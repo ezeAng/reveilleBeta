@@ -1,0 +1,38 @@
+{% extends "rev/base.html" %}
+
+{% block content %}
+  <div id="sidebar">
+  <a href="#" class="active">Home</a>
+    <a href="C:/Users/ang_e/Desktop/RevHTML/settingspage.html#">Settings</a>
+    <a href="C:/Users/ang_e/Desktop/RevHTML/adminpage.html#">Admin</a>
+   
+  </div>
+
+  <div id="maintable">
+  <table style="width:100%">
+    <tr>
+  <th>Date</th>
+  <th>Day</th>
+  <th>FirstP</th>
+  <th>LastP</th>
+    </tr>
+    <tr>
+      <td><input type="date" name="" id="mydate"></td>
+      <td id="tdday">Day</td>
+      <td><button type="button">FP</button></td>
+      <td><button type="button">LP</button></td>
+    </tr>
+    
+  <tr>
+  <td id="ok" onclick="myFunction()"><button type="button">Enter</button></td>
+  </tr>
+    
+
+
+  <div id="SummaryBlock">
+  <p id="CardBlock"> This is where the cards will be </p>
+  </div>
+
+  </div>
+
+{% endblock content %}

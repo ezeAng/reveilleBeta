@@ -1,0 +1,110 @@
+
+* {
+font-family: less;
+}
+
+body {
+  background-color: #7a7d84;
+}
+
+h1 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: #34acbc;
+  text-align: center;
+  font-size: 65px;
+  padding: 40px;
+  border-radius: 4px;
+  
+}
+
+h2 {
+  text-align: center;
+  padding:10px ;
+  border-radius: 4px;
+  background-color: #065464;
+  margin-top: 5px;
+}
+p {
+  
+  font-size: 20px;
+}
+
+#sidebar {
+  float:left;
+  background-color: #34acbc;
+  padding: 20px;
+  height: 500px;
+  width: 20%; 
+  border-radius: 4px;
+
+}
+
+#sidebar a {
+  background-color: ##7a7d84; 
+  color: black;
+  display: block; /* Make the links appear below each other */
+  padding: 12px; /* Add some padding */
+  text-decoration: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius:4px;
+}
+
+#sidebar a:hover {
+  background-color: #ccc;
+}
+
+#sidebar a.active {
+  background-color: #212121;
+  color: white;
+}
+
+#maintable {
+float: right;
+position:relative;
+background-color:#85c3cf;
+padding: 20px;
+width:70%;
+height: 500px;
+border-radius: 4px;
+}
+
+table {
+background-color:white;
+border-radius:4px;
+}
+
+#SummaryBlock {
+margin-top:0px;
+float: left;
+background-color:white;
+position: absolute;
+bottom: 0;
+height:200px;
+width:935px;
+border-radius: 4px;
+padding:60px;
+}
+
+#CardBlock {
+text-align: center;
+}
+
+footer {
+
+background-color: #34acbc;
+  padding: 10px;
+  text-align: center;
+  color: white;
+
+}
+
+tr {
+text-align: center;
+
+}
+
+table {
+border-spacing:0 25px;
+}
