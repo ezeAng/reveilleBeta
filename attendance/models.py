@@ -7,6 +7,6 @@ class Trooper(models.Model):
     def __str__(self):
         return self.name
 
-class Absence(models.Model): 
+class Absence(models.Model):
     trooper = models.ForeignKey(Trooper, on_delete=models.CASCADE)
     remarks = models.TextField(default=None)

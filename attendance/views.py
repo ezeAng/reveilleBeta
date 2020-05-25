@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Trooper, Absence
+from attendance.models import Trooper, Absence
 
-def home(request):
-    
+def home_view(request):
+
 	context = {
-		'posts': Trooper.objects.all()
+		"trooper_name": Trooper.objects.all() ,
+        "trooper_platoon": Trooper.objects.all() #retrive from db
+
 	}
 	return render(request, 'attendance/revhome.html/', context)
 
-def dashboard(request):
+def dashboard_view(request):
 	return render(request, 'attendance/revdashboard.html/')
