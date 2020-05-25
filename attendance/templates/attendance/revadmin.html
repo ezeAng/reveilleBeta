@@ -1,0 +1,23 @@
+{% extends "rev/base.html" %}
+
+{% block content %}
+
+<div id="sidebar">
+<a href="C:/Users/ang_e/Desktop/RevHTML/homepage.html#">Home</a>
+  <a href="C:/Users/ang_e/Desktop/RevHTML/settingspage.html#">Settings</a>
+  <a href="#" class="active" >Admin</a>
+
+</div>
+
+<div id="setbuttons">
+  <a href="#">Add or Delete Persons</a>
+  <a href="#">Export</a>
+  <a href="#">Help</a>
+</div>
+
+<script>
+var dt = new Date();
+document.getElementById("datetime").innerHTML = (("0"+dt.getDate()).slice(-2)) +"/"+ (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (dt.getFullYear()) 
+</script>
+
+{% endblock content %}
