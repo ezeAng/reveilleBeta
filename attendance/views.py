@@ -1,3 +1,10 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from .models import Trooper, Absence
 
-# Create your views here.
+def homepage(request):
+    context = { 
+
+    }
+    return HttpResponse("Testicles")
+

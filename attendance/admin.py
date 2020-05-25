@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Trooper, Absence
 
-# Register your models here.
+admin.site.register(Trooper)
+admin.site.register(Absence)
