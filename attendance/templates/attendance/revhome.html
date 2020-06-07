@@ -1,39 +1,112 @@
 {% extends "attendance/base.html" %}
 
 {% block content %}
+<header>
+
+  <div id="Header"><h1>Revellie</h1></div>
+  <div id="Menubar">
+    <ul>
+      <li><a href="C:/Users/ang_e/Desktop/RevHTML/settingspage.html#">Settings</a></li>
+      <li><a href="http://localhost:8000/dashboard/#">Dashboard</a></li>
+      <li><a href="#" class="active">Home</a></li>
+    </ul>
+  </div>
+
+</header>
+
+
+
+  <div id="MainTable">
+    <div id="MainMessage">
+      <h3>All your parades in one place. Today is <span id="today">Day</span>, <span id=datetime>Date</span>.</h3>
+    </div>
+
+    <div id="DateEntry" class="Container">
+      <ul>
+        <li><input type="date" name="" id="mydate"></li>
+        <li id="tdday">Day</li>
+        <li>
+          <select id="FPLP" name="ParadeChoice">
+              <option value="FP">First Parade</option>
+              <option value="LP">Last Parade</option>
+          </select>
+        </li>
+        <div id='EntButt'>
+            <span id="ok" onclick="myFunction()"><button class="ENT" type="button">Enter</button></span>
+        </div>
+
+      </ul>
+    </div>
+
+
+
+    <div><p>I took <span id="tdday2">the day</span> and <span id="PChoice"> your choice</span> from DB</p></div>
+
+  </div>
+
+
+
   <div id="sidebar">
-  <a href="#" class="active">Home</a>
-    <a href="C:/Users/ang_e/Desktop/RevHTML/settingspage.html#">Settings</a>
-    <a href="C:/Users/ang_e/Desktop/RevHTML/adminpage.html#">Admin</a>
-   
+    <div class="togglebutton" onclick="toggleSidebar()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div id="SummaryBlock">
+      <div id='SummaryHeader'><h2>Summary:</h2></div>
+      <ul>
+        <li class="SumData"><span>Total Strength:</span></li>
+        <li class="SumData"><span>Current Strength:</span></li>
+        <li class="SumData"><span>MC:</span></li>
+      </ul>
+    </div>
   </div>
 
-  <div id="maintable">
-  <table style="width:100%">
-    <tr>
-  <th>Date</th>
-  <th>Day</th>
-  <th>FirstP</th>
-  <th>LastP</th>
-  <th>{{tom}}</th>
-    </tr>
-    <tr>
-      <td><input type="date" name="" id="mydate"></td>
-      <td id="tdday">Day</td>
-      <td><button type="button">FP</button></td>
-      <td><button type="button">LP</button></td>
-    </tr>
-    
-  <tr>
-  <td id="ok" onclick="myFunction()"><button type="button">Enter</button></td>
-  </tr>
-    
 
 
-  <div id="SummaryBlock">
-  <p id="CardBlock"> This is where the cards will be </p>
+  <div id="CardBoard">
+
+    <div class="">
+      <div class="Cards">
+        <div class="IdImage">
+          <span>imghere</span>
+        </div>
+
+        <div class="RankName">
+          PTE Tames Jan
+        </div>
+
+
+        <div class="StatusLabels">
+          <div class="Status1">
+            <span></span>
+          </div>
+          <div class="Status2">
+            <span></span>
+          </div>
+          <div class="Status3None">
+            <span></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
   </div>
 
-  </div>
+
+
+
+
+
+
+
+
+
+
+
 
 {% endblock content %}
