@@ -1,110 +1,353 @@
+{% load static %}
+
 
 * {
 font-family: less;
+
+}
+
+header {
+  padding-top:20px;
+  min-height: 40px;
+
+
+}
+
+
+
+#Header {
+  display:inline-block;
+  width: 30%;
+
+
+}
+
+#Header3 {
+  display:block;
+
 }
 
 body {
-  background-color: #7a7d84;
-}
+  /*background-image: url("https://i2.wp.com/files.123freevectors.com/wp-content/original/130945-abstract-blue-and-white-polygon-triangle-background.jpg?w=800&q=95");*/
+  background-repeat: no-repeat;
+  background-size: cover;
 
+
+
+}
 h1 {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  background-color: #34acbc;
-  text-align: center;
   font-size: 65px;
-  padding: 40px;
+  padding-left: 40px;
+  padding-top: 20px;
   border-radius: 4px;
-  
+  margin: 0px;
+  background: none;
+  color: #cf6679 ;
 }
 
-h2 {
-  text-align: center;
-  padding:10px ;
+h3 {
+  background: none;
+  color:black;
+  padding-left: 40px;
   border-radius: 4px;
-  background-color: #065464;
-  margin-top: 5px;
-}
-p {
-  
-  font-size: 20px;
 }
 
-#sidebar {
-  float:left;
-  background-color: #34acbc;
+
+
+
+
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+}
+
+/* Menu Bar */
+
+#Menubar {
+  width: 60%;
+  display: block;
+  float: right;
   padding: 20px;
-  height: 500px;
-  width: 20%; 
-  border-radius: 4px;
 
 }
 
-#sidebar a {
-  background-color: ##7a7d84; 
+
+
+#Menubar li {
+  display: inline-block;
+  width: 25%;
+  margin-left: 0px;
+  margin-right: 27px;
+  float: right;
+
+}
+
+#Menubar a {
+  background-color: white;
+
   color: black;
-  display: block; /* Make the links appear below each other */
-  padding: 12px; /* Add some padding */
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
   text-decoration: none;
+  text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius:4px;
 }
 
-#sidebar a:hover {
+#Menubar a:hover {
   background-color: #ccc;
 }
 
-#sidebar a.active {
-  background-color: #212121;
+#Menubar a.active {
+  background-color: #04DAD9;
+  color: black;
+}
+
+
+
+/*Main Table */
+
+#MainMessage {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background-color: none;
   color: white;
-}
 
-#maintable {
-float: right;
-position:relative;
-background-color:#85c3cf;
+}
+#MainTable {
+
+display: block;
+
 padding: 20px;
-width:70%;
-height: 500px;
 border-radius: 4px;
+
 }
 
-table {
-background-color:white;
-border-radius:4px;
+
+
+
+#DateEntry li{
+  display: inline-block;
+  background: #3700B3;
+  padding: 10px;
+  margin: 8px;
+  border-radius: 4px;
+  width: 22%;
+  text-align: center;
+
 }
+
+input {
+  align:center;
+  width: 100%;
+}
+
+#tdday {
+  color: white;
+  background: none;
+}
+
+
+#FPLP {
+  align:center;
+  background: #3700B3;
+  margin:0px;
+  border:none;
+  padding:none;
+  color: #ffffff;
+}
+
+
+#EntButt {
+  display: block;
+  float: right;
+  width: 22%;
+  margin: 8px;
+
+}
+
+.ENT {
+  align:center;
+  width: 100%;
+  background: #BB86FC;
+  margin:0px;
+  border:none;
+  padding:10px;
+  color: #ffffff;
+  border-radius: 4px;
+
+
+}
+
+
 
 #SummaryBlock {
-margin-top:0px;
-float: left;
-background-color:white;
-position: absolute;
-bottom: 0;
-height:200px;
-width:935px;
-border-radius: 4px;
-padding:60px;
+  background-color: grey;
+  border-radius: 8px;
+  margin-top:5px;
+  width: 100%;
+  height: 100%;
+  border-width: medium;
+  border-style: solid;
+  border-color: black;
+
 }
 
-#CardBlock {
-text-align: center;
-}
 
-footer {
-
-background-color: #34acbc;
-  padding: 10px;
+#SummaryHeader {
+  color: black;
+  margin: 30px;
+  display: block;
   text-align: center;
-  color: white;
+}
+
+.SumData span {
+  text-align: left;
+  margin-left:20px;
 
 }
 
-tr {
-text-align: center;
+
+/*Button Drawer*/
+
+#sidebar .togglebutton {
+  position:absolute;
+  left:430px;
+  top:20px;
 
 }
 
-table {
-border-spacing:0 25px;
+#sidebar .togglebutton span {
+  display:block;
+  width:30px;
+  height:5px;
+  background-color:white;
+  margin:5px 0px;
+}
+
+#sidebar {
+  position:absolute;
+  width:400px;
+  height:500px;
+  left: -400px;
+  transition: all 600ms linear;
+
+}
+
+#sidebar.active {
+  left:0px;
+
+}
+
+
+
+
+
+
+/* Cards */
+
+#CardBoard {
+  background-color: rgba(0,0,125,0.3);
+  margin-top: 5px;
+  height:300px;
+  border-radius: 4px;
+
+
+}
+
+.Cards {
+  height:150px;
+  width: 150px;
+  background-color: white;
+  padding: 5px;
+  margin: 70px 10px 10px 20px;
+  display: inline-block;
+  border-radius: 8px;
+  border-width: 1px;
+  border-style: solid;
+
+
+}
+
+.RankName {
+  display: block;
+  margin:5px;
+  text-align: center;s
+}
+
+.IdImage span {
+  height: 100px;
+  width: 92%;
+  display: block;
+  background-color: red;
+  border-radius: 4px;
+  margin:5px;
+
+}
+
+.Status1 span {
+  display:inline-block;
+  width:30px;
+  height:5px;
+  background-color:red;
+  margin:5px 5px;
+  border-radius: 5px;
+  float: left;
+}
+
+.Status2 span {
+  display:inline-block;
+  width:30px;
+  height:5px;
+  background-color:green;
+  margin:5px 0px;
+  border-radius: 5px;
+  float: left;
+}
+
+.Status3None span {
+  display: none;
+}
+
+.DefaultInactive {
+  display: none;
+}
+
+
+
+
+
+/* revdashboard*/
+
+#setbuttons li {
+  text-align: center;
+  display:block;
+  width: 250px;
+  height: 150px;
+  background: #BB86FC;
+  float: left;
+  margin: 120px;
+  padding: 80px 0 0 0;
+  border:none;
+  color: #ffffff;
+  border-radius: 4px;
+
+}
+
+#setbuttons ul {
+  align:centre;
+  width: 100%;
+
+}
+
+#setbuttons a {
+  text-decoration: none;
+
 }
