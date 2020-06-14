@@ -1,63 +1,68 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-<title>Reveille</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Parade State Compiler">
+  <head>
 
-<link rel="stylesheet" type="text/css" href="{% static 'attendance/main.css'%}">
-</head>
+    <link rel="stylesheet" type="text/css" href="{% static 'rev/master.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+    <title>Reveille</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Parade State Compiler">
+
+  </head>
 
 <body>
 
 {% block content %}{% endblock %}
 
-<script>
-function myFunction() {
-  var a = document.getElementById("mydate").value;
-  var x = new Date(a)
 
-  var weekday = new Array(7);
-  weekday[0] = "Sunday";
-  weekday[1] = "Monday";
-  weekday[2] = "Tuesday";
-  weekday[3] = "Wednesday";
-  weekday[4] = "Thursday";
-  weekday[5] = "Friday";
-  weekday[6] = "Saturday";
-  var z = weekday[x.getDay()];
-  document.getElementById("tdday").innerHTML = z;
-  document.getElementById("tdday2").innerHTML = z;
 
-  var p = document.getElementById('FPLP').value;
-  document.getElementById("PChoice").innerHTML = p;
 
-}
-</script>
+  <!-- Scripts -->
+  <!-- Default Semantic -->
+  <script>
 
-<script>
- var dt = new Date();
- document.getElementById("datetime").innerHTML = (("0"+dt.getDate()).slice(-2)) +"/"+ (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (dt.getFullYear())
+    $('.ui.dropdown')
+    .dropdown()
+    ;
 
- var d = new Date();
- var weekday = new Array(7);
-  weekday[0] = "Sunday";
-  weekday[1] = "Monday";
-  weekday[2] = "Tuesday";
-  weekday[3] = "Wednesday";
-  weekday[4] = "Thursday";
-  weekday[5] = "Friday";
-  weekday[6] = "Saturday";
+    $('.menu .item')
+    .tab()
+    ;
 
-  var n = weekday[d.getDay()];
- document.getElementById("today").innerHTML = n;
+  </script>
 
- function toggleSidebar(){
-  document.getElementById("sidebar").classList.toggle('active');
-}
+  <!-- Local Self-written -->
+  <script>
+    function myFunction() {
+    var a = document.getElementById("mydate").value;
+    var x = new Date(a)
 
-</script>
+    var weekday = new Array(7);
+    weekday[0] = "Sunday";
+    weekday[1] = "Monday";
+    weekday[2] = "Tuesday";
+    weekday[3] = "Wednesday";
+    weekday[4] = "Thursday";
+    weekday[5] = "Friday";
+    weekday[6] = "Saturday";
+    var z = weekday[x.getDay()];
+
+
+    document.getElementById("tdday2").innerHTML = z;
+
+    var p = document.getElementById('ParadeChoice').value;
+    document.getElementById("PChoice").innerHTML = p;
+
+    document.getElementById("CardHolders").classList.toggle('active');
+    document.getElementById("NoDocumentPage").classList.toggle('Default-Inactive');
+
+    }
+
+  </script>
 
 
 </body>

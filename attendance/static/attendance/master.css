@@ -1,0 +1,23 @@
+
+* {
+font-family: less;
+
+}
+
+
+#HomeHeader {
+  font-size: 60px;
+}
+
+.Default-Inactive {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.position {
+  display: block;
+  float: right;
+}
