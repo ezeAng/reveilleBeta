@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Less';
+  src: local('Less'),
+       url("{% static 'attendance/Fonts/Less.otf'%}") format("truetype");
+}
+
 
 * {
 font-family: less;
