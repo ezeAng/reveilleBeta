@@ -4,6 +4,18 @@
 
 
 <body>
+
+  <!-- Dimmer for whole page-->
+  <div class="ui dimmer custom">
+    <div class="content">
+      <h2 class="ui inverted icon header">
+        <i class="heart icon"></i>
+        Dimmed Message!
+      </h2>
+      <button class="ui button">Save</button>
+    </div>
+  </div>
+
   <!-- From Headers to Datepicker -->
   <div class="ui relaxed centered grid">
 
@@ -85,101 +97,99 @@
         <a class="item" data-tab="third">Recent Changes</a>
       </div>
       <div class="ui bottom attached active tab segment" data-tab="first">
-        <div class="ui raised placeholder segment">
+        <div class="ui raised placeholder segment"> 
 
           <!-- Plus Card Button -->
-          <a class="ui red right corner label" onclick="AddNewCardFunction()" >
+          <a class="ui red right corner label" id="AddCardToggle" >
             <i class="plus circle icon"></i>
           </a>
 
-      <!--      <button class="ui right corner icon button" id="PlusCardButton">
-              <i class="plus circle icon"></i>
-            </button> -->
-
-
-
-
-
-
-
-          <!--Default page before entrance of data -->
-          <div class="" id="NoDocumentPage">
-            <div class="ui centered grid">
-              <div class="row">
-                <div class="ui icon header">
-                  <i class="user secret icon"></i>
-                    No documents are listed for this loser.
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
-          <div class="Default-Inactive" id="CardHolders">
-            <div class="ui five column grid">
-            <div class="column">
-              <div class="ui fluid card">
-                <div class="fluid content">
-
-                  <a class="fluid large header"><i class="user icon"></i>Bong Bei Win</a>
-                  <div class="ui horizontal divider">
-
-                  </div>
-                  <p>Status Summary or comments</p>
-                  <div class="meta">
-                    <a class="ui red label">MC</a>
-                    <span>MA</span>
-                    <span>Thina</span>
-                    <span>ORD</span>
-                    <span>Chump</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="column">
-              <div class="ui fluid card">
-
-                <div class="fluid content">
-
-                  <a class="fluid large header"><i class="user icon"></i>Tronald Drump</a>
-                  <div class="ui horizontal divider">
-
-                  </div>
-                  <p>Status Summary or comments</p>
-                  <div class="meta">
-                    <a class="ui red label">MC</a>
-                    <a class="ui blue label">MA</a>
-                    <span>T</span>
-                    <span>ORDlo</span>
-                    <span>Chump</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="column">
-              <div class="ui fluid card">
-
-                <div class="fluid content">
-
-                  <a class="fluid large header"><i class="user icon"></i>Mee Msien Moong</a>
-                  <div class="ui horizontal divider">
-
-                  </div>
-                  <p>Status Summary or comments</p>
-                  <div class="meta">
-                    <a class="ui green label">On Course</a>
-                    <a class="ui pink label">ORD</a>
-                    <span>Chump</span>
+          
+            <!--Default page before entrance of data -->
+            <div class="" id="NoDocumentPage">
+              <div class="ui centered grid">
+                <div class="row">
+                  <div class="ui icon header">
+                    <i class="user secret icon"></i>
+                      No documents are listed for this loser.
                   </div>
                 </div>
               </div>
             </div>
 
 
+            <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
+            <div class="Default-Inactive" id="CardHolders">
+              <div class="ui five column grid">
+              <div class="column">
+                <div class="ui fluid card">
+                  <div class="fluid content">
 
-          </div>
-          </div>
+                    <a class="fluid large header"><i class="user icon"></i>Bong Bei Win</a>
+                    <div class="ui horizontal divider">
+
+                    </div>
+                    <p>Status Summary or comments</p>
+                    <div class="meta">
+                      <a class="ui red label">MC</a>
+                      <span>MA</span>
+                      <span>Thina</span>
+                      <span>ORD</span>
+                      <span>Chump</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="column">
+                <div class="ui fluid card">
+
+                  <div class="fluid content">
+
+                    <a class="fluid large header"><i class="user icon"></i>Tronald Drump</a>
+                    <div class="ui horizontal divider">
+
+                    </div>
+                    <p>Status Summary or comments</p>
+                    <div class="meta">
+                      <a class="ui red label">MC</a>
+                      <a class="ui blue label">MA</a>
+                      <span>T</span>
+                      <span>ORDlo</span>
+                      <span>Chump</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="column">
+                <div class="ui fluid card">
+
+                  <div class="fluid content">
+
+                    <a class="fluid large header"><i class="user icon"></i>Mee Msien Moong</a>
+                    <div class="ui horizontal divider">
+
+                    </div>
+                    <p>Status Summary or comments</p>
+                    <div class="meta">
+                      <a class="ui green label">On Course</a>
+                      <a class="ui pink label">ORD</a>
+                      <span>Chump</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+            </div>
+
+            
+            
+
+            
+
+          
 
         </div>
       </div>
@@ -269,10 +279,15 @@
       </div>
 
     </div>
-  </div>
+  
+
+
 
   <!-- Footer -->
-  <div class="ui segment">
+
+  <div class="row">
+  <div class="fourteen wide column">
+  <div class="ui segment" >
     <div class="ui very relaxed centered grid">
 
       <div class="fourteen wide column">
@@ -304,8 +319,11 @@
     </div>
 
   </div>
+  </div>
+  </div>
 
-
+  
+  
 
 
 </body>
