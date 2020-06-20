@@ -1,0 +1,34 @@
+{% load static %}
+@font-face {
+  font-family: 'Less';
+  src: local('Less'),
+       url("{% static 'attendance/Fonts/Less.otf'%}") format("truetype");
+}
+
+
+* {
+font-family: less;
+
+}
+
+
+#HomeHeader {
+  font-size: 60px;
+}
+
+.Default-Inactive {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.position {
+  display: block;
+  float: right;
+}
+
+body {
+  background-image: src("{% static 'attendance/images/testimg.jpg/' %}" );
+}

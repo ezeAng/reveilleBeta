@@ -1,0 +1,21 @@
+
+Throw in header of base.html if need background image / color
+-----------------------------------
+
+<!--Unloadable style Static-->
+    <style>
+      body {
+        background-image: url("{% static 'attendance/Images/testimg.jpg' %}");
+      }
+    </style>
+
+
+<style>
+      body {
+  background-color: #2F354A ;
+  
+}
+</style>
+
+
+-------------------------------------
