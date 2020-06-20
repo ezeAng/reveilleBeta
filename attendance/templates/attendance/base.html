@@ -3,8 +3,9 @@
 <html>
   <head>
 
-    <link rel="stylesheet" type="text/css" href="{% static 'attendance/CSS/master.css'%}">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'attendance/CSS/master.css'%}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 
@@ -12,8 +13,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Parade State Compiler">
 
-    
-    
+    <style>
+      body {
+        background-color: #E6E9EF;
+        color: #489CC1;
+      }
+    </style>
+   
   </head>
 
 <body>
@@ -45,7 +51,7 @@
   <!-- Local Self-written -->
   <script>
     function myFunction() {
-    var a = document.getElementById("mydate").value;
+    var a = document.getElementById("MyDate").value;
     var x = new Date(a)
 
     var weekday = new Array(7);

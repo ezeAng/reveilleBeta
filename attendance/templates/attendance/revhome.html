@@ -9,10 +9,81 @@
   <div class="ui page dimmer custom">
     <div class="content">
       <h2 class="ui inverted icon header">
-        <i class="heart icon"></i>
-        Dimmed Message!
+        Add a New Card
       </h2>
-      <button class="ui button">Save</button>
+      <div class="container">
+        <div class="ui raised card">
+          
+          <div class="content">
+            <div class="ui centered grid">
+
+              <div class="row">
+                
+                  
+                  <div class="ui fluid search">
+                    <div class="ui icon input">
+                      <input class="fluid prompt" type="text" placeholder="Personnel...">
+                        <i class="search icon"></i>
+                    </div>
+                    <div class="results"></div>
+                  </div>
+                  
+                
+              </div>
+
+              <div class="row">
+                <div class="column">
+                  <div class="ui fluid input">
+                    <input type="text" placeholder="Comments">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="column">
+                <div class="ui form">
+                  <div class="field">
+                    <select name="MedicalStatus" class="ui fluid dropdown" id="MedStat">
+                      <option value="">Medical Status</option>
+                      <option value="MA">MA</option>
+                      <option value="FFI">FFI</option>
+                      <option value="SO">Sent Out</option>
+                      <option value="MC">MC</option>
+                    </select>
+                  </div>
+                </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="column">
+                  <div class="ui form">
+                    <div class="field">
+                      <select name="Activity" class="ui fluid dropdown" id="Activity">
+                        <option value="">Activity</option>
+                        <option value="OutStn">Outstationed</option>
+                        <option value="Off">Off</option>
+                        <option value="Leave">On-Leave</option>
+                        <option value="Course">On-Course</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          
+          <div class="extra content"> 
+            <button class="ui button">Save</button>
+            <button class="ui button">Cancel</button>
+          </div>
+
+        </div>
+        
+      </div>
+
+      
     </div>
   </div>
 
@@ -37,8 +108,10 @@
       <!-- MenuBar -->
 
       <div class="fourteen wide column">
-        <div class="ui fluid three item menu">
-          <a class="active item">Home</a>
+        <div class="ui fluid three item huge menu">
+          <a class="active item">
+            Home
+            </a>
           <a class="item">Dashboard</a>
           <a class="item">Settings</a>
         </div>
@@ -49,37 +122,47 @@
 
     <div class="fourteen wide column" id="DatePickRow">
 
-      <div class="ui horizontal segments">
-        <div class="ui red inverted segment">
-          <h2 class="ui center aligned header">Select Parade</h2>
+    
+      <div class="ui four column stackable grid">
+
+        <div class="column">
+          <div class="ui inverted blue segment" id="DatePickHead">
+            <h3 class="ui center aligned header" id="DatePickSelect">Select Parade</h3>
+          </div>
         </div>
 
-        <div class="ui center aligned red segment">
+        <div class="column">
+        <div class="ui center aligned segment" id="DatePickSelectSegment">
           <div class="ui fluid input left icon">
             <i class="caret right icon"></i>
-            <input type="date" id="mydate">
+            <input type="date" id="MyDate">
           </div>
-
-
         </div>
-        <div class="ui red center aligned segment">
+        </div>
 
-          <div class="ui form">
-            <div class="field">
-              <select name="ParadeChoice" class="ui dropdown" id="ParadeChoice">
-                <option value="">Choice of Parade</option>
-                <option value="First">First</option>
-                <option value="Mid-Day">Mid-Day</option>
-                <option value="Last">Last</option>
-              </select>
+
+        <div class="column">
+          <div class="ui center aligned segment" id="DatePickDropdown">
+
+            <div class="ui form">
+              <div class="field">
+                <select name="ParadeChoice" class="ui fluid dropdown" id="ParadeChoice">
+                  <option value="">Parade</option>
+                  <option value="First">First</option>
+                  <option value="Mid-Day">Mid-Day</option>
+                  <option value="Last">Last</option>
+                </select>
+              </div>
             </div>
           </div>
-
-
         </div>
-        <div class="ui center aligned red segment">
-          <button class="ui fluid button" onclick="myFunction()">Enter</button>
+
+        <div class="column">
+          <div class="ui center aligned segment" id="DatePickEnter">
+            <button class="ui fluid blue button" onclick="myFunction()">Enter</button>
+          </div>
         </div>
+
       </div>
 
 
@@ -89,209 +172,206 @@
 
 
  <!-- Tabs & Cards -->
-  <div class="ui centered grid">
-    <div class="fourteen wide column">
-      <div class="ui top attached tabular menu">
-        <a class="active item" data-tab="first">Overview</a>
-        <a class="item" data-tab="second">Summary</a>
-        <a class="item" data-tab="third">Recent Changes</a>
-      </div>
-      <div class="ui bottom attached active tab segment" data-tab="first">
-        <div class="ui raised placeholder segment"> 
+  <div class="container">
+    <div class="ui centered grid">
+      <div class="fourteen wide column">
+        <div class="ui top attached tabular menu">
+          <a class="active item" data-tab="first">Overview</a>
+          <a class="item" data-tab="second">Summary</a>
+          <a class="item" data-tab="third">Log</a>
+        </div>
+        <div class="ui bottom attached active tab segment" data-tab="first">
+          <div class="ui placeholder segment"> 
 
-          <!-- Plus Card Button -->
-          <a class="ui green right corner label" id="AddCardToggle" >
-            <i class="plus circle icon"></i>
-          </a>
-
-          
-            <!--Default page before entrance of data -->
-            <div class="" id="NoDocumentPage">
-              <div class="ui centered grid">
-                <div class="row">
-                  <div class="ui icon header">
-                    <i class="user secret icon"></i>
-                      No documents are listed for this loser.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
-            <div class="Default-Inactive" id="CardHolders">
-              <div class="ui five column grid">
-              <div class="column">
-                <div class="ui fluid card">
-                  <div class="fluid content">
-
-                    <a class="fluid large header"><i class="user icon"></i>Bong Bei Win</a>
-                    <div class="ui horizontal divider">
-
-                    </div>
-                    <p>Status Summary or comments</p>
-                    <div class="meta">
-                      <a class="ui red label">MC</a>
-                      <span>MA</span>
-                      <span>Thina</span>
-                      <span>ORD</span>
-                      <span>Chump</span>
-                    </div>
-                    <div>
-                      <a class="ui mini red right corner label" id="DeleteButton">
-                        <i class="minus square icon"></i>
-                      </a>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="column">
-                <div class="ui fluid card">
-
-                  <div class="fluid content">
-
-                    <a class="fluid large header"><i class="user icon"></i>Tronald Drump</a>
-                    <div class="ui horizontal divider">
-
-                    </div>
-                    <p>Status Summary or comments</p>
-                    <div class="meta">
-                      <a class="ui red label">MC</a>
-                      <a class="ui blue label">MA</a>
-                      <span>T</span>
-                      <span>ORDlo</span>
-                      <span>Chump</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="column">
-                <div class="ui fluid card">
-
-                  <div class="fluid content">
-
-                    <a class="fluid large header"><i class="user icon"></i>Mee Msien Moong</a>
-                    <div class="ui horizontal divider">
-
-                    </div>
-                    <p>Status Summary or comments</p>
-                    <div class="meta">
-                      <a class="ui green label">On Course</a>
-                      <a class="ui pink label">ORD</a>
-                      <span>Chump</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-
-            </div>
-            </div>
+            <!-- Plus Card Button -->
+            <a class="ui green right corner label" id="AddCardToggle" >
+              <i class="plus circle icon"></i>
+            </a>
 
             
-            
-
-            
-
-          
-
-        </div>
-      </div>
-
-      <div class="ui bottom attached tab segment" data-tab="second">
-        <div class="ui grid">
-          <div class="eight wide column">
-            <h1>Summary</h1>
-          </div>
-          <div class="five wide column">
-
-          </div>
-          <div class="three wide column">
-            <div class="">
-              <div class="ui left pointing dropdown link item">
-                <div>
-                  <button class="ui button">Export</button>
-                  <i class="dropdown icon"></i>
+              <!--Default page before entrance of data -->
+              <div class="" id="NoDocumentPage">
+                <div class="ui centered grid">
+                  <div class="row">
+                    <div class="ui icon header">
+                      <i class="user secret icon"></i>
+                        No documents are listed for this loser.
+                    </div>
+                  </div>
                 </div>
-                <div class="menu">
-                  <div class="item">Whatsapp</div>
-                  <div class="item">Telegram</div>
-                  <div class="item">Sent Mail</div>
-                  <div class="item">Drafts (143)</div>
-                  <div class="divider"></div>
-                  <div class="item">Save as pdf</div>
-                  <div class="item">Trash</div>
+              </div>
+
+
+              <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
+              <div class="Default-Inactive" id="CardHolders">
+                <div class="ui stackable four column grid">
+                <div class="column">
+                  <div class="ui fluid raised card">
+                    <div class="fluid content">
+
+                      <a class="fluid large header"><i class="user icon"></i>Bong Bei Win</a>
+                      <div class="ui horizontal divider">
+
+                      </div>
+                      <p>Status Summary or comments</p>
+                      <div class="meta">
+                        <a class="ui red label">MC</a>
+                        <span>MA</span>
+                        <span>Thina</span>
+                        <span>ORD</span>
+                        <span>Chump</span>
+                      </div>
+                      <div>
+                        <a class="ui mini red right corner label" id="EditButton">
+                          <i class="edit icon"></i>
+                        </a>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="ui fluid raised card">
+
+                    <div class="fluid content">
+
+                      <a class="fluid large header"><i class="user icon"></i>Tronald Drump</a>
+                      <div class="ui horizontal divider">
+
+                      </div>
+                      <p>Status Summary or comments</p>
+                      <div class="meta">
+                        <a class="ui red label">MC</a>
+                        <a class="ui blue label">MA</a>
+                        <span>T</span>
+                        <span>ORDlo</span>
+                        <span>Chump</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="ui fluid raised card">
+
+                    <div class="fluid content">
+
+                      <a class="fluid large header"><i class="user icon"></i>Mee Msien Moong</a>
+                      <div class="ui horizontal divider">
+
+                      </div>
+                      <p>Status Summary or comments</p>
+                      <div class="meta">
+                        <a class="ui green label">On Course</a>
+                        <a class="ui pink label">ORD</a>
+                        <span>Chump</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </div>
+              </div>
+
+
+          </div>
+        </div>
+
+        <div class="ui bottom attached tab segment" data-tab="second">
+          <div class="ui grid">
+            <div class="eight wide column">
+              <h1>Summary</h1>
+            </div>
+            <div class="five wide column">
+
+            </div>
+            <div class="three wide column">
+              <div class="">
+                <div class="ui left pointing dropdown link item">
+                  <div>
+                    <button class="ui button">Export</button>
+                    <i class="dropdown icon"></i>
+                  </div>
+                  <div class="menu">
+                    <div class="item">Whatsapp</div>
+                    <div class="item">Telegram</div>
+                    <div class="item">Sent Mail</div>
+                    <div class="item">Drafts (143)</div>
+                    <div class="divider"></div>
+                    <div class="item">Save as pdf</div>
+                    <div class="item">Trash</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="ui grid">
+          <div class="ui grid">
 
-          <div class="row">
-          <div class="four wide right aligned column">
-            <h3>Total Strength:</h3>
-          </div>
-          </div>
-
-          <div class="row">
-          <div class="four wide right aligned column">
-            <h3>Attend C:</h3>
-          </div>
-          </div>
-
-          <div class="row">
-          <div class="four wide right aligned column">
-            <h3>Medical Appointment:</h3>
-          </div>
-          </div>
-
-          <div class="row">
-          <div class="four wide right aligned column">
-            <h3>On Course:</h3>
-          </div>
-          </div>
-
-          <div class="row">
-          <div class="four wide right aligned column">
-            <h3>Out-stationed:</h3>
-          </div>
-          </div>
-
-
-        </div>
-      </div>
-
-      <div class="ui bottom attached tab segment" data-tab="third">
-        <div class="ui relaxed centered grid">
-          <div class="row">
-            <div><p>I took <span id="tdday2">the day</span> and <span id="PChoice"> your choice</span> from DB</p></div>
-          </div>
-          <div class="fourteen wide column">
-            <div class="ui segment">
-              <div class="ui active dimmer">
-                <div class="ui large text loader">Loading</div>
-              </div>
-              <p>The Recent Changes</p>
-              <p>Lorem ISpum</p>
-              <p>Coming Soon!</p>
+            <div class="row">
+            <div class="four wide right aligned column">
+              <h3>Total Strength:</h3>
             </div>
+            </div>
+
+            <div class="row">
+            <div class="four wide right aligned column">
+              <h3>Attend C:</h3>
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="four wide right aligned column">
+              <h3>Medical Appointment:</h3>
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="four wide right aligned column">
+              <h3>On Course:</h3>
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="four wide right aligned column">
+              <h3>Out-stationed:</h3>
+            </div>
+            </div>
+
+
           </div>
-
         </div>
-      </div>
 
+        <div class="ui bottom attached tab segment" data-tab="third">
+          <div class="ui relaxed centered grid">
+            <div class="row">
+              <div><p>I took <span id="tdday2">the day</span> and <span id="PChoice"> your choice</span> from DB</p></div>
+            </div>
+            <div class="fourteen wide column">
+              <div class="ui segment">
+                <div class="ui active dimmer">
+                  <div class="ui large text loader">Loading</div>
+                </div>
+                <p>The Recent Changes</p>
+                <p>Lorem ISpum</p>
+                <p>Coming Soon!</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
     </div>
-  
+  </div>
+
 
 
 
   <!-- Footer -->
 
-  <div class="row">
+  <div class="ui centered grid">
   <div class="fourteen wide column">
   <div class="ui segment" >
     <div class="ui very relaxed centered grid">
