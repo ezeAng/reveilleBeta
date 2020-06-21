@@ -1,13 +1,6 @@
-{% load static %}
-@font-face {
-  font-family: 'Less';
-  src: local('Less'),
-       url("{% static 'attendance/Fonts/Less.otf'%}") format("truetype");
-}
-
 
 * {
-font-family: less;
+  font-family: Gilroy-Light;
 
 }
 
@@ -15,6 +8,9 @@ font-family: less;
 #HomeHeader {
   font-size: 60px;
 }
+
+
+
 
 .Default-Inactive {
   display: none;
@@ -29,6 +25,27 @@ font-family: less;
   float: right;
 }
 
-body {
-  background-image: src("{% static 'attendance/images/testimg.jpg/' %}" );
+
+#DatePickHead {
+  padding: 8.5px;
 }
+#DatePickSelect {
+  margin: 0px;
+}
+
+#MyDate {
+  margin: 0px;
+  padding: 8px;
+  background-color:none;
+  border: grey;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+#DatePickDropdown , #DatePickEnter , #DatePickSelectSegment {
+  padding: 0px ;
+  border: none;
+  
+}
+
