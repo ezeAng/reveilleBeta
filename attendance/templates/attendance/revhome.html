@@ -33,6 +33,16 @@
 
               <div class="row">
                 <div class="column">
+                  <a class="ui fluid label" id="Search Result">
+                    <img class="ui right spaced avatar image" src="/images/avatar/small/elliot.jpg">
+                    Search Result
+                  </a>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="column">
                   <div class="ui fluid input">
                     <input type="text" placeholder="Comments">
                   </div>
@@ -49,6 +59,7 @@
                       <option value="FFI">FFI</option>
                       <option value="SO">Sent Out</option>
                       <option value="MC">MC</option>
+                      <option value="NIL">-</option>
                     </select>
                   </div>
                 </div>
@@ -65,6 +76,7 @@
                         <option value="Off">Off</option>
                         <option value="Leave">On-Leave</option>
                         <option value="Course">On-Course</option>
+                        <option value="NIL">-</option>
                       </select>
                     </div>
                   </div>
@@ -75,8 +87,8 @@
           </div>
           
           <div class="extra content"> 
-            <button class="ui button">Save</button>
-            <button class="ui button">Cancel</button>
+            <button class="ui button" id="AddCardSave">Save</button>
+            <button class="ui button" id="AddCardCancel">Cancel</button>
           </div>
 
         </div>
@@ -173,20 +185,69 @@
 
  <!-- Tabs & Cards -->
   <div class="container">
-    <div class="ui centered grid">
+    <div class="ui center aligned grid">
       <div class="fourteen wide column">
         <div class="ui top attached tabular menu">
           <a class="active item" data-tab="first">Overview</a>
           <a class="item" data-tab="second">Summary</a>
           <a class="item" data-tab="third">Log</a>
         </div>
+
+        <!--Overview Tab-->
         <div class="ui bottom attached active tab segment" data-tab="first">
+          <div class="ui centered stackable grid">
+
+            <div class="computer only fifteen wide column">
+              
+              <div class="ui fluid category search">
+                <div class="ui icon input">
+                  <input class="prompt" type="text" placeholder="Search personnel...">
+                  <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+              </div>
+              
+            </div>
+
+
+            <div class="computer only column">
+              
+              <button class="ui icon button" id="AddCardToggle" data-content="Add users to your feed">
+                <i class="user plus icon"></i>
+              </button>
+            
+            </div>
+
+
+            <div class="tablet only mobile only eight wide column">
+              <div class="ui center aligned basic segment">
+                <div class="ui fluid category search">
+                  <div class="ui icon input">
+                    <input class="prompt" type="text" placeholder="Search personnel...">
+                    <i class="search icon"></i>
+                  </div>
+                  <div class="results"></div>
+                </div>
+              </div>
+              
+            </div>
+
+
+            <div class="tablet only mobile only eight wide column">
+              <div class="ui basic segment">
+                <button class="ui fluid icon button" id="AddCardToggleMobile" data-content="Add users to your feed">
+                  <i class="user plus icon"></i>
+                </button>
+              </div>
+            
+            </div>
+            
+          </div>
+
           <div class="ui placeholder segment"> 
 
-            <!-- Plus Card Button -->
-            <a class="ui green right corner label" id="AddCardToggle" >
-              <i class="plus circle icon"></i>
-            </a>
+            
+            
 
             
               <!--Default page before entrance of data -->
@@ -205,93 +266,97 @@
               <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
               <div class="Default-Inactive" id="CardHolders">
                 <div class="ui stackable four column grid">
-                <div class="column">
-                  <div class="ui fluid raised card">
-                    <div class="fluid content">
 
-                      <a class="fluid large header"><i class="user icon"></i>Bong Bei Win</a>
-                      <div class="ui horizontal divider">
+                  <div class="column">
+                    <div class="ui fluid raised card">
+                      <div class="fluid content">
 
-                      </div>
-                      <p>Status Summary or comments</p>
-                      <div class="meta">
-                        <a class="ui red label">MC</a>
-                        <span>MA</span>
-                        <span>Thina</span>
-                        <span>ORD</span>
-                        <span>Chump</span>
-                      </div>
-                      <div>
-                        <a class="ui mini red right corner label" id="EditButton">
-                          <i class="edit icon"></i>
-                        </a>
-                        
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="column">
-                  <div class="ui fluid raised card">
+                        <a class="fluid large header"><i class="user icon"></i>Bong Bei Win</a>
+                        <div class="ui horizontal divider">
 
-                    <div class="fluid content">
-
-                      <a class="fluid large header"><i class="user icon"></i>Tronald Drump</a>
-                      <div class="ui horizontal divider">
-
-                      </div>
-                      <p>Status Summary or comments</p>
-                      <div class="meta">
-                        <a class="ui red label">MC</a>
-                        <a class="ui blue label">MA</a>
-                        <span>T</span>
-                        <span>ORDlo</span>
-                        <span>Chump</span>
+                        </div>
+                        <p>Status Summary or comments</p>
+                        <div class="meta">
+                          <a class="ui red label">MC</a>
+                          <span>MA</span>
+                          <span>Thina</span>
+                          <span>ORD</span>
+                          <span>Chump</span>
+                        </div>
+                        <div>
+                          <a class="ui mini red right corner label" id="EditButton">
+                            <i class="edit icon"></i>
+                          </a>
+                          
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="column">
-                  <div class="ui fluid raised card">
 
-                    <div class="fluid content">
+                  <div class="column">
+                    <div class="ui fluid raised card">
 
-                      <a class="fluid large header"><i class="user icon"></i>Mee Msien Moong</a>
-                      <div class="ui horizontal divider">
+                      <div class="fluid content">
 
-                      </div>
-                      <p>Status Summary or comments</p>
-                      <div class="meta">
-                        <a class="ui green label">On Course</a>
-                        <a class="ui pink label">ORD</a>
-                        <span>Chump</span>
+                        <a class="fluid large header"><i class="user icon"></i>Tronald Drump</a>
+                        <div class="ui horizontal divider">
+
+                        </div>
+                        <p>Status Summary or comments</p>
+                        <div class="meta">
+                          <a class="ui red label">MC</a>
+                          <a class="ui blue label">MA</a>
+                          <span>T</span>
+                          <span>ORDlo</span>
+                          <span>Chump</span>
+                        </div>
                       </div>
                     </div>
                   </div>
+
+                  <div class="column">
+                    <div class="ui fluid raised card">
+
+                      <div class="fluid content">
+
+                        <a class="fluid large header"><i class="user icon"></i>Mee Msien Moong</a>
+                        <div class="ui horizontal divider">
+
+                        </div>
+                        <p>Status Summary or comments</p>
+                        <div class="meta">
+                          <a class="ui green label">On Course</a>
+                          <a class="ui pink label">ORD</a>
+                          <span>Chump</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
                 </div>
-
-
-
-              </div>
               </div>
 
 
           </div>
         </div>
 
+        <!--Summary Tab-->
         <div class="ui bottom attached tab segment" data-tab="second">
-          <div class="ui grid">
-            <div class="eight wide column">
+          <div class="ui two column grid">
+            <div class="column">
+              <div class="ui basic left aligned segment">
               <h1>Summary</h1>
+              </div>
             </div>
-            <div class="five wide column">
-
-            </div>
-            <div class="three wide column">
-              <div class="">
+            
+            <div class="column">
+              <div class="ui basic right aligned segment">
                 <div class="ui left pointing dropdown link item">
                   <div>
-                    <button class="ui button">Export</button>
-                    <i class="dropdown icon"></i>
+                    <button class="ui center aligned button">Export<i class="dropdown icon"></i></button>
+                    
                   </div>
                   <div class="menu">
                     <div class="item">Whatsapp</div>
@@ -343,6 +408,7 @@
           </div>
         </div>
 
+        <!--Log Tab-->
         <div class="ui bottom attached tab segment" data-tab="third">
           <div class="ui relaxed centered grid">
             <div class="row">
