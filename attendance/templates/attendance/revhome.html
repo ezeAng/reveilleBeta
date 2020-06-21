@@ -34,7 +34,7 @@
               <div class="row">
                 <div class="column">
                   <a class="ui fluid label" id="Search Result">
-                    <img class="ui right spaced avatar image" src="/images/avatar/small/elliot.jpg">
+                    <i class="id card icon"></i>
                     Search Result
                   </a>
                 </div>
@@ -120,12 +120,12 @@
       <!-- MenuBar -->
 
       <div class="fourteen wide column">
-        <div class="ui fluid three item huge menu">
-          <a class="active item">
+        <div class="ui fluid two item huge raised menu">
+          <a class="active blue item">
             Home
             </a>
           <a class="item">Dashboard</a>
-          <a class="item">Settings</a>
+          
         </div>
       </div>
 
@@ -138,7 +138,7 @@
       <div class="ui four column stackable grid">
 
         <div class="column">
-          <div class="ui inverted blue segment" id="DatePickHead">
+          <div class="ui inverted teal segment" id="DatePickHead">
             <h3 class="ui center aligned header" id="DatePickSelect">Select Parade</h3>
           </div>
         </div>
@@ -171,7 +171,7 @@
 
         <div class="column">
           <div class="ui center aligned segment" id="DatePickEnter">
-            <button class="ui fluid blue button" onclick="myFunction()">Enter</button>
+            <button class="ui fluid teal button" onclick="myFunction()">Enter</button>
           </div>
         </div>
 
@@ -194,30 +194,29 @@
         </div>
 
         <!--Overview Tab-->
-        <div class="ui bottom attached active tab segment" data-tab="first">
+        <div class="ui bottom attached active tab segment" data-tab="first" id="OverviewTab">
           <div class="ui centered stackable grid">
 
             <div class="computer only fifteen wide column">
-              
-              <div class="ui fluid category search">
-                <div class="ui icon input">
-                  <input class="prompt" type="text" placeholder="Search personnel...">
-                  <i class="search icon"></i>
+              <div class="ui basic segment">
+                <div class="ui disabled fluid category search " id="OverviewSearch">
+                  <div class="ui icon input">
+                    <input class="prompt" type="text" placeholder="Search personnel...">
+                    <i class="search icon"></i>
+                  </div>
+                  <div class="results"></div>
                 </div>
-                <div class="results"></div>
               </div>
               
             </div>
 
-
             <div class="computer only column">
-              
-              <button class="ui icon button" id="AddCardToggle" data-content="Add users to your feed">
-                <i class="user plus icon"></i>
-              </button>
-            
+              <div class="ui basic right aligned segment">
+                <button class="ui green icon button" id="AddCardToggle" data-content="Add users to your feed">
+                  <i class="user plus icon"></i>
+                </button>
+              </div>
             </div>
-
 
             <div class="tablet only mobile only eight wide column">
               <div class="ui center aligned basic segment">
@@ -232,10 +231,9 @@
               
             </div>
 
-
             <div class="tablet only mobile only eight wide column">
               <div class="ui basic segment">
-                <button class="ui fluid icon button" id="AddCardToggleMobile" data-content="Add users to your feed">
+                <button class="ui fluid green icon button" id="AddCardToggleMobile" data-content="Add users to your feed">
                   <i class="user plus icon"></i>
                 </button>
               </div>
@@ -244,7 +242,7 @@
             
           </div>
 
-          <div class="ui placeholder segment"> 
+          <div class="ui placeholder basic segment"> 
 
             
             
@@ -267,83 +265,111 @@
               <div class="Default-Inactive" id="CardHolders">
                 <div class="ui stackable four column grid">
 
+                  
+                  <!--Sample Cards-->
                   <div class="column">
-                    <div class="ui fluid raised card">
-                      <div class="fluid content">
-
-                        <a class="fluid large header"><i class="user icon"></i>Bong Bei Win</a>
-                        <div class="ui horizontal divider">
-
-                        </div>
-                        <p>Status Summary or comments</p>
-                        <div class="meta">
-                          <a class="ui red label">MC</a>
-                          <span>MA</span>
-                          <span>Thina</span>
-                          <span>ORD</span>
-                          <span>Chump</span>
-                        </div>
-                        <div>
-                          <a class="ui mini red right corner label" id="EditButton">
-                            <i class="edit icon"></i>
-                          </a>
+                    <div class="ui raised card">
+                      <div class="content">
+                        <div class="ui grid">
+                          <div class="twelve wide column">
+                            <div class="left aligned fluid header">
+                              <h3>Ezekiel Ang</h3>
+                            </div>
+                            <div class="left aligned meta">
+                              4SG (Dynamic Rank)
+                            </div>
+                          </div>
                           
+                          <div class="four wide column">
+                            <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/jenny.jpg">
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="column">
-                    <div class="ui fluid raised card">
-
-                      <div class="fluid content">
-
-                        <a class="fluid large header"><i class="user icon"></i>Tronald Drump</a>
-                        <div class="ui horizontal divider">
-
+                        
+                        <div class="ui basic segment">
+                          <div class="description">
+                            Chaokeng like fk since BMT until ORD everyday canteen break lepak rokok. (dynamic)
+                          </div>
                         </div>
-                        <p>Status Summary or comments</p>
+                        
+
                         <div class="meta">
                           <a class="ui red label">MC</a>
-                          <a class="ui blue label">MA</a>
-                          <span>T</span>
-                          <span>ORDlo</span>
-                          <span>Chump</span>
+                          <a class="ui yellow label">Platoon 1</a>
+                          <a class="ui  orange label">Unfit</a>
+                        </div>
+                        
+                      </div>
+                      <div class="extra content">
+                        <div class="four column ui grid">
+                          <div class="column"><button class="ui olive circular icon button"><i class="small phone icon"></i></button></div>
+                          <div class="column"><button class="ui teal circular icon button"><i class="small paper plane icon"></i></button></div>
+                          <div class="column"><button class="ui green circular icon button"><i class="small edit icon"></i></button></div>
+                          <div class="column"><button class="ui red circular icon button"><i class="small minus square icon"></i></button></div>
                         </div>
                       </div>
-                    </div>
+                  </div>
+
+
+
                   </div>
 
                   <div class="column">
-                    <div class="ui fluid raised card">
-
-                      <div class="fluid content">
-
-                        <a class="fluid large header"><i class="user icon"></i>Mee Msien Moong</a>
-                        <div class="ui horizontal divider">
-
+                    <div class="ui raised card">
+                      <div class="content">
+                        <div class="ui grid">
+                          <div class="twelve wide column">
+                            <div class="left aligned fluid header">
+                              <h3>Wong Wei Bin</h3>
+                            </div>
+                            <div class="left aligned meta">
+                              OC (Dynamic Rank)
+                            </div>
+                          </div>
+                          
+                          <div class="four wide column">
+                            <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/jenny.jpg">
+                          </div>
                         </div>
-                        <p>Status Summary or comments</p>
-                        <div class="meta">
-                          <a class="ui green label">On Course</a>
-                          <a class="ui pink label">ORD</a>
-                          <span>Chump</span>
+                        
+                        
+                        
+                        <div class="ui basic segment">
+                          <div class="description">
+                            ND Tank legendarily (dynamic)
+                          </div>
+                        </div>
+
+                        <div class="meta"> <!--Dynamic generation of labels according to DB-->
+                          <a class="ui red label">MA</a>
+                          <a class="ui violet label">Platoon 2</a>
+                          <a class="ui teal label">OutStation</a>
+                        </div>
+                        
+                      </div>
+                      <div class="extra content">
+                        <div class="four column ui grid">
+                          <div class="column"><button class="ui olive circular icon button"><i class="small phone icon"></i></button></div>
+                          <div class="column"><button class="ui teal circular icon button"><i class="small paper plane icon"></i></button></div>
+                          <div class="column"><button class="ui green circular icon button"><i class="small edit icon"></i></button></div>
+                          <div class="column"><button class="ui red circular icon button"><i class="small minus square icon"></i></button></div>
                         </div>
                       </div>
-                    </div>
                   </div>
 
 
 
-                </div>
+                  </div>
+
               </div>
 
 
           </div>
+          </div>
+
         </div>
 
         <!--Summary Tab-->
-        <div class="ui bottom attached tab segment" data-tab="second">
+        <div class="ui bottom attached tab segment" data-tab="second" id="SummaryTab">
           <div class="ui two column grid">
             <div class="column">
               <div class="ui basic left aligned segment">
@@ -409,7 +435,7 @@
         </div>
 
         <!--Log Tab-->
-        <div class="ui bottom attached tab segment" data-tab="third">
+        <div class="ui bottom attached tab segment" data-tab="third" id="LogTab">
           <div class="ui relaxed centered grid">
             <div class="row">
               <div><p>I took <span id="tdday2">the day</span> and <span id="PChoice"> your choice</span> from DB</p></div>

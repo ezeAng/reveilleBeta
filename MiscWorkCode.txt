@@ -127,3 +127,26 @@ Original :
             <a class="ui green right corner label" id="AddCardToggle" >
               <i class="plus circle icon"></i>
             </a>
+
+------------------------------------ Card Style old
+
+<div class="column">
+                    <div class="ui fluid raised card">
+
+                      <div class="fluid content">
+
+                        <a class="fluid large header"><i class="user icon"></i>Mee Msien Moong</a>
+                        <div class="ui horizontal divider">
+
+                        </div>
+                        <p>Status Summary or comments</p>
+                        <div class="meta">
+                          <a class="ui green label">On Course</a>
+                          <a class="ui pink label">ORD</a>
+                          <span>Chump</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+----------------------------------------
