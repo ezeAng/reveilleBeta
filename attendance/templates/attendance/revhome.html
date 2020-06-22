@@ -531,10 +531,11 @@
           <!--Summary Data-->
           <div class="ui center aligned grid">
 
+            {% for parade in Parade %}
             <div class="row">
               <div class="fourteen wide left aligned column">
                 <div class="ui segment">
-                  <h3>Total Strength: <span>Dynamic</span></h3>
+                  <h3>Total Strength: <span>{{ parade.total_strength }}</span></h3>
                 </div>
               </div>
               </div>
@@ -587,9 +588,10 @@
               </div>
             </div>
 
+            {% endfor %}
             <div class="ui hidden divider"></div>
 
-
+            
           </div>
           
         </div>
