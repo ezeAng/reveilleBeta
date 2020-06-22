@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Personnel, Absence
+from .models import Personnel, Absence, Parade
 
 def home_view(request):
 
 	context = {
-		'posts': Personnel.objects.all()
+		'personnel': Personnel.objects.all(),
+		'parade': Parade.objects.all(),
 	}
 	return render(request, 'attendance/revhome.html/', context)
 
