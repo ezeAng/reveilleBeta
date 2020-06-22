@@ -7,6 +7,7 @@ def home_view(request):
 	context = {
 		'personnel': Personnel.objects.all(),
 		'parade': Parade.objects.all(),
+		
 	}
 	return render(request, 'attendance/revhome.html/', context)
 
