@@ -2,25 +2,279 @@
 
 {% block content %}
 
-<div id="Menubar">
-  <ul>
-    <li><a href="http://localhost:8000/home/#" >Home</a></li>
-    <li><a href="C:/Users/ang_e/Desktop/RevHTML/settingspage.html#">Settings</a></li>
-    <li><a href="#" class="active">Dashboard</a></li>
-  </ul>
+
+
+<!--Headings to MenuBar-->
+<div class="ui relaxed centered grid">
+
+  <!-- Headings -->
+  <div class="row">
+    <div>
+      <a href="http://localhost:8000/troll/#"><h1 class="ui center aligned masssive header" id="HomeHeader">
+        Reveille
+      </h1></a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+    <h2 class="ui center aligned medium header">All your parades in one place.</h2>
+    </div>
+  </div>
+
+  <!-- MenuBar -->
+
+  <div class="fourteen wide column">
+    <div class="ui fluid two item huge raised menu">
+      <a class="item" href="http://localhost:8000/home/#">
+        Home
+        </a>
+      <a class="active blue item" >Dashboard</a>
+      
+    </div>
+  </div>
+
 </div>
 
-<div id="setbuttons">
-  <ul>
-    <li><a href="#">Add or Delete Persons</a></li>
-    <li><a href="#">Export</a></li>
-    <li><a href="#">Help</a></li>
-  </ul>
+
+
+<div class="container">
+  <div class="ui centered grid">
+    <div class="fourteen wide column">
+      <div class="ui segment">
+        <div class="ui two column stackable center aligned grid">
+
+          <!--Left Side-->
+          <div class="column">
+            <div class="ui basic segment">
+
+              <!--Welcome Summary-->
+              <div class="ui fluid raised card">
+                <div class="content">
+                  <h1>Welcome to Dashboard.</h1>
+
+                  <div class="ui hidden divider"></div>
+
+                  <div class="summary">
+                    <h3>
+                      You are referencing (LABEL UNIT) (LABEL COY) parade states.
+                    </h3>
+                     
+                  </div>
+                </div>
+
+                
+                <div class="extra content">
+                  <div class="ui centered two column grid">
+                    <div class="center aligned column">
+                      <a href="">id:<span>089AAC</span> (dynamic)</a>
+                    </div>
+                    <div class="center aligned column">
+                      <a href="">Created by <span>OC WeiBin</span></a>
+                    </div>
+                  </div>
+                  
+                  
+                </div>
+              </div>
+              
+              <!--Primer Card-->
+              <div class="ui fluid raised card">
+                <div class="center aligned content">
+                  <h2>Primers</h2>
+                </div>
+
+                <div class="extra content">
+                  <div class="ui center aligned basic segment">
+                    <button class="ui fluid pink icon button">
+                      <i class="massive handshake icon"></i>
+                      <div class="ui hidden divider"></div>
+                    </button>
+                  </div>
+                  <div class="ui center aligned basic segment">
+                    <button class="ui fluid green icon button">
+                      <i class="massive briefcase icon"></i>
+                      <div class="ui hidden divider"></div>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+
+              <!--Help Card-->
+              <div class="ui fluid raised card">
+                <div class="content">
+                  <h3>Help</h3>
+                </div>
+
+                <div class="content">
+                  <div class="summary">
+                    Click here for documentation. 
+                  </div>
+                </div>
+                <div class="extra content">
+                  <div class="ui centered grid">
+                    <div class="seven wide center aligned column"><a href="">Quit Smoking</a>
+                    </div>
+
+                    <div class="seven wide center aligned column">
+                      <a href="">Report an Issue</a>
+                    </div>
+                  </div>
+                  
+                  
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!--Right Side-->
+          <div class="column">
+            <div class="ui basic segment">
+
+              <!--Menu Card-->
+              <div class="ui fluid raised card">
+                
+
+                  <div class="ui fluid borderless massive vertical menu">
+                    <a class="item">
+                      <h4 class="ui header">Other Parades</h4>
+                      <p>To view other parades under your command</p>
+                      
+                    </a>
+
+
+                    <a class="item">
+                      <h4 class="ui header">Edit Current</h4>
+                      <p>To edit current parade personnel, add or remove.</p>
+                      
+                    </a>
+
+                    <a class="item">
+                      <h4 class="ui header">Edit Individual</h4>
+                      <p>To edit Individual personnel information</p>
+                      
+                    </a>
+                    
+                  </div>
+
+                
+              </div>
+
+              <!--Statistic Cards-->
+
+              <!--ORD Batch Card-->
+              <div class="ui fluid raised card">
+
+                <div class="content">
+                  <div class="ui hidden divider"></div>
+                  <div class="ui hidden divider"></div>
+                  <div class="ui basic center aligned segment">
+                    
+                      <div class="ui pink huge statistic">
+                        <div class="value">
+                          277
+                        </div>
+                        <div class="label">
+                          Days to ORD
+                        </div>
+                      </div>
+
+                  </div>
+                  <div class="ui hidden divider"></div>
+                  <div class="ui hidden divider"></div>
+                </div>
+
+              </div>
+
+              <!--National Day-->
+              <div class="ui fluid raised card">
+
+                <div class="content">
+
+                  <div class="ui basic center aligned segment">
+                    
+                      <div class="ui red huge statistic">
+                        <div class="value">
+                          155
+                        </div>
+                        <div class="label">
+                          Days to National Day
+                        </div>
+                      </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 </div>
 
-<script>
-var dt = new Date();
-document.getElementById("datetime").innerHTML = (("0"+dt.getDate()).slice(-2)) +"/"+ (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (dt.getFullYear())
-</script>
+
+
+
+
+
+<!-- Footer -->
+
+<div class="ui centered grid">
+  <div class="fourteen wide column">
+  <div class="ui segment" >
+    <div class="ui very relaxed centered grid">
+
+      <div class="fourteen wide column">
+
+        <div class="ui middle aligned animated list">
+          <div class="item">
+            <i class="question icon"></i>
+            <div class="content">
+              <div class="header">FAQ</div>
+            </div>
+          </div>
+          <div class="item">
+            <i class="file alternate icon"></i>
+            <div class="content">
+              <div class="header">Terms and Conditions</div>
+            </div>
+          </div>
+          <div class="item">
+            <i class="large envelope outline icon"></i>
+            <div class="content">
+              <div class="header">Contact our team</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 {% endblock content %}

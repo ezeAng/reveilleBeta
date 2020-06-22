@@ -124,7 +124,7 @@
           <a class="active blue item">
             Home
             </a>
-          <a class="item">Dashboard</a>
+          <a class="item" href="http://localhost:8000/dashboard/#">Dashboard</a>
           
         </div>
       </div>
@@ -263,12 +263,13 @@
 
               <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
               <div class="Default-Inactive" id="CardHolders">
-                <div class="ui stackable four column grid">
+                
 
                   
                   <!--Sample Cards-->
-                  <div class="column">
-                    <div class="ui raised card">
+                  <!--Will ahve to html loop generate within ui rasied cards-->
+                  <div class="ui raised four cards">
+                    <div class="card">
                       <div class="content">
                         <div class="ui grid">
                           <div class="twelve wide column">
@@ -292,29 +293,28 @@
                         </div>
                         
 
-                        <div class="meta">
-                          <a class="ui red label">MC</a>
-                          <a class="ui yellow label">Platoon 1</a>
-                          <a class="ui  orange label">Unfit</a>
-                        </div>
+                        
                         
                       </div>
                       <div class="extra content">
+                        <div class="ui basic segment">
+                          <div class="meta"> <!--Dynamic generation of labels according to DB-->
+                            <a class="ui red label">MA</a>
+                            <a class="ui yellow label">Platoon 1</a>
+                            <a class="ui orange label">Unfit for duty</a>
+                          </div>
+                        </div>
+
                         <div class="four column ui grid">
-                          <div class="column"><button class="ui olive circular icon button"><i class="small phone icon"></i></button></div>
-                          <div class="column"><button class="ui teal circular icon button"><i class="small paper plane icon"></i></button></div>
-                          <div class="column"><button class="ui green circular icon button"><i class="small edit icon"></i></button></div>
-                          <div class="column"><button class="ui red circular icon button"><i class="small minus square icon"></i></button></div>
+                          <div class="column"><button class="ui olive circular icon button"><i class="phone icon"></i></button></div>
+                          <div class="column"><button class="ui teal circular icon button"><i class="paper plane icon"></i></button></div>
+                          <div class="column"><button class="ui green circular icon button"><i class="edit icon"></i></button></div>
+                          <div class="column"><button class="ui red circular icon button"><i class="minus square icon"></i></button></div>
                         </div>
                       </div>
-                  </div>
-
-
-
-                  </div>
-
-                  <div class="column">
-                    <div class="ui raised card">
+                    </div>
+                                 
+                    <div class="card">
                       <div class="content">
                         <div class="ui grid">
                           <div class="twelve wide column">
@@ -339,31 +339,137 @@
                           </div>
                         </div>
 
-                        <div class="meta"> <!--Dynamic generation of labels according to DB-->
-                          <a class="ui red label">MA</a>
-                          <a class="ui violet label">Platoon 2</a>
-                          <a class="ui teal label">OutStation</a>
-                        </div>
+                        
                         
                       </div>
                       <div class="extra content">
+                        <div class="ui basic segment">
+                          <div class="meta"> <!--Dynamic generation of labels according to DB-->
+                            <a class="ui red label">MA</a>
+                            <a class="ui violet label">Platoon 2</a>
+                            <a class="ui teal label">OutStation</a>
+                          </div>
+                        </div>
                         <div class="four column ui grid">
-                          <div class="column"><button class="ui olive circular icon button"><i class="small phone icon"></i></button></div>
-                          <div class="column"><button class="ui teal circular icon button"><i class="small paper plane icon"></i></button></div>
-                          <div class="column"><button class="ui green circular icon button"><i class="small edit icon"></i></button></div>
-                          <div class="column"><button class="ui red circular icon button"><i class="small minus square icon"></i></button></div>
+                          <div class="column"><button class="ui olive circular icon button"><i class="phone icon"></i></button></div>
+                          <div class="column"><button class="ui teal circular icon button"><i class="paper plane icon"></i></button></div>
+                          <div class="column"><button class="ui green circular icon button"><i class="edit icon"></i></button></div>
+                          <div class="column"><button class="ui red circular icon button"><i class="minus square icon"></i></button></div>
                         </div>
                       </div>
+                  
+
+
+
+                    </div>
+
+                    <div class="card">
+                      <div class="content">
+                        <div class="ui grid">
+                          <div class="twelve wide column">
+                            <div class="left aligned fluid header">
+                              <h3>Shao</h3>
+                            </div>
+                            <div class="left aligned meta">
+                              CSM (Dynamic Rank)
+                            </div>
+                          </div>
+                          
+                          <div class="four wide column">
+                            <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/jenny.jpg">
+                          </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="ui basic segment">
+                          <div class="description">
+                            4yr NS (dynamic)
+                          </div>
+                        </div>
+                        
+                        
+                        
+                      </div>
+                      <div class="extra content">
+                        <div class="ui basic segment">
+                          <div class="meta"> <!--Dynamic generation of labels according to DB-->
+                            <a class="ui red label">MA</a>
+                            <a class="ui violet label">Platoon 2</a>
+                            <a class="ui teal label">OutStation</a>
+                          </div>
+                        </div>
+                        
+                        
+                        <div class="four column ui grid">
+                          <div class="column"><button class="ui olive circular icon button"><i class="phone icon"></i></button></div>
+                          <div class="column"><button class="ui teal circular icon button"><i class="paper plane icon"></i></button></div>
+                          <div class="column"><button class="ui green circular icon button"><i class="edit icon"></i></button></div>
+                          <div class="column"><button class="ui red circular icon button"><i class="minus square icon"></i></button></div>
+                        </div>
+                      </div>
+                  
+
+
+
+                    </div>
+
+                    <div class="card">
+                      <div class="content">
+                        <div class="ui grid">
+                          <div class="twelve wide column">
+                            <div class="left aligned fluid header">
+                              <h3>Yacob</h3>
+                            </div>
+                            <div class="left aligned meta">
+                              P (Dynamic Rank)
+                            </div>
+                          </div>
+                          
+                          <div class="four wide column">
+                            <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/jenny.jpg">
+                          </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="ui basic segment">
+                          <div class="description">
+                            Picture on Wall (dynamic)
+                          </div>
+                        </div>
+
+                        
+                        
+                      </div>
+                      <div class="extra content">
+                        <div class="ui basic segment">
+                          <div class="meta"> <!--Dynamic generation of labels according to DB-->
+                            <a class="ui red label">MA</a>
+                            <a class="ui violet label">Platoon 2</a>
+                            <a class="ui teal label">OutStation</a>
+                          </div>
+                        </div>
+                        <div class="four column ui grid">
+                          <div class="column"><button class="ui olive circular icon button"><i class="phone icon"></i></button></div>
+                          <div class="column"><button class="ui teal circular icon button"><i class="paper plane icon"></i></button></div>
+                          <div class="column"><button class="ui green circular icon button"><i class="edit icon"></i></button></div>
+                          <div class="column"><button class="ui red circular icon button"><i class="minus square icon"></i></button></div>
+                        </div>
+                      </div>
+                  
+
+
+
+                    </div>
+
+                    
                   </div>
 
+                
 
-
-                  </div>
 
               </div>
-
-
-          </div>
           </div>
 
         </div>
@@ -371,19 +477,20 @@
         <!--Summary Tab-->
         <div class="ui bottom attached tab segment" data-tab="second" id="SummaryTab">
 
-          <!--First row-->
-          <div class="ui two column grid">
-            <div class="column">
+          <!--First row -->
+          
+          <div class="ui center aligned grid">
+            <div class="ten wide column">
               <div class="ui basic left aligned segment">
               <h1>Summary</h1>
               </div>
             </div>
             
-            <div class="column">
+            <div class="computer only four wide column">
               <div class="ui basic right aligned segment">
                 <div class="ui left pointing dropdown link item">
                   <div>
-                    <button class="ui center aligned button">Export<i class="dropdown icon"></i></button>
+                    <button class="ui center aligned button">Export</button>
                     
                   </div>
                   <div class="menu">
@@ -393,7 +500,27 @@
                     <div class="item">Drafts (143)</div>
                     <div class="divider"></div>
                     <div class="item">Save as pdf</div>
-                    <div class="item">Trash</div>
+                    <div class="item">Options</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mobile only tablet only four wide column">
+              <div class="ui basic right aligned segment">
+                <div class="ui right pointing dropdown link item">
+                  <div class="">
+                    <button class="ui center aligned button">Export</button>
+                    
+                  </div>
+                  <div class="menu">
+                    <div class="item">Whatsapp</div>
+                    <div class="item">Telegram</div>
+                    <div class="item">Sent Mail</div>
+                    <div class="item">Drafts (143)</div>
+                    <div class="divider"></div>
+                    <div class="item">Save as pdf</div>
+                    <div class="item">Options</div>
                   </div>
                 </div>
               </div>
