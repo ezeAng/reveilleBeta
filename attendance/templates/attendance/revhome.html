@@ -5,6 +5,8 @@
 
 
 
+
+
   <!-- Dimmer for whole page-->
   <div class="ui page dimmer custom">
     <div class="content">
@@ -171,7 +173,7 @@
 
         <div class="column">
           <div class="ui center aligned segment" id="DatePickEnter">
-            <button class="ui fluid teal button" onclick="myFunction()">Enter</button>
+            <button class="ui fluid teal button" >Enter</button>
           </div>
         </div>
 
@@ -266,18 +268,20 @@
                 
 
                   
+                
                   <!--Sample Cards-->
                   <!--Will ahve to html loop generate within ui rasied cards-->
                   <div class="ui raised four cards">
+                    <!-- {% for xx in xx %} -->
                     <div class="card">
                       <div class="content">
                         <div class="ui grid">
                           <div class="twelve wide column">
                             <div class="left aligned fluid header">
-                              <h3>Ezekiel Ang</h3>
+                              <h3>{{ xx.name }}</h3>
                             </div>
                             <div class="left aligned meta">
-                              4SG (Dynamic Rank)
+                              {{ xx.rank }})
                             </div>
                           </div>
                           
@@ -288,7 +292,7 @@
                         
                         <div class="ui basic segment">
                           <div class="description">
-                            Chaokeng like fk since BMT until ORD everyday canteen break lepak rokok. (dynamic)
+                            {{ xx.remarks }}
                           </div>
                         </div>
                         
@@ -299,9 +303,11 @@
                       <div class="extra content">
                         <div class="ui basic segment">
                           <div class="meta"> <!--Dynamic generation of labels according to DB-->
+                            <!-- {% for status in personnel %} -->
                             <a class="ui red label">MA</a>
                             <a class="ui yellow label">Platoon 1</a>
                             <a class="ui orange label">Unfit for duty</a>
+                            <!-- {% endfor %} -->
                           </div>
                         </div>
 
@@ -313,6 +319,7 @@
                         </div>
                       </div>
                     </div>
+                    <!-- {% endfor %} -->
                                  
                     <div class="card">
                       <div class="content">

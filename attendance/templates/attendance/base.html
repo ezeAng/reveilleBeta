@@ -25,6 +25,8 @@
 
 <body>
 
+  
+
 {% block content %}{% endblock %}
 
 
@@ -61,8 +63,13 @@
   </script>
 
   <!-- Local Self-written -->
-  <script>
-    function myFunction() {
+  <!-- <script>
+    function EnterFunction() {
+
+      
+
+
+
     var a = document.getElementById("MyDate").value;
     var x = new Date(a)
 
@@ -82,27 +89,85 @@
     var p = document.getElementById('ParadeChoice').value;
     document.getElementById("PChoice").innerHTML = p;
 
-    document.getElementById("CardHolders").classList.toggle('active');
-    document.getElementById("NoDocumentPage").className="Default-Inactive";
-    document.getElementById("OverviewSearch").classList.remove('disabled');
+    
+
+    var a = document.getElementById("MyDate").value;
+    var p = document.getElementById('ParadeChoice').value;
+    var b = 2 ;
+
+    
+    
+    location.href = "?parade_id=" + b + "&?date=" + a + "&?parade_choice=" + p  ;
+    var url_location = location.href 
+
+
+    // have to loop check if parade and card data exists, if yes then generate cards and hide default not show and enable search.
+
+    
+    
+
+
 
     }
 
+  </script> -->
+
+  <script>
+
+    var btn = document.getElementById('DatePickEnter');
+    btn.addEventListener('click',UpdateBackUrl);
+
+    function UpdateBackUrl(){
+      
+      var a = document.getElementById("MyDate").value;
+      var p = document.getElementById('ParadeChoice').value;
+      var b = 2;
+      location.href = "?parade_id=" + b + "&?date=" + a + "&?parade_choice=" + p  ;
+
+
+      console.log("url changed");
+
+      
+    }
     
+
+  </script>
+
+  <script>
+    var anot = document.getElementById("MyDate");
+    var pnot = document.getElementById('ParadeChoice');
+    var b = 2;
+    var urlnow = window.location.search;
+    console.log(urlnow);
     
-    // var url = "http://localhost:8000/home/?parade_id";
-    // window.location(url);
+    //Once url is not ...home/... this code block will run, which toggles the cardholder
+    //next is to take context from html side, put into js variable, e.g var p = doc.getelebyidinnerhtml... -->48SAR A COy Parade,
+    // for personnel in p :
+    // if personnel.status != null {
+    // for eachdog in personnel.status , iterate cards , use js to create html chunks within cardholder segments
+    // } can do a settimemout to iterate cards
+
+    // search personnel will then search the current html onsite 
+    // add card will be a form add to db, and then rerun chunk of code of iterating, without timemout ( maybe code it to only timedelay the last one)
+    if (urlnow != "") {
+      console.log("url live");
+      document.getElementById("CardHolders").classList.toggle('active');
+      document.getElementById("OverviewSearch").classList.remove('disabled');
+      document.getElementById("NoDocumentPage").className="Default-Inactive";
+    }
+
+    else {
+      console.log("close document none print cards")
+
+      
+    }
+
     
   </script>
 
-  <!-- <script>
-    var a = document.getElementById("MyDate").value;
-    var p = document.getElementById('ParadeChoice').value;
+  
 
-    var u = "localhost:8000/home/" + "?" + a
-
-
-  </script> -->
+  
 
 
 </body>

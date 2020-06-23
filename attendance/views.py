@@ -8,10 +8,14 @@ def home_view(request):
 	'''
 	parade_id = request.GET.get('parade_id')
 	if parade_id is None:
-		return render(request, 'attendance/revhome.html/')
+		context = {
+			'error': True
+		}
+		return render(request, 'attendance/revhome.html/', context)
 	else:
 		# parade = Parade.objects.get(id=parade_id)
 		context = {
+			'error': False,
 			# 'personnel': Personnel.objects.all(),
 			'parade': Parade.objects.filter(id=parade_id).values()[0],
 			# 'parade': parade
