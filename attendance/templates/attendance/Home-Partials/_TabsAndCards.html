@@ -1,0 +1,354 @@
+<!--Tabs and Cards, Main Bulk of Home Page-->
+
+
+
+<div class="ui center aligned grid">
+    <div class="fourteen wide column">
+      <div class="ui top attached tabular inverted violet menu">
+        <a class="active item" data-tab="first">Overview</a>
+        <a class="item" data-tab="second">Summary</a>
+        <a class="item" data-tab="third" >Log</a>
+      </div>
+
+
+      <!--Overview Tab-->
+
+      <div class="ui violet inverted bottom attached active tab basic segment" data-tab="first" id="OverviewTab">
+
+        <!--First Row of Overview Tab-->
+        <div class="ui centered stackable grid">
+
+          <!--Search Cards-->
+          <div class="computer only fifteen wide violet column">
+            <div class="ui basic segment">
+              <div class="ui disabled fluid category search " id="OverviewSearch">
+                <div class="ui icon input">
+                  <input class="prompt" type="text" placeholder="Search personnel...">
+                  <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+              </div>
+            </div>
+            
+          </div>
+
+          <!--Add Card Toggle-->
+          <div class="computer only violet column">
+            <div class="ui basic right aligned segment">
+              <button class="ui teal icon button" id="AddCardToggle" data-content="Add users to your feed">
+                <i class="user plus icon"></i>
+              </button>
+            </div>
+          </div>
+
+
+          <!--Search Cards (Mobile/Tablet)-->
+          <div class="tablet only mobile only eight wide violet column">
+            <div class="ui center aligned basic segment">
+              <div class="ui fluid category search">
+                <div class="ui icon input">
+                  <input class="prompt" type="text" placeholder="Search personnel...">
+                  <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+              </div>
+            </div>
+            
+          </div>
+
+          <!--Add Card toggle (Mobile/Tablet)-->
+          <div class="tablet only mobile only eight wide violet column">
+            <div class="ui basic segment">
+              <button class="ui fluid teal icon button" id="AddCardToggleMobile" data-content="Add users to your feed">
+                <i class="user plus icon"></i>
+              </button>
+            </div>
+          
+          </div>
+          
+        </div>
+
+
+        <!--Card Holder Segments-->
+        <div class="ui placeholder basic violet segment"> 
+
+            <!--Default page before entrance of data. No Documents. -->
+            <div class="" id="NoDocumentPage">
+              <div class="ui centered grid">
+                <div class="row">
+                  <div class="ui icon header">
+                    <i class="grey user secret icon"></i>
+                      <span class="ui grey header">No documents are listed for this loser.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
+            <div class="Default-Inactive" id="CardHolders">
+                                                
+                <!--Sample Cards-->
+                <!--Will ahve to html loop generate within ui rasied cards-->
+                <div class="ui raised four cards">
+
+                  <!--Individual Cards-->
+
+                  
+                  <div class="card">
+                    <div class="content">
+                      <div class="ui grid">
+                        <div class="twelve wide column">
+                          <div class="left aligned fluid header">
+                            <h3>{{ xx.name }}</h3>
+                          </div>
+                          <div class="left aligned meta">
+                            {{ xx.rank }})
+                          </div>
+                        </div>
+                        
+                        <div class="four wide column">
+                          <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/jenny.jpg">
+                        </div>
+                      </div>
+                      
+                      <div class="ui basic segment">
+                        <div class="description">
+                          {{ xx.remarks }}
+                        </div>
+                      </div>
+                      
+
+                      
+                      
+                    </div>
+
+                    <!--Labels for Current Status-->
+                    <div class="extra content">
+                      <div class="ui basic segment">
+                        <div class="meta"> <!--Dynamic generation of labels according to DB-->
+                          <!-- {% for status in personnel %} -->
+                          <a class="ui red label">MA</a>
+                          <a class="ui yellow label">Platoon 1</a>
+                          <a class="ui orange label">Unfit for duty</a>
+                          <!-- {% endfor %} -->
+                        </div>
+                      </div>
+
+                      <div class="four column ui grid">
+                        <div class="column"><button class="ui olive circular icon button"><i class="phone icon"></i></button></div>
+                        <div class="column"><button class="ui teal circular icon button"><i class="paper plane icon"></i></button></div>
+                        <div class="column"><button class="ui green circular icon button"><i class="edit icon"></i></button></div>
+                        <div class="column"><button class="ui red circular icon button"><i class="minus square icon"></i></button></div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                                
+                  <div class="card">
+                    <div class="content">
+                      <div class="ui grid">
+                        <div class="twelve wide column">
+                          <div class="left aligned fluid header">
+                            <h3>Wong Wei Bin</h3>
+                          </div>
+                          <div class="left aligned meta">
+                            OC (Dynamic Rank)
+                          </div>
+                        </div>
+                        
+                        <div class="four wide column">
+                          <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/jenny.jpg">
+                        </div>
+                      </div>
+                      
+                      
+                      
+                      <div class="ui basic segment">
+                        <div class="description">
+                          ND Tank legendarily (dynamic)
+                        </div>
+                      </div>
+
+                      
+                      
+                    </div>
+                    <div class="extra content">
+                      <div class="ui basic segment">
+                        <div class="meta"> <!--Dynamic generation of labels according to DB-->
+                          <a class="ui red label">MA</a>
+                          <a class="ui violet label">Platoon 2</a>
+                          <a class="ui teal label">OutStation</a>
+                        </div>
+                      </div>
+                      <div class="four column ui grid">
+                        <div class="column"><button class="ui olive circular icon button"><i class="phone icon"></i></button></div>
+                        <div class="column"><button class="ui teal circular icon button"><i class="paper plane icon"></i></button></div>
+                        <div class="column"><button class="ui green circular icon button"><i class="edit icon"></i></button></div>
+                        <div class="column"><button class="ui red circular icon button"><i class="minus square icon"></i></button></div>
+                      </div>
+                    </div>
+                
+
+
+
+                  </div>
+
+                  
+
+                  
+
+                  
+                </div>
+
+              
+
+
+            </div>
+        </div>
+
+      </div>
+
+      <!--Summary Tab-->
+      <div class="ui violet inverted bottom attached tab basic segment" data-tab="second" id="SummaryTab">
+
+        <!--First row -->
+        
+        <div class="ui center aligned grid">
+
+          <div class="ten wide column">
+            <div class="ui basic left aligned segment">
+            <h1 id="SummaryHeader">Summary</h1>
+            </div>
+          </div>
+          
+          <div class="computer only four wide column">
+            <div class="ui basic right aligned segment">
+              <div class="ui left pointing dropdown link item">
+                <div>
+                  <button class="ui center aligned orange button">Export</button>
+                  
+                </div>
+                <div class="menu">
+                  <div class="item">Whatsapp</div>
+                  <div class="item">Telegram</div>
+                  <div class="item">Sent Mail</div>
+                  <div class="item">Drafts (143)</div>
+                  <div class="divider"></div>
+                  <div class="item">Save as pdf</div>
+                  <div class="item">Options</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mobile only tablet only four wide column">
+            <div class="ui basic right aligned segment">
+              <div class="ui right pointing dropdown link item">
+                <div class="">
+                  <button class="ui center aligned orange button">Export</button>
+                  
+                </div>
+                <div class="ui grey menu">
+                  <div class="green item">Whatsapp</div>
+                  <div class="item">Telegram</div>
+                  <div class="item">Sent Mail</div>
+                  <div class="item">Drafts (143)</div>
+                  <div class="divider"></div>
+                  <div class="item">Save as pdf</div>
+                  <div class="item">Options</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!--Summary Data-->
+        <div class="ui center aligned grid">
+
+          <!-- {% for eachparade in parade %} -->
+          <div class="row">
+            <div class="fourteen wide left aligned column">
+              <div class="ui inverted grey segment">
+                <h3 class="ui violet header">Total Strength: <span>{{ parade.total_strength }}</span></h3>
+              </div>
+            </div>
+            </div>
+
+          <div class="row">
+            <div class="fourteen wide left aligned column">
+              <div class="ui inverted grey segment">
+                <h3 class="ui violet header">Current Strength: <span>{{ parade.personnel_strength }}</span></h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="fourteen wide left aligned column">
+              <div class="ui inverted grey segment">
+                <h3 class="ui violet header">Attend C: <span>Dynamic</span></h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="fourteen wide left aligned column">
+              <div class="ui inverted grey segment">
+                <h3 class="ui violet header">Medical Appointment: <span>Dynamic</span></h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="fourteen wide left aligned column">
+              <div class="ui inverted grey segment">
+                <h3 class="ui violet header">On Course: <span>Dynamic</span></h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="fourteen wide left aligned column">
+              <div class="ui inverted grey segment">
+                <h3 class="ui violet header">Outstationed: <span>Dynamic</span></h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="fourteen wide left aligned column">
+              <div class="ui inverted grey segment">
+                <h3 class="ui violet header">Dentention Barracks: <span>Dynamic</span></h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- {% endfor %} -->
+
+          <div class="ui hidden divider"></div>
+
+          
+        </div>
+        
+      </div>
+
+      <!--Log Tab-->
+      <div class="ui violet inverted bottom attached tab basic segment" data-tab="third" id="LogTab">
+        <div class="ui relaxed centered grid">
+
+          <div class="row">
+            <div><p>I took <span id="tdday2">the day</span> and <span id="PChoice"> your choice</span> from DB</p></div>
+          </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+<!--------------------------------------------------------------->

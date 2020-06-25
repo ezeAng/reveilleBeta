@@ -20,6 +20,9 @@ def home_view(request):
 			'parade': Parade.objects.filter(id=parade_id).values()[0],
 			# 'parade': parade
 
+
+			
+
 		}
 		return render(request, 'attendance/revhome.html/', context)
 

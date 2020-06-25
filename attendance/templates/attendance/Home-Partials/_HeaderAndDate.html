@@ -1,0 +1,88 @@
+<!-- From Headers to Datepicker -->
+
+<div class="ui relaxed centered grid">
+
+    <!-- Headings -->
+    <div class="ui hidden divider"></div>
+    <div class="row">
+      <div>
+        <a href="http://localhost:8000/troll/#"><h1 class="ui center aligned masssive header" id="HomeHeader">
+          Reveille
+        </h1></a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+      <h2 class="ui center aligned medium header" id="HeaderSum">All your parades in one place.</h2>
+      </div>
+    </div>
+
+    <!-- MenuBar -->
+
+    <div class="fourteen wide column">
+      <div class="ui fluid two item huge raised inverted violet menu">
+        <a class="active item">
+          Home
+          </a>
+        <a class="item" href="http://localhost:8000/dashboard/#">Dashboard</a>
+        
+      </div>
+    </div>
+
+
+  <!-- Datepicker Block -->
+
+  <div class="fourteen wide column" id="DatePickRow">
+
+  
+    <div class="ui four column stackable grid">
+
+      <div class="column">
+        <div class="ui inverted blue segment" id="DatePickHead">
+          <h3 class="ui center aligned header" id="DatePickSelect">Select Parade</h3>
+        </div>
+      </div>
+
+      <div class="column">
+      <div class="ui center aligned segment" id="DatePickSelectSegment">
+        <div class="ui fluid input left icon">
+          <i class="caret right icon"></i>
+          <input class="input" type="date" id="MyDate">
+        </div>
+      </div>
+      </div>
+
+
+      <div class="column">
+        <div class="ui center aligned segment" id="DatePickDropdown">
+
+          <div class="ui form">
+            <div class="field">
+              <select name="ParadeChoice" class="ui fluid dropdown" id="ParadeChoice">
+                <option value="">Parade</option>
+                <option value="0">First</option>
+                <option value="1">Mid-Day</option>
+                <option value="2">Last</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="ui center aligned segment" id="DatePickEnter">
+          <button class="ui fluid primary button" >Enter</button>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<!----------------------------------------------->
