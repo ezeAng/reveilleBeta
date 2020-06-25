@@ -1,3 +1,18 @@
 /*******************************
      User Global Variables
 *******************************/
+
+
+@primaryColor: @teal ;
+@secondaryColor: @blue ;
+@teal : #3FC4A1 ;
+@blue : #0589B6 ;
+@orange : #C45C49 ;
+@violet : #1C2754 ;
+@grey : #CCD1DD ;
+
+
+@relativeBorderRadius: @relative6px;
+@absoluteBorderRadius: @6px;
+
+@fontName : Roboto ;

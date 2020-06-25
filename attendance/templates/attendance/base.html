@@ -4,8 +4,8 @@
   <head>
 
     
-    <link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/distcopy/semantic.css/' %} ">
-    <link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/distcopy/icon.css/' %} ">
+    <link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/dist/semantic.css/' %} ">
+    <link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/dist/icon.css/' %} ">
     <link rel="stylesheet" type="text/css" href="{% static 'attendance/CSS/master.css'%}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
@@ -14,11 +14,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Parade State Compiler">
 
+    <!-- Style Overides -->
     <style>
       body {
-        background-color: #D1DCE2;
+        /* ArsenicColor */
+        background-color: #0C1430;
         color: black;
       }
+
+      #HomeHeader, #HeaderSum {
+        background-color: none;
+
+        color: white;
+      }
+
+      #SummaryHeader {
+        background-color: none;
+        color: gray;
+      }
+
+     
+
+      #OverviewTab, #SummaryTab, #LogTab {
+        border-style: none;
+      }
+
     </style>
    
   </head>

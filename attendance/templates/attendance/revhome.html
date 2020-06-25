@@ -105,6 +105,7 @@
   <div class="ui relaxed centered grid">
 
       <!-- Headings -->
+      <div class="ui hidden divider"></div>
       <div class="row">
         <div>
           <a href="http://localhost:8000/troll/#"><h1 class="ui center aligned masssive header" id="HomeHeader">
@@ -115,15 +116,15 @@
 
       <div class="row">
         <div>
-        <h2 class="ui center aligned medium header">All your parades in one place.</h2>
+        <h2 class="ui center aligned medium header" id="HeaderSum">All your parades in one place.</h2>
         </div>
       </div>
 
       <!-- MenuBar -->
 
       <div class="fourteen wide column">
-        <div class="ui fluid two item huge raised menu">
-          <a class="active blue item">
+        <div class="ui fluid two item huge raised inverted violet menu">
+          <a class="active item">
             Home
             </a>
           <a class="item" href="http://localhost:8000/dashboard/#">Dashboard</a>
@@ -140,7 +141,7 @@
       <div class="ui four column stackable grid">
 
         <div class="column">
-          <div class="ui inverted teal segment" id="DatePickHead">
+          <div class="ui inverted blue segment" id="DatePickHead">
             <h3 class="ui center aligned header" id="DatePickSelect">Select Parade</h3>
           </div>
         </div>
@@ -149,7 +150,7 @@
         <div class="ui center aligned segment" id="DatePickSelectSegment">
           <div class="ui fluid input left icon">
             <i class="caret right icon"></i>
-            <input type="date" id="MyDate">
+            <input class="input" type="date" id="MyDate">
           </div>
         </div>
         </div>
@@ -173,7 +174,7 @@
 
         <div class="column">
           <div class="ui center aligned segment" id="DatePickEnter">
-            <button class="ui fluid teal button" >Enter</button>
+            <button class="ui fluid primary button" >Enter</button>
           </div>
         </div>
 
@@ -186,20 +187,20 @@
 
 
  <!-- Tabs & Cards -->
-  <div class="container">
+  
     <div class="ui center aligned grid">
       <div class="fourteen wide column">
-        <div class="ui top attached tabular menu">
+        <div class="ui top attached tabular inverted violet menu">
           <a class="active item" data-tab="first">Overview</a>
           <a class="item" data-tab="second">Summary</a>
-          <a class="item" data-tab="third">Log</a>
+          <a class="item" data-tab="third" >Log</a>
         </div>
 
         <!--Overview Tab-->
-        <div class="ui bottom attached active tab segment" data-tab="first" id="OverviewTab">
+        <div class="ui violet inverted bottom attached active tab basic segment" data-tab="first" id="OverviewTab">
           <div class="ui centered stackable grid">
 
-            <div class="computer only fifteen wide column">
+            <div class="computer only fifteen wide violet column">
               <div class="ui basic segment">
                 <div class="ui disabled fluid category search " id="OverviewSearch">
                   <div class="ui icon input">
@@ -212,15 +213,15 @@
               
             </div>
 
-            <div class="computer only column">
+            <div class="computer only violet column">
               <div class="ui basic right aligned segment">
-                <button class="ui green icon button" id="AddCardToggle" data-content="Add users to your feed">
+                <button class="ui teal icon button" id="AddCardToggle" data-content="Add users to your feed">
                   <i class="user plus icon"></i>
                 </button>
               </div>
             </div>
 
-            <div class="tablet only mobile only eight wide column">
+            <div class="tablet only mobile only eight wide violet column">
               <div class="ui center aligned basic segment">
                 <div class="ui fluid category search">
                   <div class="ui icon input">
@@ -233,9 +234,9 @@
               
             </div>
 
-            <div class="tablet only mobile only eight wide column">
+            <div class="tablet only mobile only eight wide violet column">
               <div class="ui basic segment">
-                <button class="ui fluid green icon button" id="AddCardToggleMobile" data-content="Add users to your feed">
+                <button class="ui fluid teal icon button" id="AddCardToggleMobile" data-content="Add users to your feed">
                   <i class="user plus icon"></i>
                 </button>
               </div>
@@ -244,19 +245,15 @@
             
           </div>
 
-          <div class="ui placeholder basic segment"> 
+          <div class="ui placeholder basic violet segment"> 
 
-            
-            
-
-            
               <!--Default page before entrance of data -->
               <div class="" id="NoDocumentPage">
                 <div class="ui centered grid">
                   <div class="row">
                     <div class="ui icon header">
-                      <i class="user secret icon"></i>
-                        No documents are listed for this loser.
+                      <i class="grey user secret icon"></i>
+                        <span class="ui grey header">No documents are listed for this loser.</span>
                     </div>
                   </div>
                 </div>
@@ -265,10 +262,7 @@
 
               <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
               <div class="Default-Inactive" id="CardHolders">
-                
-
-                  
-                
+                                                 
                   <!--Sample Cards-->
                   <!--Will ahve to html loop generate within ui rasied cards-->
                   <div class="ui raised four cards">
@@ -482,14 +476,14 @@
         </div>
 
         <!--Summary Tab-->
-        <div class="ui bottom attached tab segment" data-tab="second" id="SummaryTab">
+        <div class="ui violet inverted bottom attached tab basic segment" data-tab="second" id="SummaryTab">
 
           <!--First row -->
           
           <div class="ui center aligned grid">
             <div class="ten wide column">
               <div class="ui basic left aligned segment">
-              <h1>Summary</h1>
+              <h1 id="SummaryHeader">Summary</h1>
               </div>
             </div>
             
@@ -497,7 +491,7 @@
               <div class="ui basic right aligned segment">
                 <div class="ui left pointing dropdown link item">
                   <div>
-                    <button class="ui center aligned button">Export</button>
+                    <button class="ui center aligned orange button">Export</button>
                     
                   </div>
                   <div class="menu">
@@ -517,11 +511,11 @@
               <div class="ui basic right aligned segment">
                 <div class="ui right pointing dropdown link item">
                   <div class="">
-                    <button class="ui center aligned button">Export</button>
+                    <button class="ui center aligned orange button">Export</button>
                     
                   </div>
-                  <div class="menu">
-                    <div class="item">Whatsapp</div>
+                  <div class="ui grey menu">
+                    <div class="green item">Whatsapp</div>
                     <div class="item">Telegram</div>
                     <div class="item">Sent Mail</div>
                     <div class="item">Drafts (143)</div>
@@ -541,56 +535,56 @@
             <!-- {% for eachparade in parade %} -->
             <div class="row">
               <div class="fourteen wide left aligned column">
-                <div class="ui segment">
-                  <h3>Total Strength: <span>{{ parade.total_strength }}</span></h3>
+                <div class="ui inverted grey segment">
+                  <h3 class="ui violet header">Total Strength: <span>{{ parade.total_strength }}</span></h3>
                 </div>
               </div>
               </div>
 
             <div class="row">
               <div class="fourteen wide left aligned column">
-                <div class="ui segment">
-                  <h3>Current Strength: <span>{{ parade.personnel_strength }}</span></h3>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="fourteen wide left aligned column">
-                <div class="ui segment">
-                  <h3>Attend C: <span>Dynamic</span></h3>
+                <div class="ui inverted grey segment">
+                  <h3 class="ui violet header">Current Strength: <span>{{ parade.personnel_strength }}</span></h3>
                 </div>
               </div>
             </div>
 
             <div class="row">
               <div class="fourteen wide left aligned column">
-                <div class="ui segment">
-                  <h3>Medical Appointment: <span>Dynamic</span></h3>
+                <div class="ui inverted grey segment">
+                  <h3 class="ui violet header">Attend C: <span>Dynamic</span></h3>
                 </div>
               </div>
             </div>
 
             <div class="row">
               <div class="fourteen wide left aligned column">
-                <div class="ui segment">
-                  <h3>On Course: <span>Dynamic</span></h3>
+                <div class="ui inverted grey segment">
+                  <h3 class="ui violet header">Medical Appointment: <span>Dynamic</span></h3>
                 </div>
               </div>
             </div>
 
             <div class="row">
               <div class="fourteen wide left aligned column">
-                <div class="ui segment">
-                  <h3>Outstationed: <span>Dynamic</span></h3>
+                <div class="ui inverted grey segment">
+                  <h3 class="ui violet header">On Course: <span>Dynamic</span></h3>
                 </div>
               </div>
             </div>
 
             <div class="row">
               <div class="fourteen wide left aligned column">
-                <div class="ui segment">
-                  <h3>Dentention Barracks: <span>Dynamic</span></h3>
+                <div class="ui inverted grey segment">
+                  <h3 class="ui violet header">Outstationed: <span>Dynamic</span></h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="fourteen wide left aligned column">
+                <div class="ui inverted grey segment">
+                  <h3 class="ui violet header">Dentention Barracks: <span>Dynamic</span></h3>
                 </div>
               </div>
             </div>
@@ -605,7 +599,7 @@
         </div>
 
         <!--Log Tab-->
-        <div class="ui bottom attached tab segment" data-tab="third" id="LogTab">
+        <div class="ui violet inverted bottom attached tab basic segment" data-tab="third" id="LogTab">
           <div class="ui relaxed centered grid">
             <div class="row">
               <div><p>I took <span id="tdday2">the day</span> and <span id="PChoice"> your choice</span> from DB</p></div>
@@ -626,7 +620,7 @@
 
       </div>
     </div>
-  </div>
+  
 
 
 
@@ -635,7 +629,7 @@
 
   <div class="ui centered grid">
   <div class="fourteen wide column">
-  <div class="ui segment" >
+  <div class="ui violet inverted segment" >
     <div class="ui very relaxed centered grid">
 
       <div class="fourteen wide column">
@@ -644,19 +638,19 @@
           <div class="item">
             <i class="question icon"></i>
             <div class="content">
-              <div class="header">FAQ</div>
+              <div class="ui grey header">FAQ</div>
             </div>
           </div>
           <div class="item">
             <i class="file alternate icon"></i>
             <div class="content">
-              <div class="header">Terms and Conditions</div>
+              <div class="ui grey header">Terms and Conditions</div>
             </div>
           </div>
           <div class="item">
             <i class="large envelope outline icon"></i>
             <div class="content">
-              <div class="header">Contact our team</div>
+              <div class="ui grey header">Contact our team</div>
             </div>
           </div>
         </div>
