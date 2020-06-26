@@ -1,31 +1,35 @@
 {% extends "attendance/base.html" %}
 
 {% block content %}
-<!--Body-->
+<!---------------------------------Body---------------------->
 
 
-  <!--Dimmers, Misc-->
-    <!-- Dimmer for whole page-->
-    {% include 'attendance/Home-Partials/_DimmerAddCard.html/' %}
+<!--Dimmers, Misc-->
+<!-- Dimmer for whole page-->
+{% include 'attendance/Home-Partials/_DimmerAddCard.html/' %}
 
   
-  <!--Main Body-->
-
-    <!--Headers and Date Pickers-->
-    {% include 'attendance/Home-Partials/_HeaderAndDate.html/' %}
-
-    <!-- Tabs & Cards -->
-    {% include 'attendance/Home-Partials/_TabsAndCards.html/' %}
+<!-----------------------Main Body---------------------->
 
 
 
-  <!--Home Page Bottom Footer-->
-    <!-- Footer -->
-    {% include 'attendance/Home-Partials/_Footer.html/' %}
+
+<!--Headers and Date Pickers-->
+{% include 'attendance/Home-Partials/_HeaderAndDate.html/' %}
+
+<!-- Tabs & Cards -->
+{% include 'attendance/Home-Partials/_TabsAndCards.html/' %}
+
+
+
+<!--Home Page Bottom Footer-->
+<!-- Footer -->
+{% include 'attendance/Home-Partials/_Footer.html/' %}
 
   
  
-<!--Body Close-->
 
+
+<!--------------------------------Body Close----------------------->
 
 {% endblock content %}

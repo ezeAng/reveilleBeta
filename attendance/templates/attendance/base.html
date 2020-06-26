@@ -88,7 +88,11 @@
 
   <!-- Local Self-written -->
   
-    <!--Updating URL from DatePicker-->
+    <!-- 
+    Updating URL from DatePicker, 
+    to query DB for specific parade on specific date
+    -->
+    
     <script>
 
       var btn = document.getElementById('DatePickEnter');
@@ -96,10 +100,11 @@
 
       function UpdateBackUrl(){
         
-        var a = document.getElementById("MyDate").value;
-        var p = document.getElementById('ParadeChoice').value;
-        var b = 2;
-        location.href = "?parade_id=" + b + "&?date=" + a + "&?parade_choice=" + p  ;
+        var datepickerValue = document.getElementById("MyDate").value;
+        var paradeChoice = document.getElementById('ParadeChoice').value;
+        var paradeId = 2;
+
+        location.href = "?parade_id=" + paradeId + "&?date=" + datepickerValue + "&?parade_choice=" + paradeChoice  ;
 
 
         console.log("url changed");
