@@ -1,47 +1,47 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
 
-    
-    <link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/distcopy/semantic.css/' %} ">
-    <link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/distcopy/icon.css/' %} ">
-    <link rel="stylesheet" type="text/css" href="{% static 'attendance/CSS/master.css'%}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-    
-    <title>Reveille</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Parade State Compiler">
+  
+<link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/distcopy/semantic.css/' %} ">
+<link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/distcopy/icon.css/' %} ">
+<link rel="stylesheet" type="text/css" href="{% static 'attendance/CSS/master.css'%}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 
-    <!-- Style Overides -->
-    <style>
-      body {
-        /* ArsenicColor */
-        background-color: #0C1430;
-        color: black;
-      }
+<title>Reveille</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Parade State Compiler">
 
-      #HomeHeader, #HeaderSum {
-        background-color: none;
+<!-- Style Overides -->
+<style>
+  body {
+    /* ArsenicColor */
+    background-color: #0C1430;
+    color: black;
+  }
 
-        color: white;
-      }
+  #HomeHeader, #HeaderSum {
+    background-color: none;
 
-      #SummaryHeader {
-        background-color: none;
-        color: gray;
-      }
+    color: white;
+  }
 
-     
+  #SummaryHeader {
+    background-color: none;
+    color: gray;
+  }
 
-      #OverviewTab, #SummaryTab, #LogTab {
-        border-style: none;
-      }
+  
 
-    </style>
-   
-  </head>
+  #OverviewTab, #SummaryTab, #LogTab {
+    border-style: none;
+  }
+
+</style>
+
+</head>
 
 <body>
 
@@ -52,91 +52,97 @@
 
 
 
-  <!-- Scripts -->
+  <!-------- Scripts -------->
+
   <!-- Default Semantic -->
-  <script>
 
-    $('.ui.dropdown')
-    .dropdown()
-    ;
+    <script>
 
-    $('.menu .item')
-    .tab()
-    ;
+      $('.ui.dropdown')
+      .dropdown()
+      ;
 
-    $('#AddCardToggle').click(function(){ $('.ui.dimmer.custom').dimmer("show") })
-    ;
+      $('.menu .item')
+      .tab()
+      ;
 
-    $('#AddCardToggleMobile').click(function(){ $('.ui.dimmer.custom').dimmer("show") })
-    ;
+      $('#AddCardToggle').click(function(){ $('.ui.dimmer.custom').dimmer("show") })
+      ;
 
-    $('#AddCardSave').click(function(){ $('.ui.dimmer.custom').dimmer("hide") })
-    ;
+      $('#AddCardToggleMobile').click(function(){ $('.ui.dimmer.custom').dimmer("show") })
+      ;
 
-    $('#AddCardCancel').click(function(){ $('.ui.dimmer.custom').dimmer("hide") })
-    ;
+      $('#AddCardSave').click(function(){ $('.ui.dimmer.custom').dimmer("hide") })
+      ;
 
-    $('#AddCardtoggle').popup()
-    ;
-    
+      $('#AddCardCancel').click(function(){ $('.ui.dimmer.custom').dimmer("hide") })
+      ;
 
-  </script>
+      $('#AddCardtoggle').popup()
+      ;
+      
+
+    </script>
+
+
 
   <!-- Local Self-written -->
   
+    <!--Updating URL from DatePicker-->
+    <script>
 
-  <script>
+      var btn = document.getElementById('DatePickEnter');
+      btn.addEventListener('click',UpdateBackUrl);
 
-    var btn = document.getElementById('DatePickEnter');
-    btn.addEventListener('click',UpdateBackUrl);
+      function UpdateBackUrl(){
+        
+        var a = document.getElementById("MyDate").value;
+        var p = document.getElementById('ParadeChoice').value;
+        var b = 2;
+        location.href = "?parade_id=" + b + "&?date=" + a + "&?parade_choice=" + p  ;
 
-    function UpdateBackUrl(){
+
+        console.log("url changed");
+
+        
+      }
       
-      var a = document.getElementById("MyDate").value;
-      var p = document.getElementById('ParadeChoice').value;
+
+    </script>
+
+
+    <!--Elements after picking parade from DatePicker-->
+    <script>
+      var anot = document.getElementById("MyDate");
+      var pnot = document.getElementById('ParadeChoice');
       var b = 2;
-      location.href = "?parade_id=" + b + "&?date=" + a + "&?parade_choice=" + p  ;
+      var urlNow = window.location.search;
+      console.log(urlNow);
+      
+      //Once url is not ...home/... this code block will run, which toggles the cardholder
+      //next is to take context from html side, put into js variable, e.g var p = doc.getelebyidinnerhtml... -->48SAR A COy Parade,
+      // for personnel in p :
+      // if personnel.status != null {
+      // for eachdog in personnel.status , iterate cards , use js to create html chunks within cardholder segments
+      // } can do a settimemout to iterate cards
 
+      // search personnel will then search the current html onsite 
+      // add card will be a form add to db, and then rerun chunk of code of iterating, without timemout ( maybe code it to only timedelay the last one)
+      if (urlNow != "") {
+        console.log("url live");
+        document.getElementById("CardHolders").classList.toggle('active');
+        document.getElementById("OverviewSearch").classList.remove('disabled');
+        document.getElementById("NoDocumentPage").className="Default-Inactive";
+      }
 
-      console.log("url changed");
+      else {
+        console.log("close document none print cards")
+
+        
+      }
 
       
-    }
-    
-
-  </script>
-
-  <script>
-    var anot = document.getElementById("MyDate");
-    var pnot = document.getElementById('ParadeChoice');
-    var b = 2;
-    var urlnow = window.location.search;
-    console.log(urlnow);
-    
-    //Once url is not ...home/... this code block will run, which toggles the cardholder
-    //next is to take context from html side, put into js variable, e.g var p = doc.getelebyidinnerhtml... -->48SAR A COy Parade,
-    // for personnel in p :
-    // if personnel.status != null {
-    // for eachdog in personnel.status , iterate cards , use js to create html chunks within cardholder segments
-    // } can do a settimemout to iterate cards
-
-    // search personnel will then search the current html onsite 
-    // add card will be a form add to db, and then rerun chunk of code of iterating, without timemout ( maybe code it to only timedelay the last one)
-    if (urlnow != "") {
-      console.log("url live");
-      document.getElementById("CardHolders").classList.toggle('active');
-      document.getElementById("OverviewSearch").classList.remove('disabled');
-      document.getElementById("NoDocumentPage").className="Default-Inactive";
-    }
-
-    else {
-      console.log("close document none print cards")
-
-      
-    }
-
-    
-  </script>
+    </script>
 
   
 
