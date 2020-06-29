@@ -1,7 +1,8 @@
 {% extends "attendance/base.html" %}
 
-{% block content %}
 
+
+{% block content %}
 
 
 <!--Headings to MenuBar-->
@@ -35,7 +36,6 @@
   </div>
 
 </div>
-
 
 
 <div class="container">
@@ -165,51 +165,7 @@
 
               <!--Statistic Cards-->
 
-              <!--ORD Batch Card-->
-              <div class="ui fluid raised card">
-
-                <div class="content">
-                  <div class="ui hidden divider"></div>
-                  <div class="ui hidden divider"></div>
-                  <div class="ui basic center aligned segment">
-                    
-                      <div class="ui pink huge statistic">
-                        <div class="value">
-                          277
-                        </div>
-                        <div class="label">
-                          Days to ORD
-                        </div>
-                      </div>
-
-                  </div>
-                  <div class="ui hidden divider"></div>
-                  <div class="ui hidden divider"></div>
-                </div>
-
-              </div>
-
-              <!--National Day-->
-              <div class="ui fluid raised card">
-
-                <div class="content">
-
-                  <div class="ui basic center aligned segment">
-                    
-                      <div class="ui red huge statistic">
-                        <div class="value">
-                          155
-                        </div>
-                        <div class="label">
-                          Days to National Day
-                        </div>
-                      </div>
-
-                  </div>
-
-                </div>
-
-              </div>
+              
 
             </div>
           </div>
@@ -221,56 +177,13 @@
     </div>
   </div>
 </div>
-
 
 
 
 
 
 <!-- Footer -->
-
-<div class="ui centered grid">
-  <div class="fourteen wide column">
-  <div class="ui segment" >
-    <div class="ui very relaxed centered grid">
-
-      <div class="fourteen wide column">
-
-        <div class="ui middle aligned animated list">
-          <div class="item">
-            <i class="question icon"></i>
-            <div class="content">
-              <div class="header">FAQ</div>
-            </div>
-          </div>
-          <div class="item">
-            <i class="file alternate icon"></i>
-            <div class="content">
-              <div class="header">Terms and Conditions</div>
-            </div>
-          </div>
-          <div class="item">
-            <i class="large envelope outline icon"></i>
-            <div class="content">
-              <div class="header">Contact our team</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-
-    </div>
-
-  </div>
-  </div>
-</div>
-
-
-
-
-
-
+{% include 'attendance/Home-Partials/_Footer.html/' %}
 
 
 

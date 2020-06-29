@@ -1,0 +1,97 @@
+<!--Dimmer Add Card-->
+
+<div class="ui page dimmer custom">
+    <div class="content">
+      <h2 class="ui inverted icon header">
+        Add a New Card
+      </h2>
+      <div class="container">
+        <div class="ui raised card">
+          
+          <div class="content">
+            <div class="ui centered grid">
+              <div class="row">                                  
+                <div class="ui fluid search">
+                  <div class="ui icon input">
+                    <input class="fluid prompt" type="text" placeholder="Personnel...">
+                      <i class="search icon"></i>
+                  </div>
+                  <div class="results"></div>
+                </div>                                  
+              </div>
+
+              <div class="row">
+                <div class="column">
+                  <a class="ui fluid label" id="Search Result">
+                    <i class="id card icon"></i>
+                    Search Result
+                  </a>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="column">
+                  <div class="ui form">
+                    <div class="field">
+                      <label>Comments</label>
+                      <textarea rows="2" id="CardCommentInput"></textarea>
+                    </div>
+                  </div>
+                  
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="column">
+                <div class="ui form">
+                  <div class="field">
+                    <select name="MedicalStatus" class="ui fluid dropdown" id="MedStat">
+                      <option value="">Medical Status</option>
+                      <option value="MA">MA</option>
+                      <option value="FFI">FFI</option>
+                      <option value="SO">Sent Out</option>
+                      <option value="MC">MC</option>
+                      <option value="NIL">-</option>
+                    </select>
+                  </div>
+                </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="column">
+                  <div class="ui form">
+                    <div class="field">
+                      <select name="Activity" class="ui fluid dropdown" id="Activity">
+                        <option value="">Activity</option>
+                        <option value="OutStn">Outstationed</option>
+                        <option value="Off">Off</option>
+                        <option value="Leave">On-Leave</option>
+                        <option value="Course">On-Course</option>
+                        <option value="NIL">-</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          
+          <div class="extra content"> 
+            <button class="ui disabled button" id="AddCardSave">Save</button>
+            <button class="ui button" id="AddCardCancel">Cancel</button>
+          </div>
+
+        </div>
+        
+      </div>
+
+      
+    </div>
+</div>
+
+
+  <!-------------------------------------------------------------------------------------------------------->
