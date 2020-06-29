@@ -149,7 +149,66 @@
       
     </script>
 
-  
+    <!-- For Card Dimmer  -->
+    <script>
+
+      var saveBtn = document.getElementById('AddCardSave');
+      var selectMedical = document.getElementById('MedStat');
+      var selectActivity = document.getElementById('Activity');
+
+      var selectMedicalVal = document.getElementById('MedStat').value;
+      var selectActivityVal = document.getElementById('Activity').value;
+
+      
+
+      function ToggleCardSaveBtn(selectActivityVal,selectMedicalVal){
+
+        var saveBtn = document.getElementById('AddCardSave');
+        var selectMedical = document.getElementById('MedStat');
+        var selectActivity = document.getElementById('Activity');
+
+        var selectMedicalVal = document.getElementById('MedStat').value;
+        var selectActivityVal = document.getElementById('Activity').value;
+
+        
+
+        if (selectMedicalVal == "NIL" && selectActivityVal == "NIL" ) {
+          console.log('NIL choices selected');
+          saveBtn.classList.remove("green");
+          saveBtn.classList.add("disabled");
+          
+        }
+        
+        else if (selectMedicalVal == "NIL" && selectActivityVal == "" ) {
+          console.log('NIL choices selected');
+          saveBtn.classList.remove("green");
+          saveBtn.classList.add("disabled");
+        }
+
+        else if (selectMedicalVal == "" && selectActivityVal == "NIL" ) {
+          console.log('NIL choices selected');
+          saveBtn.classList.remove("green");
+          saveBtn.classList.add("disabled");
+        }
+
+        else {
+          saveBtn.className = "ui green button";
+        }
+      }
+
+      var selectMed = document.getElementById('MedStat');
+      var selectAct = document.getElementById('Activity');
+
+      selectMed.addEventListener('change',ToggleCardSaveBtn);
+      selectAct.addEventListener('change',ToggleCardSaveBtn);
+      
+
+      
+      
+
+
+      
+    </script>
 
   
 
