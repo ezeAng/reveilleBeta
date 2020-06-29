@@ -31,7 +31,7 @@ class Personnel(models.Model):
 class Parade(models.Model):
     date = models.DateField(default=None)
     time = models.TimeField(default=None)
-    first_last = models.IntegerField()
+    time_of_day = models.IntegerField()
     total_strength = models.IntegerField()
     commander_strength = models.IntegerField()
     personnel_strength = models.IntegerField()
