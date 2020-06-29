@@ -88,23 +88,22 @@
 
   <!-- Local Self-written -->
   
+
     <!-- 
     Updating URL from DatePicker, 
     to query DB for specific parade on specific date
     -->
-    
     <script>
 
-      var btn = document.getElementById('DatePickEnter');
-      btn.addEventListener('click',UpdateBackUrl);
+      var datePickEntBtn = document.getElementById('DatePickEnter');
+      datePickEntBtn.addEventListener('click',UpdateBackUrl);
 
       function UpdateBackUrl(){
         
         var datepickerValue = document.getElementById("MyDate").value;
         var paradeChoice = document.getElementById('ParadeChoice').value;
-        var paradeId = 2;
 
-        location.href = "?parade_id=" + paradeId + "&?date=" + datepickerValue + "&?parade_choice=" + paradeChoice  ;
+        location.href = "parade/" + "?date=" + datepickerValue + "&time_of_day=" + paradeChoice + "/" ;
 
 
         console.log("url changed");
@@ -118,9 +117,9 @@
 
     <!--Elements after picking parade from DatePicker-->
     <script>
-      var anot = document.getElementById("MyDate");
-      var pnot = document.getElementById('ParadeChoice');
-      var b = 2;
+
+
+      
       var urlNow = window.location.search;
       console.log(urlNow);
       
@@ -142,12 +141,12 @@
 
       else {
         console.log("close document none print cards")
-
-        
-      }
-
       
+      }
+  
     </script>
+
+
 
     <!-- For Card Dimmer  -->
     <script>
@@ -196,18 +195,12 @@
         }
       }
 
-      var selectMed = document.getElementById('MedStat');
-      var selectAct = document.getElementById('Activity');
-
-      selectMed.addEventListener('change',ToggleCardSaveBtn);
-      selectAct.addEventListener('change',ToggleCardSaveBtn);
       
-
-      
+      selectMedical.addEventListener('change',ToggleCardSaveBtn);
+      selectActivity.addEventListener('change',ToggleCardSaveBtn);
       
 
 
-      
     </script>
 
   
