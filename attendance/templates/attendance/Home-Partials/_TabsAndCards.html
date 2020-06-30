@@ -4,7 +4,7 @@
 
 <div class="ui center aligned grid">
     <div class="fourteen wide column">
-      <div class="ui top attached tabular inverted violet menu">
+      <div class="ui top attached tabular inverted violet menu" id="CardTabs">
         <a class="active item" data-tab="first">Overview</a>
         <a class="item" data-tab="second">Summary</a>
         <a class="item" data-tab="third" >Log</a>
@@ -33,9 +33,9 @@
           </div>
 
           <!--Layout Changer -->
-          <div class="computer only violet two wide column">
+          <div class="computer only violet three wide column">
             <div class="ui basic right aligned segment">
-              <div class="ui floating labeled icon dropdown button">
+              <div class="ui disabled floating labeled icon dropdown fluid button" id="LayoutBtn">
                 <i class="object group icon"></i>
                 <span class="text">Layout</span>
                 <div class="menu">
@@ -62,14 +62,15 @@
           </div>
 
           <!--Add Card Toggle-->
-          <div class="computer only violet two wide column">
-            <div class="ui basic center aligned segment">
+          <div class="computer only violet one wide column">
+            <div class="ui basic left aligned segment">
               <button class="ui teal icon button" id="AddCardToggle" data-content="Add users to your feed">
                 <i class="user plus icon"></i>
               </button>
             </div>
           </div>
-
+        
+        
 
           <!--Search Cards (Mobile/Tablet)-->
           <div class="tablet only mobile only eight wide violet column">
@@ -85,14 +86,44 @@
             
           </div>
 
-          <!--Add Card toggle (Mobile/Tablet)-->
+          <!--Layout and Add Card Buttons (Mobile/Tablet)-->
           <div class="tablet only mobile only eight wide violet column">
-            <div class="ui basic segment">
-              <button class="ui fluid teal icon button" id="AddCardToggleMobile" data-content="Add users to your feed">
-                <i class="user plus icon"></i>
-              </button>
+            <div class="ui two column grid">
+              <div class="column">
+                <div class="ui basic segment">
+                  <div class="ui floating labeled icon dropdown fluid button">
+                    <i class="object group icon"></i>
+                    <span class="text">Layout</span>
+                    <div class="menu">
+                      <div class="header">
+                        <i class="columns icon"></i>
+                        Layout Choices
+                      </div>
+                      <div class="divider"></div>
+                      <div class="item">
+                        <i class="sticky note icon"></i>
+                        Default Card
+                      </div>
+                      <div class="item">
+                        <i class="list ul icon"></i>
+                        Stacked Rows
+                      </div>
+                      <div class="item">
+                        <i class="th icon"></i>
+                        Small icons
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="column">
+                <div class="ui basic segment">
+                  <button class="ui fluid teal icon button" id="AddCardToggleMobile" data-content="Add users to your feed">
+                    <i class="user plus icon"></i>
+                  </button>
+                </div>
+              </div>
             </div>
-          
           </div>
           
         </div>
@@ -106,8 +137,8 @@
               <div class="ui centered grid">
                 <div class="row">
                   <div class="ui icon header">
-                    <i class="grey user secret icon"></i>
-                      <span class="ui grey header">No documents are listed for this loser.</span>
+                    <i class="inverted user secret icon"></i>
+                      <span class="ui grey header">No cards are listed, search for your parade to begin.</span>
                   </div>
                 </div>
               </div>
@@ -364,13 +395,44 @@
 
       <!--Log Tab-->
       <div class="ui violet inverted bottom attached tab basic segment" data-tab="third" id="LogTab">
-        <div class="ui relaxed centered grid">
-          <!--Should be a iteration of all the changes made to the parade in past 24 hrs-->
-          <div class="row">
-            <div><p>I took <span id="tdday2">the day</span> and <span id="PChoice"> your choice</span> from DB</p></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui centered grid">
+          <div class="fourteen wide column">
+            <!--for changes in changes etc-->
+            <div class="ui feed">
+              <div class="event">
+                <div class="label">
+                  
+                </div>
+                <div class="content">
+                  <div class="date">
+                    3 days ago
+                  </div>
+                  <div class="summary">
+                     You added <a>Mess</a> to <a>12C48</a> parades.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ui feed">
+              <div class="event">
+                <div class="label">
+                  img
+                </div>
+                <div class="content">
+                  <div class="date">
+                    3 days ago
+                  </div>
+                  <div class="summary">
+                     You added <a>Mess</a> to <a>12C48</a> parades.
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          
         </div>
+        
+        
       </div>
 
     </div>
