@@ -158,8 +158,6 @@
       var selectMedicalVal = document.getElementById('MedStat').value;
       var selectActivityVal = document.getElementById('Activity').value;
 
-      
-
       function ToggleCardSaveBtn(selectActivityVal,selectMedicalVal){
 
         var saveBtn = document.getElementById('AddCardSave');
@@ -173,25 +171,31 @@
 
         if (selectMedicalVal == "NIL" && selectActivityVal == "NIL" ) {
           console.log('NIL choices selected');
-          saveBtn.classList.remove("green");
+          saveBtn.classList.remove("teal");
           saveBtn.classList.add("disabled");
           
         }
         
         else if (selectMedicalVal == "NIL" && selectActivityVal == "" ) {
           console.log('NIL choices selected');
-          saveBtn.classList.remove("green");
+          saveBtn.classList.remove("teal");
+          saveBtn.classList.add("disabled");
+        }
+
+        else if (selectMedicalVal == "" && selectActivityVal == "" ) {
+          console.log('NIL choices selected');
+          saveBtn.classList.remove("teal");
           saveBtn.classList.add("disabled");
         }
 
         else if (selectMedicalVal == "" && selectActivityVal == "NIL" ) {
           console.log('NIL choices selected');
-          saveBtn.classList.remove("green");
+          saveBtn.classList.remove("teal");
           saveBtn.classList.add("disabled");
         }
 
         else {
-          saveBtn.className = "ui green button";
+          saveBtn.className = "ui teal button";
         }
       }
 
@@ -199,10 +203,23 @@
       selectMedical.addEventListener('change',ToggleCardSaveBtn);
       selectActivity.addEventListener('change',ToggleCardSaveBtn);
       
+      // <!--Reset Cancel Button-->
+      function resetInput(value) {
+        var selectMedicalVal = document.getElementById('MedStat').value;
+        var selectActivityVal = document.getElementById('Activity').value;
+        selectMedicalVal = "";
+        selectActivityVal ="";
+        $('form').form('clear');
+      }
+
+      var cancelBtn = document.getElementById("AddCardCancel");
+      cancelBtn.addEventListener('click', resetInput);
 
 
     </script>
 
+   
+    
   
 
 

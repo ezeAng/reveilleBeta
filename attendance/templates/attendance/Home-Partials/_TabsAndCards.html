@@ -19,7 +19,7 @@
         <div class="ui centered stackable grid">
 
           <!--Search Cards-->
-          <div class="computer only fifteen wide violet column">
+          <div class="computer only twelve wide violet column">
             <div class="ui basic segment">
               <div class="ui disabled fluid category search " id="OverviewSearch">
                 <div class="ui icon input">
@@ -32,9 +32,38 @@
             
           </div>
 
-          <!--Add Card Toggle-->
-          <div class="computer only violet column">
+          <!--Layout Changer -->
+          <div class="computer only violet two wide column">
             <div class="ui basic right aligned segment">
+              <div class="ui floating labeled icon dropdown button">
+                <i class="object group icon"></i>
+                <span class="text">Layout</span>
+                <div class="menu">
+                  <div class="header">
+                    <i class="columns icon"></i>
+                    Layout Choices
+                  </div>
+                  <div class="divider"></div>
+                  <div class="item">
+                    <i class="sticky note icon"></i>
+                    Default Card
+                  </div>
+                  <div class="item">
+                    <i class="list ul icon"></i>
+                    Stacked Rows
+                  </div>
+                  <div class="item">
+                    <i class="th icon"></i>
+                    Small icons
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Add Card Toggle-->
+          <div class="computer only violet two wide column">
+            <div class="ui basic center aligned segment">
               <button class="ui teal icon button" id="AddCardToggle" data-content="Add users to your feed">
                 <i class="user plus icon"></i>
               </button>
