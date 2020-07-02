@@ -1,0 +1,4 @@
+1) Primer Widget 
+                   {% include 'attendance/Dashboard-Partials/Dashboard-Widget-Partials/_PrimerWidget.html/' %}
+
+2) 

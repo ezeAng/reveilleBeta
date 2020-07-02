@@ -4,7 +4,11 @@
   
 }
 
-
+#CreateStateHeader {
+    font-size: 48px;
+    color: white;
+    background:none ;
+}
 
 
 
@@ -45,11 +49,5 @@
   
 }
 
-.ui.menu:after {
-  background-color: beige !important ;
-  z-index: +1 !important;
-  height: 100px !important;
-  width: 100px !important;
-}
 
 
