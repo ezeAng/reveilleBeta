@@ -2,6 +2,3 @@
         Global Overrides
 *******************************/
 
-.ui.card {
-        @background : @grey;
-}

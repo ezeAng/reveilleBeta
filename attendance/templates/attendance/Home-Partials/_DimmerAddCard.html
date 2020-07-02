@@ -10,7 +10,9 @@
           
           <div class="content">
             <div class="ui centered grid">
-              <div class="row">                                  
+              <div class="ui hidden divider"></div>
+
+              <div class="sixteen wide center aligned column">                                  
                 <div class="ui fluid search">
                   <div class="ui icon input">
                     <input class="fluid prompt" type="text" placeholder="Personnel...">
@@ -20,7 +22,7 @@
                 </div>                                  
               </div>
 
-              <div class="row">
+              <div class="twelve wide center aligned column">
                 <div class="column">
                   <a class="ui fluid label" id="Search Result">
                     <i class="id card icon"></i>
@@ -30,24 +32,19 @@
 
               </div>
 
-              <div class="row">
-                <div class="column">
-                  <div class="ui form">
-                    <div class="field">
-                      <label>Comments</label>
-                      <textarea rows="2" id="CardCommentInput"></textarea>
-                    </div>
-                  </div>
-                  
-
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="column">
-                <div class="ui form">
+              <!--Form-->
+              <div class="ui form">
+                
+                <form method="POST" action="" id="AddNewCard"> <!--THis is where the url will be linked to handler for createCard-->
+                  {% csrf_token %} <!--csrf token added idk what to do w it incontext, cos it crashes sometimes if u reload the page-->
                   <div class="field">
-                    <select name="MedicalStatus" class="ui fluid dropdown" id="MedStat">
+                    <label>Comments</label>
+                    <textarea rows="2" id="CardCommentInput"></textarea>
+                  </div>
+  
+                  <div class="field">
+                    <label>Medical Status</label>
+                    <select name="MedicalStatus" class="ui fluid dropdown" id="MedStat"> <!--"input" name = ...-->
                       <option value="">Medical Status</option>
                       <option value="MA">MA</option>
                       <option value="FFI">FFI</option>
@@ -56,34 +53,35 @@
                       <option value="NIL">-</option>
                     </select>
                   </div>
-                </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="column">
-                  <div class="ui form">
-                    <div class="field">
-                      <select name="Activity" class="ui fluid dropdown" id="Activity">
-                        <option value="">Activity</option>
-                        <option value="OutStn">Outstationed</option>
-                        <option value="Off">Off</option>
-                        <option value="Leave">On-Leave</option>
-                        <option value="Course">On-Course</option>
-                        <option value="NIL">-</option>
-                      </select>
-                    </div>
+  
+                  <div class="field">
+                    <label>Current Activity</label>
+                    <select name="Activity" class="ui fluid dropdown" id="Activity"> <!--"input" name = ...-->
+                      <option value="">Activity</option>
+                      <option value="OutStn">Outstationed</option>
+                      <option value="Off">Off</option>
+                      <option value="Leave">On-Leave</option>
+                      <option value="Course">On-Course</option>
+                      <option value="NIL">-</option>
+                    </select>
                   </div>
-                </div>
+                  <div class="ui hidden divider"></div>
+  
+                  <div class="extra content"> 
+                    <button class="ui disabled button" id="AddCardSave" type="submit" >Save</button> 
+                    <button class="ui orange button" type="button" id="AddCardCancel">Cancel</button> <!--Has JS to clear input fields-->
+                  </div>
+                  <div class="ui hidden divider"></div>
+                  <div class="ui hidden divider"></div>
+                </form>
+
               </div>
 
+            
             </div>
           </div>
           
-          <div class="extra content"> 
-            <button class="ui disabled button" id="AddCardSave">Save</button>
-            <button class="ui button" id="AddCardCancel">Cancel</button>
-          </div>
+          
 
         </div>
         

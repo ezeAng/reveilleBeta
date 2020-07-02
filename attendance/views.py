@@ -31,3 +31,6 @@ def dashboard_view(request):
 
 def troll_view(request):
 	return render(request, 'attendance/jokie.html/')
+
+def faq_view(request):
+	return render(request, 'attendance/FAQ.html/')

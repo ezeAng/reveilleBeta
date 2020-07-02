@@ -3,9 +3,10 @@
 <html>
 <head>
 
-  
-<link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/distcopy/semantic.css/' %} ">
-<link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/distcopy/icon.css/' %} ">
+
+
+<link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/dist/semantic.css/' %} ">
+<link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/dist/icon.css/' %} ">
 <link rel="stylesheet" type="text/css" href="{% static 'attendance/CSS/master.css'%}">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
@@ -16,6 +17,10 @@
 
 <!-- Style Overides -->
 <style>
+  a.item.p {
+    background: none;
+    color: black !important;
+  }
   body {
     /* ArsenicColor */
     background-color: #0C1430;
@@ -38,6 +43,14 @@
   #OverviewTab, #SummaryTab, #LogTab {
     border-style: none;
   }
+
+
+  #LogTab {
+    margin-left: 0px;
+    width: 100%;
+  }
+
+  
 
 </style>
 
@@ -88,23 +101,22 @@
 
   <!-- Local Self-written -->
   
+
     <!-- 
     Updating URL from DatePicker, 
     to query DB for specific parade on specific date
     -->
-    
     <script>
 
-      var btn = document.getElementById('DatePickEnter');
-      btn.addEventListener('click',UpdateBackUrl);
+      var datePickEntBtn = document.getElementById('DatePickEnter');
+      datePickEntBtn.addEventListener('click',UpdateBackUrl);
 
       function UpdateBackUrl(){
         
         var datepickerValue = document.getElementById("MyDate").value;
         var paradeChoice = document.getElementById('ParadeChoice').value;
-        var paradeId = 2;
 
-        location.href = "?parade_id=" + paradeId + "&?date=" + datepickerValue + "&?parade_choice=" + paradeChoice  ;
+        location.href = "parade/" + "?date=" + datepickerValue + "&time_of_day=" + paradeChoice + "/" ;
 
 
         console.log("url changed");
@@ -118,9 +130,9 @@
 
     <!--Elements after picking parade from DatePicker-->
     <script>
-      var anot = document.getElementById("MyDate");
-      var pnot = document.getElementById('ParadeChoice');
-      var b = 2;
+
+
+      
       var urlNow = window.location.search;
       console.log(urlNow);
       
@@ -137,17 +149,18 @@
         console.log("url live");
         document.getElementById("CardHolders").classList.toggle('active');
         document.getElementById("OverviewSearch").classList.remove('disabled');
+        document.getElementById("LayoutBtn").classList.remove('disabled');
         document.getElementById("NoDocumentPage").className="Default-Inactive";
       }
 
       else {
         console.log("close document none print cards")
-
-        
-      }
-
       
+      }
+  
     </script>
+
+
 
     <!-- For Card Dimmer  -->
     <script>
@@ -158,8 +171,6 @@
 
       var selectMedicalVal = document.getElementById('MedStat').value;
       var selectActivityVal = document.getElementById('Activity').value;
-
-      
 
       function ToggleCardSaveBtn(selectActivityVal,selectMedicalVal){
 
@@ -174,42 +185,55 @@
 
         if (selectMedicalVal == "NIL" && selectActivityVal == "NIL" ) {
           console.log('NIL choices selected');
-          saveBtn.classList.remove("green");
+          saveBtn.classList.remove("teal");
           saveBtn.classList.add("disabled");
           
         }
         
         else if (selectMedicalVal == "NIL" && selectActivityVal == "" ) {
           console.log('NIL choices selected');
-          saveBtn.classList.remove("green");
+          saveBtn.classList.remove("teal");
+          saveBtn.classList.add("disabled");
+        }
+
+        else if (selectMedicalVal == "" && selectActivityVal == "" ) {
+          console.log('NIL choices selected');
+          saveBtn.classList.remove("teal");
           saveBtn.classList.add("disabled");
         }
 
         else if (selectMedicalVal == "" && selectActivityVal == "NIL" ) {
           console.log('NIL choices selected');
-          saveBtn.classList.remove("green");
+          saveBtn.classList.remove("teal");
           saveBtn.classList.add("disabled");
         }
 
         else {
-          saveBtn.className = "ui green button";
+          saveBtn.className = "ui teal button";
         }
       }
 
-      var selectMed = document.getElementById('MedStat');
-      var selectAct = document.getElementById('Activity');
-
-      selectMed.addEventListener('change',ToggleCardSaveBtn);
-      selectAct.addEventListener('change',ToggleCardSaveBtn);
       
-
+      selectMedical.addEventListener('change',ToggleCardSaveBtn);
+      selectActivity.addEventListener('change',ToggleCardSaveBtn);
       
-      
+      // <!--Reset Cancel Button-->
+      function resetInput(value) {
+        var selectMedicalVal = document.getElementById('MedStat').value;
+        var selectActivityVal = document.getElementById('Activity').value;
+        selectMedicalVal = "";
+        selectActivityVal ="";
+        $('form').form('clear');
+      }
+
+      var cancelBtn = document.getElementById("AddCardCancel");
+      cancelBtn.addEventListener('click', resetInput);
 
 
-      
     </script>
 
+   
+    
   
 
 
