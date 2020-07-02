@@ -4,7 +4,6 @@
 <head>
 
 
-
 <link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/distcopy/semantic.css/' %} ">
 <link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/distcopy/icon.css/' %} ">
 <link rel="stylesheet" type="text/css" href="{% static 'attendance/CSS/master.css'%}">
@@ -116,8 +115,9 @@
         var datepickerValue = document.getElementById("MyDate").value;
         var paradeChoice = document.getElementById('ParadeChoice').value;
 
-        location.href = "parade/" + "?date=" + datepickerValue + "&time_of_day=" + paradeChoice + "/" ;
+        // location.href = "parade/" + "?date=" + datepickerValue + "&time_of_day=" + paradeChoice + "/" ;
 
+        location.assign("http://localhost:8000/home/parade/" + "?date=" + datepickerValue + "&time_of_day=" + paradeChoice + "/" );
 
         console.log("url changed");
 
@@ -232,9 +232,6 @@
 
     </script>
 
-   
-    
-  
 
 
 </body>
