@@ -3,6 +3,70 @@ Bunch of Cached code for reference / history purposes
 
 
 
+----------- Card Label generation 
+
+
+{% if {{ is_MC == True }} %}
+                          <a class="ui red label">MC</a>
+                          {% else %}
+                          {% endif %}
+                          
+                          {% if {{ is_MA == True }} %}
+                          <a class="ui orange label">MC</a>
+                          {% else %}
+                          {% endif %}
+
+                          {% if {{ is_off == True }} %}
+                          <a class="ui blue label">Off</a>
+                          {% else %}
+                          {% endif %}
+
+                          {% if {{ is_leave == True }} %}
+                          <a class="ui green label">Leave</a>
+                          {% else %}
+                          {% endif %}
+
+                          {% if {{ is_other == True }} %}
+                          <a class="ui red label">Others</a>
+                          {% else %}
+                          {% endif %}
+
+
+
+
+
+
+
+
+----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Throw in header of base.html if need background image / color
 -----------------------------------
 

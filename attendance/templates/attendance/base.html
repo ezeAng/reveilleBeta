@@ -251,23 +251,29 @@
         .search({
           source: content
           
-        })
-
-        .search(get result, id)
+        }) 
+        .result 
       ;
+
+      $('#AddNewCardSearch')
+        .search('get value') 
+      ;
+      
+      var searchAddCard = document.getElementById("CardSearchInput");
+      var searchResult = searchAddCard.value;
+      searchAddCard.addEventListener('change',CheckSearch);
+      
+      
+      function CheckSearch(searchResult) {
+        var searchResult = searchAddCard.value;
+        console.log(searchResult);
+
+      }
+
 
     </script>
     
-    <script>
-      var searchAddCard = document.getElementById("AddNewCardSearch");
-      var searchResult = searchAddCard.value;
-      searchAddCard.addEventListener('change',CheckSearch)
-
-      function CheckSearch {
-
-      }
-    </script>
-
+   
 
 </body>
 

@@ -46,15 +46,15 @@
                   <div class="divider"></div>
                   <div class="item">
                     <i class="sticky note icon"></i>
-                    Default Card
+                    Cards
                   </div>
                   <div class="item">
                     <i class="list ul icon"></i>
-                    Stacked Rows
+                    Rows
                   </div>
                   <div class="item">
                     <i class="th icon"></i>
-                    Small icons
+                    Icons
                   </div>
                 </div>
               </div>
@@ -131,8 +131,9 @@
 
         <!--Card Holder Segments-->
         <div class="ui placeholder basic violet segment"> 
-            <!--else {} , this should be below card holdings once we discuss card itereation-->
+            
             <!--Default page before entrance of data. No Documents. -->
+            {% if error %}
             <div class="" id="NoDocumentPage">
               <div class="ui centered grid">
                 <div class="row">
@@ -143,129 +144,72 @@
                 </div>
               </div>
             </div>
+        </div>
 
-            <!--If parade -->
-            <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
-            <div class="Default-Inactive" id="CardHolders">
+            
+        <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
+        {% else %}
+              
+        <div class="" id="CardHolders">
                                                 
-                <!--Sample Cards-->
-                <!--Will ahve to html loop generate within ui raised cards-->
-                <div class="ui raised four cards">
+          <!--Sample Cards-->                
+          <div class="ui raised four stackable cards">
 
-                  <!--Individual Cards-->                  
-                  <div class="card">
-                    <div class="content">
-                      <div class="ui grid">
-                        <div class="twelve wide column">
-                          <div class="left aligned fluid header">
-                            <h3>{{ xx.name }}</h3>
-                          </div>
-                          <div class="left aligned meta">
-                            {{ xx.rank }})
-                          </div>
-                        </div>
-                        
-                        <div class="four wide column">
-                          <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/jenny.jpg">
-                        </div>
-                      </div>
-                      
-                      <div class="ui basic segment">
-                        <div class="description">
-                          {{ xx.remarks }}
-                        </div>
-                      </div>
-                      
-
-                      
-                      
+            <!-- {% for eachcard in absence %} -->
+            <!--Individual Cards-->                  
+            <div class="card">
+              <div class="content">
+                <div class="ui grid">
+                  <div class="twelve wide column">
+                    <div class="left aligned fluid header">
+                      <h3>{{ name }}</h3>
                     </div>
-
-                    
-                    <!--Labels for Current Status-->
-                    <div class="extra content">
-                      <div class="ui basic segment">
-                        <div class="meta"> <!--Dynamic generation of labels according to DB-->
-                          <!-- {% for status in personnel %} -->
-                          <a class="ui red label">MA</a>
-                          <a class="ui yellow label">Platoon 1</a>
-                          <a class="ui orange label">Unfit for duty</a>
-                          <!-- {% endfor %} -->
-                        </div>
-                      </div>
-
-                      <div class="four column ui grid">
-                        <div class="column"><button class="ui olive circular icon button"><i class="phone icon"></i></button></div>
-                        <div class="column"><button class="ui teal circular icon button"><i class="paper plane icon"></i></button></div>
-                        <div class="column"><button class="ui green circular icon button"><i class="edit icon"></i></button></div>
-                        <div class="column"><button class="ui red circular icon button"><i class="minus square icon"></i></button></div>
-                      </div>
+                    <div class="left aligned meta">
+                      {{ rank }}
                     </div>
                   </div>
                   
-                                
-                  <div class="card">
-                    <div class="content">
-                      <div class="ui grid">
-                        <div class="twelve wide column">
-                          <div class="left aligned fluid header">
-                            <h3>Wong Wei Bin</h3>
-                          </div>
-                          <div class="left aligned meta">
-                            OC (Dynamic Rank)
-                          </div>
-                        </div>
-                        
-                        <div class="four wide column">
-                          <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/jenny.jpg">
-                        </div>
-                      </div>
-                      
-                      
-                      
-                      <div class="ui basic segment">
-                        <div class="description">
-                          ND Tank legendarily (dynamic)
-                        </div>
-                      </div>
-
-                      
-                      
-                    </div>
-                    <div class="extra content">
-                      <div class="ui basic segment">
-                        <div class="meta"> <!--Dynamic generation of labels according to DB-->
-                          <a class="ui red label">MA</a>
-                          <a class="ui violet label">Platoon 2</a>
-                          <a class="ui teal label">OutStation</a>
-                        </div>
-                      </div>
-                      <div class="four column ui grid">
-                        <div class="column"><button class="ui olive circular icon button"><i class="phone icon"></i></button></div>
-                        <div class="column"><button class="ui teal circular icon button"><i class="paper plane icon"></i></button></div>
-                        <div class="column"><button class="ui green circular icon button"><i class="edit icon"></i></button></div>
-                        <div class="column"><button class="ui red circular icon button"><i class="minus square icon"></i></button></div>
-                      </div>
-                    </div>
+                  <div class="four wide column">
+                    <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/jenny.jpg">
+                  </div>
+                </div>
                 
-
-
-
+                
+                
+                <div class="ui basic segment">
+                  <div class="description">
+                    {{ remarks }}
                   </div>
-
-                  
-
-                  
-
-                  
                 </div>
 
-              
+              </div>
+              <div class="extra content">
+                <div class="ui basic segment">
+                  <div class="meta"> 
+                    
+
+                  </div>
+                </div>
+                <div class="four column ui grid">
+                  <!-- <div class="column"><button class="ui olive circular icon button"><i class="phone icon"></i></button></div> -->
+                  <!-- <div class="column"><button class="ui teal circular icon button"><i class="paper plane icon"></i></button></div> -->
+                  <div class="column"><button class="ui teal circular icon button"><i class="edit icon"></i></button></div>
+                  <div class="column"><button class="ui orange circular icon button"><i class="minus square icon"></i></button></div>
+                </div>
+              </div>
+          
+
 
 
             </div>
+            <!-- {% endfor %} -->
+            
+          </div>
+
         </div>
 
+        {% endif %}
+      
       </div>
 
       <!--Summary Tab-->
@@ -328,12 +272,18 @@
         <div class="ui center aligned grid">
 
 
-          { if error }
+          {% if error %}
+          <div class="ui basic segment">
             <div class="ui divider"></div>
-            <div>{{ message }}</div>
+            <div><h1>{{ message }}</h1></div>
             <div class="ui divider"></div>
+          </div>
+          <div class="ui basic segment">
 
-          { else }
+          </div>
+            
+
+          {% else %}
 
           <div class="row">
             <div class="fourteen wide left aligned column">
@@ -399,7 +349,7 @@
             </div>
           </div>
 
-          {{ endif }}
+          {% endif %}
           
 
 
@@ -415,45 +365,14 @@
         <div class="ui hidden divider"></div>
         <div class="ui centered grid">
           <div class="fourteen wide column">
-            <!--for changes in changes etc-->
-            <div class="ui feed">
-              <div class="event">
-                <div class="label">
-                  
-                </div>
-                <div class="content">
-                  <div class="date">
-                    3 days ago
-                  </div>
-                  <div class="summary">
-                     You added <a>Mess</a> to <a>12C48</a> parades.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="ui feed">
-              <div class="event">
-                <div class="label">
-                  img
-                </div>
-                <div class="content">
-                  <div class="date">
-                    3 days ago
-                  </div>
-                  <div class="summary">
-                     You added <a>Mess</a> to <a>12C48</a> parades.
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
-        
-        
+         
       </div>
 
     </div>
-  </div>
+</div>
 
 
 
