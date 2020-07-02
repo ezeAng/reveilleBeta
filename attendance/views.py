@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Personnel, Absence, Parade
+import datetime
+import logging
+import sys
 
 def home_view(request):
 	parade_id = request.GET.get('parade_id')
@@ -20,14 +23,19 @@ def home_view(request):
 		return render(request, 'attendance/revhome.html/', context)
 
 def parade_view(request):
-
+	logger = logging.getLogger(__name__)
 	date = request.GET.get('date')
-	time_of_day = request.GET.get('time_of_day')
+	date = datetime.datetime.strptime(date, "%Y-%m-%d").date()
+	logger.info('DATE %s',date)
+
+	time_of_day = int(request.GET.get('time_of_day'))
+	logger.info('TIME OF DAY %s',time_of_day)
 	
 	try:
 		parade = Parade.objects.filter(
 			date = date, time_of_day = time_of_day
 		)
+		logger.info(parade)
 
 		# Parade does not exist
 		if len(parade) == 0:
@@ -35,6 +43,7 @@ def parade_view(request):
 
 		else:
 			parade = parade.values()[0]
+			logger.info('PARADE OBJ %s',parade)
 			parade_id = parade['id']
 			absentees = Absence.objects.filter(
 				parade_id = parade_id
