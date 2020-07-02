@@ -232,6 +232,41 @@
 
     </script>
 
+    <script>
+
+      var content = [
+        { title: 'Andorra' ,id: '1' },
+        { title: 'United Arab Emirates' },
+        { title: 'Afghanistan' },
+        { title: 'Antigua' },
+        { title: 'Burkina Faso' },
+        { title: 'Bulgaria' },
+        { title: 'Bahrain' },
+        { title: 'Burundi' }
+        // etc
+        ];
+
+
+      $('#AddNewCardSearch')
+        .search({
+          source: content
+          
+        })
+
+        .search(get result, id)
+      ;
+
+    </script>
+    
+    <script>
+      var searchAddCard = document.getElementById("AddNewCardSearch");
+      var searchResult = searchAddCard.value;
+      searchAddCard.addEventListener('change',CheckSearch)
+
+      function CheckSearch {
+
+      }
+    </script>
 
 
 </body>
