@@ -64,7 +64,7 @@
           <!--Add Card Toggle-->
           <div class="computer only violet one wide column">
             <div class="ui basic left aligned segment">
-              <button class="ui teal icon button" id="AddCardToggle" data-content="Add users to your feed">
+              <button class="ui teal disabled icon button" id="AddCardToggle" data-content="Add users to your feed">
                 <i class="user plus icon"></i>
               </button>
             </div>
@@ -140,12 +140,31 @@
                     <i class="inverted user secret icon"></i>
                       <span class="ui grey header">No cards are listed, search for your parade to begin.</span>
                       <div class="ui grey header">New to Reveille? Let's Begin</div>
-                        
+
                         <a class="ui teal button" href="#ParadeMakeBanner">Start</a></div>
                   
                 </div>
               </div>
             </div>
+
+            {% elif parade_exist == False %}
+
+            <div class="" id="NoDocumentPage2">
+              <div class="ui centered grid">
+                <div class="row">
+                  <div class="ui icon header">
+                    <i class="plane icon"></i>
+                      <span class="ui grey header">No cards are listed, add card</span>
+                      <div class="ui grey header">New to Reveille? Let's Begin</div>
+
+                        <a class="ui teal button" href="#ParadeMakeBanner">Start</a></div>
+                  
+                </div>
+              </div>
+            </div>
+
+
+
 
             <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
             {% else %}
@@ -316,10 +335,10 @@
         <div class="ui center aligned grid">
 
 
-          {% if error %}
+          {% if parade_exist == False %}
           <div class="ui basic segment">
             <div class="ui divider"></div>
-            <div><h1>{{ message }}</h1></div>
+            <div><h1>Parade does not exist, proceed to create parade?</h1></div>
             <div class="ui divider"></div>
           </div>
           <div class="ui basic segment">
@@ -327,7 +346,7 @@
           </div>
             
 
-          {% else %}
+          {% elif parade_exist == True %}
 
           <div class="row">
             <div class="fourteen wide left aligned column">
@@ -393,6 +412,18 @@
             </div>
           </div>
 
+          {% else %}
+            
+          <div class="ui basic segment">
+            <div class="ui divider"></div>
+            <div><h1>No parade selection has been made, proceed to select a parade?</h1></div>
+            <div><a href="#" class="ui teal button">Select Parade</a></div>
+            <div class="ui divider"></div>
+          </div>
+          <div class="ui basic segment">
+
+          </div>
+            
           {% endif %}
           
 
