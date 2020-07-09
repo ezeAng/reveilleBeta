@@ -6,22 +6,19 @@ import logging
 import sys
 
 def home_view(request):
-	parade_id = request.GET.get('parade_id')
-	if parade_id is None:
-		context = {
-			'error': True
-		}
-		return render(request, 'attendance/revhome.html/', context)
-	else:
-		# parade = Parade.objects.get(id=parade_id)
-		context = {
-			'error': False,
-			# 'personnel': Personnel.objects.all(),
-			'parade': Parade.objects.filter(id=parade_id).values()[0],
-			# 'parade': parade		
-		}
-		return render(request, 'attendance/revhome.html/', context)
-
+	# parade_id = request.GET.get('parade_id')
+	# if parade_id is None:
+	# 	context = {
+	# 		'error': True
+	# 	}
+	# 	return render(request, 'attendance/revhome.html/', context)
+	# else:
+	# 	context = {
+	# 		'error': False,
+	# 		'parade': Parade.objects.filter(id=parade_id).values()[0],
+	# 	}
+		return render(request, 'attendance/revhome.html/')
+		
 def parade_view(request):
 	logger = logging.getLogger(__name__)
 	date = request.GET.get('date')
@@ -48,13 +45,16 @@ def parade_view(request):
 			parade_id = parade['id']
 			total_strength = parade['total_strength']
 			current_strength = parade['commander_strength'] + parade['personnel_strength']
+			
 			absentees = Absence.objects.filter(
 				parade_id = parade_id
 			).values()
 			logger.info('ABSENCE %s', absentees)
-			all_present = False
+			
+			no_absentees = True
 			if len(absentees) == 0:
-				all_present = True
+				no_absentees = False
+				card_data = []
 			
 			else:
 				total_attc = 0
@@ -63,6 +63,7 @@ def parade_view(request):
 				total_off = 0
 				total_other = 0
 				
+				card_data = []
 				for abs in absentees:
 					if abs['is_MC']:
 						total_attc += 1
@@ -76,10 +77,26 @@ def parade_view(request):
 						total_other += 1
 					else:
 						pass
+					
+					personnel = Personnel.objects.get(
+						id=int(abs['personnel_id']))
+					data = {
+						'name': personnel.name,
+						'rank': personnel.rank,
+						'platoon': personnel.platoon,
+						'is_mc': abs['is_MC'],
+						'is_ma': abs['is_MA'],
+						'is_leave': abs['is_leave'],
+						'is_off': abs['is_off'],
+						'is_other': abs['is_other'],
+						'remarks': abs['remarks'],
+					}
+					logger.info('DATA %s', data )
+					card_data.append(data)
+					logger.info('CARD DATA %s', card_data )
 
-		context = {
+		parade_summary = {
 			'parade_id': parade_id,
-			'all_present': all_present,
 			'total_strength': total_strength,
 			'current_strength': current_strength,
 			'total_absent': total_strength-current_strength,
@@ -88,6 +105,12 @@ def parade_view(request):
 			'total_leave': total_leave,
 			'total_off': total_off,
 			'total_other': total_other,
+		}
+
+		context = {
+			'no_absentees': no_absentees,
+			'parade_summary': parade_summary,
+			'parade_overview': card_data
 		}
 
 		logger.info('RESULTS %s', context)
