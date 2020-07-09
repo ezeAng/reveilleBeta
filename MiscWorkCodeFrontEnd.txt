@@ -3,6 +3,40 @@ Bunch of Cached code for reference / history purposes
 
 
 
+------------------------------
+
+<div class="field">
+                    <label>Current Activity</label>
+                    <select name="Activity" class="ui fluid dropdown" id="Activity"> <!--"input" name = ...-->
+                      <option value="">Activity</option>
+                      <option value="OutStn">Outstationed</option>
+                      <option value="Off">Off</option>
+                      <option value="Leave">On-Leave</option>
+                      <option value="Course">On-Course</option>
+                      <option value="NIL">-</option>
+                    </select>
+                  </div>
+
+
+
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ----------- Card Label generation 
 
 

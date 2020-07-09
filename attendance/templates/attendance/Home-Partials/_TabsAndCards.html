@@ -132,15 +132,17 @@
         <div class="ui placeholder basic violet segment"> 
             
             <!--Default page before entrance of data. No Documents. -->
-            {% if error %}
+            {% if default %}
             <div class="" id="NoDocumentPage">
               <div class="ui centered grid">
                 <div class="row">
                   <div class="ui icon header">
                     <i class="inverted user secret icon"></i>
                       <span class="ui grey header">No cards are listed, search for your parade to begin.</span>
-                      <div class="ui grey header">New to Reveille? Let's Begin <button class="ui teal button">Start</button></div>
-                  </div>
+                      <div class="ui grey header">New to Reveille? Let's Begin</div>
+                        
+                        <a class="ui teal button" href="#ParadeMakeBanner">Start</a></div>
+                  
                 </div>
               </div>
             </div>
@@ -153,7 +155,7 @@
               <!--Sample Cards-->                
               <div class="ui raised four stackable cards">
 
-                <!-- {% for eachCard in parade_overview %} -->
+                {% for eachCard in parade_overview %}
                 <!--Individual Cards-->                  
                 <div class="card">
                   <div class="content">
@@ -168,17 +170,16 @@
                       </div>
                       
                       <div class="four wide column">
-                        <button class="ui icon button" id="CardDeleteIndiv"><i class="minus square outline icon"></i></button>
-                      </div>
-                    </div>
-                    
-                    <div class="ui basic segment">
-                      <div class="meta">
-                        <div class="ui yellow label">
-                          {{ eachCard.platoon }}
+                        <div class="meta">
+                          
+                            <a class="ui yellow right label">
+                              Platoon
+                            {{ eachCard.platoon }}
+                            </a>
                         </div>
                       </div>
                     </div>
+                    
                     
                     <div class="ui basic segment">
                       <div class="description">
@@ -186,38 +187,52 @@
                       </div>
                     </div>
 
-                  </div>
-                  <div class="extra content">
                     <div class="ui basic segment">
                       <div class="meta"> 
-                          {% if {{ eachCard.is_mc }} == True %}
-                          <a class="ui red label">MC</a>
+                          {% if eachCard.is_mc == True %}
+                          
+                          <a class="ui large red label">
+                          <i class="medkit icon"></i>
+                            MC</a>
                           {% else %}
                           {% endif %}
                           
-                          {% if {{ eachCard.is_ma }} == True  %}
-                          <a class="ui orange label">MC</a>
+                          {% if eachCard.is_ma == True  %}
+                          <a class="ui large orange label">
+                            <i class="hospital icon"></i>
+                            MA</a>
                           {% else %}
                           {% endif %}
-
-                          {% if {{ eachCard.is_off }} == True %}
-                          <a class="ui blue label">Off</a>
+  
+                          {% if eachCard.is_off == True %}
+                          <a class="ui large blue label">
+                            <i class="home icon"></i>
+                            Off</a>
                           {% else %}
                           {% endif %}
-
-                          {% if {{ eachCard.is_leave }} == True %}
-                          <a class="ui green label">Leave</a>
+  
+                          {% if eachCard.is_leave == True %}
+                          <a class="ui large green label">
+                            <i class="plane icon"></i>
+                            Leave</a>
                           {% else %}
                           {% endif %}
-
-                          {% if {{ eachCard.is_other }} == True %}
+  
+                          {% if eachCard.is_other == True %}
                           <a class="ui red label">Others</a>
                           {% else %}
                           {% endif %}
-
+  
                       </div>
                     </div>
-                    <div class="four column ui grid">
+                    
+                  </div>
+                  
+                  
+                  <div class="extra content">
+                    
+
+                    <div class="two column ui grid">
                       <!-- <div class="column"><button class="ui olive circular icon button"><i class="phone icon"></i></button></div> -->
                       <!-- <div class="column"><button class="ui teal circular icon button"><i class="paper plane icon"></i></button></div> -->
                       <div class="column"><button class="ui teal circular icon button"><i class="edit icon"></i></button></div>
@@ -229,7 +244,8 @@
 
 
                 </div>
-                <!-- {% endfor %} -->
+                
+                {% endfor %}
                 
               </div>
 
@@ -316,7 +332,7 @@
           <div class="row">
             <div class="fourteen wide left aligned column">
               <div class="ui inverted grey segment">
-                <h3 class="ui violet header">Total Strength: <span>{{ total_strength }}</span></h3>
+                <h3 class="ui violet header">Total Strength: <span>{{ parade_summary.total_strength }}</span></h3>
               </div>
             </div>
           </div>
@@ -324,7 +340,7 @@
           <div class="row">
             <div class="fourteen wide left aligned column">
               <div class="ui inverted grey segment">
-                <h3 class="ui violet header">Current Strength: <span>{{ current_strength }}</span></h3>
+                <h3 class="ui violet header">Current Strength: <span>{{ parade_summary.current_strength }}</span></h3>
               </div>
             </div>
           </div>
@@ -332,7 +348,7 @@
           <div class="row">
             <div class="fourteen wide left aligned column">
               <div class="ui inverted grey segment">
-                <h3 class="ui violet header">Total Absent: <span>{{ total_absent }}</span></h3>
+                <h3 class="ui violet header">Total Absent: <span>{{ parade_summary.total_absent }}</span></h3>
               </div>
             </div>
           </div>
@@ -340,7 +356,7 @@
           <div class="row">
             <div class="fourteen wide left aligned column">
               <div class="ui inverted grey segment">
-                <h3 class="ui violet header">Attend C: <span>{{ total_attc }}</span></h3>
+                <h3 class="ui violet header">Attend C: <span>{{ parade_summary.total_attc }}</span></h3>
               </div>
             </div>
           </div>
@@ -348,7 +364,7 @@
           <div class="row">
             <div class="fourteen wide left aligned column">
               <div class="ui inverted grey segment">
-                <h3 class="ui violet header">Medical Appointment: <span>{{ total_ma }}</span></h3>
+                <h3 class="ui violet header">Medical Appointment: <span>{{ parade_summary.total_ma }}</span></h3>
               </div>
             </div>
           </div>
@@ -356,7 +372,7 @@
           <div class="row">
             <div class="fourteen wide left aligned column">
               <div class="ui inverted grey segment">
-                <h3 class="ui violet header">Leave: <span>{{ total_leave }}</span></h3>
+                <h3 class="ui violet header">Leave: <span>{{ parade_summary.total_leave }}</span></h3>
               </div>
             </div>
           </div>
@@ -364,7 +380,7 @@
           <div class="row">
             <div class="fourteen wide left aligned column">
               <div class="ui inverted grey segment">
-                <h3 class="ui violet header">On Off: <span>{{ total_off }}</span></h3>
+                <h3 class="ui violet header">On Off: <span>{{ parade_summary.total_off }}</span></h3>
               </div>
             </div>
           </div>
@@ -372,7 +388,7 @@
           <div class="row">
             <div class="fourteen wide left aligned column">
               <div class="ui inverted grey segment">
-                <h3 class="ui violet header">Other: <span>{{ total_other }}</span></h3>
+                <h3 class="ui violet header">Other: <span>{{ parade_summary.total_other }}</span></h3>
               </div>
             </div>
           </div>

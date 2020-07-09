@@ -139,10 +139,8 @@
       
       if (urlNow != "") {
         console.log("url live");
-        // document.getElementById("CardHolders").classList.toggle('active');
         document.getElementById("OverviewSearch").classList.remove('disabled');
         document.getElementById("LayoutBtn").classList.remove('disabled');
-        // document.getElementById("NoDocumentPage").className="Default-Inactive";
       }
 
       else {
@@ -155,49 +153,34 @@
 
     <!--Delete Button for individual Card-->
 
-    
+
 
     <!-- For Card Dimmer  -->
     <script>
 
       var saveBtn = document.getElementById('AddCardSave');
-      var selectMedical = document.getElementById('MedStat');
-      var selectActivity = document.getElementById('Activity');
+      var selectStatus = document.getElementById('Status');
 
-      var selectMedicalVal = document.getElementById('MedStat').value;
-      var selectActivityVal = document.getElementById('Activity').value;
+      var selectStatusVal = document.getElementById('Status').value;
 
-      function ToggleCardSaveBtn(selectActivityVal,selectMedicalVal){
+      function ToggleCardSaveBtn(selectStatusVal){
 
         var saveBtn = document.getElementById('AddCardSave');
-        var selectMedical = document.getElementById('MedStat');
-        var selectActivity = document.getElementById('Activity');
+        var selectStatus = document.getElementById('Status');
 
-        var selectMedicalVal = document.getElementById('MedStat').value;
-        var selectActivityVal = document.getElementById('Activity').value;
+        var selectStatusVal = document.getElementById('Status').value;
 
         
 
-        if (selectMedicalVal == "NIL" && selectActivityVal == "NIL" ) {
+        if (selectStatusVal == "NIL" ) {
           console.log('NIL choices selected');
           saveBtn.classList.remove("teal");
           saveBtn.classList.add("disabled");
           
         }
         
-        else if (selectMedicalVal == "NIL" && selectActivityVal == "" ) {
-          console.log('NIL choices selected');
-          saveBtn.classList.remove("teal");
-          saveBtn.classList.add("disabled");
-        }
-
-        else if (selectMedicalVal == "" && selectActivityVal == "" ) {
-          console.log('NIL choices selected');
-          saveBtn.classList.remove("teal");
-          saveBtn.classList.add("disabled");
-        }
-
-        else if (selectMedicalVal == "" && selectActivityVal == "NIL" ) {
+      
+        else if (selectStatusVal == "" ) {
           console.log('NIL choices selected');
           saveBtn.classList.remove("teal");
           saveBtn.classList.add("disabled");
@@ -209,15 +192,13 @@
       }
 
       
-      selectMedical.addEventListener('change',ToggleCardSaveBtn);
-      selectActivity.addEventListener('change',ToggleCardSaveBtn);
+      selectStatus.addEventListener('change',ToggleCardSaveBtn);
       
+
       // <!--Reset Cancel Button-->
       function resetInput(value) {
-        var selectMedicalVal = document.getElementById('MedStat').value;
-        var selectActivityVal = document.getElementById('Activity').value;
-        selectMedicalVal = "";
-        selectActivityVal ="";
+        var selectStatusVal = document.getElementById('Status').value;
+        selectStatusVal = "";
         $('form').form('clear');
       }
 

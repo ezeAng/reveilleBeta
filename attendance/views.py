@@ -17,7 +17,8 @@ def home_view(request):
 	# 		'error': False,
 	# 		'parade': Parade.objects.filter(id=parade_id).values()[0],
 	# 	}
-		return render(request, 'attendance/revhome.html/')
+		context = {'default': True}
+		return render(request, 'attendance/revhome.html/', context)
 		
 def parade_view(request):
 	logger = logging.getLogger(__name__)
