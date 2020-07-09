@@ -128,7 +128,6 @@
           
         </div>
 
-
         <!--Card Holder Segments-->
         <div class="ui placeholder basic violet segment"> 
             
@@ -140,76 +139,82 @@
                   <div class="ui icon header">
                     <i class="inverted user secret icon"></i>
                       <span class="ui grey header">No cards are listed, search for your parade to begin.</span>
+                      <div class="ui grey header">New to Reveille? Let's Begin <button class="ui teal button">Start</button></div>
                   </div>
                 </div>
               </div>
             </div>
-        </div>
 
-            
-        <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
-        {% else %}
-              
-        <div class="" id="CardHolders">
-                                                
-          <!--Sample Cards-->                
-          <div class="ui raised four stackable cards">
+            <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
+            {% else %}
+            <!-- if no_absentees == true , else show no absentee msg.-->
+            <div class="" id="CardHolders">
+                                                    
+              <!--Sample Cards-->                
+              <div class="ui raised four stackable cards">
 
-            <!-- {% for eachcard in absence %} -->
-            <!--Individual Cards-->                  
-            <div class="card">
-              <div class="content">
-                <div class="ui grid">
-                  <div class="twelve wide column">
-                    <div class="left aligned fluid header">
-                      <h3>{{ name }}</h3>
+                <!-- {% for eachcard in absence %} -->
+                <!--Individual Cards-->                  
+                <div class="card">
+                  <div class="content">
+                    <div class="ui grid">
+                      <div class="twelve wide column">
+                        <div class="left aligned fluid header">
+                          <h3>{{ name }}</h3>
+                        </div>
+                        <div class="left aligned meta">
+                          {{ rank }}
+                        </div>
+                      </div>
+                      
+                      <div class="four wide column">
+                        <button class="ui icon button" id="CardDeleteIndiv"><i class="minus square outline icon"></i></button>
+                      </div>
                     </div>
-                    <div class="left aligned meta">
-                      {{ rank }}
-                    </div>
-                  </div>
-                  
-                  <div class="four wide column">
-                    <img class="right floated mini ui image" src="https://semantic-ui.com/images/avatar/large/jenny.jpg">
-                  </div>
-                </div>
-                
-                
-                
-                <div class="ui basic segment">
-                  <div class="description">
-                    {{ remarks }}
-                  </div>
-                </div>
-
-              </div>
-              <div class="extra content">
-                <div class="ui basic segment">
-                  <div class="meta"> 
                     
+                    <div class="ui basic segment">
+                      <div class="meta">
+                        <div class="ui yellow label">
+                          {{ platoon }}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="ui basic segment">
+                      <div class="description">
+                        {{ remarks }}
+                      </div>
+                    </div>
 
                   </div>
+                  <div class="extra content">
+                    <div class="ui basic segment">
+                      <div class="meta"> 
+                        
+
+                      </div>
+                    </div>
+                    <div class="four column ui grid">
+                      <!-- <div class="column"><button class="ui olive circular icon button"><i class="phone icon"></i></button></div> -->
+                      <!-- <div class="column"><button class="ui teal circular icon button"><i class="paper plane icon"></i></button></div> -->
+                      <div class="column"><button class="ui teal circular icon button"><i class="edit icon"></i></button></div>
+                      <div class="column"><button class="ui orange circular icon button"><i class="minus square icon"></i></button></div>
+                    </div>
+                  </div>
+              
+
+
+
                 </div>
-                <div class="four column ui grid">
-                  <!-- <div class="column"><button class="ui olive circular icon button"><i class="phone icon"></i></button></div> -->
-                  <!-- <div class="column"><button class="ui teal circular icon button"><i class="paper plane icon"></i></button></div> -->
-                  <div class="column"><button class="ui teal circular icon button"><i class="edit icon"></i></button></div>
-                  <div class="column"><button class="ui orange circular icon button"><i class="minus square icon"></i></button></div>
-                </div>
+                <!-- {% endfor %} -->
+                
               </div>
-          
-
-
 
             </div>
-            <!-- {% endfor %} -->
-            
-          </div>
 
+            {% endif %}
         </div>
 
-        {% endif %}
-      
       </div>
 
       <!--Summary Tab-->
@@ -365,7 +370,11 @@
         <div class="ui hidden divider"></div>
         <div class="ui centered grid">
           <div class="fourteen wide column">
-            
+            <div class="ui grey segment">
+              <h1>Coming Soon.</h1>
+            </div>
+            <div class="ui hidden divider "></div>
+
           </div>
         </div>
          

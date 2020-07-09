@@ -136,21 +136,13 @@
       var urlNow = window.location.search;
       console.log(urlNow);
       
-      //Once url is not ...home/... this code block will run, which toggles the cardholder
-      //next is to take context from html side, put into js variable, e.g var p = doc.getelebyidinnerhtml... -->48SAR A COy Parade,
-      // for personnel in p :
-      // if personnel.status != null {
-      // for eachdog in personnel.status , iterate cards , use js to create html chunks within cardholder segments
-      // } can do a settimemout to iterate cards
-
-      // search personnel will then search the current html onsite 
-      // add card will be a form add to db, and then rerun chunk of code of iterating, without timemout ( maybe code it to only timedelay the last one)
+      
       if (urlNow != "") {
         console.log("url live");
-        document.getElementById("CardHolders").classList.toggle('active');
+        // document.getElementById("CardHolders").classList.toggle('active');
         document.getElementById("OverviewSearch").classList.remove('disabled');
         document.getElementById("LayoutBtn").classList.remove('disabled');
-        document.getElementById("NoDocumentPage").className="Default-Inactive";
+        // document.getElementById("NoDocumentPage").className="Default-Inactive";
       }
 
       else {
@@ -161,6 +153,9 @@
     </script>
 
 
+    <!--Delete Button for individual Card-->
+
+    
 
     <!-- For Card Dimmer  -->
     <script>
