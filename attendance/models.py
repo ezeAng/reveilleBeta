@@ -29,12 +29,12 @@ class Personnel(models.Model):
         return self.name
 
 class Parade(models.Model):
-    date = models.DateField(default=None)
+    date = models.DateField()
     time = models.TimeField(default=None)
     time_of_day = models.IntegerField()
-    total_strength = models.IntegerField()
-    commander_strength = models.IntegerField()
-    personnel_strength = models.IntegerField()
+    total_strength = models.IntegerField(null=True, blank=True)
+    commander_strength = models.IntegerField(null=True, blank=True)
+    personnel_strength = models.IntegerField(null=True, blank=True)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
