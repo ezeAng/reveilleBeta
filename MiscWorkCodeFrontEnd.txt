@@ -6,7 +6,7 @@ Bunch of Cached code for reference / history purposes
 ----------- Card Label generation 
 
 
-{% if {{ is_MC == True }} %}
+                          {% if {{ is_MC == True }} %}
                           <a class="ui red label">MC</a>
                           {% else %}
                           {% endif %}

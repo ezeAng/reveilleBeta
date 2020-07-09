@@ -153,17 +153,17 @@
               <!--Sample Cards-->                
               <div class="ui raised four stackable cards">
 
-                <!-- {% for eachcard in absence %} -->
+                <!-- {% for eachCard in parade_overview %} -->
                 <!--Individual Cards-->                  
                 <div class="card">
                   <div class="content">
                     <div class="ui grid">
                       <div class="twelve wide column">
                         <div class="left aligned fluid header">
-                          <h3>{{ name }}</h3>
+                          <h3>{{ eachCard.name }}</h3>
                         </div>
                         <div class="left aligned meta">
-                          {{ rank }}
+                          {{ eachCard.rank }}
                         </div>
                       </div>
                       
@@ -175,14 +175,14 @@
                     <div class="ui basic segment">
                       <div class="meta">
                         <div class="ui yellow label">
-                          {{ platoon }}
+                          {{ eachCard.platoon }}
                         </div>
                       </div>
                     </div>
                     
                     <div class="ui basic segment">
                       <div class="description">
-                        {{ remarks }}
+                        {{ eachCard.remarks }}
                       </div>
                     </div>
 
@@ -190,7 +190,30 @@
                   <div class="extra content">
                     <div class="ui basic segment">
                       <div class="meta"> 
-                        
+                          {% if {{ eachCard.is_mc }} == True %}
+                          <a class="ui red label">MC</a>
+                          {% else %}
+                          {% endif %}
+                          
+                          {% if {{ eachCard.is_ma }} == True  %}
+                          <a class="ui orange label">MC</a>
+                          {% else %}
+                          {% endif %}
+
+                          {% if {{ eachCard.is_off }} == True %}
+                          <a class="ui blue label">Off</a>
+                          {% else %}
+                          {% endif %}
+
+                          {% if {{ eachCard.is_leave }} == True %}
+                          <a class="ui green label">Leave</a>
+                          {% else %}
+                          {% endif %}
+
+                          {% if {{ eachCard.is_other }} == True %}
+                          <a class="ui red label">Others</a>
+                          {% else %}
+                          {% endif %}
 
                       </div>
                     </div>
