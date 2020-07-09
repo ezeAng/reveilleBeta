@@ -122,6 +122,23 @@ def parade_view(request):
 		
 		if request.method == 'POST':
 			logger.info('POST DATA %s', request.POST)
+			if parade_exist:
+					
+			
+			else:
+				# create new parade if it does not exist
+				parade = Parade(
+
+				)
+				parade.save()
+				return parade
+			# '''
+			absence = Absence(
+				personnel = personnel_object,
+				parade = 
+
+			)
+			# '''
 	
 	except Exception as identifier:
 		logging.info('ERROR %s', identifier.args[0])
