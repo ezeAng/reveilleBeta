@@ -17,8 +17,8 @@ def home_view(request):
 	# 		'error': False,
 	# 		'parade': Parade.objects.filter(id=parade_id).values()[0],
 	# 	}
-		context = {'default': True}
-		return render(request, 'attendance/revhome.html/', context)
+	context = {'default': True}
+	return render(request, 'attendance/revhome.html/', context)
 		
 def parade_view(request):
 	logger = logging.getLogger(__name__)
@@ -37,9 +37,10 @@ def parade_view(request):
 
 		# Parade does not exist
 		if len(parade) == 0:
-			raise Exception('No parades found')
+			parade_exist = False
 
 		else:
+			parade_exist = True
 			parade = parade.values()[0]
 			logger.info('PARADE OBJ %s',parade)
 
@@ -98,6 +99,7 @@ def parade_view(request):
 
 		parade_summary = {
 			'parade_id': parade_id,
+			'no_absentees': no_absentees,
 			'total_strength': total_strength,
 			'current_strength': current_strength,
 			'total_absent': total_strength-current_strength,
@@ -108,23 +110,46 @@ def parade_view(request):
 			'total_other': total_other,
 		}
 
-		context = {
-			'no_absentees': no_absentees,
-			'parade_summary': parade_summary,
-			'parade_overview': card_data
-		}
+		if request.method == 'GET':
+			context = {
+				'parade_exist': parade_exist,
+				'parade_summary': parade_summary,
+				'parade_overview': card_data
+			}
 
-		logger.info('RESULTS %s', context)
-		return render(request, 'attendance/revhome.html/', context)
+			logger.info('RESULTS %s', context)
+			return render(request, 'attendance/revhome.html/', context)
+		
+		if request.method == 'POST':
+			logger.info('POST DATA %s', request.POST)
+			if parade_exist:
+					
+			
+			else:
+				# create new parade if it does not exist
+				parade = Parade(
+
+				)
+				parade.save()
+				return parade
+			# '''
+			absence = Absence(
+				personnel = personnel_object,
+				parade = 
+
+			)
+			# '''
 	
 	except Exception as identifier:
 		logging.info('ERROR %s', identifier.args[0])
 		context = {
 			'error': True,
-			'message': identifier.args[0]
+			'message': 'Hong gan liao unexpected error occured. Please contact your encik grandmother for support.'
 		}
 		return render(request, 'attendance/revhome.html/', context)
 
+# def add_card_view(request):
+	
 
 def dashboard_view(request):
 	return render(request, 'attendance/revdashboard.html/')
