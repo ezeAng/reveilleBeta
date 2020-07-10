@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 
 class Personnel(models.Model):
     rank = models.CharField(max_length=255)
@@ -30,9 +31,10 @@ class Personnel(models.Model):
 
 class Parade(models.Model):
     date = models.DateField()
-    time = models.TimeField(default=None)
     time_of_day = models.IntegerField()
+    time = models.TimeField(default=timezone.now)
     total_strength = models.IntegerField(null=True, blank=True)
+    current_strength = models.IntegerField(null=True, blank=True)
     commander_strength = models.IntegerField(null=True, blank=True)
     personnel_strength = models.IntegerField(null=True, blank=True)
     created_by = models.ForeignKey(
