@@ -7,7 +7,7 @@ from attendance.models import (
 import logging
 import sys
 
-class ParadeStrengthCalculator:
+class ParadeStateHandler:
     logger = logging.getLogger(__name__)
     def __init__(self, parade_id):
         parade = Parade.objects.get(id = parade_id)
@@ -34,7 +34,7 @@ class ParadeStrengthCalculator:
             total_comd_strength += 1
         current_comd_strength = total_comd_strength
         absent_comds = Absence.objects.filter(
-            id=self.parade_id).filter(personnel__is_commander=True)
+            parade_id=self.parade_id).filter(personnel__is_commander=True)
         for i in absent_comds:
             current_comd_strength -= 1
         return current_comd_strength
@@ -45,13 +45,15 @@ class ParadeStrengthCalculator:
             total_trpr_strength += 1
         current_trpr_strength = total_trpr_strength
         absent_trprs = Absence.objects.filter(
-            id=self.parade_id).filter(personnel__is_commander=False)
+            parade_id=self.parade_id).filter(personnel__is_commander=False)
         for i in absent_trprs:
             current_trpr_strength -= 1
         return current_trpr_strength
 
     def calc_absence(self):
-        absentees = Absence.objects.all().filter(id=self.parade_id)
+        absentees = Absence.objects.filter(
+            parade_id=self.parade_id).values()
+        self.logger.info('ABSENTEES %s', absentees)
         no_absentees = True
         if len(absentees) == 0:
             no_absentees = False
@@ -76,13 +78,37 @@ class ParadeStrengthCalculator:
                     pass
         data = { 
             'no_absentees': no_absentees,
-            'total_absent': int(self.calc_coy_total) - int(self.calc_coy_current),
+            'total_absent': int(self.parade.total_strength) - int(self.parade.current_strength),
             'total_attc': total_attc,
             'total_ma': total_ma,
             'total_leave': total_leave,
             'total_off': total_off,
             'total_other': total_other,
         }
+        return data
+
+    def get_parade_overview(self):
+        absentees = Absence.objects.filter(
+            parade_id=self.parade_id).values()
+        card_data = []
+        for abs in absentees:
+            personnel = Personnel.objects.get(
+                        id=int(abs['personnel_id']))
+            data = {
+                'name': personnel.name,
+                'rank': personnel.rank,
+                'platoon': personnel.platoon,
+                'is_mc': abs['is_MC'],
+                'is_ma': abs['is_MA'],
+                'is_leave': abs['is_leave'],
+                'is_off': abs['is_off'],
+                'is_other': abs['is_other'],
+                'remarks': abs['remarks'],
+            }
+            self.logger.info('DATA %s', data )
+            card_data.append(data)
+            self.logger.info('CARD DATA %s', card_data )
+        return card_data
 
 
     def update_parade_instance(self):
