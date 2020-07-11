@@ -176,14 +176,14 @@
 
                 {% for eachCard in parade_overview %}
                 <!--Individual Cards-->                  
-                <div class="card">
+                <div class="card personnel-card">
                   <div class="content">
                     <div class="ui grid">
                       <div class="twelve wide column">
                         <div class="left aligned fluid header">
-                          <h3>{{ eachCard.name }}</h3>
+                          <h3 class="PersonName">{{ eachCard.name }}</h3>
                         </div>
-                        <div class="left aligned meta">
+                        <div class="left aligned meta PersonRank">
                           {{ eachCard.rank }}
                         </div>
                       </div>
@@ -191,7 +191,7 @@
                       <div class="four wide column">
                         <div class="meta">
                           
-                            <a class="ui yellow right label">
+                            <a class="ui yellow right label PersonPlatoon">
                               Platoon
                             {{ eachCard.platoon }}
                             </a>
@@ -201,7 +201,7 @@
                     
                     
                     <div class="ui basic segment">
-                      <div class="description">
+                      <div class="description PersonDesc">
                         {{ eachCard.remarks }}
                       </div>
                     </div>
@@ -254,7 +254,7 @@
                     <div class="two column ui grid">
                       <!-- <div class="column"><button class="ui olive circular icon button"><i class="phone icon"></i></button></div> -->
                       <!-- <div class="column"><button class="ui teal circular icon button"><i class="paper plane icon"></i></button></div> -->
-                      <div class="column"><button class="ui teal circular icon button"><i class="edit icon"></i></button></div>
+                      <div class="column"><button class="ui teal circular icon button IndivEdit" ><i class="edit icon"></i></button></div>
                       <div class="column"><button class="ui orange circular icon button"><i class="minus square icon"></i></button></div>
                     </div>
                   </div>
@@ -263,6 +263,7 @@
 
 
                 </div>
+
                 
                 {% endfor %}
                 

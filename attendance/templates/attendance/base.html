@@ -78,20 +78,28 @@
       .tab()
       ;
 
-      $('#AddCardToggle').click(function(){ $('.ui.dimmer.custom').dimmer("show") })
+      $('#AddCardToggle').click(function(){ $('#AddCardDimmer').dimmer("show") })
       ;
 
-      $('#AddCardToggleMobile').click(function(){ $('.ui.dimmer.custom').dimmer("show") })
+      $('#AddCardToggleMobile').click(function(){ $('#AddCardDimmer').dimmer("show") })
       ;
 
-      $('#AddCardSave').click(function(){ $('.ui.dimmer.custom').dimmer("hide") })
+      $('#AddCardSave').click(function(){ $('#AddCardDimmer').dimmer("hide") })
       ;
 
-      $('#AddCardCancel').click(function(){ $('.ui.dimmer.custom').dimmer("hide") })
+      $('#AddCardCancel').click(function(){ $('#AddCardDimmer').dimmer("hide") })
       ;
 
       $('#AddCardtoggle').popup()
       ;
+
+      
+      $('.IndivEdit').click(function(){ $('.IndivDim').dimmer("show") })
+      ;
+      
+      
+
+      
       
 
     </script>
@@ -152,8 +160,6 @@
   
     </script>
 
-
-    <!--Delete Button for individual Card-->
 
 
 
@@ -238,8 +244,8 @@
       ;
       
       var searchAddCard = document.getElementById("CardSearchInput");
-      var searchResult = searchAddCard.value;
-      searchAddCard.addEventListener('change',CheckSearch);
+      // var searchResult = searchAddCard.value;
+      // searchAddCard.addEventListener('change',CheckSearch);
       
       
       function CheckSearch(searchResult) {
@@ -250,7 +256,74 @@
 
 
     </script>
-    
+
+
+    <!-- Edit Card button-->
+    <script>
+      var perEdit = document.getElementsByClassName('IndivEdit');
+      var perCard = document.getElementsByClassName('personnel-card');
+      var perName = document.getElementsByClassName('PersonName');
+      var perRank = document.getElementsByClassName('PersonRank');
+      var perPlatoon = document.getElementsByClassName('PersonPlatoon');
+      var perRemarks = document.getElementsByClassName('PersonDesc');
+
+
+      var EachCard = [] ;
+      var EditBtn = [] ;
+      var EachName = [] ;
+
+      for (var i = 0; i < perEdit.length; i++) {
+          //This block of code appends the id of cards to have indiv id
+          perEdit[i].id = "indivEdit" + i ;
+          perCard[i].id = "indivCard" + i ;
+          perName[i].id = "personName" + i ;
+          perRank[i].id = "personRank" + i ;
+          perPlatoon[i].id = "personPlatoon" + i ;
+          perRemarks[i].id = "personRemarks" + i ;
+
+          //this adds it to the arr above for retrieval
+          EachCard[i] = perCard[i].id;
+          EditBtn[i] = perEdit[i].id;
+          EachName[i] = perName[i].id;
+
+      }
+
+
+
+      function changeDim(){
+          var CardNumber = String(this.id).slice(9,10);
+
+          var IdOfName = "personName" + CardNumber;
+          var IdOfRank = "personRank" + CardNumber;
+          var IdOfPlatoon = "personPlatoon" + CardNumber;
+          var IdOfRemarks = "personRemarks" + CardNumber;
+
+
+          
+          var a = document.getElementById(IdOfName).innerHTML;
+          var b = document.getElementById(IdOfRank).innerHTML;
+          var c = document.getElementById(IdOfPlatoon).innerHTML;
+          var d = document.getElementById(IdOfRemarks).innerHTML;
+
+          document.getElementById('DimName').innerHTML = a ;
+          document.getElementById('DimRank').innerHTML = b ;
+          document.getElementById('DimPlatoon').innerHTML = c ;
+          document.getElementById('DimRemarks').innerHTML = d ;
+
+
+
+        }
+
+      for (var i = 0; i < EachCard.length; i++) {
+        var number = i ;
+        document.getElementById(EditBtn[i]).addEventListener('click',changeDim)
+               
+      }
+
+
+
+
+    </script>
    
 
 </body>
