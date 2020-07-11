@@ -6,7 +6,7 @@ import datetime
 import logging
 import sys
 from django.db import transaction
-from reveille.utils import ParadeStateHandler
+from reveille.utils import ParadeStateHandler, add_new_card
 
 def home_view(request):
 	context = {'default': True}
@@ -16,13 +16,11 @@ def parade_view(request):
 	logger = logging.getLogger(__name__)
 	date = request.GET.get('date')
 	formatted_date = datetime.datetime.strptime(date, "%Y-%m-%d").date()
-	logger.info('DATE %s',formatted_date)
-
 	time_of_day = int(request.GET.get('time_of_day'))
+	logger.info('DATE %s',formatted_date)
 	logger.info('TIME OF DAY %s',time_of_day)
-	transaction.set_autocommit(False)
+	# transaction.set_autocommit(False)
 
-	
 	# try:
 	parade = Parade.objects.filter(
 		date = formatted_date, time_of_day = time_of_day
@@ -32,17 +30,14 @@ def parade_view(request):
 	parade_overview = None
 
 	if len(parade) == 0:
-		logger.info('Lanjiao')
 		parade_exist = False
 
 	else:
-		logger.info('jibai')
 		parade_exist = True
 		parade = parade.values()[0]
 		logger.info('PARADE OBJ %s',parade)
 
 		parade_id = parade['id']
-
 		parade_instance = ParadeStateHandler(parade_id)			
 		parade_absence_summary = parade_instance.calc_absence()
 		
@@ -61,7 +56,7 @@ def parade_view(request):
 		logger.info('POST DATA %s', request.POST)
 		name = request.POST.get('Name')
 		remarks = request.POST.get('Remarks')
-		absence = request.POST.get('Absence')
+		reason = request.POST.get('Absence')
 		transaction.set_autocommit(False)
 
 		try:
@@ -75,42 +70,18 @@ def parade_view(request):
 				)
 				parade.save()
 				parade_id = parade.id
+			
+			add_new_card(parade_id, name, remarks, reason)
 
-			personnel_obj = Personnel.objects.get(
-				name = name
-			)
-			absence = Absence(
-				personnel = personnel_obj,
-				parade_id = parade_id,
-				remarks = remarks,
-			)
-			if absence == 'MA':
-				absence.is_MA = True
-			elif absence == 'MC':
-				absence.is_MC = True
-			elif absence == 'Off':
-				absence.is_off = True
-			elif absence == 'Leave':
-				absence.is_leave = True
-			elif absence == 'Others':
-				absence.is_other = True
-			else:
-				pass
-			absence.save()
-
-			parade_instance = ParadeStateHandler(parade_id)
-			parade_instance.update_parade_instance()
-		
 		except Exception as identifier:
 			transaction.rollback()
 			raise Exception(identifier.args[0])
 		transaction.commit()
 
-		logger.info('GET DATE %s', date)
-		logger.info('GET TOD, %s', str(time_of_day))
 		return HttpResponseRedirect(
 			request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
 	
+
 	elif request.method == 'GET':
 		context = {
 			'parade_exist': parade_exist,
@@ -142,6 +113,10 @@ def faq_view(request):
 	return render(request, 'attendance/FAQ.html/')
 
 
+
+'''
+CBV [KIV]
+'''
 # class ParadeView(View):
 # 	logger = logging.getLogger(__name__)
 # 	date = request.GET.get('date')

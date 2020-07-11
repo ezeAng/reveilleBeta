@@ -23,7 +23,7 @@ class ParadeStateHandler:
     def calc_coy_current(self):
         total_strength = self.calc_coy_total()
         current_strength = total_strength
-        for i in Absence.objects.filter(id=self.parade_id):
+        for i in Absence.objects.filter(parade_id=self.parade_id):
             current_strength -= 1
         # return ('{}/{}'.format(current_strength,total_strength))
         return current_strength
@@ -110,7 +110,6 @@ class ParadeStateHandler:
             self.logger.info('CARD DATA %s', card_data )
         return card_data
 
-
     def update_parade_instance(self):
         parade = self.parade
         parade.commander_strength = int(self.calc_comd_strength())
@@ -132,4 +131,46 @@ class ParadeStateHandler:
         return ('{}/{}'.format(current_strength,total_strength))
 '''
 
-    
+
+def add_new_card(parade_id, name, remarks, reason):
+    logger = logging.getLogger(__name__)
+    # transaction.set_autocommit(False)
+    try:
+        try:
+            personnel_obj = Personnel.objects.get(
+                name = name
+            )
+        except:
+            raise Exception('Personnel does not exist in database')
+
+        if name == '' or name == None:
+            raise Exception('Name not provided')
+        if reason == '' or reason == None:
+            raise Exception('Reason for absence not provided')
+        
+        absentee = Absence(
+            personnel = personnel_obj,
+            parade_id = parade_id,
+            remarks = remarks,
+        )
+        if reason == 'MA':
+            absentee.is_MA = True
+        elif reason == 'MC':
+            absentee.is_MC = True
+        elif reason == 'Off':
+            absentee.is_off = True
+        elif reason == 'Leave':
+            absentee.is_leave = True
+        elif reason == 'Others':
+            absentee.is_other = True
+        else:
+            pass
+        logger.info('SAVING NOW')
+        absentee.save()
+        logger.info('ABSENTEE INSTANCE %s', absentee)
+
+        parade_instance = ParadeStateHandler(parade_id)
+        parade_instance.update_parade_instance()
+
+    except Exception as identifier:
+        raise Exception(identifier.args[0])
