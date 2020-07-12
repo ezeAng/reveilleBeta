@@ -1,8 +1,8 @@
 <!-- Dimmer EDit CArd-->
 
-<div class="ui page dimmer custom IndivDim">
+<div class="ui mini modal IndivDim">
     <div class="content">
-        <div class="ui card">
+        <div class="ui fluid card">
             <div class="content">
               <div class="ui grid">
                 <div class="twelve wide column">
@@ -19,22 +19,21 @@
                     
                       <a class="ui yellow right label" id="DimPlatoon">
                         Platoon
-                        
                       </a>
                   </div>
                 </div>
               </div>
-              
+              <div class="ui hidden divider"></div>
               <div class="ui form">
                 <form>
                     <div class="field">
                         <label>Comments</label>
-                        <textarea rows="2" name="Remarks" id="DimRemarks">Remarks</textarea>
+                        <textarea rows="5" cols= "80" name="Remarks" id="DimRemarks"></textarea>
                     </div>
       
                     <div class="field">
                         <label>Reason for Absence</label>
-                        <select name="Absence" class="ui fluid dropdown">
+                        <select name="Absence" class="ui fluid dropdown" id="DimReason">
                             <option value="">Reason for Absence</option>
                             <option value="MA">MA</option>
                             <option value="MC">MC</option>
@@ -48,9 +47,9 @@
                     <div class="ui hidden divider"></div>
 
                     <div class="extra content"> 
-                      <div class="ui basic segment">
-                          <button class="ui disabled button"  type="submit" >Save</button> 
-                          <button class="ui orange button" type="button" >Cancel</button>
+                      <div class="ui basic center aligned segment">
+                          <button class="ui disabled button"  type="submit" id="EditCardSave">Save</button> 
+                          <button class="ui orange button" type="button" id="EditCardCancel">Cancel</button>
                       </div>
                     </div>
                     <div class="ui hidden divider"></div>

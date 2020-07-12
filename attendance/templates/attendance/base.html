@@ -49,6 +49,12 @@
     width: 100%;
   }
 
+  #CreateStateHeader2 {
+  font-size: 30px;
+    color: white;
+    background: none;
+}
+
   
 
 </style>
@@ -78,23 +84,54 @@
       .tab()
       ;
 
-      $('#AddCardToggle').click(function(){ $('#AddCardDimmer').dimmer("show") })
-      ;
+      
 
       $('#AddCardToggleMobile').click(function(){ $('#AddCardDimmer').dimmer("show") })
       ;
 
-      $('#AddCardSave').click(function(){ $('#AddCardDimmer').dimmer("hide") })
+
+      $('#AddCardToggle').click(function(){ 
+        $('#AddCardDimmer').dimmer("show");
+
+         })
       ;
 
-      $('#AddCardCancel').click(function(){ $('#AddCardDimmer').dimmer("hide") })
+      $('#AddCardSave').click(function(){ 
+
+        $('#AddCardDimmer').dimmer("hide");
+
+        
+         })
       ;
 
-      $('#AddCardtoggle').popup()
+      $('#AddCardCancel').click(function(){ 
+        
+        $('#AddCardDimmer').dimmer("hide");
+        
+         })
       ;
 
       
-      $('.IndivEdit').click(function(){ $('.IndivDim').dimmer("show") })
+      $('.IndivEdit').click(function(){ 
+        $('.IndivDim').modal("show");
+      
+       })
+      ;
+
+      $('#EditCardCancel').click(function(){ 
+        $('.IndivDim').modal("hide");
+
+
+        
+       })
+      ;
+
+      $('#EditCardSave').click(function(){ 
+        $('.IndivDim').modal("hide");
+        
+
+        
+         })
       ;
       
       
@@ -166,14 +203,14 @@
     <!-- For Card Dimmer  -->
     <script>
 
-      var saveBtn = document.getElementById('AddCardSave');
+      var addSaveBtn = document.getElementById('AddCardSave');
       var selectStatus = document.getElementById('Status');
 
       var selectStatusVal = document.getElementById('Status').value;
 
       function ToggleCardSaveBtn(selectStatusVal){
 
-        var saveBtn = document.getElementById('AddCardSave');
+        var addSaveBtn = document.getElementById('AddCardSave');
         var selectStatus = document.getElementById('Status');
 
         var selectStatusVal = document.getElementById('Status').value;
@@ -182,20 +219,20 @@
 
         if (selectStatusVal == "NIL" ) {
           console.log('NIL choices selected');
-          saveBtn.classList.remove("teal");
-          saveBtn.classList.add("disabled");
+          addSaveBtn.classList.remove("teal");
+          addSaveBtn.classList.add("disabled");
           
         }
         
       
         else if (selectStatusVal == "" ) {
           console.log('NIL choices selected');
-          saveBtn.classList.remove("teal");
-          saveBtn.classList.add("disabled");
+          addSaveBtn.classList.remove("teal");
+          addSaveBtn.classList.add("disabled");
         }
 
         else {
-          saveBtn.className = "ui teal button";
+          addSaveBtn.className = "ui teal button";
         }
       }
 
@@ -258,7 +295,7 @@
     </script>
 
 
-    <!-- Edit Card button-->
+    <!-- Edit Card button--> <!--Do not fucking touch this -->
     <script>
       var perEdit = document.getElementsByClassName('IndivEdit');
       var perCard = document.getElementsByClassName('personnel-card');
@@ -266,30 +303,42 @@
       var perRank = document.getElementsByClassName('PersonRank');
       var perPlatoon = document.getElementsByClassName('PersonPlatoon');
       var perRemarks = document.getElementsByClassName('PersonDesc');
+      var perReason = document.getElementsByClassName('PersonReason');
+
+      var perDelete = document.getElementsByClassName('IndivDelete');
+      var deleteDim = document.getElementsByClassName('DeleteDim');
+
 
 
       var EachCard = [] ;
       var EditBtn = [] ;
       var EachName = [] ;
+      var DeleteBtn = [] ;
+      var deleteDimIdList = [] ;
 
       for (var i = 0; i < perEdit.length; i++) {
           //This block of code appends the id of cards to have indiv id
           perEdit[i].id = "indivEdit" + i ;
+          perDelete[i].id = "indivDelete" + i;
+          deleteDim[i].id = "deleteDim" + i;
           perCard[i].id = "indivCard" + i ;
           perName[i].id = "personName" + i ;
           perRank[i].id = "personRank" + i ;
           perPlatoon[i].id = "personPlatoon" + i ;
           perRemarks[i].id = "personRemarks" + i ;
+          perReason[i].id = "personReason" + i ;
 
           //this adds it to the arr above for retrieval
           EachCard[i] = perCard[i].id;
           EditBtn[i] = perEdit[i].id;
           EachName[i] = perName[i].id;
+          DeleteBtn[i] = perDelete[i].id;
+          deleteDimIdList[i] = deleteDim[i].id;
 
       }
 
 
-
+      var currentSelection = [];
       function changeDim(){
           var CardNumber = String(this.id).slice(9,10);
 
@@ -297,6 +346,8 @@
           var IdOfRank = "personRank" + CardNumber;
           var IdOfPlatoon = "personPlatoon" + CardNumber;
           var IdOfRemarks = "personRemarks" + CardNumber;
+          var IdOfReason = "personReason" + CardNumber;
+          
 
 
           
@@ -305,25 +356,73 @@
           var c = document.getElementById(IdOfPlatoon).innerHTML;
           var d = document.getElementById(IdOfRemarks).innerHTML;
 
+          var e = document.getElementById(IdOfReason).getElementsByTagName("a")[0].innerText;
+          currentSelection[0] = e ;
+
+
           document.getElementById('DimName').innerHTML = a ;
           document.getElementById('DimRank').innerHTML = b ;
           document.getElementById('DimPlatoon').innerHTML = c ;
-          document.getElementById('DimRemarks').innerHTML = d ;
+          document.getElementById('DimRemarks').value = d ;
+          $('#DimReason').dropdown(
+            'set selected', e
+          );
 
+          function removeTextAreaWhiteSpace() {
+            var myTxtArea = document.getElementById('DimRemarks');
+            myTxtArea.value = myTxtArea.value.replace(/^\s*|\s*$/g,'');
+            }
 
-
+          removeTextAreaWhiteSpace();
+          
         }
+
+
+      function confirmDelete(){
+        var CardNumber = String(this.id).slice(11,12);
+        console.log(CardNumber);
+        $('#deleteDim'+CardNumber).dimmer("show");
+      }
 
       for (var i = 0; i < EachCard.length; i++) {
         var number = i ;
         document.getElementById(EditBtn[i]).addEventListener('click',changeDim)
+        document.getElementById(DeleteBtn[i]).addEventListener('click',confirmDelete)
                
       }
 
+      
+      function checkChange(){
+        var saveBtn = document.getElementById('EditCardSave');
+        var selectReason = document.getElementById('DimReason');
 
+        var dimDropVal = $('#DimReason').dropdown(
+            'get value'
+          );
+          
+        if (currentSelection[0] == dimDropVal) {
+          console.log('nochange');
+          saveBtn.classList.add('disabled');
+          saveBtn.classList.remove('teal');
 
+        }
+        else {
+          console.log('changed');
+          saveBtn.classList.remove('disabled');
+          saveBtn.classList.add('teal');
+          
+        }
+      }
 
+      var saveBtn = document.getElementById('EditCardSave');
+      var selectReason = document.getElementById('DimReason');
+      selectReason.addEventListener('change',checkChange);
+
+      
+      
     </script>
+
+    
    
 
 </body>
