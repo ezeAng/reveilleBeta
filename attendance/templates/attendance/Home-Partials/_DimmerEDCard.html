@@ -27,6 +27,7 @@
               <div class="ui hidden divider"></div>
               <div class="ui form">
                 <form method="POST" >
+                    {% csrf_token %}
                     <div class="field">
                         <label>Comments</label>
                         <textarea rows="5" cols= "80" name="Remarks" id="DimRemarks"></textarea>

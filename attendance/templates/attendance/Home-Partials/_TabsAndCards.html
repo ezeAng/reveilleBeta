@@ -197,6 +197,8 @@
                       </h2>
                       <div class="ui two column center aligned grid ">
                         <form action="" method="post" class="hidden-form">
+                          {% csrf_token %}
+
                           <input class="DimDelId" name="absence_id" ></input>
                           <input class="DimDel" name="action" >2</input>
                         </form>
