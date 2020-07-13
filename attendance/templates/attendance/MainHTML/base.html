@@ -16,6 +16,10 @@
 
 <!-- Style Overides -->
 <style>
+
+  .DimDB , .IndivDBID , .hidden-form {
+    display: none;
+  }
   
   a.item.p {
     background: none;
@@ -121,19 +125,29 @@
 
       $('#EditCardCancel').click(function(){ 
         $('.IndivDim').modal("hide");
-
-
-        
+  
        })
       ;
 
       $('#EditCardSave').click(function(){ 
         $('.IndivDim').modal("hide");
         
-
-        
          })
       ;
+
+      
+      $('.DelCardConfirm').click(function(){
+        $('.DeleteDim').dimmer("hide");
+      })
+      ;
+
+      $('.DelCardNo').click(function(){
+        $('.DeleteDim').dimmer("hide");
+      })
+      ;
+
+
+
       
       
 
@@ -172,11 +186,6 @@
 
 
 
-
-
-
-
-
     <!-- 
     Updating URL from DatePicker, 
     to query DB for specific parade on specific date
@@ -190,8 +199,6 @@
         
         var datepickerValue = document.getElementById("MyDate").value;
         var paradeChoice = document.getElementById('ParadeChoice').value;
-
-        // location.href = "parade/" + "?date=" + datepickerValue + "&time_of_day=" + paradeChoice + "/" ;
 
         location.assign("http://localhost:8000/home/parade/" + "?date=" + datepickerValue + "&time_of_day=" + paradeChoice);
 
@@ -326,8 +333,9 @@
     </script>
 
 
-    <!-- Edit Card button--> <!--Do not fucking touch this -->
+    <!-- Edit Card button and Delete dimmer--> <!--Do not fucking touch this -->
     <script>
+
       var perEdit = document.getElementsByClassName('IndivEdit');
       var perCard = document.getElementsByClassName('personnel-card');
       var perName = document.getElementsByClassName('PersonName');
@@ -338,6 +346,9 @@
 
       var perDelete = document.getElementsByClassName('IndivDelete');
       var deleteDim = document.getElementsByClassName('DeleteDim');
+
+      var perDBID = document.getElementsByClassName('IndivDBID');
+      
 
 
 
@@ -358,6 +369,7 @@
           perPlatoon[i].id = "personPlatoon" + i ;
           perRemarks[i].id = "personRemarks" + i ;
           perReason[i].id = "personReason" + i ;
+          perDBID[i].id = "indivDBID" + i ;
 
           //this adds it to the arr above for retrieval
           EachCard[i] = perCard[i].id;
@@ -373,11 +385,17 @@
       function changeDim(){
           var CardNumber = String(this.id).slice(9,10);
 
+          
+
           var IdOfName = "personName" + CardNumber;
           var IdOfRank = "personRank" + CardNumber;
           var IdOfPlatoon = "personPlatoon" + CardNumber;
           var IdOfRemarks = "personRemarks" + CardNumber;
           var IdOfReason = "personReason" + CardNumber;
+
+          var IdOfDBID = "indivDBID" + CardNumber;
+
+          
           
 
 
@@ -390,6 +408,10 @@
           var e = document.getElementById(IdOfReason).getElementsByTagName("a")[0].innerText;
           currentSelection[0] = e ;
 
+          var f = document.getElementById(IdOfDBID).innerHTML;
+          var intID = parseInt(f);
+          console.log(intID);
+
 
           document.getElementById('DimName').innerHTML = a ;
           document.getElementById('DimRank').innerHTML = b ;
@@ -398,6 +420,13 @@
           $('#DimReason').dropdown(
             'set selected', e
           );
+
+          document.getElementsByClassName('DimDB')[0].innerHTML = intID ;
+          document.getElementsByClassName('DimDB')[1].innerHTML = 1 ; // To send flag for edit,hidden inputs have class DimDB so indexing is used
+
+          
+
+          
 
           function removeTextAreaWhiteSpace() {
             var myTxtArea = document.getElementById('DimRemarks');
@@ -408,13 +437,44 @@
           
         }
 
+      
+      //Confirm Delete
+
+      var delCardConfirm = document.getElementsByClassName('DelCardConfirm');
+      var delDBID = document.getElementsByClassName('DimDelId');
+
+      // var delDBIDlist = [];
+
+      for (var i = 0; i < perEdit.length; i++) {
+
+        delCardConfirm[i].id = "DelCardYes" + i;
+
+        delDBID[i].id = "DelDBID" + i ; 
+
+      }
+
+
 
       function confirmDelete(){
         var CardNumber = String(this.id).slice(11,12);
-        console.log(CardNumber);
+        // console.log(CardNumber);
+
+        var IdOfDBID = "indivDBID" + CardNumber;
+
+        var absID = document.getElementById(IdOfDBID).innerHTML;
+        var intAbsID = parseInt(absID);
+        // console.log(intAbsID);
+
+        document.getElementById('DelDBID' + CardNumber).innerHTML = intAbsID ;
+
+
         $('#deleteDim'+CardNumber).dimmer("show");
+
+  
+
       }
 
+      //Adding functions to each button of each card
       for (var i = 0; i < EachCard.length; i++) {
         var number = i ;
         document.getElementById(EditBtn[i]).addEventListener('click',changeDim)
@@ -422,7 +482,7 @@
                
       }
 
-      
+      //Check for changes to enable save button
       function checkChange(){
         var saveBtn = document.getElementById('EditCardSave');
         var selectReason = document.getElementById('DimReason');
