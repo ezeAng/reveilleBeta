@@ -56,15 +56,15 @@ class ParadeStateHandler:
         absentees = Absence.objects.filter(
             parade_id=self.parade_id).values()
         self.logger.info('ABSENTEES %s', absentees)
-        no_absentees = True
+        no_absentees = False
+        total_attc = 0
+        total_ma = 0
+        total_leave = 0
+        total_off = 0
+        total_other = 0
         if len(absentees) == 0:
-            no_absentees = False
+            no_absentees = True
         else:
-            total_attc = 0
-            total_ma = 0
-            total_leave = 0
-            total_off = 0
-            total_other = 0
             for abs in absentees:
                 if abs['is_MC']:
                     total_attc += 1
@@ -107,7 +107,6 @@ class ParadeStateHandler:
                 'is_off': abs['is_off'],
                 'is_other': abs['is_other'],
                 'remarks': abs['remarks'],
-                'test': 'icle'
             }
             self.logger.info('DATA %s', data )
             card_data.append(data)

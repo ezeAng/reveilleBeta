@@ -34,10 +34,10 @@ class Parade(models.Model):
     date = models.DateField()
     time_of_day = models.IntegerField()
     time = models.TimeField(default=timezone.now)
-    total_strength = models.IntegerField(null=True, blank=True)
-    current_strength = models.IntegerField(null=True, blank=True)
-    commander_strength = models.IntegerField(null=True, blank=True)
-    personnel_strength = models.IntegerField(null=True, blank=True)
+    total_strength = models.IntegerField(default=0, blank=True)
+    current_strength = models.IntegerField(default=0, blank=True)
+    commander_strength = models.IntegerField(default=0, blank=True)
+    personnel_strength = models.IntegerField(default=0, blank=True)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

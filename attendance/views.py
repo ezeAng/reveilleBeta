@@ -17,22 +17,43 @@ def parade_view(request):
 	date = request.GET.get('date')
 	formatted_date = datetime.datetime.strptime(date, "%Y-%m-%d").date()
 	time_of_day = int(request.GET.get('time_of_day'))
+	create = request.GET.get('create')
 	logger.info('DATE %s',formatted_date)
 	logger.info('TIME OF DAY %s',time_of_day)
+	logger.info('CREATE %s',create)
 	# transaction.set_autocommit(False)
 
-	try:
-		parade = Parade.objects.filter(
+	parade = Parade.objects.filter(
 			date = formatted_date, time_of_day = time_of_day
 		)
-		logger.info('PARADE %s', parade)
-		parade_summary = None
-		parade_overview = None
-
+	logger.info('PARADE %s', parade)
+	parade_summary = None
+	parade_overview = None
+	try:
+		# parade does not exist
 		if len(parade) == 0:
-			parade_exist = False
-
+			# if user choose create
+			if create is not None:
+				parade = Parade(
+					date = formatted_date, 
+					time_of_day = time_of_day
+				)
+				parade.save()
+				return HttpResponseRedirect(
+					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
+			# if user choose select
+			else:
+				parade_exist=False
+	
+		# parade exists
 		else:
+			# route fucker who try to create existing parade back to select
+			if create is not None:
+				return HttpResponseRedirect(
+					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
+			else: 
+				pass
+
 			parade_exist = True
 			parade = parade.values()[0]
 			logger.info('PARADE OBJ %s',parade)
@@ -104,7 +125,6 @@ def parade_view(request):
 				return HttpResponseRedirect(
 					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
 		
-
 			elif action == 1:
 				# edit card
 				remarks = request.POST.get('Remarks')
@@ -153,6 +173,7 @@ def parade_view(request):
 					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
 		
 				pass
+			
 			else:
 				pass
 
