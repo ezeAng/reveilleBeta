@@ -59,60 +59,89 @@ def parade_view(request):
 			delete: 2
 			'''
 			logger.info('POST DATA %s', request.POST)
-			action = int(request.POST.get('action')[0])
+			action = int(request.POST.get('action'))
 			logger.info('ACTION %s', action)
 		
 			if action == 0:
 				# add card
-				pass
+				name = request.POST.get('Name')
+				remarks = request.POST.get('Remarks')
+				reason = request.POST.get('Absence')
+				# transaction.set_autocommit(False)
+
+				try:
+					if parade_exist:
+						pass
+
+					else:
+						parade = Parade(
+							date = formatted_date, 
+							time_of_day = time_of_day
+						)
+						parade.save()
+						parade_id = parade.id
+					
+					card_instance = CardHandler(
+						parade_id = parade_id,
+						name = name,
+						remarks= remarks,
+						reason = reason
+					)
+					if card_instance.add_new_card() == False:
+						context = {
+							'repeat_entry': True,
+							'message': "This personnel's record already exists for this parade. Edit the existing card instead"
+						}
+						render(request, 'attendance/MainHTML/revhome.html/', context)
+					else:
+						pass
+
+				except Exception as identifier:
+					# transaction.rollback()
+					raise Exception(identifier.args[0])
+				# transaction.commit()
+
+				return HttpResponseRedirect(
+					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
+		
+
 			elif action == 1:
 				# edit card
+				'''
+				'Remarks': ['As the name suggests'], 'Absence': ['MA'], 'absence_id': ['1'], 'action': ['1']}>
+				'''
+				remarks = request.POST.get('Remarks')
+				reason = request.POST.get('Absence')
+				absence_id = int(request.POST.get('absence_id'))
+				logger.info('remakrs %s', remarks)
+				logger.info('reason %s', reason)
+				logger.info('absence_id %s', absence_id)
+
+				transaction.set_autocommit(False)
+				
+				try:
+					card_instance = CardHandler(
+						absence_id = absence_id,
+						remarks= remarks,
+						reason = reason
+					)
+					card_instance.edit_card()
+
+				except Exception as identifier:
+					transaction.rollback()
+					raise Exception(identifier.args[0])
+				transaction.commit()
+
+				return HttpResponseRedirect(
+					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
+		
+
 				pass
 			elif action == 2:
 				# delete card
 				pass
 			else:
 				pass
-			name = request.POST.get('Name')
-			remarks = request.POST.get('Remarks')
-			reason = request.POST.get('Absence')
-			transaction.set_autocommit(False)
-
-			try:
-				if parade_exist:
-					pass
-
-				else:
-					parade = Parade(
-						date = formatted_date, 
-						time_of_day = time_of_day
-					)
-					parade.save()
-					parade_id = parade.id
-				
-				card_instance = CardHandler(
-					parade_id = parade_id,
-					name = name,
-					remarks= remarks,
-					reason = reason
-				)
-				if card_instance.add_new_card() == False:
-					context = {
-						'repeat_entry': True,
-						'message': "This personnel's record already exists for this parade. Edit the existing card instead"
-					}
-					render(request, 'attendance/MainHTML/revhome.html/', context)
-				else:
-					pass
-
-			except Exception as identifier:
-				transaction.rollback()
-				raise Exception(identifier.args[0])
-			transaction.commit()
-
-			return HttpResponseRedirect(
-				request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
-		
 
 		elif request.method == 'GET':
 			context = {
