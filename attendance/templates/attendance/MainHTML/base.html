@@ -421,8 +421,11 @@
             'set selected', e
           );
 
+          // To send flag for edit,hidden inputs have class DimDB so indexing is used
+
           document.getElementsByClassName('DimDB')[0].value = intID ;
           document.getElementsByClassName('DimDB')[1].value = 1 ;
+          
 
           
 
@@ -463,10 +466,12 @@
         var intAbsID = parseInt(absID);
         // console.log(intAbsID);
 
-        document.getElementById('DelDBID' + CardNumber).innerHTML = intAbsID ;
-
+        document.getElementById('DelDBID' + CardNumber).value = intAbsID ;
 
         $('#deleteDim'+CardNumber).dimmer("show");
+
+      
+        
 
   
 

@@ -195,15 +195,18 @@
                       <h2 class="ui inverted icon header">
                         Delete ?
                       </h2>
-                      <div class="ui two column center aligned grid ">
-                        <form action="" method="post" class="hidden-form">
+                      <div class="ui center aligned grid ">
+                        <form action="" method="post" class="">
                           {% csrf_token %}
-
-                          <input class="DimDelId" name="absence_id" ></input>
-                          <input class="DimDel" name="action" >2</input>
+                          <div class="hidden-form">
+                            <input class="DimDelId" name="absence_id" ></input>
+                            <input class="DimDel" name="action" value="2">2</input>
+                          </div>
+                          
+                          <div class="column"><button class="ui fluid teal button DelCardConfirm"  type="submit">Yes</button></div>
+                          <div class="column"><button class="ui fluid orange button DelCardNo" type="button">No</button></div>
                         </form>
-                        <div class="column"><button class="ui fluid teal button DelCardConfirm"  type="submit">Yes</button></div>
-                        <div class="column"><button class="ui fluid orange button DelCardNo" type="button">No</button></div>
+                        
                       </div>
 
                       
