@@ -1,0 +1,461 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/distcopy/semantic.css/' %} ">
+<link rel="stylesheet" href="{% static 'attendance/SemanticAssets/semantic/distcopy/icon.css/' %} ">
+<link rel="stylesheet" type="text/css" href="{% static 'attendance/CSS/master.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+<title>Reveille</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Parade State Compiler">
+
+<!-- Style Overides -->
+<style>
+  
+  a.item.p {
+    background: none;
+    color: black !important;
+  }
+  body {
+    /* ArsenicColor */
+    background-color: #0C1430;
+    color: black;
+  }
+
+  #HomeHeader, #HeaderSum {
+    background-color: none;
+
+    color: white;
+  }
+
+  #SummaryHeader {
+    background-color: none;
+    color: gray;
+  }
+
+  
+
+  #OverviewTab, #SummaryTab, #LogTab {
+    border-style: none;
+  }
+
+
+  #LogTab {
+    margin-left: 0px;
+    width: 100%;
+  }
+
+  #CreateStateHeader2 {
+  font-size: 30px;
+    color: white;
+    background: none;
+}
+
+  
+
+</style>
+
+</head>
+
+<body>
+
+  
+
+{% block content %}{% endblock %}
+
+
+
+
+  <!-------- Scripts -------->
+
+  <!-- Default Semantic -->
+
+    <script>
+
+      $('.ui.dropdown')
+      .dropdown()
+      ;
+
+      $('.menu .item')
+      .tab()
+      ;
+
+      
+
+      $('#AddCardToggleMobile').click(function(){ $('#AddCardDimmer').dimmer("show") })
+      ;
+
+
+      $('#AddCardToggle').click(function(){ 
+        $('#AddCardDimmer').dimmer("show");
+
+         })
+      ;
+
+      $('#AddCardSave').click(function(){ 
+
+        $('#AddCardDimmer').dimmer("hide");
+
+        
+         })
+      ;
+
+      $('#AddCardCancel').click(function(){ 
+        
+        $('#AddCardDimmer').dimmer("hide");
+        
+         })
+      ;
+
+      
+      $('.IndivEdit').click(function(){ 
+        $('.IndivDim').modal("show");
+      
+       })
+      ;
+
+      $('#EditCardCancel').click(function(){ 
+        $('.IndivDim').modal("hide");
+
+
+        
+       })
+      ;
+
+      $('#EditCardSave').click(function(){ 
+        $('.IndivDim').modal("hide");
+        
+
+        
+         })
+      ;
+      
+      
+
+      
+      
+
+    </script>
+
+
+
+  <!-- Local Self-written -->
+  
+    <!--Scroll infographics-->
+    <script>
+      var getStartBtn = document.getElementById('GetStartBtn');
+      getStartBtn.addEventListener('click',ScrollToInfo);
+      function ScrollToInfo(){
+        $("html, body").animate({
+          scrollTop: $("#IntroBanner").offset().top - 20 
+        }, 1300);
+
+      }
+
+      var createPar = document.getElementById('createPar');
+      createPar.addEventListener('click',ScrollToDateBar);
+      function ScrollToDateBar(){
+        $("html, body").animate({
+          scrollTop: $("body").offset().top
+        }, 1300);
+
+      }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 
+    Updating URL from DatePicker, 
+    to query DB for specific parade on specific date
+    -->
+    <script>
+
+      var datePickEntBtn = document.getElementById('DatePickEnter');
+      datePickEntBtn.addEventListener('click',UpdateBackUrl);
+
+      function UpdateBackUrl(){
+        
+        var datepickerValue = document.getElementById("MyDate").value;
+        var paradeChoice = document.getElementById('ParadeChoice').value;
+
+        // location.href = "parade/" + "?date=" + datepickerValue + "&time_of_day=" + paradeChoice + "/" ;
+
+        location.assign("http://localhost:8000/home/parade/" + "?date=" + datepickerValue + "&time_of_day=" + paradeChoice);
+
+        console.log("url changed");
+
+        
+      }
+      
+
+    </script>
+
+
+    <!--Elements after picking parade from DatePicker-->
+    <script>
+
+
+      
+      var urlNow = window.location.search;
+      console.log(urlNow);
+      
+      
+      if (urlNow != "") {
+        console.log("url live");
+        document.getElementById("OverviewSearch").classList.remove('disabled');
+        document.getElementById("LayoutBtn").classList.remove('disabled');
+        document.getElementById("AddCardToggle").classList.remove('disabled');
+
+      }
+
+      else {
+        console.log("close document none print cards")
+      
+      }
+  
+    </script>
+
+
+
+
+    <!-- For Card Dimmer  -->
+    <script>
+
+      var addSaveBtn = document.getElementById('AddCardSave');
+      var selectStatus = document.getElementById('Status');
+
+      var selectStatusVal = document.getElementById('Status').value;
+
+      function ToggleCardSaveBtn(selectStatusVal){
+
+        var addSaveBtn = document.getElementById('AddCardSave');
+        var selectStatus = document.getElementById('Status');
+
+        var selectStatusVal = document.getElementById('Status').value;
+
+        
+
+        if (selectStatusVal == "NIL" ) {
+          console.log('NIL choices selected');
+          addSaveBtn.classList.remove("teal");
+          addSaveBtn.classList.add("disabled");
+          
+        }
+        
+      
+        else if (selectStatusVal == "" ) {
+          console.log('NIL choices selected');
+          addSaveBtn.classList.remove("teal");
+          addSaveBtn.classList.add("disabled");
+        }
+
+        else {
+          addSaveBtn.className = "ui teal button";
+        }
+      }
+
+      
+      selectStatus.addEventListener('change',ToggleCardSaveBtn);
+      
+
+      // <!--Reset Cancel Button-->
+      function resetInput(value) {
+        var selectStatusVal = document.getElementById('Status').value;
+        selectStatusVal = "";
+        $('form').form('clear');
+      }
+
+      var cancelBtn = document.getElementById("AddCardCancel");
+      cancelBtn.addEventListener('click', resetInput);
+
+
+    </script>
+
+    <script>
+
+      var content = [
+        { title: 'Andorra' ,id: '1' },
+        { title: 'United Arab Emirates' },
+        { title: 'Afghanistan' },
+        { title: 'Antigua' },
+        { title: 'Burkina Faso' },
+        { title: 'Bulgaria' },
+        { title: 'Bahrain' },
+        { title: 'Burundi' }
+        // etc
+        ];
+
+
+      $('#AddNewCardSearch')
+        .search({
+          source: content
+          
+        }) 
+        .result 
+      ;
+
+      $('#AddNewCardSearch')
+        .search('get value') 
+      ;
+      
+      var searchAddCard = document.getElementById("CardSearchInput");
+      // var searchResult = searchAddCard.value;
+      // searchAddCard.addEventListener('change',CheckSearch);
+      
+      
+      function CheckSearch(searchResult) {
+        var searchResult = searchAddCard.value;
+        console.log(searchResult);
+
+      }
+
+
+    </script>
+
+
+    <!-- Edit Card button--> <!--Do not fucking touch this -->
+    <script>
+      var perEdit = document.getElementsByClassName('IndivEdit');
+      var perCard = document.getElementsByClassName('personnel-card');
+      var perName = document.getElementsByClassName('PersonName');
+      var perRank = document.getElementsByClassName('PersonRank');
+      var perPlatoon = document.getElementsByClassName('PersonPlatoon');
+      var perRemarks = document.getElementsByClassName('PersonDesc');
+      var perReason = document.getElementsByClassName('PersonReason');
+
+      var perDelete = document.getElementsByClassName('IndivDelete');
+      var deleteDim = document.getElementsByClassName('DeleteDim');
+
+
+
+      var EachCard = [] ;
+      var EditBtn = [] ;
+      var EachName = [] ;
+      var DeleteBtn = [] ;
+      var deleteDimIdList = [] ;
+
+      for (var i = 0; i < perEdit.length; i++) {
+          //This block of code appends the id of cards to have indiv id
+          perEdit[i].id = "indivEdit" + i ;
+          perDelete[i].id = "indivDelete" + i;
+          deleteDim[i].id = "deleteDim" + i;
+          perCard[i].id = "indivCard" + i ;
+          perName[i].id = "personName" + i ;
+          perRank[i].id = "personRank" + i ;
+          perPlatoon[i].id = "personPlatoon" + i ;
+          perRemarks[i].id = "personRemarks" + i ;
+          perReason[i].id = "personReason" + i ;
+
+          //this adds it to the arr above for retrieval
+          EachCard[i] = perCard[i].id;
+          EditBtn[i] = perEdit[i].id;
+          EachName[i] = perName[i].id;
+          DeleteBtn[i] = perDelete[i].id;
+          deleteDimIdList[i] = deleteDim[i].id;
+
+      }
+
+
+      var currentSelection = [];
+      function changeDim(){
+          var CardNumber = String(this.id).slice(9,10);
+
+          var IdOfName = "personName" + CardNumber;
+          var IdOfRank = "personRank" + CardNumber;
+          var IdOfPlatoon = "personPlatoon" + CardNumber;
+          var IdOfRemarks = "personRemarks" + CardNumber;
+          var IdOfReason = "personReason" + CardNumber;
+          
+
+
+          
+          var a = document.getElementById(IdOfName).innerHTML;
+          var b = document.getElementById(IdOfRank).innerHTML;
+          var c = document.getElementById(IdOfPlatoon).innerHTML;
+          var d = document.getElementById(IdOfRemarks).innerHTML;
+
+          var e = document.getElementById(IdOfReason).getElementsByTagName("a")[0].innerText;
+          currentSelection[0] = e ;
+
+
+          document.getElementById('DimName').innerHTML = a ;
+          document.getElementById('DimRank').innerHTML = b ;
+          document.getElementById('DimPlatoon').innerHTML = c ;
+          document.getElementById('DimRemarks').value = d ;
+          $('#DimReason').dropdown(
+            'set selected', e
+          );
+
+          function removeTextAreaWhiteSpace() {
+            var myTxtArea = document.getElementById('DimRemarks');
+            myTxtArea.value = myTxtArea.value.replace(/^\s*|\s*$/g,'');
+            }
+
+          removeTextAreaWhiteSpace();
+          
+        }
+
+
+      function confirmDelete(){
+        var CardNumber = String(this.id).slice(11,12);
+        console.log(CardNumber);
+        $('#deleteDim'+CardNumber).dimmer("show");
+      }
+
+      for (var i = 0; i < EachCard.length; i++) {
+        var number = i ;
+        document.getElementById(EditBtn[i]).addEventListener('click',changeDim)
+        document.getElementById(DeleteBtn[i]).addEventListener('click',confirmDelete)
+               
+      }
+
+      
+      function checkChange(){
+        var saveBtn = document.getElementById('EditCardSave');
+        var selectReason = document.getElementById('DimReason');
+
+        var dimDropVal = $('#DimReason').dropdown(
+            'get value'
+          );
+          
+        if (currentSelection[0] == dimDropVal) {
+          console.log('nochange');
+          saveBtn.classList.add('disabled');
+          saveBtn.classList.remove('teal');
+
+        }
+        else {
+          console.log('changed');
+          saveBtn.classList.remove('disabled');
+          saveBtn.classList.add('teal');
+          
+        }
+      }
+
+      var saveBtn = document.getElementById('EditCardSave');
+      var selectReason = document.getElementById('DimReason');
+      selectReason.addEventListener('change',checkChange);
+
+      
+      
+    </script>
+
+    
+   
+
+</body>
+
+</html>

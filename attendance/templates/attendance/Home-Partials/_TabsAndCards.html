@@ -1,5 +1,5 @@
 <!--Tabs and Cards, Main Bulk of Home Page-->
-
+{% load static %}
 
 
 <div class="ui center aligned grid">
@@ -134,17 +134,29 @@
             <!--Default page before entrance of data. No Documents. -->
             {% if default %}
             <div class="" id="NoDocumentPage">
+              <div class="ui hidden divider"></div>
               <div class="ui centered grid">
                 <div class="row">
-                  <div class="ui icon header">
-                    <i class="inverted user secret icon"></i>
-                      <span class="ui grey header">No cards are listed, search for your parade to begin.</span>
-                      <div class="ui grey header">New to Reveille? Let's Begin</div>
-
-                        <a class="ui teal button" href="#ParadeMakeBanner">Start</a></div>
+                  <div class="ui inverted icon header">
+                      <i class="folder outline icon"></i>
+                      <h1 class="content">No cards are listed, search for your parade.</h1>
+                    
+                  </div>
+                  
+                  <div class="ui hidden divider"></div>
                   
                 </div>
+                <div class="row">
+                  <div class="ui basic  segment">
+                    <h2 class="ui grey header">New to Reveille?</h2>
+                    <div class="ui hidden divider"></div>
+
+                    <a class="ui teal button" id="GetStartBtn" href="#IntroBanner">Get Started</a>
+                  </div>
+                </div>
               </div>
+              <div class="ui hidden divider"></div>
+
             </div>
 
             {% elif parade_exist == False %}
@@ -175,15 +187,30 @@
               <div class="ui raised four stackable cards">
 
                 {% for eachCard in parade_overview %}
-                <!--Individual Cards-->                  
-                <div class="card">
+                <!--Individual Cards-->     
+
+                <div class="card personnel-card">
+                  <div class="ui dimmer DeleteDim">
+                    <div class="content">
+                      <h2 class="ui inverted icon header">
+                        Are you sure?
+                      </h2>
+                      <div class="ui two column center aligned grid ">
+                        <div class="column"><button class="ui fluid teal button"  type="submit" id="DeleteCardSave">Yes</button></div>
+                        <div class="column"><button class="ui fluid orange button" type="button" id="DeleteCardCancel">No</button></div>
+                      </div>
+
+                      
+                    </div>
+                  </div>
+
                   <div class="content">
                     <div class="ui grid">
                       <div class="twelve wide column">
                         <div class="left aligned fluid header">
-                          <h3>{{ eachCard.name }}</h3>
+                          <h3 class="PersonName">{{ eachCard.name }}</h3>
                         </div>
-                        <div class="left aligned meta">
+                        <div class="left aligned meta PersonRank">
                           {{ eachCard.rank }}
                         </div>
                       </div>
@@ -191,7 +218,7 @@
                       <div class="four wide column">
                         <div class="meta">
                           
-                            <a class="ui yellow right label">
+                            <a class="ui yellow right label PersonPlatoon">
                               Platoon
                             {{ eachCard.platoon }}
                             </a>
@@ -201,39 +228,40 @@
                     
                     
                     <div class="ui basic segment">
-                      <div class="description">
+                      <div class="description PersonDesc">
                         {{ eachCard.remarks }}
                       </div>
                     </div>
 
-                    <div class="ui basic segment">
+                    
+                    
+                  </div>
+                  
+                  
+                  <div class="extra content">
+                    
+                    <div class="ui basic segment PersonReason">
                       <div class="meta"> 
                           {% if eachCard.is_mc == True %}
                           
-                          <a class="ui large red label">
-                          <i class="medkit icon"></i>
-                            MC</a>
+                          <a class="ui large red label">MC</a>
                           {% else %}
                           {% endif %}
                           
                           {% if eachCard.is_ma == True  %}
-                          <a class="ui large orange label">
-                            <i class="hospital icon"></i>
-                            MA</a>
+                          
+                          <a class="ui large orange label">MA</a>
+
                           {% else %}
                           {% endif %}
   
                           {% if eachCard.is_off == True %}
-                          <a class="ui large blue label">
-                            <i class="home icon"></i>
-                            Off</a>
+                          <a class="ui large blue label">Off</a>
                           {% else %}
                           {% endif %}
   
                           {% if eachCard.is_leave == True %}
-                          <a class="ui large green label">
-                            <i class="plane icon"></i>
-                            Leave</a>
+                          <a class="ui large green label">Leave</a>
                           {% else %}
                           {% endif %}
   
@@ -244,25 +272,20 @@
   
                       </div>
                     </div>
-                    
-                  </div>
-                  
-                  
-                  <div class="extra content">
-                    
-
                     <div class="two column ui grid">
                       <!-- <div class="column"><button class="ui olive circular icon button"><i class="phone icon"></i></button></div> -->
                       <!-- <div class="column"><button class="ui teal circular icon button"><i class="paper plane icon"></i></button></div> -->
-                      <div class="column"><button class="ui teal circular icon button"><i class="edit icon"></i></button></div>
-                      <div class="column"><button class="ui orange circular icon button"><i class="minus square icon"></i></button></div>
+                      <div class="column"><button class="ui teal circular icon button IndivEdit" ><i class="edit icon"></i></button></div>
+                      <div class="column"><button class="ui orange circular icon button IndivDelete"><i class="minus square icon"></i></button></div>
                     </div>
                   </div>
-              
-
+                  
+                  
+                  
 
 
                 </div>
+
                 
                 {% endfor %}
                 
@@ -290,7 +313,7 @@
           
           <div class="computer only four wide column">
             <div class="ui basic right aligned segment">
-              <div class="ui left pointing dropdown link item">
+              <div class="ui disabled left pointing dropdown link item" id="ExportBtn">
                 <div>
                   <button class="ui center aligned orange button">Export</button>
                   
@@ -347,6 +370,9 @@
             
 
           {% elif parade_exist == True %}
+          <script>
+            document.getElementById('ExportBtn').classList.remove('disabled');
+          </script>
 
           <div class="row">
             <div class="fourteen wide left aligned column">
@@ -413,14 +439,26 @@
           </div>
 
           {% else %}
-            
-          <div class="ui basic segment">
-            <div class="ui divider"></div>
-            <div><h1>No parade selection has been made, proceed to select a parade?</h1></div>
-            <div><a href="#" class="ui teal button">Select Parade</a></div>
-            <div class="ui divider"></div>
-          </div>
-          <div class="ui basic segment">
+          <div class="">
+            <div class="ui hidden divider"></div>
+            <div class="ui centered grid">
+              <div class="row">
+                <div class="ui inverted icon header">
+                    <i class="folder outline icon"></i>
+                    <h1 class="content">No parade selection has been made.</h1>
+                  
+                </div>
+                
+                <div class="ui hidden divider"></div>
+                
+              </div>
+              <div class="row">
+                <div class="ui basic  segment">
+                  <a href="#" class="ui teal button">Select Parade</a>
+                </div>
+              </div>
+            </div>
+            <div class="ui hidden divider"></div>
 
           </div>
             

@@ -1,0 +1,65 @@
+<!-- Dimmer EDit CArd-->
+
+<div class="ui mini modal IndivDim">
+    <div class="content">
+        <div class="ui fluid card">
+            <div class="content">
+              <div class="ui grid">
+                <div class="twelve wide column">
+                  <div class="left aligned fluid header">
+                    <h1 class="ui red header" id="DimName">Name</h1>
+                  </div>
+                  <div class="left aligned meta" id="DimRank">
+                    Rank
+                  </div>
+                </div>
+                
+                <div class="four wide column">
+                  <div class="meta">
+                    
+                      <a class="ui yellow right label" id="DimPlatoon">
+                        Platoon
+                      </a>
+                  </div>
+                </div>
+              </div>
+              <div class="ui hidden divider"></div>
+              <div class="ui form">
+                <form>
+                    <div class="field">
+                        <label>Comments</label>
+                        <textarea rows="5" cols= "80" name="Remarks" id="DimRemarks"></textarea>
+                    </div>
+      
+                    <div class="field">
+                        <label>Reason for Absence</label>
+                        <select name="Absence" class="ui fluid dropdown" id="DimReason">
+                            <option value="">Reason for Absence</option>
+                            <option value="MA">MA</option>
+                            <option value="MC">MC</option>
+                            <option value="Off">Off</option>
+                            <option value="Leave">Leave</option>
+                            <option value="Others">Others</option>
+                            <option value="NIL">-</option>
+                        </select>
+                    </div>
+
+                    <div class="ui hidden divider"></div>
+
+                    <div class="extra content"> 
+                      <div class="ui basic center aligned segment">
+                          <button class="ui disabled button"  type="submit" id="EditCardSave">Save</button> 
+                          <button class="ui orange button" type="button" id="EditCardCancel">Cancel</button>
+                      </div>
+                    </div>
+                    <div class="ui hidden divider"></div>
+                    <div class="ui hidden divider"></div>
+                </form>
+
+              </div>
+              
+              
+              </div>
+          </div>
+    </div>
+</div>
