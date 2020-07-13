@@ -166,7 +166,7 @@
                 <div class="row">
                   <div class="ui icon header">
                     <i class="plane icon"></i>
-                      <span class="ui grey header">No cards are listed, add card</span>
+                      <span class="ui grey header">Parade does not exist, create parade</span>
                       <div class="ui grey header">New to Reveille? Let's Begin</div>
 
                         <a class="ui teal button" href="#ParadeMakeBanner">Start</a></div>
@@ -193,18 +193,23 @@
                   <div class="ui dimmer DeleteDim">
                     <div class="content">
                       <h2 class="ui inverted icon header">
-                        Delete ?
+                        Delete Card?
                       </h2>
+                      <div class="ui hidden divider"></div>
                       <div class="ui center aligned grid ">
                         <form action="" method="post" class="">
                           {% csrf_token %}
+                          
                           <div class="hidden-form">
                             <input class="DimDelId" name="absence_id" ></input>
                             <input class="DimDel" name="action" value="2">2</input>
                           </div>
-                          
-                          <div class="column"><button class="ui fluid teal button DelCardConfirm"  type="submit">Yes</button></div>
+
+                          <div class="ui two column center aligned grid">
+                            <div class="column"><button class="ui fluid teal button DelCardConfirm"  type="submit">Yes</button></div>
                           <div class="column"><button class="ui fluid orange button DelCardNo" type="button">No</button></div>
+                          </div>
+                          
                         </form>
                         
                       </div>
