@@ -107,6 +107,7 @@ class ParadeStateHandler:
                 'is_off': abs['is_off'],
                 'is_other': abs['is_other'],
                 'remarks': abs['remarks'],
+                'test': 'icle'
             }
             self.logger.info('DATA %s', data )
             card_data.append(data)
@@ -214,8 +215,8 @@ class CardHandler:
             raise Exception(identifier.args[0])
 
     def edit_card(self):
-        logger = logging.getLogger(__name__)
         absence_instance = self.absence_instance
+        self.logger.info('ABSENETEE %s', absence_instance)
         remarks = self.remarks
         reason = self.reason
 
@@ -228,6 +229,7 @@ class CardHandler:
             absence_instance.is_leave = False
             absence_instance.is_other = False
             absence_instance.save()
+            self.logger.info('1ST SAVE DONE')
 
             if reason == 'MA':
                 absence_instance.is_MA = True
@@ -242,11 +244,13 @@ class CardHandler:
             else:
                 pass
             absence_instance.save()
+            self.logger.info('2ND SAVE DONE')
+
 
         except Exception as identifier:
             raise Exception(identifier.args[0])
     
-    def delete_card(absence_id):
+    def delete_card(self):
         logger = logging.getLogger(__name__)
         absence_instance = self.absence_instance
         absence_instance.delete()
