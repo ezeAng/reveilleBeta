@@ -95,6 +95,7 @@ class ParadeStateHandler:
             personnel = Personnel.objects.get(
                         id=int(abs['personnel_id']))
             data = {
+                'absence_id': abs['id'],
                 'name': personnel.name,
                 'rank': personnel.rank,
                 'platoon': personnel.platoon,
