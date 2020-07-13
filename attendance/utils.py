@@ -10,8 +10,10 @@ import sys
 class ParadeStateHandler:
     logger = logging.getLogger(__name__)
     def __init__(self, parade_id):
-        parade = Parade.objects.get(id = parade_id)
-        self.parade = parade
+        try:
+            self.parade = Parade.objects.get(id = parade_id)
+        except:
+            raise Exception('Invalid parade_id')
         self.parade_id = parade_id
 
     def calc_coy_total(self):
@@ -132,46 +134,120 @@ class ParadeStateHandler:
         return ('{}/{}'.format(current_strength,total_strength))
 '''
 
-
-def add_new_card(parade_id, name, remarks, reason):
+class CardHandler:
     logger = logging.getLogger(__name__)
-    # transaction.set_autocommit(False)
-    try:
-        try:
-            personnel_obj = Personnel.objects.get(
-                name = name
-            )
-        except:
-            raise Exception('Personnel does not exist in database')
-
-        if name == '' or name == None:
-            raise Exception('Name not provided')
-        if reason == '' or reason == None:
-            raise Exception('Reason for absence not provided')
+    def __init__(self, parade_id=None, absence_id=None, name=None, remarks=None, reason=None):
+        self.parade_id = parade_id
+        if parade_id is not None:
+            try:
+                parade = Parade.objects.get(id = parade_id)
+            except:
+                raise Exception('Invalid parade_id')
         
-        absentee = Absence(
-            personnel = personnel_obj,
-            parade_id = parade_id,
-            remarks = remarks,
-        )
-        if reason == 'MA':
-            absentee.is_MA = True
-        elif reason == 'MC':
-            absentee.is_MC = True
-        elif reason == 'Off':
-            absentee.is_off = True
-        elif reason == 'Leave':
-            absentee.is_leave = True
-        elif reason == 'Others':
-            absentee.is_other = True
-        else:
-            pass
-        logger.info('SAVING NOW')
-        absentee.save()
-        logger.info('ABSENTEE INSTANCE %s', absentee)
+        self.absence_id = absence_id
+        if absence_id is not None: 
+            try:
+                self.absence_instance = Absence.objects.get(
+                        id = absence_id
+                    )
+            except:
+                raise Exception('Invalid absence_id')
 
-        parade_instance = ParadeStateHandler(parade_id)
-        parade_instance.update_parade_instance()
+        self.name = name
+        self.remarks = remarks
+        self.reason = reason
 
-    except Exception as identifier:
-        raise Exception(identifier.args[0])
+    def add_new_card(self):
+        logger = logging.getLogger(__name__)
+        name = self.name
+        remarks = self.remarks
+        reason = self.reason
+        # transaction.set_autocommit(False)
+        try:
+            
+            try:
+                personnel_obj = Personnel.objects.get(
+                    name = name,
+                )
+            except:
+                raise Exception('Personnel does not exist in database')
+
+            if name == '' or name == None:
+                raise Exception('Name not provided')
+            if reason == '' or reason == None:
+                raise Exception('Reason for absence not provided')
+            
+            repeat_check = Absence.objects.filter(
+                personnel = personnel_obj,
+                parade_id = self.parade_id
+            )
+
+            if len(repeat_check) > 0:
+                return False
+            
+            else:
+                absentee = Absence(
+                    personnel = personnel_obj,
+                    parade_id = self.parade_id,
+                    remarks = remarks,
+                )
+                if reason == 'MA':
+                    absentee.is_MA = True
+                elif reason == 'MC':
+                    absentee.is_MC = True
+                elif reason == 'Off':
+                    absentee.is_off = True
+                elif reason == 'Leave':
+                    absentee.is_leave = True
+                elif reason == 'Others':
+                    absentee.is_other = True
+                else:
+                    pass
+                logger.info('SAVING NOW')
+                absentee.save()
+                logger.info('ABSENTEE INSTANCE %s', absentee)
+
+                parade_instance = ParadeStateHandler(self.parade_id)
+                parade_instance.update_parade_instance()
+
+        except Exception as identifier:
+            raise Exception(identifier.args[0])
+
+    def edit_card(self):
+        logger = logging.getLogger(__name__)
+        absence_instance = self.absence_instance
+        remarks = self.remarks
+        reason = self.reason
+
+        try:
+            
+            absence_instance.remarks = remarks
+            absence_instance.is_MA = False
+            absence_instance.is_MC = False
+            absence_instance.is_off = False
+            absence_instance.is_leave = False
+            absence_instance.is_other = False
+            absence_instance.save()
+
+            if reason == 'MA':
+                absence_instance.is_MA = True
+            elif reason == 'MC':
+                absence_instance.is_MC = True
+            elif reason == 'Off':
+                absence_instance.is_off = True
+            elif reason == 'Leave':
+                absence_instance.is_leave = True
+            elif reason == 'Others':
+                absence_instance.is_other = True
+            else:
+                pass
+            absence_instance.save()
+
+        except Exception as identifier:
+            raise Exception(identifier.args[0])
+    
+    def delete_card(absence_id):
+        logger = logging.getLogger(__name__)
+        absence_instance = self.absence_instance
+        absence_instance.delete()
+
