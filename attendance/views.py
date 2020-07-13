@@ -59,6 +59,20 @@ def parade_view(request):
 			delete: 2
 			'''
 			logger.info('POST DATA %s', request.POST)
+			action = int(request.POST.get('action')[0])
+			logger.info('ACTION %s', action)
+		
+			if action == 0:
+				# add card
+				pass
+			elif action == 1:
+				# edit card
+				pass
+			elif action == 2:
+				# delete card
+				pass
+			else:
+				pass
 			name = request.POST.get('Name')
 			remarks = request.POST.get('Remarks')
 			reason = request.POST.get('Absence')
