@@ -148,11 +148,6 @@
 
 
 
-      
-      
-
-      
-      
 
     </script>
 
@@ -192,30 +187,67 @@
     -->
     <script>
 
-      var datePickEntBtn = document.getElementById('DatePickEnter');
+      // var selectLabel = document.getElementsByClassName('datepick')[0];
+      var dateSelect = document.getElementById('MyDate');
+      var parChoiceDrop = document.getElementById('ParadeChoice');
+
+      function checkFillDate(){
+        var selectVal = $('.datepick').dropdown('get value');
+        var paradeChoice = document.getElementById('ParadeChoice').value;
+
+
+        console.log(paradeChoice);
+        if ( selectVal != "" && dateSelect.value != "" && paradeChoice != "" ){
+          console.log('done');
+          document.getElementById('DateEnter').classList.remove('disabled');
+          document.getElementById('DateEnter').classList.add('teal');
+
+        }
+        else {
+          console.log('selection undone');
+        }
+      }
+
+
+      document.getElementsByClassName("datepick")[0].addEventListener('click',checkFillDate);
+      dateSelect.addEventListener('click',checkFillDate);
+      parChoiceDrop.addEventListener('change',checkFillDate);
+
+
+      var dropSelect = $('.datepick').dropdown('get value');
+
+      
+      var datePickEntSegment = document.getElementById('DatePickEnter');
+      datePickEntSegment.addEventListener('click',function(){
+        console.log('error msg');
+
+      })
+      var datePickEntBtn = document.getElementById('DateEnter');
       datePickEntBtn.addEventListener('click',UpdateBackUrl);
 
       function UpdateBackUrl(){
-        
+
+        var dropSelect = $('.datepick').dropdown('get value');
+
         var datepickerValue = document.getElementById("MyDate").value;
         var paradeChoice = document.getElementById('ParadeChoice').value;
 
-        location.assign("http://localhost:8000/home/parade/" + "?date=" + datepickerValue + "&time_of_day=" + paradeChoice);
+        if ( dropSelect == "false"){
+          location.assign("http://localhost:8000/home/parade/" + "?date=" + datepickerValue + "&time_of_day=" + paradeChoice) ;
 
-        console.log("url changed");
+        }
+        else {
+          location.assign("http://localhost:8000/home/parade/" + "?date=" + datepickerValue + "&time_of_day=" + paradeChoice + "&create=" + dropSelect ) ;
+
+        }
+        
 
         
       }
-      
-
-    </script>
 
 
-    <!--Elements after picking parade from DatePicker-->
-    <script>
-
-
-      
+    // <!--Elements after picking parade from DatePicker-->
+    
       var urlNow = window.location.search;
       console.log(urlNow);
       
