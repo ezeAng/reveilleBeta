@@ -2,7 +2,6 @@
 {% load static %}
 
 
-
 <div class="ui center aligned grid">
     <div class="fourteen wide column">
       <div class="ui top attached tabular inverted violet menu" id="CardTabs">
@@ -135,19 +134,29 @@
             <!--Default page before entrance of data. No Documents. -->
             {% if default %}
             <div class="" id="NoDocumentPage">
+              <div class="ui hidden divider"></div>
               <div class="ui centered grid">
                 <div class="row">
-                  <div class="ui header">
-                    <img class="ui massive image" src="{% static 'attendance/Images/no-document.png'%}">
-                      <h1 class="ui grey header">No cards are listed, search for your parade.</h1>
-                      <h2 class="ui grey header">New to Reveille? Let's Begin</h2>
-                      <div class="ui hidden divider"></div>
-
-                      <a class="ui teal button" href="#ParadeMakeBanner">Get Started</a></div>
-                      <div class="ui hidden divider"></div>
+                  <div class="ui inverted icon header">
+                      <i class="folder outline icon"></i>
+                      <h1 class="content">No cards are listed, search for your parade.</h1>
+                    
+                  </div>
+                  
+                  <div class="ui hidden divider"></div>
                   
                 </div>
+                <div class="row">
+                  <div class="ui basic  segment">
+                    <h2 class="ui grey header">New to Reveille?</h2>
+                    <div class="ui hidden divider"></div>
+
+                    <a class="ui teal button" id="GetStartBtn" href="#IntroBanner">Get Started</a>
+                  </div>
+                </div>
               </div>
+              <div class="ui hidden divider"></div>
+
             </div>
 
             {% elif parade_exist == False %}
@@ -430,14 +439,26 @@
           </div>
 
           {% else %}
-            
-          <div class="ui basic segment">
-            <div class="ui divider"></div>
-            <div><h1>No parade selection has been made, proceed to select a parade?</h1></div>
-            <div><a href="#" class="ui teal button">Select Parade</a></div>
-            <div class="ui divider"></div>
-          </div>
-          <div class="ui basic segment">
+          <div class="">
+            <div class="ui hidden divider"></div>
+            <div class="ui centered grid">
+              <div class="row">
+                <div class="ui inverted icon header">
+                    <i class="folder outline icon"></i>
+                    <h1 class="content">No parade selection has been made.</h1>
+                  
+                </div>
+                
+                <div class="ui hidden divider"></div>
+                
+              </div>
+              <div class="row">
+                <div class="ui basic  segment">
+                  <a href="#" class="ui teal button">Select Parade</a>
+                </div>
+              </div>
+            </div>
+            <div class="ui hidden divider"></div>
 
           </div>
             

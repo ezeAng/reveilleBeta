@@ -10,7 +10,7 @@ from reveille.utils import ParadeStateHandler, add_new_card
 
 def home_view(request):
 	context = {'default': True}
-	return render(request, 'attendance/revhome.html/', context)
+	return render(request, 'attendance/MainHTML/revhome.html/', context)
 
 def parade_view(request):
 	logger = logging.getLogger(__name__)
@@ -90,7 +90,7 @@ def parade_view(request):
 		}
 
 		logger.info('RESULTS %s', context)
-		return render(request, 'attendance/revhome.html/', context)
+		return render(request, 'attendance/MainHTML/revhome.html/', context)
 	
 	else:
 		raise Exception('Method not allowed')
@@ -104,13 +104,13 @@ def parade_view(request):
 	# 	return render(request, 'attendance/revhome.html/', context)
 
 def dashboard_view(request):
-	return render(request, 'attendance/revdashboard.html/')
+	return render(request, 'attendance/MainHTML/revdashboard.html/')
 
 def troll_view(request):
-	return render(request, 'attendance/jokie.html/')
+	return render(request, 'attendance/MainHTML/jokie.html/')
 
 def faq_view(request):
-	return render(request, 'attendance/FAQ.html/')
+	return render(request, 'attendance/MainHTML/FAQ.html/')
 
 
 

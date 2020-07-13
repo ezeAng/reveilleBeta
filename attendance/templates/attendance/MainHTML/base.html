@@ -16,6 +16,7 @@
 
 <!-- Style Overides -->
 <style>
+  
   a.item.p {
     background: none;
     color: black !important;
@@ -145,6 +146,36 @@
 
   <!-- Local Self-written -->
   
+    <!--Scroll infographics-->
+    <script>
+      var getStartBtn = document.getElementById('GetStartBtn');
+      getStartBtn.addEventListener('click',ScrollToInfo);
+      function ScrollToInfo(){
+        $("html, body").animate({
+          scrollTop: $("#IntroBanner").offset().top - 20 
+        }, 1300);
+
+      }
+
+      var createPar = document.getElementById('createPar');
+      createPar.addEventListener('click',ScrollToDateBar);
+      function ScrollToDateBar(){
+        $("html, body").animate({
+          scrollTop: $("body").offset().top
+        }, 1300);
+
+      }
+    </script>
+
+
+
+
+
+
+
+
+
+
 
     <!-- 
     Updating URL from DatePicker, 
