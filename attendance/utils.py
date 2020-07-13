@@ -250,7 +250,7 @@ class CardHandler:
         except Exception as identifier:
             raise Exception(identifier.args[0])
     
-    def delete_card(absence_id):
+    def delete_card(self):
         logger = logging.getLogger(__name__)
         absence_instance = self.absence_instance
         absence_instance.delete()

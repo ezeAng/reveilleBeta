@@ -107,13 +107,10 @@ def parade_view(request):
 
 			elif action == 1:
 				# edit card
-				'''
-				'Remarks': ['As the name suggests'], 'Absence': ['MA'], 'absence_id': ['1'], 'action': ['1']}>
-				'''
 				remarks = request.POST.get('Remarks')
 				reason = request.POST.get('Absence')
 				absence_id = int(request.POST.get('absence_id'))
-				logger.info('remakrs %s', remarks)
+				logger.info('remarks %s', remarks)
 				logger.info('reason %s', reason)
 				logger.info('absence_id %s', absence_id)
 
@@ -135,10 +132,26 @@ def parade_view(request):
 				return HttpResponseRedirect(
 					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
 		
-
-				pass
 			elif action == 2:
 				# delete card
+				absence_id = int(request.POST.get('absence_id'))
+				logger.info('absence_id %s', absence_id)
+				transaction.set_autocommit(False)
+				
+				try:
+					card_instance = CardHandler(
+						absence_id = absence_id,
+					)
+					card_instance.delete_card()
+
+				except Exception as identifier:
+					transaction.rollback()
+					raise Exception(identifier.args[0])
+				transaction.commit()
+
+				return HttpResponseRedirect(
+					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
+		
 				pass
 			else:
 				pass
