@@ -6,7 +6,7 @@ import datetime
 import logging
 import sys
 from django.db import transaction
-from reveille.utils import ParadeStateHandler, add_new_card
+from .utils import ParadeStateHandler, CardHandler
 
 def home_view(request):
 	context = {'default': True}
@@ -21,90 +21,105 @@ def parade_view(request):
 	logger.info('TIME OF DAY %s',time_of_day)
 	# transaction.set_autocommit(False)
 
-	# try:
-	parade = Parade.objects.filter(
-		date = formatted_date, time_of_day = time_of_day
-	)
-	logger.info('PARADE %s', parade)
-	parade_summary = None
-	parade_overview = None
+	try:
+		parade = Parade.objects.filter(
+			date = formatted_date, time_of_day = time_of_day
+		)
+		logger.info('PARADE %s', parade)
+		parade_summary = None
+		parade_overview = None
 
-	if len(parade) == 0:
-		parade_exist = False
+		if len(parade) == 0:
+			parade_exist = False
 
-	else:
-		parade_exist = True
-		parade = parade.values()[0]
-		logger.info('PARADE OBJ %s',parade)
+		else:
+			parade_exist = True
+			parade = parade.values()[0]
+			logger.info('PARADE OBJ %s',parade)
+			parade_id = parade['id']
 
-		parade_id = parade['id']
-		parade_instance = ParadeStateHandler(parade_id)			
-		parade_absence_summary = parade_instance.calc_absence()
-		
-		parade_summary = {
-			'parade_id': parade_id,
-			'total_strength': parade['total_strength'],
-			'current_strength': parade['current_strength'],
-			'commander_strength': parade['commander_strength'],
-			'personnel_strength': parade['personnel_strength']
-		}
-		parade_summary.update(parade_absence_summary)
-		parade_overview = parade_instance.get_parade_overview()
-
-	
-	if request.method == 'POST':
-		logger.info('POST DATA %s', request.POST)
-		name = request.POST.get('Name')
-		remarks = request.POST.get('Remarks')
-		reason = request.POST.get('Absence')
-		transaction.set_autocommit(False)
-
-		try:
-			if parade_exist:
-				pass
-
-			else:
-				parade = Parade(
-					date = formatted_date, 
-					time_of_day = time_of_day
-				)
-				parade.save()
-				parade_id = parade.id
+			parade_instance = ParadeStateHandler(parade_id)			
+			parade_absence_summary = parade_instance.calc_absence()
 			
-			add_new_card(parade_id, name, remarks, reason)
+			parade_summary = {
+				'parade_id': parade_id,
+				'total_strength': parade['total_strength'],
+				'current_strength': parade['current_strength'],
+				'commander_strength': parade['commander_strength'],
+				'personnel_strength': parade['personnel_strength']
+			}
+			parade_summary.update(parade_absence_summary)
+			parade_overview = parade_instance.get_parade_overview()
 
-		except Exception as identifier:
-			transaction.rollback()
-			raise Exception(identifier.args[0])
-		transaction.commit()
+		if request.method == 'POST':
+			'''
+			action enums
+			add: 0
+			edit: 1
+			delete: 2
+			'''
+			logger.info('POST DATA %s', request.POST)
+			name = request.POST.get('Name')
+			remarks = request.POST.get('Remarks')
+			reason = request.POST.get('Absence')
+			transaction.set_autocommit(False)
 
-		return HttpResponseRedirect(
-			request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
+			try:
+				if parade_exist:
+					pass
+
+				else:
+					parade = Parade(
+						date = formatted_date, 
+						time_of_day = time_of_day
+					)
+					parade.save()
+					parade_id = parade.id
+				
+				card_instance = CardHandler(
+					parade_id = parade_id,
+					name = name,
+					remarks= remarks,
+					reason = reason
+				)
+				if card_instance.add_new_card() == False:
+					context = {
+						'repeat_entry': True,
+						'message': "This personnel's record already exists for this parade. Edit the existing card instead"
+					}
+					render(request, 'attendance/MainHTML/revhome.html/', context)
+				else:
+					pass
+
+			except Exception as identifier:
+				transaction.rollback()
+				raise Exception(identifier.args[0])
+			transaction.commit()
+
+			return HttpResponseRedirect(
+				request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
+		
+
+		elif request.method == 'GET':
+			context = {
+				'parade_exist': parade_exist,
+				'parade_summary': parade_summary,
+				'parade_overview': parade_overview
+			}
+
+			logger.info('RESULTS %s', context)
+			return render(request, 'attendance/MainHTML/revhome.html/', context)
+		
+		else:
+			raise Exception('Method not allowed')
 	
-
-	elif request.method == 'GET':
+	except Exception as identifier:
+		logging.info('ERROR %s', identifier.args[0])
 		context = {
-			'parade_exist': parade_exist,
-			'parade_summary': parade_summary,
-			'parade_overview': parade_overview
+			'error': True,
+			'message': 'Hong gan liao unexpected error occured. Please contact your encik for support.'
 		}
-
-		logger.info('RESULTS %s', context)
 		return render(request, 'attendance/MainHTML/revhome.html/', context)
-	
-	else:
-		raise Exception('Method not allowed')
-	
-	# except Exception as identifier:
-	# 	logging.info('ERROR %s', identifier.args[0])
-	# 	context = {
-	# 		'error': True,
-	# 		'message': 'Hong gan liao unexpected error occured. Please contact your encik for support.'
-	# 	}
-	# 	return render(request, 'attendance/revhome.html/', context)
-
-def dashboard_view(request):
-	return render(request, 'attendance/MainHTML/revdashboard.html/')
 
 def troll_view(request):
 	return render(request, 'attendance/MainHTML/jokie.html/')
