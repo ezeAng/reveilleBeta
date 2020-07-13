@@ -421,9 +421,10 @@
             'set selected', e
           );
 
-          document.getElementsByClassName('DimDB')[0].innerHTML = intID ;
-          document.getElementsByClassName('DimDB')[1].innerHTML = 1 ; // To send flag for edit,hidden inputs have class DimDB so indexing is used
+          // To send flag for edit,hidden inputs have class DimDB so indexing is used
 
+          document.getElementsByClassName('DimDB')[0].value = intID ;
+          document.getElementsByClassName('DimDB')[1].value = 1 ;
           
 
           
@@ -465,8 +466,8 @@
         var intAbsID = parseInt(absID);
         // console.log(intAbsID);
 
-        document.getElementById('DelDBID' + CardNumber).innerHTML = intAbsID ;
-
+        document.getElementById('DelDBID' + CardNumber).value = intAbsID ;
+        // document.getElementsByClassName('.DimDel')
 
         $('#deleteDim'+CardNumber).dimmer("show");
 
