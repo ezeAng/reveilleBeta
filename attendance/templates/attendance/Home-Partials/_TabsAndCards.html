@@ -193,11 +193,15 @@
                   <div class="ui dimmer DeleteDim">
                     <div class="content">
                       <h2 class="ui inverted icon header">
-                        Are you sure?
+                        Delete ?
                       </h2>
                       <div class="ui two column center aligned grid ">
-                        <div class="column"><button class="ui fluid teal button"  type="submit" id="DeleteCardSave">Yes</button></div>
-                        <div class="column"><button class="ui fluid orange button" type="button" id="DeleteCardCancel">No</button></div>
+                        <form action="" method="post" class="hidden-form">
+                          <input class="DimDelId" name="absence_id" ></input>
+                          <input class="DimDel" name="action" >2</input>
+                        </form>
+                        <div class="column"><button class="ui fluid teal button DelCardConfirm"  type="submit">Yes</button></div>
+                        <div class="column"><button class="ui fluid orange button DelCardNo" type="button">No</button></div>
                       </div>
 
                       
@@ -231,6 +235,10 @@
                       <div class="description PersonDesc">
                         {{ eachCard.remarks }}
                       </div>
+                    </div>
+
+                    <div class="IndivDBID" >
+                      {{ eachCard.absence_id }}
                     </div>
 
                     

@@ -4,6 +4,7 @@
     <div class="content">
         <div class="ui fluid card">
             <div class="content">
+              
               <div class="ui grid">
                 <div class="twelve wide column">
                   <div class="left aligned fluid header">
@@ -25,7 +26,7 @@
               </div>
               <div class="ui hidden divider"></div>
               <div class="ui form">
-                <form>
+                <form method="POST" >
                     <div class="field">
                         <label>Comments</label>
                         <textarea rows="5" cols= "80" name="Remarks" id="DimRemarks"></textarea>
@@ -43,6 +44,10 @@
                             <option value="NIL">-</option>
                         </select>
                     </div>
+
+                    
+                    <input class="DimDB" name="absence_id"></input>
+                    <input class="DimDB" name="action"></input>
 
                     <div class="ui hidden divider"></div>
 
