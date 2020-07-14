@@ -3,8 +3,9 @@
 
 <div class="container">
     <div class="ui centered grid">
+
       <div class="fourteen wide column">
-        <div class="ui basic segment">
+        <div class="ui basic segment" id="DashWidgets">
           <div class="ui two column stackable center aligned grid">
   
             <!--Left Side-->
@@ -78,23 +79,23 @@
                 <!--Menu Card-->
                 <div class="ui fluid card" id="menucard">
                   
-                    <div class="ui fluid borderless massive vertical grey inverted menu" id="bormenu">
-                      <a class="item">
-                        <h2 class="ui violet header">Other Parades</h2>
+                    <div class="ui fluid borderless massive vertical menu" id="bormenu">
+                      <!-- <a class="item">
+                        <h2 class="ui header">Other Parades</h2>
                         <p>To view other parades under your command</p>
             
-                      </a>
+                      </a> -->
   
   
-                      <a class="item">
-                        <h2 class="ui violet header">Edit Current</h2>
-                        <p>To edit current parade personnel, add or remove.</p>
+                      <a class="item" id="DashPerView">
+                        <h2 class="ui header">Personnel View</h2>
+                        <p>To view and edit current personnel information.</p>
                         
                       </a>
   
                       <a class="item">
-                        <h2 class="ui violet header">Edit Individual</h2>
-                        <p>To edit Individual personnel information</p>
+                        <h2 class="ui header">Other Function</h2>
+                        <p>Coming Soon</p>
                         
                       </a>
                       
@@ -110,10 +111,18 @@
             </div>
   
           </div>
-  
         </div>
-  
       </div>
+
+      <div class="fourteen wide column" >
+        <div class="ui basic segment hidden" id="PersonnelViewer">
+          This is where the personnel view will be
+
+          <button class="ui orange button" id="PerViewBack">Back</button>
+
+        </div>
+      </div>
+
     </div>
 </div>
 

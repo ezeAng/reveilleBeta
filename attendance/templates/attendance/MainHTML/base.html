@@ -17,7 +17,7 @@
 <!-- Style Overides -->
 <style>
 
-  .DimDB , .IndivDBID , .hidden-form {
+  .DimDB , .IndivDBID , .hidden-form , .hidden {
     display: none;
   }
   
@@ -75,12 +75,13 @@
 
 
 
-  <!-------- Scripts -------->
+<!-------- Scripts -------->
 
   <!-- Default Semantic -->
 
     <script>
 
+      //Initializing
       $('.ui.dropdown')
       .dropdown()
       ;
@@ -89,11 +90,10 @@
       .tab()
       ;
 
-      
-
+    
+      //Add New Card
       $('#AddCardToggleMobile').click(function(){ $('#AddCardDimmer').dimmer("show") })
       ;
-
 
       $('#AddCardToggle').click(function(){ 
         $('#AddCardDimmer').dimmer("show");
@@ -117,6 +117,7 @@
       ;
 
       
+      //Edit Card
       $('.IndivEdit').click(function(){ 
         $('.IndivDim').modal("show");
       
@@ -135,7 +136,7 @@
          })
       ;
 
-      
+      //Delete Card
       $('.DelCardConfirm').click(function(){
         $('.DeleteDim').dimmer("hide");
       })
@@ -152,13 +153,15 @@
     </script>
 
 
-
   <!-- Local Self-written -->
   
     <!--Scroll infographics-->
     <script>
       var getStartBtn = document.getElementById('GetStartBtn');
-      getStartBtn.addEventListener('click',ScrollToInfo);
+      if (getStartBtn) {
+        getStartBtn.addEventListener('click',ScrollToInfo);
+
+      }
       function ScrollToInfo(){
         $("html, body").animate({
           scrollTop: $("#IntroBanner").offset().top - 20 
@@ -177,17 +180,12 @@
     </script>
 
 
-
-
-
-
     <!-- 
     Updating URL from DatePicker, 
-    to query DB for specific parade on specific date
+    to query DB for specific parade on specific date , enabling elements on get.
     -->
     <script>
 
-      // var selectLabel = document.getElementsByClassName('datepick')[0];
       var dateSelect = document.getElementById('MyDate');
       var parChoiceDrop = document.getElementById('ParadeChoice');
 
@@ -218,12 +216,15 @@
 
       
       var datePickEntSegment = document.getElementById('DatePickEnter');
+
+      //can use the below to add popup next time
       datePickEntSegment.addEventListener('click',function(){
         console.log('error msg');
 
       })
       var datePickEntBtn = document.getElementById('DateEnter');
       datePickEntBtn.addEventListener('click',UpdateBackUrl);
+
 
       function UpdateBackUrl(){
 
@@ -246,7 +247,7 @@
       }
 
 
-    // <!--Elements after picking parade from DatePicker-->
+    //Elements after picking parade from DatePicker
     
       var urlNow = window.location.search;
       console.log(urlNow);
@@ -266,8 +267,6 @@
       }
   
     </script>
-
-
 
 
     <!-- For Card Dimmer  -->
@@ -320,17 +319,64 @@
       var cancelBtn = document.getElementById("AddCardCancel");
       cancelBtn.addEventListener('click', resetInput);
 
-
     </script>
 
+
+    <!-- Search function -->
     <script>
 
-      var content = [
-        { title: 'Andorra' ,id: '1' },
+      var contentCards = [
+        { title: 'Name 1' ,id: '1' },
         { title: 'United Arab Emirates' },
         { title: 'Afghanistan' },
         { title: 'Antigua' },
-        { title: 'Burkina Faso' },
+        { title: 'Bulgaria' },
+        { title: 'Bahrain' },
+        { title: 'Burundi' }
+        // etc
+        ];
+
+
+      $('.overSearch')
+        .search({
+          source: contentCards ,
+
+          searchFields   : [
+            'title'
+          ],
+          fullTextSearch: false , 
+
+          onSelect: function checkSearchVal(result){
+            // var cardSearch = document.getElementById('searchCards').value;
+            // console.log(cardSearch);
+
+            console.log(result);
+
+          }          
+        })      
+      ;
+      
+      // function checkSearchVal(){
+      //   var cardSearch = document.getElementById('searchCards').value;
+      // ;
+      // console.log(cardSearch);
+
+      // }
+      
+      // document.getElementsByClassName('overSearch')[0].addEventListener('change',checkSearchVal);
+      
+      
+      
+
+
+    </script>
+    <!--NExt step is to get content from DB personnel-->
+    <script>
+      var contentNameDB = [
+        { title: 'Sa La Kau' ,id: '1' },
+        { title: 'United Arab Emirates', rank: '3SG' },
+        { title: 'Afghanistan' },
+        { title: 'Antigua' },
         { title: 'Bulgaria' },
         { title: 'Bahrain' },
         { title: 'Burundi' }
@@ -340,28 +386,26 @@
 
       $('#AddNewCardSearch')
         .search({
-          source: content
-          
-        }) 
-        .result 
+          source: contentNameDB ,
+
+          searchFields   : [
+            'title',
+            'id',
+            'rank'
+          ],
+          fullTextSearch: false , 
+
+          onSelect: function checkACSearchVal(result){
+            // var cardSearch = document.getElementById('searchCards').value;
+            // console.log(cardSearch);
+
+            console.log(result);
+            document.getElementById('CardSearchInput').value = result.title ;
+            var a = document.getElementById('CardSearchInput').value ; 
+            console.log(a);
+          }          
+        })      
       ;
-
-      $('#AddNewCardSearch')
-        .search('get value') 
-      ;
-      
-      var searchAddCard = document.getElementById("CardSearchInput");
-      // var searchResult = searchAddCard.value;
-      // searchAddCard.addEventListener('change',CheckSearch);
-      
-      
-      function CheckSearch(searchResult) {
-        var searchResult = searchAddCard.value;
-        console.log(searchResult);
-
-      }
-
-
     </script>
 
 
@@ -412,7 +456,7 @@
 
       }
 
-
+      var currentRemarks = [];
       var currentSelection = [];
       function changeDim(){
           var CardNumber = String(this.id).slice(9,10);
@@ -436,6 +480,7 @@
           var b = document.getElementById(IdOfRank).innerHTML;
           var c = document.getElementById(IdOfPlatoon).innerHTML;
           var d = document.getElementById(IdOfRemarks).innerHTML;
+          currentRemarks[0] = d;
 
           var e = document.getElementById(IdOfReason).getElementsByTagName("a")[0].innerText;
           currentSelection[0] = e ;
@@ -443,6 +488,8 @@
           var f = document.getElementById(IdOfDBID).innerHTML;
           var intID = parseInt(f);
           console.log(intID);
+
+
 
 
           document.getElementById('DimName').innerHTML = a ;
@@ -522,11 +569,21 @@
         var saveBtn = document.getElementById('EditCardSave');
         var selectReason = document.getElementById('DimReason');
 
+        var remarkText = document.getElementById('DimRemarks');
+
+        var remarkcopy = "" ;
+        remarkcopy = remarkText.value.replace(/^\s*|\s*$/g,'');
+
+        var currentRemark = currentRemarks[0]
+        currentRemark = currentRemark.replace(/^\s*|\s*$/g,'');
+
         var dimDropVal = $('#DimReason').dropdown(
             'get value'
           );
+
+          console.log(remarkText.value);
           
-        if (currentSelection[0] == dimDropVal) {
+        if (currentSelection[0] == dimDropVal && currentRemark == remarkcopy) {
           console.log('nochange');
           saveBtn.classList.add('disabled');
           saveBtn.classList.remove('teal');
@@ -543,12 +600,38 @@
       var saveBtn = document.getElementById('EditCardSave');
       var selectReason = document.getElementById('DimReason');
       selectReason.addEventListener('change',checkChange);
+      var remarkText = document.getElementById('DimRemarks');
+      remarkText.addEventListener('input',checkChange);
 
       
       
     </script>
 
-    
+
+    <!-- Scripts for dashboard item and functions -->  
+    <script>
+      // For showing of personnel View
+      var dashboardPerViewLink = document.getElementById('DashPerView');
+
+      function launchPerView(){
+
+        document.getElementById("PersonnelViewer").classList.remove('hidden');
+        // Hide all the dashboard cards and display Personnel View
+        // On clicking back or breadcrumb to dashboard, hide per view and show usual cards
+        document.getElementById("DashWidgets").classList.add('hidden');
+
+      }
+      dashboardPerViewLink.addEventListener('click',launchPerView);
+
+      function dashboardBack(){
+        document.getElementById("PersonnelViewer").classList.add('hidden');
+        // Hide all the dashboard cards and display Personnel View
+        // On clicking back or breadcrumb to dashboard, hide per view and show usual cards
+        document.getElementById("DashWidgets").classList.remove('hidden');
+      }
+      document.getElementById("PerViewBack").addEventListener('click',dashboardBack);
+
+    </script>
    
 
 </body>
