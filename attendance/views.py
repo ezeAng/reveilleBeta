@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import View
 from .models import Personnel, Absence, Parade
@@ -217,7 +217,7 @@ def parade_view(request):
 		return render(request, 'attendance/MainHTML/revhome.html/', context)
 
 def troll_view(request):
-	return render(request, 'attendance/MainHTML/jokie.html/')
+	return redirect('https://www.youtube.com/watch?v=xt4hSs4IWPg')
 
 def faq_view(request):
 	return render(request, 'attendance/MainHTML/FAQ.html/')
