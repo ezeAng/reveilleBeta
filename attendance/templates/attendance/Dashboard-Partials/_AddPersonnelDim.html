@@ -1,0 +1,74 @@
+<!--Add Personnel Dimmer-->
+
+<div class="ui page dimmer custom" id="AddPersonnelDimmer">
+    <div class="content">
+      <h2 class="ui inverted icon header">
+        Add a New Personnel
+      </h2>
+      
+      <div class="ui raised card">
+        <div class="content">
+            
+            <!--Form-->
+            
+            <div class="ui fluid form">
+              <form method="POST" action="" id="AddNewPersonnel"> 
+                <!--THis is where the url will be linked to handler for createCard-->
+                {% csrf_token %} 
+
+                <div class="ui basic segment">
+                  <div class="field">
+                    <label>Name</label>
+                    <div class="ui input">
+                        <input type="text" name="personnelAdd" id="">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label>Rank</label>
+                  <select name="personnelRank" class="ui fluid dropdown" id="personRank">
+                    <option value="">Rank</option>
+                    <option value="CPL">CPL</option>
+                    <option value="3SG">3SG</option>
+                    <option value="2LT">Off</option>
+                    <option value="LTA">LTA</option>
+                    <option value="CPT">CPT</option>
+                    <option value="REC">REC</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label>Platoon</label>
+                  <select name="Absence" class="ui fluid dropdown" id="Status">
+                    <option value="">Reason for Absence</option>
+                    <option value="">Reason for Absence</option>
+
+                    
+                    
+                  </select>
+                </div>
+
+                
+                <div class="ui hidden divider"></div>
+
+                <div class="extra content"> 
+                  <div class="ui basic segment">
+                    <button class="ui disabled button" id="AddCardSave" type="submit" >Save</button> 
+                  <button class="ui orange button" type="button" id="AddCardCancel">Cancel</button>
+                  </div> <!--Has JS to clear input fields-->
+                </div>
+                <div class="ui hidden divider"></div>
+                <div class="ui hidden divider"></div>
+              </form>
+
+            </div>
+
+          
+          
+        </div>
+
+      </div>
+
+    </div>
+</div>

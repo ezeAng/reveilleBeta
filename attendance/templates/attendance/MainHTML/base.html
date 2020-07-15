@@ -612,26 +612,28 @@
     <script>
       // For showing of personnel View
       
-      // var InfoAddPerBtn = document.getElementById('InfoAddPer');
-      // if (InfoAddPerBtn){
-      //   InfoAddPerBtn.addEventListener('click',InfoAddPerPressed);
-      // }
-      // var checkInfoPressed = [];
-      // function InfoAddPerPressed(){
-        console.log('press');
-        checkInfoPressed[0] = "AddPerPressed";
+      var InfoAddPerBtn = document.getElementById('InfoAddPer');
+      if (InfoAddPerBtn){
+        InfoAddPerBtn.addEventListener('click',InfoAddPerPressed);
+      }
+      function InfoAddPerPressed(){
         
-        console.log(val);
-
+       window.localStorage.setItem('AddPerPressed', 'True');
 
       }
 
       var dashboardPerViewLink = document.getElementById('DashPerView');
-      // var val = checkInfoPressed[0];
-      // $('document').ready(function(){
+      var localStr = window.localStorage.getItem('AddPerPressed');
 
-      //   console.log(val);
-      // });
+      $('document').ready(function(){
+        console.log(localStr);
+        if (localStr == 'True'){
+          launchPerView();
+        }
+        window.localStorage.clear();
+
+        
+      });
 
       function launchPerView(){
 
@@ -639,6 +641,8 @@
         // Hide all the dashboard cards and display Personnel View
         // On clicking back or breadcrumb to dashboard, hide per view and show usual cards
         document.getElementById("DashWidgets").classList.add('hidden');
+
+
 
       }
       dashboardPerViewLink.addEventListener('click',launchPerView);
