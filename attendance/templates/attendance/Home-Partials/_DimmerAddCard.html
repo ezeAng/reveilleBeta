@@ -7,38 +7,11 @@
       </h2>
       
       <div class="ui raised card">
-        
         <div class="content">
-          <div class="ui left aligned grid">
-            <div class="ui hidden divider"></div>
-
-
-            <!-- Search
-            <div class="sixteen wide center aligned column">                                  
-              <div class="ui fluid search" id="AddNewCardSearch">
-                <div class="ui icon input" >
-                  <input class="fluid prompt" type="text" placeholder="Personnel..." id="CardSearchInput">
-                    <i class="search icon"></i>
-                </div>
-                <div class="results" id="AddResult"></div>
-              </div>                                  
-            </div>
-
-            <div class="twelve wide center aligned column">
-              <div class="column">
-                <a class="ui fluid label" id="Search Result">
-                  <i class="id card icon"></i>
-                  Search Result
-                </a>
-              </div>
-
-            </div> -->
-            
             
             <!--Form-->
             
-            <div class="ui form">
-              
+            <div class="ui fluid form">
               <form method="POST" action="" id="AddNewCard"> 
                 <!--THis is where the url will be linked to handler for createCard-->
                 {% csrf_token %} 
@@ -46,10 +19,16 @@
                   <input class="DimDel" name="action" value="0"></input>
                 </div>
 
-                <div class="ui segment">
+                <div class="ui basic segment">
                   <div class="field">
-                    <label>Name</label>
-                    <input type="text" name="Name" placeholder="First Name">
+                    <label>Search Name</label>
+                    <div class="ui fluid search" id="AddNewCardSearch">
+                      <div class="ui icon input" >
+                        <input class="fluid prompt" name="searchAdd" type="text" placeholder="Personnel..." id="CardSearchInput">
+                        <i class="search icon"></i>
+                      </div>
+                      <div class="results" id="AddResult"></div>
+                    </div>
                   </div>
                 </div>
 
@@ -60,7 +39,7 @@
 
                 <div class="field">
                   <label>Reason for Absence</label>
-                  <select name="Absence" class="ui fluid dropdown" id="Status"> <!--"input" name = ...-->
+                  <select name="Absence" class="ui fluid dropdown" id="Status">
                     <option value="">Reason for Absence</option>
                     <option value="MA">MA</option>
                     <option value="MC">MC</option>
@@ -87,7 +66,7 @@
             </div>
 
           
-          </div>
+          
         </div>
 
       </div>
