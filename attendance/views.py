@@ -161,6 +161,7 @@ def parade_view(request):
 				try:
 					card_instance = CardHandler(
 						absence_id = absence_id,
+						parade_id = parade_id,
 					)
 					card_instance.delete_card()
 

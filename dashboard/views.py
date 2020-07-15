@@ -9,4 +9,9 @@ from django.db import transaction
 # from .utils import 
 
 def dashboard_view(request):
+
+	if request.method == 'GET':
+		context = {
+			
+		}
 	return render(request, 'attendance/MainHTML/revdashboard.html/')

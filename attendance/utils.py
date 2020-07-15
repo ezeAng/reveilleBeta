@@ -253,4 +253,6 @@ class CardHandler:
         logger = logging.getLogger(__name__)
         absence_instance = self.absence_instance
         absence_instance.delete()
+        parade_instance = ParadeStateHandler(self.parade_id)
+        parade_instance.update_parade_instance()
 
