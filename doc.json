@@ -1,0 +1,46 @@
+{
+    company:[
+                {
+                    plt_number : 1,
+                    personnel: [
+                        {
+                            rank: LCP
+                            name: Tom
+                        },
+                        {
+                            rank: PTE
+                            name: Tan
+                        },...
+                    ]
+                },
+
+                {
+                    plt_number : 2,
+                    personnel: [
+                        {
+                            rank: LCP
+                            name: Tom
+                        },
+                        {
+                            rank: PTE
+                            name: Tan
+                        },...
+                    ]
+                },
+
+                {
+                    plt_number : 3,
+                    personnel: [
+                        {
+                            rank: LCP
+                            name: Tom
+                        },
+                        {
+                            rank: PTE
+                            name: Tan
+                        },...
+                    ]
+                }
+    ]
+}
+

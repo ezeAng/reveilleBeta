@@ -7,6 +7,7 @@ import logging
 import sys
 from django.db import transaction
 from .utils import ParadeStateHandler, CardHandler
+from dashboard.utils import get_all_personnel
 
 def home_view(request):
 	context = {'default': True}
@@ -85,10 +86,10 @@ def parade_view(request):
 		
 			if action == 0:
 				# add card
-				name = request.POST.get('Name')
+				name = request.POST.get('searchAdd')
 				remarks = request.POST.get('Remarks')
 				reason = request.POST.get('Absence')
-				# transaction.set_autocommit(False)
+				transaction.set_autocommit(False)
 
 				try:
 					if parade_exist:
@@ -113,14 +114,14 @@ def parade_view(request):
 							'repeat_entry': True,
 							'message': "This personnel's record already exists for this parade. Edit the existing card instead"
 						}
-						render(request, 'attendance/MainHTML/revhome.html/', context)
+						return render(request, 'attendance/MainHTML/revhome.html/', context)
 					else:
 						pass
 
 				except Exception as identifier:
-					# transaction.rollback()
+					transaction.rollback()
 					raise Exception(identifier.args[0])
-				# transaction.commit()
+				transaction.commit()
 
 				return HttpResponseRedirect(
 					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
@@ -133,7 +134,6 @@ def parade_view(request):
 				logger.info('remarks %s', remarks)
 				logger.info('reason %s', reason)
 				logger.info('absence_id %s', absence_id)
-
 				transaction.set_autocommit(False)
 				
 				try:
@@ -175,14 +175,31 @@ def parade_view(request):
 		
 				pass
 			
+			elif action == 3:
+				# delete parade
+				transaction.set_autocommit(False)
+				try:
+					if parade_exist:
+						parade = Parade.objects.get(
+							id = parade_id
+						)
+						parade.delete()
+					else:
+						raise Exception('Cannot delete non-existent parade.')
+				except Exception as identifier:
+					transaction.rollback
+					raise Exception(identifier.args[0])
+				transaction.commit()
+
 			else:
-				pass
+				raise Exception('Invalid action type')
 
 		elif request.method == 'GET':
 			context = {
 				'parade_exist': parade_exist,
 				'parade_summary': parade_summary,
 				'parade_overview': parade_overview
+				# 'personnel': get_all_personnel()
 			}
 
 			logger.info('RESULTS %s', context)
@@ -192,7 +209,7 @@ def parade_view(request):
 			raise Exception('Method not allowed')
 	
 	except Exception as identifier:
-		logging.info('ERROR %s', identifier.args[0])
+		logger.info('ERROR %s', identifier.args[0])
 		context = {
 			'error': True,
 			'message': 'Hong gan liao unexpected error occured. Please contact your encik for support.'
