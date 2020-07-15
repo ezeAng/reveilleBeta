@@ -18,7 +18,7 @@ class ParadeStateHandler:
 
     def calc_coy_total(self):
         strength = 0
-        for i in Personnel.objects.all():
+        for i in Personnel.objects.filter(is_deleted=False):
             strength += 1
         return strength
 
@@ -32,7 +32,7 @@ class ParadeStateHandler:
     
     def calc_comd_strength(self):
         total_comd_strength = 0
-        for i in Personnel.objects.filter(is_commander = True):
+        for i in Personnel.objects.filter(is_commander = True, is_deleted=False):
             total_comd_strength += 1
         current_comd_strength = total_comd_strength
         absent_comds = Absence.objects.filter(
@@ -43,7 +43,7 @@ class ParadeStateHandler:
 
     def calc_trpr_strength(self):
         total_trpr_strength = 0
-        for i in Personnel.objects.filter(is_commander = False):
+        for i in Personnel.objects.filter(is_commander = False, is_deleted=False):
             total_trpr_strength += 1
         current_trpr_strength = total_trpr_strength
         absent_trprs = Absence.objects.filter(
@@ -123,7 +123,7 @@ class ParadeStateHandler:
 
     def export_data(self):
         pass
-    
+
 '''
     def calc_plt_total(platoon):
         strength = 0 
