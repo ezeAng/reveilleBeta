@@ -120,6 +120,10 @@ class ParadeStateHandler:
         parade.current_strength = int(self.calc_coy_current())
         parade.total_strength = int(self.calc_coy_total())
         parade.save()
+
+    def export_data(self):
+        pass
+    
 '''
     def calc_plt_total(platoon):
         strength = 0 
@@ -253,4 +257,7 @@ class CardHandler:
         logger = logging.getLogger(__name__)
         absence_instance = self.absence_instance
         absence_instance.delete()
+        parade_instance = ParadeStateHandler(self.parade_id)
+        parade_instance.update_parade_instance()
+
 
