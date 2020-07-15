@@ -17,7 +17,7 @@
 <!-- Style Overides -->
 <style>
 
-  .DimDB , .IndivDBID , .hidden-form , .hidden {
+  .DimDB , .IndivDBID , .hidden-form , .hidden1 {
     display: none;
   }
   
@@ -354,13 +354,13 @@
     <script>
 
       var contentCards = [
-        { title: 'Name 1' ,id: '1' },
-        { title: 'United Arab Emirates' },
-        { title: 'Afghanistan' },
-        { title: 'Antigua' },
-        { title: 'Bulgaria' },
-        { title: 'Bahrain' },
-        { title: 'Burundi' }
+        { Name: 'Name 1' ,id: '1' , Rank:"5SG", Platoon:"1" },
+        { Name: 'United Arab Emirates' },
+        { Name: 'Afghanistan' },
+        { Name: 'Antigua' },
+        { Name: 'Bulgaria' },
+        { Name: 'Bahrain' },
+        { Name: 'Burundi' }
         // etc
         ];
 
@@ -370,7 +370,9 @@
           source: contentCards ,
 
           searchFields   : [
-            'title'
+            'Name',
+            'Rank',
+            'Platoon'
           ],
           fullTextSearch: false , 
 
@@ -383,6 +385,22 @@
           }          
         })      
       ;
+
+      $('#AddNewCardSearch').search({
+        source: contentCards ,
+
+          searchFields   : [
+            'Name'
+            
+          ],
+          fullTextSearch: false , 
+
+          onSelect: function checkSearchVal(result){
+            // var cardSearch = document.getElementById('searchCards').value;
+            // console.log(cardSearch);
+
+            console.log(result);}}
+            )
       
       // function checkSearchVal(){
       //   var cardSearch = document.getElementById('searchCards').value;
@@ -639,62 +657,90 @@
     <script>
       // For showing of personnel View
       
+      //On press of info graphic to personnelView
       var InfoAddPerBtn = document.getElementById('InfoAddPer');
       if (InfoAddPerBtn){
         InfoAddPerBtn.addEventListener('click',InfoAddPerPressed);
       }
-
       function InfoAddPerPressed(){
        window.localStorage.setItem('AddPerPressed', 'True');
       }
 
 
-
       var dashboardPerViewLink = document.getElementById('DashPerView');
+      
+      var localStrAfterDel = window.localStorage.getItem('deletePer');
       var localStr = window.localStorage.getItem('AddPerPressed');
       var localStrAfterAdd = window.localStorage.getItem('AddedPerson');
-      var localStrAfterDel = window.localStorage.getItem('deletePer','True');
+
 
       if (localStrAfterDel == 'True'){
-          // launchPerView();
-        document.getElementById("PersonnelViewer").classList.remove('hidden');
+
+        document.getElementById("PersonnelViewer").classList.remove('hidden1');
+        document.getElementById("DashWidgets").classList.add('hidden1');
+
+        window.localStorage.setItem('deletePer', 'False');
+
+      }     
+      if (localStr == 'True'){
+        if (document.getElementById("PersonnelViewer")){
+          document.getElementById("PersonnelViewer").classList.remove('hidden1');
         
-        document.getElementById("DashWidgets").classList.add('hidden');
-        console.log('nani');
+        document.getElementById("DashWidgets").classList.add('hidden1');
+        
+        }
+        window.localStorage.setItem('AddedPerPressed', 'False');
 
       }
+      if (localStrAfterAdd == 'True'){
+        // launchPerView();
+        if (document.getElementById("PersonnelViewer")){
+          document.getElementById("PersonnelViewer").classList.remove('hidden1');
+        
+        document.getElementById("DashWidgets").classList.add('hidden1');
+        
+        }
+        window.localStorage.setItem('AddedPerson', 'False');
+
+      }
+
+      window.localStorage.setItem('AddPerPressed', 'False');
+      window.localStorage.setItem('deletePer', 'False');
+      window.localStorage.setItem('AddedPerson', 'False');
       
-      else if (localStr == 'True'){
-        launchPerView();
-      }
-      else if (localStrAfterAdd == 'True'){
-        launchPerView();
-        
-
-      }
       //Checks localstorage to know what to display
-      $('document').ready(function(){        
-
-        window.localStorage.clear();
-     
-      });
 
       function launchPerView(){
-
-        document.getElementById("PersonnelViewer").classList.remove('hidden');
+        if (document.getElementById("PersonnelViewer")){
+          document.getElementById("PersonnelViewer").classList.remove('hidden1');
         
-        document.getElementById("DashWidgets").classList.add('hidden');
+        document.getElementById("DashWidgets").classList.add('hidden1');
+        
+        }
+      }
+
+      function hidePerView(){
+        
+          document.getElementById("PersonnelViewer").classList.add('hidden1');
+          document.getElementById("DashWidgets").classList.remove('hidden1');
+ 
+      }
+      
+      if(dashboardPerViewLink){
+        dashboardPerViewLink.addEventListener('click',launchPerView);
 
       }
-      dashboardPerViewLink.addEventListener('click',launchPerView);
 
+      //Back Button
       function dashboardBack(){
-        document.getElementById("PersonnelViewer").classList.add('hidden');
+        document.getElementById("PersonnelViewer").classList.add('hidden1');
         // Hide all the dashboard cards and display Personnel View
         // On clicking back or breadcrumb to dashboard, hide per view and show usual cards
-        document.getElementById("DashWidgets").classList.remove('hidden');
+        document.getElementById("DashWidgets").classList.remove('hidden1');
+      }  
+      if(document.getElementById("PerViewBack")){
+        document.getElementById("PerViewBack").addEventListener('click',dashboardBack);
       }
-      document.getElementById("PerViewBack").addEventListener('click',dashboardBack);
 
 
     
@@ -820,7 +866,7 @@
       function deleteNo(){
         // var perCardNum = delBtnNum[0];
         // $('#personnelDim' + perCardNum).dimmer('hide');
-        window.localStorage.clear();
+        // window.localStorage.clear();
         $('.DeleteDimPer').dimmer('hide');
 
       }
@@ -852,6 +898,48 @@
 
     </script>
 
+    <!-- Script to retain home url after clicking dashboard -->
+    <script>
+      var currentURL = window.location.href;
+      var homeURL = "";
+      if (currentURL.includes("home") == true){
+        homeURL = currentURL;
+        window.localStorage.setItem('homeURL', homeURL);
+
+      }
+
+      if (currentURL.includes("dashboard") == true){
+        console.log('on dash');
+        
+        var homeURLBack = window.localStorage.getItem('homeURL');
+        console.log(homeURLBack);
+        if (homeURLBack) {
+          document.getElementById('HomeBar').setAttribute('href',homeURLBack);
+        }
+        
+      }
+
+      if (currentURL.includes('dashboard') == true && homeURLBack.includes('home') == true && localStr == "False" && localStrAfterAdd=="False" && localStrAfterDel == "False"){
+        console.log('default');
+        hidePerView();
+      }
+
+            
+
+
+
+    </script>
+
+    <!--For summary drawer-->
+    <script>
+      document.getElementById('showBreak').addEventListener('change',function(){
+        $('.hiddenName')
+          .transition('fade down')
+        ;
+        document.getElementsByClassName('hiddenName')[0].classList.remove('hidden');
+        
+      })
+    </script>
     
    
 

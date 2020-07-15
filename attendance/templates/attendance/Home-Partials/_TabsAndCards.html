@@ -188,7 +188,7 @@
 
                 {% for eachCard in parade_overview %}
                 <!--Individual Cards-->     
-
+                
                 <div class="card personnel-card">
                   <div class="ui dimmer DeleteDim">
                     <div class="content">
@@ -202,7 +202,7 @@
                           
                           <div class="hidden-form">
                             <input class="DimDelId" name="absence_id" ></input>
-                            <input class="DimDel" name="action" value="2">2</input>
+                            <input class="DimDel" name="action" value="2"></input>
                           </div>
 
                           <div class="ui two column center aligned grid">
@@ -323,10 +323,21 @@
         
         <div class="ui center aligned grid">
 
-          <div class="ten wide column">
+          <div class="eight wide column">
             <div class="ui basic left aligned segment">
             <h1 id="SummaryHeader">Summary</h1>
             </div>
+          </div>
+
+          <div class="two wide column">
+            <div class="ui basic left aligned segment">
+              <div class="ui toggle checkbox" id="showBreak">
+                <input type="checkbox" name="Breakdown">
+                <label><h3 class="ui inverted header">Breakdown</h3></label>
+              </div>            
+            </div>
+            
+            
           </div>
           
           <div class="computer only four wide column">
@@ -395,31 +406,41 @@
           <div class="row">
             <div class="fourteen wide left aligned column">
               <div class="ui inverted grey segment">
-                <h3 class="ui violet header">Total Strength: <span>{{ parade_summary.total_strength }}</span></h3>
+                <h2 class="ui violet header">Total Strength: <span>{{ parade_summary.total_strength }}</span></h2>
               </div>
+              <div class="ui hidden divider"></div>
             </div>
           </div>
 
           <div class="row">
             <div class="fourteen wide left aligned column">
               <div class="ui inverted grey segment">
-                <h3 class="ui violet header">Current Strength: <span>{{ parade_summary.current_strength }}</span></h3>
+                <h2 class="ui violet header">Current Strength: <span>{{ parade_summary.current_strength }}</span></h2>
               </div>
+              <div class="ui hidden divider"></div>
+
             </div>
           </div>
 
           <div class="row">
-            <div class="fourteen wide left aligned column">
+            <a class="fourteen wide left aligned column dataRow">
               <div class="ui inverted grey segment">
                 <h3 class="ui violet header">Total Absent: <span>{{ parade_summary.total_absent }}</span></h3>
               </div>
-            </div>
+              <div class="ui segment hidden1 1Name">
+                TotalABs List
+              </div>
+            </a>
+
           </div>
 
           <div class="row">
             <div class="fourteen wide left aligned column">
               <div class="ui inverted grey segment">
                 <h3 class="ui violet header">Attend C: <span>{{ parade_summary.total_attc }}</span></h3>
+              </div>
+              <div class="ui segment hidden1 hiddenName">
+                Total Attc List
               </div>
             </div>
           </div>
@@ -429,6 +450,9 @@
               <div class="ui inverted grey segment">
                 <h3 class="ui violet header">Medical Appointment: <span>{{ parade_summary.total_ma }}</span></h3>
               </div>
+              <div class="ui segment hidden1 hiddenName">
+                Total MA List
+              </div>
             </div>
           </div>
 
@@ -436,6 +460,9 @@
             <div class="fourteen wide left aligned column">
               <div class="ui inverted grey segment">
                 <h3 class="ui violet header">Leave: <span>{{ parade_summary.total_leave }}</span></h3>
+              </div>
+              <div class="ui segment hidden1 hiddenName">
+                Total Lv List
               </div>
             </div>
           </div>
@@ -445,6 +472,9 @@
               <div class="ui inverted grey segment">
                 <h3 class="ui violet header">On Off: <span>{{ parade_summary.total_off }}</span></h3>
               </div>
+              <div class="ui segment hidden1 hiddenName">
+                Total Off List
+              </div>
             </div>
           </div>
 
@@ -452,6 +482,9 @@
             <div class="fourteen wide left aligned column">
               <div class="ui inverted grey segment">
                 <h3 class="ui violet header">Other: <span>{{ parade_summary.total_other }}</span></h3>
+              </div>
+              <div class="ui segment hidden1 hiddenName">
+                Total Oter List
               </div>
             </div>
           </div>
