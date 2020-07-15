@@ -848,6 +848,9 @@
       var allDelConfirm = document.getElementsByClassName('DelPersonConfirm');
       var allDelNo = document.getElementsByClassName('DelPersonNo');
 
+      var allPerName = document.getElementsByClassName('eachPerName');
+      var allPerRank = document.getElementsByClassName('eachPerRank');
+
       var delBtnNum = [];
 
       function deleteConfirm(){
@@ -873,6 +876,20 @@
 
       function editPersonnel(){
         console.log('edit pressed');
+        var perCardNum = this.id.slice(7,8);
+
+        var DBID = document.getElementById('personnelDBIDa'+ perCardNum);
+        var perName = document.getElementById('perName' + perCardNum);
+        var perRank = document.getElementById('perRank' + perCardNum);
+
+        document.getElementById('NameView').innerHTML = perName.innerHTML ; 
+        document.getElementById('RankView').innerHTML = perRank.innerHTML ; 
+
+
+        $('.EditPerMod').modal('show');
+        
+
+        
       }
       
       
@@ -883,6 +900,8 @@
         allPersonID[i].id = 'personnelDBIDa' + i ;
         allHiddenDBID[i].id = 'hiddenformDBID' + i ;
         allEditBtn[i].id = 'editPer' + i ;
+        allPerName[i].id = 'perName' + i ;
+        allPerRank[i].id = 'perRank' + i ;
 
         allDeleteBtn[i].addEventListener('click',deleteConfirm);
         allEditBtn[i].addEventListener('click', editPersonnel);
@@ -893,6 +912,8 @@
         allDelNo[i].addEventListener('click',deleteNo);
 
       }
+
+
 
       
 
