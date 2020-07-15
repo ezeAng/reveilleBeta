@@ -126,7 +126,7 @@
 
             <div class="fourteen wide column">
               {% for eachPlatoon in company %}
-              <div class="ui segment">{{ eachPlatoon.platoon }}</div>
+              <div class="ui orange inverted segment"><h1 class="ui inverted header">Platoon {{ eachPlatoon.plt_number }}</h1></div>
               {% for eachPerson in eachPlatoon.personnel %}
               <div class="ui fluid card personnelCard">
                 <div class="content">
@@ -141,7 +141,7 @@
                           
                           <div class="hidden-form">
                             <input class="personnelDBIDb" name="personID" ></input>
-                            <input class="" name="action" value="2">2</input>
+                            <input class="" name="action" value="2"></input>
                           </div>
 
                           <div class="ui two column grid">
@@ -164,11 +164,13 @@
                       <div class="left aligned fluid header"><h1>{{ eachPerson.name }}</h1></div>
                       <div class="left aligned meta">{{ eachPerson.rank }}</div>
                     </div>
-                    <!-- <div class="two wide right aligned column">
-                      <div class="ui large red label">{{eachPerson.pl}}</div>
-                    </div> -->
                     
-                    <div class="four wide right aligned column">
+                    <div class="two wide right aligned column">
+                      <button class="ui small teal circular icon button editPer" >
+                        <i class="edit icon"></i>
+                      </button>
+                    </div>
+                    <div class="two wide right aligned column">
                       <button class="ui small orange circular icon button deletePer" >
                         <i class="minus icon"></i>
                       </button>
