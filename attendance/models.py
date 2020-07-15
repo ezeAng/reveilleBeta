@@ -8,20 +8,20 @@ class Personnel(models.Model):
     is_commander = models.BooleanField(default=False)
     platoon = models.IntegerField()
     company = models.CharField(max_length=255)
-    created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        default = 1,
-        related_name='personnel_created_by',
-        db_column='created_by'
-        )
-    updated_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        default = 1,
-        related_name='personnel_updated_by',
-        db_column='updated_by'
-        )
+    # created_by = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     on_delete=models.CASCADE,
+    #     default = 1,
+    #     related_name='personnel_created_by',
+    #     db_column='created_by'
+    #     )
+    # updated_by = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     on_delete=models.CASCADE,
+    #     default = 1,
+    #     related_name='personnel_updated_by',
+    #     db_column='updated_by'
+    #     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
@@ -38,20 +38,20 @@ class Parade(models.Model):
     current_strength = models.IntegerField(default=0, blank=True)
     commander_strength = models.IntegerField(default=0, blank=True)
     personnel_strength = models.IntegerField(default=0, blank=True)
-    created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        default = 1,
-        related_name='parade_created_by',
-        db_column='created_by'
-        )
-    updated_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        default = 1,
-        related_name='parade_updated_by',
-        db_column='updated_by'
-        )
+    # created_by = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     on_delete=models.CASCADE,
+    #     default = 1,
+    #     related_name='parade_created_by',
+    #     db_column='created_by'
+    #     )
+    # updated_by = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     on_delete=models.CASCADE,
+    #     default = 1,
+    #     related_name='parade_updated_by',
+    #     db_column='updated_by'
+    #     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
@@ -66,20 +66,20 @@ class Absence(models.Model):
     is_leave = models.BooleanField(default=False)
     is_other = models.BooleanField(default=False)
     remarks = models.TextField(default=None)
-    created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        default = 1,
-        related_name='absence_created_by',
-        db_column='created_by'
-        )
-    updated_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        default = 1,
-        related_name='absence_updated_by',
-        db_column='updated_by'
-        )
+    # created_by = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     on_delete=models.CASCADE,
+    #     default = 1,
+    #     related_name='absence_created_by',
+    #     db_column='created_by'
+    #     )
+    # updated_by = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     on_delete=models.CASCADE,
+    #     default = 1,
+    #     related_name='absence_updated_by',
+    #     db_column='updated_by'
+    #     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
@@ -90,20 +90,20 @@ class Status(models.Model):
     parade = models.ForeignKey(Parade, on_delete=models.CASCADE)
     status = models.CharField(max_length=255)
     remarks = models.TextField(default=None)
-    created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        default = 1,
-        related_name='status_created_by',
-        db_column='created_by'
-        )
-    updated_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        default = 1,
-        related_name='status_updated_by',
-        db_column='updated_by'
-        )
+    # created_by = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     on_delete=models.CASCADE,
+    #     default = 1,
+    #     related_name='status_created_by',
+    #     db_column='created_by'
+    #     )
+    # updated_by = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     on_delete=models.CASCADE,
+    #     default = 1,
+    #     related_name='status_updated_by',
+    #     db_column='updated_by'
+    #     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
