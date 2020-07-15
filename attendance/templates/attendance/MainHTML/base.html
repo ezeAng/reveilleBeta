@@ -648,23 +648,35 @@
        window.localStorage.setItem('AddPerPressed', 'True');
       }
 
+
+
       var dashboardPerViewLink = document.getElementById('DashPerView');
       var localStr = window.localStorage.getItem('AddPerPressed');
       var localStrAfterAdd = window.localStorage.getItem('AddedPerson');
+      var localStrAfterDel = window.localStorage.getItem('deletePer','True');
 
-
-      //Checks localstorage to know what to display
-      $('document').ready(function(){
-        if (localStr == 'True'){
-          launchPerView();
-        }
-        else if (localStrAfterAdd == 'True'){
-          launchPerView();
-
-        }
-        window.localStorage.clear();
-
+      if (localStrAfterDel == 'True'){
+          // launchPerView();
+        document.getElementById("PersonnelViewer").classList.remove('hidden');
         
+        document.getElementById("DashWidgets").classList.add('hidden');
+        console.log('nani');
+
+      }
+      
+      else if (localStr == 'True'){
+        launchPerView();
+      }
+      else if (localStrAfterAdd == 'True'){
+        launchPerView();
+        
+
+      }
+      //Checks localstorage to know what to display
+      $('document').ready(function(){        
+
+        window.localStorage.clear();
+     
       });
 
       function launchPerView(){
@@ -787,12 +799,12 @@
       var allHiddenDBID = document.getElementsByClassName('personnelDBIDb');
       var allPersonID = document.getElementsByClassName('personDBID');
 
+      var allDelConfirm = document.getElementsByClassName('DelPersonConfirm');
       var allDelNo = document.getElementsByClassName('DelPersonNo');
 
       var delBtnNum = [];
 
       function deleteConfirm(){
-        console.log('delete');
         var idOfClickedDelBtn = this.id ;
         var perCardNum = idOfClickedDelBtn.slice(15,16);
         delBtnNum[0] = perCardNum;
@@ -806,8 +818,11 @@
       }
 
       function deleteNo(){
-        var perCardNum = delBtnNum[0];
-        $('#personnelDim' + perCardNum).dimmer('hide');
+        // var perCardNum = delBtnNum[0];
+        // $('#personnelDim' + perCardNum).dimmer('hide');
+        window.localStorage.clear();
+        $('.DeleteDimPer').dimmer('hide');
+
       }
 
       function editPersonnel(){
@@ -825,9 +840,15 @@
 
         allDeleteBtn[i].addEventListener('click',deleteConfirm);
         allEditBtn[i].addEventListener('click', editPersonnel);
+
+        allDelConfirm[i].addEventListener('click',function(){
+          window.localStorage.setItem('deletePer', 'True');
+        });
         allDelNo[i].addEventListener('click',deleteNo);
 
       }
+
+      
 
     </script>
 
