@@ -779,8 +779,10 @@
 
       // Delete Personnel
       var allPersonnel = document.getElementsByClassName('personnelCard');
+      var allEditBtn = document.getElementsByClassName('editPer');
       var allDeleteBtn = document.getElementsByClassName('deletePer');
       var allDeleteDim = document.getElementsByClassName('DeleteDimPer');
+
 
       var allHiddenDBID = document.getElementsByClassName('personnelDBIDb');
       var allPersonID = document.getElementsByClassName('personDBID');
@@ -788,7 +790,7 @@
       var allDelNo = document.getElementsByClassName('DelPersonNo');
 
       var delBtnNum = [];
-      
+
       function deleteConfirm(){
         console.log('delete');
         var idOfClickedDelBtn = this.id ;
@@ -797,8 +799,7 @@
 
         var DBID = document.getElementById('personnelDBIDa'+ perCardNum);
         var formDBID = document.getElementById('hiddenformDBID'+ perCardNum);
-        formDBID.value = DBID.innerHTML;
-        // console.log(document.getElementById('hiddenformDBID'+ i).value);
+        formDBID.value = parseInt(DBID.innerHTML);
         
         
         $('#personnelDim' + perCardNum).dimmer('show');
@@ -809,6 +810,9 @@
         $('#personnelDim' + perCardNum).dimmer('hide');
       }
 
+      function editPersonnel(){
+        console.log('edit pressed');
+      }
       
       
       for (var i = 0; i < allDeleteBtn.length; i++) {
@@ -817,9 +821,10 @@
         allDeleteDim[i].id = 'personnelDim' + i ;
         allPersonID[i].id = 'personnelDBIDa' + i ;
         allHiddenDBID[i].id = 'hiddenformDBID' + i ;
+        allEditBtn[i].id = 'editPer' + i ;
 
         allDeleteBtn[i].addEventListener('click',deleteConfirm);
-
+        allEditBtn[i].addEventListener('click', editPersonnel);
         allDelNo[i].addEventListener('click',deleteNo);
 
       }
