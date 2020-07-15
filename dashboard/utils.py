@@ -6,10 +6,13 @@ from attendance.models import (
 )
 import logging
 import sys
+from attendance.utils import ParadeStateHandler
 
 def get_all_personnel():
     logger = logging.getLogger(__name__)
-    platoon_list = Personnel.objects.all().order_by('platoon').values_list('platoon', flat=True).distinct()
+    platoon_list = Personnel.objects.filter(
+        is_deleted = False
+    ).order_by('platoon').values_list('platoon', flat=True).distinct()
     logger.info('PLT LIST %s', platoon_list)
     data = {}
     company = []
@@ -64,5 +67,6 @@ def delete_personnel(id):
         personnel = Personnel.objects.get(id=id)
     except:
         raise Exception('Personnel does not exist in database.')
-    personnel.delete()
+    personnel.is_deleted = True
+    personnel.save()
     
