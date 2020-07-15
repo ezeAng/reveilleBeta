@@ -54,6 +54,8 @@ def dashboard_view(request):
 					transaction.rollback()
 					raise Exception(identifier.args[0])
 				transaction.commit()
+				return HttpResponseRedirect(
+					request.path_info)
 			
 			elif action == 2:
 				# delete personnel
@@ -64,6 +66,8 @@ def dashboard_view(request):
 					transaction.rollback()
 					raise Exception(identifier.args[0])
 				transaction.commit()
+				return HttpResponseRedirect(
+					request.path_info)
 
 	
 	except Exception as identifier:
