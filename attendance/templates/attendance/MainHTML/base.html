@@ -149,6 +149,34 @@
 
 
 
+      //Dashboard Personnel Add
+      $('#AddPersonnel').click(function(){ $('#AddPersonnelDimmer').dimmer("show") })
+      ;
+
+      // $('#AddPersonnel').click(function(){ 
+      //   $('#AddPersonnelDimmer').dimmer("show");
+
+      //    })
+      // ;
+
+      $('#AddPersonnelSave').click(function(){ 
+
+        $('#AddPersonnelDimmer').dimmer("hide");
+
+        
+         })
+      ;
+
+      $('#AddPersonnelCancel').click(function(){ 
+        
+        $('#AddPersonnelDimmer').dimmer("hide");
+        
+         })
+      ;
+
+      
+
+
 
     </script>
 
@@ -269,7 +297,7 @@
     </script>
 
 
-    <!-- For Card Dimmer  -->
+    <!-- For Add Card Dimmer  -->
     <script>
 
       var addSaveBtn = document.getElementById('AddCardSave');
@@ -370,6 +398,7 @@
 
 
     </script>
+
     <!--NExt step is to get content from DB personnel-->
     <script>
       var contentNameDB = [
@@ -550,9 +579,6 @@
         $('#deleteDim'+CardNumber).dimmer("show");
 
       
-        
-
-  
 
       }
 
@@ -608,6 +634,7 @@
     </script>
 
 
+
     <!-- Scripts for dashboard item and functions -->  
     <script>
       // For showing of personnel View
@@ -616,19 +643,24 @@
       if (InfoAddPerBtn){
         InfoAddPerBtn.addEventListener('click',InfoAddPerPressed);
       }
-      function InfoAddPerPressed(){
-        
-       window.localStorage.setItem('AddPerPressed', 'True');
 
+      function InfoAddPerPressed(){
+       window.localStorage.setItem('AddPerPressed', 'True');
       }
 
       var dashboardPerViewLink = document.getElementById('DashPerView');
       var localStr = window.localStorage.getItem('AddPerPressed');
+      var localStrAfterAdd = window.localStorage.getItem('AddedPerson');
 
+
+      //Checks localstorage to know what to display
       $('document').ready(function(){
-        console.log(localStr);
         if (localStr == 'True'){
           launchPerView();
+        }
+        else if (localStrAfterAdd == 'True'){
+          launchPerView();
+
         }
         window.localStorage.clear();
 
@@ -638,11 +670,8 @@
       function launchPerView(){
 
         document.getElementById("PersonnelViewer").classList.remove('hidden');
-        // Hide all the dashboard cards and display Personnel View
-        // On clicking back or breadcrumb to dashboard, hide per view and show usual cards
+        
         document.getElementById("DashWidgets").classList.add('hidden');
-
-
 
       }
       dashboardPerViewLink.addEventListener('click',launchPerView);
@@ -656,7 +685,147 @@
       document.getElementById("PerViewBack").addEventListener('click',dashboardBack);
 
 
+    
+
+      // For Add Personnel
+    
+      var PersonnelSaveBtn = document.getElementById('AddPersonnelSave');
+      var nameInput = document.getElementById('personName');
+      var nameInputVal = nameInput.value;
+
+      var selectRank = document.getElementById('personRank');
+      var selectRankVal = selectRank.value;
+
+      var selectPlatoon = document.getElementById('personPlatoon');
+      var selectPlatoonVal = selectPlatoon.value;
+
+      function TogglePersonnelSaveBtn(nameInputVal, selectRankVal, selectPlatoonVal){
+
+        var PersonnelSaveBtn = document.getElementById('AddPersonnelSave');
+        var nameInput = document.getElementById('personName');
+        var nameInputVal = nameInput.value;
+
+        var selectRank = document.getElementById('personRank');
+        var selectRankVal = selectRank.value;
+
+        var selectPlatoon = document.getElementById('personPlatoon');
+        var selectPlatoonVal = selectPlatoon.value;
+
+        console.log('tog');
+        console.log(nameInputVal);
+        if (nameInputVal == "" ) {
+          console.log('Form undone');
+          PersonnelSaveBtn.classList.remove("teal");
+          PersonnelSaveBtn.classList.add("disabled");
+          
+        }
+
+        else if (selectRankVal == ""){
+          console.log('Form undone');
+          PersonnelSaveBtn.classList.remove("teal");
+          PersonnelSaveBtn.classList.add("disabled");
+          
+        }
+
+        else if (selectPlatoonVal == ""){
+          console.log('Form undone');
+          PersonnelSaveBtn.classList.remove("teal");
+          PersonnelSaveBtn.classList.add("disabled");
+        }
+        
+      
+        else {
+          PersonnelSaveBtn.className = "ui teal button";
+        }
+      }
+
+      nameInput.addEventListener('input',TogglePersonnelSaveBtn);
+      selectRank.addEventListener('change',TogglePersonnelSaveBtn);
+      selectPlatoon.addEventListener('change',TogglePersonnelSaveBtn);
+
+
+      function refreshPer(){
+        window.localStorage.setItem('AddedPerson', 'True');
+        
+      }
+
+      PersonnelSaveBtn.addEventListener('click',refreshPer);
+
+      // <!--Reset Cancel Button-->
+      function resetInput(value) {
+
+        var nameInputVal = document.getElementById('personName').value;
+        nameInputVal = "" ;
+
+        var selectRankVal = document.getElementById('personRank').value;
+        selectRankVal = "";
+
+        var selectPlatoonVal = document.getElementById('personPlatoon').value;
+        selectPlatoonVal = "";
+        $('form').form('clear');
+
+        PersonnelSaveBtn.classList.remove("teal");
+        PersonnelSaveBtn.classList.add("disabled");
+
+        
+      }
+
+      var cancelBtn = document.getElementById("AddPersonnelCancel");
+      cancelBtn.addEventListener('click', resetInput);
+
+
+
+
+
+      // Delete Personnel
+      var allPersonnel = document.getElementsByClassName('personnelCard');
+      var allDeleteBtn = document.getElementsByClassName('deletePer');
+      var allDeleteDim = document.getElementsByClassName('DeleteDimPer');
+
+      var allHiddenDBID = document.getElementsByClassName('personnelDBIDb');
+      var allPersonID = document.getElementsByClassName('personDBID');
+
+      var allDelNo = document.getElementsByClassName('DelPersonNo');
+
+      var delBtnNum = [];
+      function deleteConfirm(){
+        console.log('delete');
+        var idOfClickedDelBtn = this.id ;
+        var perCardNum = idOfClickedDelBtn.slice(15,16);
+        delBtnNum[0] = perCardNum;
+
+        var DBID = document.getElementById('personnelDBIDa'+ perCardNum);
+        var formDBID = document.getElementById('hiddenformDBID'+ perCardNum);
+        formDBID.value = DBID.innerHTML;
+        // console.log(document.getElementById('hiddenformDBID'+ i).value);
+        
+        
+        $('#personnelDim' + perCardNum).dimmer('show');
+      }
+
+      function deleteNo(){
+        var perCardNum = delBtnNum[0];
+        $('#personnelDim' + perCardNum).dimmer('hide');
+      }
+
+      
+      
+      for (var i = 0; i < allDeleteBtn.length; i++) {
+        allPersonnel[i].id = 'personnelCard' + i ; 
+        allDeleteBtn[i].id = 'personnelDelete' + i ;
+        allDeleteDim[i].id = 'personnelDim' + i ;
+        allPersonID[i].id = 'personnelDBIDa' + i ;
+        allHiddenDBID[i].id = 'hiddenformDBID' + i ;
+
+        allDeleteBtn[i].addEventListener('click',deleteConfirm);
+
+        allDelNo[i].addEventListener('click',deleteNo);
+
+      }
+
     </script>
+
+    
    
 
 </body>

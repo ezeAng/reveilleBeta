@@ -20,14 +20,14 @@
                   <div class="field">
                     <label>Name</label>
                     <div class="ui input">
-                        <input type="text" name="personnelAdd" id="">
+                        <input type="text" name="personName" id="personName">
                     </div>
                   </div>
                 </div>
 
                 <div class="field">
                   <label>Rank</label>
-                  <select name="personnelRank" class="ui fluid dropdown" id="personRank">
+                  <select name="personRank" class="ui fluid dropdown" id="personRank">
                     <option value="">Rank</option>
                     <option value="CPL">CPL</option>
                     <option value="3SG">3SG</option>
@@ -40,12 +40,11 @@
 
                 <div class="field">
                   <label>Platoon</label>
-                  <select name="Absence" class="ui fluid dropdown" id="Status">
-                    <option value="">Reason for Absence</option>
-                    <option value="">Reason for Absence</option>
-
-                    
-                    
+                  <select name="personPlatoon" class="ui fluid dropdown" id="personPlatoon">
+                    <option value="">Platoon</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>                   
                   </select>
                 </div>
 
@@ -54,8 +53,8 @@
 
                 <div class="extra content"> 
                   <div class="ui basic segment">
-                    <button class="ui disabled button" id="AddCardSave" type="submit" >Save</button> 
-                  <button class="ui orange button" type="button" id="AddCardCancel">Cancel</button>
+                    <button class="ui disabled button" id="AddPersonnelSave" type="submit" >Save</button> 
+                  <button class="ui orange button" type="button" id="AddPersonnelCancel">Cancel</button>
                   </div> <!--Has JS to clear input fields-->
                 </div>
                 <div class="ui hidden divider"></div>

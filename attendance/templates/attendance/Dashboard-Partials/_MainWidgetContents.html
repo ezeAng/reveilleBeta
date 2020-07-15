@@ -121,43 +121,79 @@
               <div class="ui inverted header"><h1>Personnel</h1></div>
             </div>
             <div class="four wide column">
-              <button class="ui teal button">Add new personnel</button>
+              <button class="ui teal button" id="AddPersonnel">Add new personnel</button>
             </div>
 
             <div class="fourteen wide column">
-              <!-- for each person in persoonel -->
-              <a class="ui fluid card" href="">
+              {% for eachPlatoon in company %}
+              <div class="ui segment">{{ eachPlatoon.platoon }}</div>
+              {% for eachPerson in eachPlatoon.personnel %}
+              <div class="ui fluid card personnelCard">
                 <div class="content">
+                  <div class="ui dimmer DeleteDimPer">
+                    <div class="content">
+                      <h2 class="ui inverted icon header">
+                        Delete Personnel?
+                      </h2>
+                      <div class="ui center aligned grid ">
+                        <form action="" method="post" class="">
+                          {% csrf_token %}
+                          
+                          <div class="hidden-form">
+                            <input class="personnelDBIDb" name="personID" ></input>
+                            <input class="" name="action" value="2">2</input>
+                          </div>
+
+                          <div class="ui two column grid">
+                            <div class="column"><button class="ui fluid teal button DelPersonConfirm"  type="submit">Yes</button></div>
+                            <div class="column"><button class="ui fluid orange button DelPersonNo" type="button">No</button></div>
+                          </div>
+                          
+                        </form>
+                        
+                      </div>
+
+                      
+                    </div>
+                  </div>
                   <div class="ui center aligned grid">
+                    <div class="ui hidden divider"></div>
+                    <div class="ui hidden divider"></div>
+
                     <div class="twelve wide column">
-                      <div class="left aligned fluid header"><h3>Name</h3></div>
-                      <div class="left aligned meta">Rank</div>
+                      <div class="left aligned fluid header"><h1>{{ eachPerson.name }}</h1></div>
+                      <div class="left aligned meta">{{ eachPerson.rank }}</div>
                     </div>
-                    <div class="two wide right aligned column">
-                      <div class="ui large red label">Platoon</div>
-                    </div>
-                    <div class="two wide right aligned column">
-                      <button class="ui small orange circular icon button">
+                    <!-- <div class="two wide right aligned column">
+                      <div class="ui large red label">{{eachPerson.pl}}</div>
+                    </div> -->
+                    
+                    <div class="four wide right aligned column">
+                      <button class="ui small orange circular icon button deletePer" >
                         <i class="minus icon"></i>
                       </button>
                     </div>
-                    <div class="fourteen wide column">
-                      <div class="ui fluid basic segment">
-                        <div class="description">
-                          This man is a chokeng dog
-                        </div>
-                      </div>
-
+                    
+                    <div class="hidden personDBID">
+                      {{ eachPerson.id }}
                     </div>
+                    <div class="ui hidden divider"></div>
+                    <div class="ui hidden divider"></div>
+                    <div class="ui hidden divider"></div>
+
+
                   </div>
                   
-                    
-                  
-                  
+
 
                   </div>
                 
-              </a>
+              </div>
+              {% endfor %}
+              
+              {% endfor %}
+
+              
             </div>
 
             <div class="fourteen wide left aligned column">
