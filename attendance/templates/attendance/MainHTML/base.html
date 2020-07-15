@@ -17,7 +17,7 @@
 <!-- Style Overides -->
 <style>
 
-  .DimDB , .IndivDBID , .hidden-form , .hidden {
+  .DimDB , .IndivDBID , .hidden-form , .hidden1 {
     display: none;
   }
   
@@ -676,17 +676,17 @@
 
       if (localStrAfterDel == 'True'){
 
-        document.getElementById("PersonnelViewer").classList.remove('hidden');
-        document.getElementById("DashWidgets").classList.add('hidden');
+        document.getElementById("PersonnelViewer").classList.remove('hidden1');
+        document.getElementById("DashWidgets").classList.add('hidden1');
 
         window.localStorage.setItem('deletePer', 'False');
 
       }     
       if (localStr == 'True'){
         if (document.getElementById("PersonnelViewer")){
-          document.getElementById("PersonnelViewer").classList.remove('hidden');
+          document.getElementById("PersonnelViewer").classList.remove('hidden1');
         
-        document.getElementById("DashWidgets").classList.add('hidden');
+        document.getElementById("DashWidgets").classList.add('hidden1');
         
         }
         window.localStorage.setItem('AddedPerPressed', 'False');
@@ -695,9 +695,9 @@
       if (localStrAfterAdd == 'True'){
         // launchPerView();
         if (document.getElementById("PersonnelViewer")){
-          document.getElementById("PersonnelViewer").classList.remove('hidden');
+          document.getElementById("PersonnelViewer").classList.remove('hidden1');
         
-        document.getElementById("DashWidgets").classList.add('hidden');
+        document.getElementById("DashWidgets").classList.add('hidden1');
         
         }
         window.localStorage.setItem('AddedPerson', 'False');
@@ -712,17 +712,17 @@
 
       function launchPerView(){
         if (document.getElementById("PersonnelViewer")){
-          document.getElementById("PersonnelViewer").classList.remove('hidden');
+          document.getElementById("PersonnelViewer").classList.remove('hidden1');
         
-        document.getElementById("DashWidgets").classList.add('hidden');
+        document.getElementById("DashWidgets").classList.add('hidden1');
         
         }
       }
 
       function hidePerView(){
         
-          document.getElementById("PersonnelViewer").classList.add('hidden');
-          document.getElementById("DashWidgets").classList.remove('hidden');
+          document.getElementById("PersonnelViewer").classList.add('hidden1');
+          document.getElementById("DashWidgets").classList.remove('hidden1');
  
       }
       
@@ -733,10 +733,10 @@
 
       //Back Button
       function dashboardBack(){
-        document.getElementById("PersonnelViewer").classList.add('hidden');
+        document.getElementById("PersonnelViewer").classList.add('hidden1');
         // Hide all the dashboard cards and display Personnel View
         // On clicking back or breadcrumb to dashboard, hide per view and show usual cards
-        document.getElementById("DashWidgets").classList.remove('hidden');
+        document.getElementById("DashWidgets").classList.remove('hidden1');
       }  
       if(document.getElementById("PerViewBack")){
         document.getElementById("PerViewBack").addEventListener('click',dashboardBack);
@@ -928,6 +928,17 @@
 
 
 
+    </script>
+
+    <!--For summary drawer-->
+    <script>
+      document.getElementById('showBreak').addEventListener('change',function(){
+        $('.hiddenName')
+          .transition('fade down')
+        ;
+        document.getElementsByClassName('hiddenName')[0].classList.remove('hidden');
+        
+      })
     </script>
     
    
