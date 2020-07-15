@@ -11,7 +11,6 @@ from attendance.utils import ParadeStateHandler
 def get_all_personnel():
     logger = logging.getLogger(__name__)
     platoon_list = Personnel.objects.filter(
-        is_deleted = False
     ).order_by('platoon').values_list('platoon', flat=True).distinct()
     logger.info('PLT LIST %s', platoon_list)
     data = {}
@@ -22,7 +21,8 @@ def get_all_personnel():
         }
         person_list = []
         personnel = Personnel.objects.filter(
-            platoon = int(platoon)
+            platoon = int(platoon),
+            is_deleted = False
         ).order_by('-created_at').values()
         for person in personnel:
             person_data = {
