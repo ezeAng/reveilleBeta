@@ -9,7 +9,7 @@ import sys
 
 def get_all_personnel():
     logger = logging.getLogger(__name__)
-    platoon_list = Personnel.objects.all().values_list('platoon', flat=True).distinct()
+    platoon_list = Personnel.objects.all().order_by('platoon').values_list('platoon', flat=True).distinct()
     logger.info('PLT LIST %s', platoon_list)
     data = {}
     company = []
@@ -20,7 +20,7 @@ def get_all_personnel():
         person_list = []
         personnel = Personnel.objects.filter(
             platoon = int(platoon)
-        ).values()
+        ).order_by('-created_at').values()
         for person in personnel:
             person_data = {
                 'id': person['id'],
