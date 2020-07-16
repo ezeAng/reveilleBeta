@@ -217,6 +217,30 @@
       var dateSelect = document.getElementById('MyDate');
       var parChoiceDrop = document.getElementById('ParadeChoice');
 
+      var URL = window.location.search;
+      var indexEq = URL.indexOf('=') ;
+      var indexAm = URL.indexOf('&') ;
+      var dateVal = URL.slice(indexEq+1,indexAm);
+      var indexLastEq = URL.lastIndexOf('=');
+      var paradeDayChoiceNum = URL.substr(indexLastEq+1);
+      var paradeDayChoice = "";
+
+      document.getElementById("DateView").innerHTML = dateVal;
+
+      if (paradeDayChoiceNum =="0" ){
+        paradeDayChoice = "First Parade"
+      }
+      else if (paradeDayChoiceNum =="1" ){
+        paradeDayChoice = "Mid-Day Parade"
+      }
+
+      else {
+        paradeDayChoice = "Last Parade"
+      }
+
+      document.getElementById('ParadeView').innerHTML = paradeDayChoice;
+      
+
       function checkFillDate(){
         var selectVal = $('.datepick').dropdown('get value');
         var paradeChoice = document.getElementById('ParadeChoice').value;
@@ -269,10 +293,12 @@
           location.assign("http://localhost:8000/home/parade/" + "?date=" + datepickerValue + "&time_of_day=" + paradeChoice + "&create=" + dropSelect ) ;
 
         }
-        
-
-        
+          
       }
+
+
+      
+
 
 
     //Elements after picking parade from DatePicker
@@ -286,6 +312,8 @@
         document.getElementById("OverviewSearch").classList.remove('disabled');
         document.getElementById("LayoutBtn").classList.remove('disabled');
         document.getElementById("AddCardToggle").classList.remove('disabled');
+        document.getElementById('paradeBarDate').classList.remove('hidden1');
+        document.getElementById('paradeBarTime').classList.remove('hidden1');
 
       }
 
@@ -961,6 +989,7 @@
         
       })
     </script>
+
     
    
 

@@ -19,7 +19,7 @@
         <div class="ui centered stackable grid">
 
           <!--Search Cards-->
-          <div class="computer only twelve wide violet column">
+          <div class="computer only three wide violet column">
             <div class="ui basic segment">
               <div class="ui disabled fluid search overSearch" id="OverviewSearch">
                 <div class="ui icon input">
@@ -30,6 +30,38 @@
               </div>
             </div>
             
+          </div>
+
+          <!-- Labels -->
+          <div class="computer only three wide violet column">
+            <div class="ui basic segment hidden1" id="paradeBarDate">
+              <div class="ui inverted teal fluid large label">
+                <h3 class="ui inverted medium center aligned header">
+                  <span id="DateView"></span>
+                </h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="computer only three wide violet column">
+            <div class="ui basic segment hidden1" id="paradeBarTime">
+              <div class="ui inverted orange fluid large label">
+                <h3 class="ui inverted medium center aligned header">
+                  <span id="ParadeView"></span>
+                </h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="computer only three wide violet column">
+            <div class="ui basic segment">
+              {% if no_absentees == True %}
+              <div class="ui large fluid green teal label"><h3 class="ui inverted medium center aligned header">All present</h3></div>
+              {% elif no_absentees == False %}
+              <div class="ui large fluid red label"><h3 class="ui inverted medium center aligned header">Not All Present</h3></div>
+              {% else %}
+              {% endif %}
+            </div>
           </div>
 
           <!--Layout Changer -->
@@ -180,6 +212,8 @@
 
             <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
             {% else %}
+
+              
             <!-- if no_absentees == true , else show no absentee msg.-->
             <div class="" id="CardHolders">
                                                     
