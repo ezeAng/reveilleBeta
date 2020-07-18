@@ -308,18 +308,25 @@
       
       
       if (urlNow != "") {
-        console.log("url live");
-        document.getElementById("OverviewSearch").classList.remove('disabled');
+        var log = "{{parade_exist}}";
+        if (log == "True"){
+          console.log('Parade Exists');
+          document.getElementById("OverviewSearch").classList.remove('disabled');
         document.getElementById("LayoutBtn").classList.remove('disabled');
         document.getElementById("AddCardToggle").classList.remove('disabled');
         document.getElementById('paradeBarDate').classList.remove('hidden1');
         document.getElementById('paradeBarTime').classList.remove('hidden1');
+        }
 
+        // else if allpresent is true, disable search and layout btn and add the labels
+        else {
+          console.log('parade does not, disable all');
+        }
+        
       }
 
       else {
         console.log("close document none print cards")
-      
       }
   
     </script>
@@ -381,44 +388,30 @@
     <!-- Search function -->
     <script>
 
+      //dynamic from context
       var contentCards = [
-        { Name: 'Name 1' ,id: '1' , Rank:"5SG", Platoon:"1" },
-        { Name: 'United Arab Emirates' },
-        { Name: 'Afghanistan' },
-        { Name: 'Antigua' },
-        { Name: 'Bulgaria' },
-        { Name: 'Bahrain' },
-        { Name: 'Burundi' }
+        { title: 'Name 1' ,id: '1' , description:"5SG", category:"Platoon 1" },
+        { title: 'Aame 2' ,id: '2' , description:"5SG", category:"Platoon 2" },
+        { title: 'Bame 1' ,id: '3' , description:"3SG", category:"Platoon 3" },
+        { title: 'Bame 1' ,id: '4' , description:"2SG", category:"Platoon 1" },
+        { title: 'Dame 1' ,id: '5' , description:"1SG", category:"Platoon 2" },
+        
+
         // etc
         ];
 
 
       $('.overSearch')
         .search({
+          type: 'category',
           source: contentCards ,
 
           searchFields   : [
-            'Name',
-            'Rank',
-            'Platoon'
-          ],
-          fullTextSearch: false , 
-
-          onSelect: function checkSearchVal(result){
-            // var cardSearch = document.getElementById('searchCards').value;
-            // console.log(cardSearch);
-
-            console.log(result);
-
-          }          
-        })      
-      ;
-
-      $('#AddNewCardSearch').search({
-        source: contentCards ,
-
-          searchFields   : [
-            'Name'
+            
+            'description',
+            'id',
+            'category',
+            'title'
             
           ],
           fullTextSearch: false , 
@@ -427,20 +420,47 @@
             // var cardSearch = document.getElementById('searchCards').value;
             // console.log(cardSearch);
 
-            console.log(result);}}
-            )
-      
-      // function checkSearchVal(){
-      //   var cardSearch = document.getElementById('searchCards').value;
-      // ;
-      // console.log(cardSearch);
+            $('.overSearch').search('set value',result);
 
-      // }
-      
-      // document.getElementsByClassName('overSearch')[0].addEventListener('change',checkSearchVal);
-      
-      
-      
+          }          
+        })      
+      ;
+
+      var contentCardsAdd = [
+        { title: 'Name 1' ,id: '1' , description:"5SG", category:"Platoon 1" },
+        { title: 'Aame 2' ,id: '2' , description:"5SG", category:"Platoon 2" },
+        { title: 'Bame 1' ,id: '3' , description:"3SG", category:"Platoon 3" },
+        { title: 'Bame 1' ,id: '4' , description:"2SG", category:"Platoon 1" },
+        { title: 'Dame 1' ,id: '5' , description:"1SG", category:"Platoon 2" },
+        
+
+        // etc
+        ];
+
+      $('.AddNewCardSearch').search({
+        type : 'category' ,
+        source: contentCardsAdd ,
+
+          searchFields   : [
+          'description',
+          'id',
+          'category',
+          'title'
+            
+          ],
+          fullTextSearch: false , 
+
+          onSelect: function checkSearchVal(result){
+            // var cardSearch = document.getElementById('searchCards').value;
+            // console.log(cardSearch);
+            $('#AddNewCardSearch').search('set value',result);
+            document.getElementById('CardSearchInput').value = result.id ;
+
+
+            console.log(result.title);
+            console.log(document.getElementById('CardSearchInput').value);
+          }}
+            );      
 
 
     </script>
