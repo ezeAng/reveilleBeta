@@ -7,7 +7,7 @@ import logging
 import sys
 from django.db import transaction
 from .utils import ParadeStateHandler, CardHandler
-from dashboard.utils import get_all_personnel
+from dashboard.utils import get_all_personnel, get_search
 
 def home_view(request):
 	context = {'default': True}
@@ -198,8 +198,9 @@ def parade_view(request):
 			context = {
 				'parade_exist': parade_exist,
 				'parade_summary': parade_summary,
-				'parade_overview': parade_overview
-				# 'personnel': get_all_personnel()
+				'parade_overview': parade_overview,
+				'personnel': get_search(),
+				'absentees': get_search(parade_id)
 			}
 
 			logger.info('RESULTS %s', context)
