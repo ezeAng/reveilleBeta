@@ -19,22 +19,24 @@ def parade_view(request):
 	formatted_date = datetime.datetime.strptime(date, "%Y-%m-%d").date()
 	time_of_day = int(request.GET.get('time_of_day'))
 	create = request.GET.get('create')
-	logger.info('DATE %s',formatted_date)
-	logger.info('TIME OF DAY %s',time_of_day)
-	logger.info('CREATE %s',create)
+	logger.info('DATE: %s',formatted_date)
+	logger.info('TIME OF DAY: %s',time_of_day)
+	logger.info('CREATE: %s',create)
 	# transaction.set_autocommit(False)
 
 	parade = Parade.objects.filter(
 			date = formatted_date, time_of_day = time_of_day
 		)
-	logger.info('PARADE %s', parade)
+	logger.info('PARADE: %s', parade)
 	parade_summary = None
 	parade_overview = None
 	try:
 		# parade does not exist
 		if len(parade) == 0:
+			logger.info('PARADE DOES NOT EXIST')
 			# if user choose create
 			if create is not None:
+				logger.info('USER CREATE PARADE')
 				parade = Parade(
 					date = formatted_date, 
 					time_of_day = time_of_day
@@ -43,17 +45,23 @@ def parade_view(request):
 				parade_id = parade.id
 				parade_instance = ParadeStateHandler(parade_id)
 				parade_instance.update_parade_instance()
+				logger.info('PARADE CREATED')
 
 				return HttpResponseRedirect(
 					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
 			# if user choose select
 			else:
+				logger.info('USER SELECT NON-EXISTENT PARADE')
 				parade_exist=False
+				parade_id = 0
 
 		# parade exists
 		else:
+			logger.info('PARADE EXISTS')
+			logger.info('USER SELECT EXISTING PARADE')
 			# route fucker who try to create existing parade back to select
 			if create is not None:
+				logger.info('USER CREATE EXISTING PARADE')
 				return HttpResponseRedirect(
 					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
 			else: 
@@ -61,7 +69,7 @@ def parade_view(request):
 
 			parade_exist = True
 			parade = parade.values()[0]
-			logger.info('PARADE OBJ %s',parade)
+			logger.info('PARADE OBJ: %s',parade)
 			parade_id = parade['id']
 
 			parade_instance = ParadeStateHandler(parade_id)			
@@ -76,6 +84,7 @@ def parade_view(request):
 			}
 			parade_summary.update(parade_absence_summary)
 			parade_overview = parade_instance.get_parade_overview()
+
 
 		if request.method == 'POST':
 			'''
@@ -201,6 +210,7 @@ def parade_view(request):
 				raise Exception('Invalid action type')
 
 		elif request.method == 'GET':
+			logger.info('PARADE ID: %s',parade_id)
 			context = {
 				'parade_exist': parade_exist,
 				'parade_summary': parade_summary,

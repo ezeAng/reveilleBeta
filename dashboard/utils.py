@@ -79,7 +79,8 @@ def get_search(parade_id = None):
         personnel = Personnel.objects.filter(
             is_deleted = False
         )
-
+    elif parade_id == 0:
+        return []
     else:
         # Get absentees only
         absentee_list = Absence.objects.filter(
@@ -88,7 +89,6 @@ def get_search(parade_id = None):
         personnel = Personnel.objects.filter(
             id__in = absentee_list
         )
-
     data = []
     for person in personnel:
         person_obj = {}

@@ -62,30 +62,76 @@ class ParadeStateHandler:
         total_leave = 0
         total_off = 0
         total_other = 0
+        attc = []
+        ma = []
+        leave = []
+        off = []
+        other = []
         if len(absentees) == 0:
             no_absentees = True
         else:
+            
             for abs in absentees:
                 if abs['is_MC']:
                     total_attc += 1
+                    absentee = Personnel.objects.get(
+                        id = abs['personnel_id']
+                    )
+                    attc.append(
+                        str(absentee.rank) + " " + str(absentee.name))
                 elif abs['is_MA']:
                     total_ma += 1
+                    absentee = Personnel.objects.get(
+                        id = abs['personnel_id']
+                    )
+                    ma.append(
+                        str(absentee.rank) + " " + str(absentee.name))
                 elif abs['is_leave']:
                     total_leave += 1
+                    absentee = Personnel.objects.get(
+                        id = abs['personnel_id']
+                    )
+                    leave.append(
+                        str(absentee.rank) + " " + str(absentee.name))
                 elif abs['is_off']:
                     total_off += 1
+                    absentee = Personnel.objects.get(
+                        id = abs['personnel_id']
+                    )
+                    off.append(
+                        str(absentee.rank) + " " + str(absentee.name))
                 elif abs['is_other']:
                     total_other += 1
+                    absentee = Personnel.objects.get(
+                        id = abs['personnel_id']
+                    )
+                    other.append(
+                        str(absentee.rank) + " " + str(absentee.name))
                 else:
                     pass
         data = { 
             'no_absentees': no_absentees,
             'total_absent': int(self.parade.total_strength) - int(self.parade.current_strength),
-            'total_attc': total_attc,
-            'total_ma': total_ma,
-            'total_leave': total_leave,
-            'total_off': total_off,
-            'total_other': total_other,
+            'total_attc': {
+                "count": total_attc,
+                "personnel": attc
+            },
+            'total_ma': {
+                "count": total_ma,
+                "personnel": ma
+            },
+            'total_leave': {
+                "count": total_leave,
+                "personnel": leave
+            },
+            'total_off': {
+                "count": total_off,
+                "personnel": off
+            },
+            'total_other': {
+                "count": total_other,
+                "personnel": other
+            },
         }
         return data
 
@@ -98,6 +144,7 @@ class ParadeStateHandler:
                         id=int(abs['personnel_id']))
             data = {
                 'absence_id': abs['id'],
+                'personnel_id': personnel.id,
                 'name': personnel.name,
                 'rank': personnel.rank,
                 'platoon': personnel.platoon,
