@@ -308,17 +308,21 @@
       
       
       if (urlNow != "") {
-        var log = "{{parade_exist}}";
-        if (log == "True"){
-          console.log('Parade Exists');
-          document.getElementById("OverviewSearch").classList.remove('disabled');
+        var paradeExistence = "{{parade_exist}}";
+        var absenteesNone = "{{no_absentees}}";
+        if (paradeExistence == "True"){
+
+        document.getElementById("OverviewSearch").classList.remove('disabled');     
         document.getElementById("LayoutBtn").classList.remove('disabled');
         document.getElementById("AddCardToggle").classList.remove('disabled');
         document.getElementById('paradeBarDate').classList.remove('hidden1');
         document.getElementById('paradeBarTime').classList.remove('hidden1');
         document.getElementById('DeleteParade').classList.remove('disabled');
 
+        
         }
+
+        
 
         // else if allpresent is true, disable search and layout btn and add the labels
         else {
@@ -397,6 +401,7 @@
       
       var ListPersonel = {{ personnel|safe }};
       var ListAbsPar = {{ absentees|safe }};
+      
 
 
       $('.overSearch')
@@ -415,11 +420,43 @@
 
           onSelect: function checkSearchVal(result){
             
-            $('.overSearch').search('set value',result);
-            
-          }          
+            $('.overSearch').search('set value',result.id);
+            var idRes = document.getElementById('searchCards').value;
+            console.log(idRes);
+            var allCards = document.getElementsByClassName('personnel-card');
+            var allCardAbsID = document.getElementsByClassName('IndivDBID');
+
+      //Just require the ID issue to be settled such that an if statement for equality can be written
+      // for eg, var xx = absenceid.innerHTML .... xx
+
+            for (var i = 0; i < allCards.length; i++){
+              console.log(allCards[i].id);
+              console.log(allCardAbsID[i].innerHTML);
+              allCards[i].style.display = "none" ;
+              if (parseInt(allCardAbsID[i].innerHTML) == idRes){
+                allCards[i].style.display = 'flex';
+              }
+              
+            }
+            // allCards[0].style.display = "flex";
+                      
+          }
+
+
         })      
       ;
+
+      
+      document.getElementById('OverviewSearch').addEventListener('input',function(){
+        //to remove display=none
+        var allCards = document.getElementsByClassName('personnel-card');
+        for (var i = 0; i < allCards.length; i++){
+              
+              allCards[i].style.display = "flex" ;
+              
+        }
+        
+      });
 
       $('.AddNewCardSearch').search({
         type : 'category' ,
