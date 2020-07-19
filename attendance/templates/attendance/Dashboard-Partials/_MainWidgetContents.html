@@ -127,68 +127,68 @@
             <div class="fourteen wide column">
               {% for eachPlatoon in company %}
               <div class="ui orange inverted segment"><h1 class="ui inverted header">Platoon {{ eachPlatoon.plt_number }}</h1></div>
-              {% for eachPerson in eachPlatoon.personnel %}
-              <div class="ui fluid card personnelCard">
-                <div class="content">
-                  <div class="ui dimmer DeleteDimPer">
-                    <div class="content">
-                      <h2 class="ui inverted icon header">
-                        Delete Personnel?
-                      </h2>
-                      <div class="ui center aligned grid ">
-                        <form action="" method="post" class="">
-                          {% csrf_token %}
-                          
-                          <div class="hidden-form">
-                            <input class="personnelDBIDb" name="personID"></input>
-                            <input class="" name="action" value="2"></input>
-                          </div>
+                {% for eachPerson in eachPlatoon.personnel %}
+                <div class="ui fluid card personnelCard">
+                  <div class="content">
+                    <div class="ui dimmer DeleteDimPer">
+                      <div class="content">
+                        <h2 class="ui inverted icon header">
+                          Delete Personnel?
+                        </h2>
+                        <div class="ui center aligned grid ">
+                          <form action="" method="post" class="">
+                            {% csrf_token %}
+                            
+                            <div class="hidden-form">
+                              <input class="personnelDBIDb" name="personID"></input>
+                              <input class="" name="action" value="2"></input>
+                            </div>
 
-                          <div class="ui two column grid">
-                            <div class="column"><button class="ui fluid teal button DelPersonConfirm"  type="submit">Yes</button></div>
-                            <div class="column"><button class="ui fluid orange button DelPersonNo" type="button">No</button></div>
-                          </div>
+                            <div class="ui two column grid">
+                              <div class="column"><button class="ui fluid teal button DelPersonConfirm"  type="submit">Yes</button></div>
+                              <div class="column"><button class="ui fluid orange button DelPersonNo" type="button">No</button></div>
+                            </div>
+                            
+                          </form>
                           
-                        </form>
+                        </div>
+
                         
                       </div>
-
+                    </div>
+                    <div class="ui center aligned grid">
                       
-                    </div>
-                  </div>
-                  <div class="ui center aligned grid">
-                    
 
-                    <div class="twelve wide column">
-                      <div class="left aligned fluid header eachPerName"><h1>{{ eachPerson.name }}</h1></div>
-                      <div class="left aligned meta eachPerRank">{{ eachPerson.rank }}</div>
-                    </div>
-                    
-                    <div class="two wide right aligned column">
-                      <button class="ui small icon button editPer" >
-                        <i class="ellipsis horizontal icon"></i>
-                      </button>
-                    </div>
-                    <div class="two wide left aligned column">
-                      <button class="ui small icon button deletePer" >
-                        <i class="trash alternate icon"></i>
-                      </button>
-                    </div>
-                    
-                    <div class="hidden1 personDBID">
-                      {{ eachPerson.id }}
-                    </div>
-                    
+                      <div class="twelve wide column">
+                        <div class="left aligned fluid header eachPerName"><h1>{{ eachPerson.name }}</h1></div>
+                        <div class="left aligned meta eachPerRank">{{ eachPerson.rank }}</div>
+                      </div>
+                      
+                      <div class="two wide right aligned column">
+                        <button class="ui small icon button editPer" >
+                          <i class="ellipsis horizontal icon"></i>
+                        </button>
+                      </div>
+                      <div class="two wide left aligned column">
+                        <button class="ui small icon button deletePer" >
+                          <i class="trash alternate icon"></i>
+                        </button>
+                      </div>
+                      
+                      <div class="hidden1 personDBID">
+                        {{ eachPerson.id }}
+                      </div>
+                      
 
 
-                  </div>
+                    </div>
+                    
+
+
+                    </div>
                   
-
-
-                  </div>
-                
-              </div>
-              {% endfor %}
+                </div>
+                {% endfor %}
               
               {% endfor %}
 
