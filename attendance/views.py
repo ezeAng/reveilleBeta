@@ -41,7 +41,10 @@ def parade_view(request):
 				)
 				parade_instance = ParadeStateHandler(parade_id)
 				parade.save(
-
+					total_strength = parade_instance.calc_coy_total(),
+					current_strength = parade_instance.calc_coy_current(),
+					commander_strength = parade_instance.calc_comd_strength(),
+					personnel_strength = parade_instance.calc_trpr_strength(),
 				)
 				return HttpResponseRedirect(
 					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
