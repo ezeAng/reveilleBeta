@@ -140,7 +140,7 @@ class ParadeStateHandler:
 
 class CardHandler:
     logger = logging.getLogger(__name__)
-    def __init__(self, parade_id=None, absence_id=None, name=None, remarks=None, reason=None):
+    def __init__(self, parade_id=None, absence_id=None, id=None, remarks=None, reason=None):
         self.parade_id = parade_id
         if parade_id is not None:
             try:
@@ -157,13 +157,13 @@ class CardHandler:
             except:
                 raise Exception('Invalid absence_id')
 
-        self.name = name
+        self.id = id
         self.remarks = remarks
         self.reason = reason
 
     def add_new_card(self):
         logger = logging.getLogger(__name__)
-        name = self.name
+        id = self.id
         remarks = self.remarks
         reason = self.reason
         # transaction.set_autocommit(False)
@@ -171,15 +171,10 @@ class CardHandler:
             
             try:
                 personnel_obj = Personnel.objects.get(
-                    name = name,
+                    id = id,
                 )
             except:
                 raise Exception('Personnel does not exist in database')
-
-            if name == '' or name == None:
-                raise Exception('Name not provided')
-            if reason == '' or reason == None:
-                raise Exception('Reason for absence not provided')
             
             repeat_check = Absence.objects.filter(
                 personnel = personnel_obj,

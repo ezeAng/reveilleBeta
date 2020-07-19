@@ -43,7 +43,7 @@ def parade_view(request):
 				parade_id = parade.id
 				parade_instance = ParadeStateHandler(parade_id)
 				parade_instance.update_parade_instance()
-				
+
 				return HttpResponseRedirect(
 					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
 			# if user choose select
@@ -90,7 +90,7 @@ def parade_view(request):
 		
 			if action == 0:
 				# add card
-				name = request.POST.get('searchAdd')
+				id = request.POST.get('idSearchResult')
 				remarks = request.POST.get('Remarks')
 				reason = request.POST.get('Absence')
 				transaction.set_autocommit(False)
@@ -111,7 +111,7 @@ def parade_view(request):
 					
 					card_instance = CardHandler(
 						parade_id = parade_id,
-						name = name,
+						id = id,
 						remarks= remarks,
 						reason = reason
 					)
