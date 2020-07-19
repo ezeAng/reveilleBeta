@@ -316,6 +316,8 @@
         document.getElementById("AddCardToggle").classList.remove('disabled');
         document.getElementById('paradeBarDate').classList.remove('hidden1');
         document.getElementById('paradeBarTime').classList.remove('hidden1');
+        document.getElementById('DeleteParade').classList.remove('disabled');
+
         }
 
         // else if allpresent is true, disable search and layout btn and add the labels
@@ -384,11 +386,16 @@
 
     </script>
 
+    <!-- For Delete Parade Modal -->
+    
+
 
     <!-- Search function -->
     <script>
 
       //dynamic from context
+      var contextTest = {{ personnel }};
+      console.log(contextTest);
       var contentCards = [
         { title: 'Name 1' ,id: '1' , description:"5SG", category:"Platoon 1" },
         { title: 'Aame 2' ,id: '2' , description:"5SG", category:"Platoon 2" },

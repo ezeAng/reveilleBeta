@@ -33,32 +33,32 @@
           </div>
 
           <!-- Labels -->
-          <div class="computer only three wide violet column">
+          <div class="computer only two wide violet column">
             <div class="ui basic segment hidden1" id="paradeBarDate">
               <div class="ui inverted teal fluid large label">
-                <h3 class="ui inverted medium center aligned header">
+                <h5 class="ui inverted mini fluid center aligned header">
                   <span id="DateView"></span>
-                </h3>
+                </h5>
               </div>
             </div>
           </div>
 
-          <div class="computer only three wide violet column">
+          <div class="computer only two wide violet column">
             <div class="ui basic segment hidden1" id="paradeBarTime">
               <div class="ui inverted orange fluid large label">
-                <h3 class="ui inverted medium center aligned header">
+                <h5 class="ui inverted mini center aligned header">
                   <span id="ParadeView"></span>
-                </h3>
+                </h5>
               </div>
             </div>
           </div>
 
           <div class="computer only three wide violet column">
             <div class="ui basic segment">
-              {% if no_absentees == True %}
-              <div class="ui large fluid green teal label"><h3 class="ui inverted medium center aligned header">All present</h3></div>
-              {% elif no_absentees == False %}
-              <div class="ui large fluid red label"><h3 class="ui inverted medium center aligned header">Not All Present</h3></div>
+              {% if parade_summary.no_absentees == True %}
+              <div class="ui medium fluid green teal label"><h3 class="ui inverted medium center aligned header">All present</h3></div>
+              {% elif parade_summary.no_absentees == False %}
+              <div class="ui medium fluid red label"><h3 class="ui inverted medium center aligned header">Not All Present</h3></div>
               {% else %}
               {% endif %}
             </div>
@@ -94,10 +94,28 @@
           </div>
 
           <!--Add Card Toggle-->
+
           <div class="computer only violet one wide column">
             <div class="ui basic left aligned segment">
               <button class="ui teal disabled icon button" id="AddCardToggle" data-content="Add users to your feed">
                 <i class="user plus icon"></i>
+              </button>
+            </div>
+          </div>
+
+          <!--Delete Parade-->
+
+          <!-- <div class="ui modal">
+            <div class="header">Delete Parade?</div>
+            <div class="content">
+              
+            </div>
+          </div> -->
+
+          <div class="computer only violet one wide column">
+            <div class="ui basic left aligned segment">
+              <button class="ui orange disabled icon button" id="DeleteParade" data-content="Add users to your feed">
+                <i class="minus icon"></i>
               </button>
             </div>
           </div>
