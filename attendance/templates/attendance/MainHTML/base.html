@@ -424,7 +424,7 @@
             $('.overSearch').search('set value',result);
 
             console.log(result.id);
-            document.getElementsByClassName('ResultID')[0].value = result.id;
+            
           }          
         })      
       ;
@@ -448,11 +448,10 @@
             // var cardSearch = document.getElementById('searchCards').value;
             // console.log(cardSearch);
             $('#AddNewCardSearch').search('set value',result);
-            document.getElementById('CardSearchInput').value = result.id ;
-
+            document.getElementById('ResultID').value = result.id ;
 
             console.log(result.title);
-            console.log(document.getElementById('CardSearchInput').value);
+            console.log(document.getElementById('ResultID').value);
           }}
             );      
 
