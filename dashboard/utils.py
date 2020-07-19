@@ -92,7 +92,7 @@ def get_search(parade_id = None):
     data = []
     for person in personnel:
         person_obj = {}
-        person["id"] = person.id
+        person_obj["id"] = person.id
         person_obj["title"] = person.name
         person_obj["description"] = person.rank
         person_obj["category"] = "Platoon " + str(person.platoon)

@@ -39,13 +39,16 @@ def parade_view(request):
 					date = formatted_date, 
 					time_of_day = time_of_day
 				)
-				parade.save()
+				parade_instance = ParadeStateHandler(parade_id)
+				parade.save(
+
+				)
 				return HttpResponseRedirect(
 					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
 			# if user choose select
 			else:
 				parade_exist=False
-	
+
 		# parade exists
 		else:
 			# route fucker who try to create existing parade back to select
@@ -208,7 +211,7 @@ def parade_view(request):
 		
 		else:
 			raise Exception('Method not allowed')
-	
+
 	except Exception as identifier:
 		logger.info('ERROR %s', identifier.args[0])
 		context = {

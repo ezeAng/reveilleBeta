@@ -1,4 +1,4 @@
-from attendance.models import (
+from .models import (
     Personnel, 
     Absence, 
     Status, 
