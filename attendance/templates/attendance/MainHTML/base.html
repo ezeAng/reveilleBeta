@@ -395,13 +395,8 @@
 
       //dynamic from context
       
-        var ListPersonel = {{ personnel|safe }};
-        var ListAbsPar = {{ absentees|safe }};
-        
-
-      
-      
-      
+      var ListPersonel = {{ personnel|safe }};
+      var ListAbsPar = {{ absentees|safe }};
 
 
       $('.overSearch')
@@ -417,87 +412,39 @@
             'title'
             
           ],
-          fullTextSearch: false , 
 
           onSelect: function checkSearchVal(result){
-            // var cardSearch = document.getElementById('searchCards').value;
-            // console.log(cardSearch);
-
+            
             $('.overSearch').search('set value',result);
-
-            console.log(result.id);
             
           }          
         })      
       ;
-
-      
 
       $('.AddNewCardSearch').search({
         type : 'category' ,
         source: ListPersonel ,
 
-          searchFields   : [
-          'description',
-          'id',
-          'category',
-          'title'
-            
-          ],
-          fullTextSearch: false , 
+        searchFields   : [
+        'description',
+        'id',
+        'category',
+        'title'
+          
+        ],
 
-          onSelect: function checkSearchVal(result){
-            // var cardSearch = document.getElementById('searchCards').value;
-            // console.log(cardSearch);
-            $('#AddNewCardSearch').search('set value',result);
-            document.getElementById('ResultID').value = result.id ;
+        onSelect: function checkSearchVal(result){
+          // var cardSearch = document.getElementById('searchCards').value;
+          // console.log(cardSearch);
+          $('#AddNewCardSearch').search('set value',result);
+          document.getElementById('ResultID').value = result.id ;
 
-            console.log(result.title);
-            console.log(document.getElementById('ResultID').value);
-          }}
-            );      
-
+          console.log(result.title);
+          console.log(document.getElementById('ResultID').value);
+        }}
+      );      
 
     </script>
-
-    <!--NExt step is to get content from DB personnel-->
-    <script>
-      var contentNameDB = [
-        { title: 'Sa La Kau' ,id: '1' },
-        { title: 'United Arab Emirates', rank: '3SG' },
-        { title: 'Afghanistan' },
-        { title: 'Antigua' },
-        { title: 'Bulgaria' },
-        { title: 'Bahrain' },
-        { title: 'Burundi' }
-        // etc
-        ];
-
-
-      $('#AddNewCardSearch')
-        .search({
-          source: contentNameDB ,
-
-          searchFields   : [
-            'title',
-            'id',
-            'rank'
-          ],
-          fullTextSearch: false , 
-
-          onSelect: function checkACSearchVal(result){
-            // var cardSearch = document.getElementById('searchCards').value;
-            // console.log(cardSearch);
-
-            console.log(result);
-            document.getElementById('CardSearchInput').value = result.title ;
-            var a = document.getElementById('CardSearchInput').value ; 
-            console.log(a);
-          }          
-        })      
-      ;
-    </script>
-
 
     <!-- Edit Card button and Delete dimmer--> <!--Do not fucking touch this -->
     <script>
@@ -549,7 +496,8 @@
       var currentRemarks = [];
       var currentSelection = [];
       function changeDim(){
-          var CardNumber = String(this.id).slice(9,10);
+          var CardNumber = String(this.id).slice(9);
+          console.log(CardNumber);
 
           
 
@@ -898,7 +846,7 @@
 
       function deleteConfirm(){
         var idOfClickedDelBtn = this.id ;
-        var perCardNum = idOfClickedDelBtn.slice(15,16);
+        var perCardNum = idOfClickedDelBtn.slice(15);
         delBtnNum[0] = perCardNum;
 
         var DBID = document.getElementById('personnelDBIDa'+ perCardNum);
