@@ -387,7 +387,7 @@
     </script>
 
     <!-- For Delete Parade Modal -->
-    
+
 
 
     <!-- Search function -->
@@ -395,8 +395,10 @@
 
       //dynamic from context
       
-        var contextTest = {{ personnel|safe }};
-        console.log(contextTest);
+        var ListPersonel = {{ personnel|safe }};
+        var ListAbsPar = {{ absentees|safe }};
+        
+
       
       
       
@@ -405,7 +407,7 @@
       $('.overSearch')
         .search({
           type: 'category',
-          source: contextTest ,
+          source: ListAbsPar ,
 
           searchFields   : [
             
@@ -433,7 +435,7 @@
 
       $('.AddNewCardSearch').search({
         type : 'category' ,
-        source: contextTest ,
+        source: ListPersonel ,
 
           searchFields   : [
           'description',
