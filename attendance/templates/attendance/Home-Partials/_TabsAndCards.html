@@ -43,7 +43,7 @@
             </div>
           </div>
 
-          <div class="computer only two wide violet column">
+          <div class="computer only three wide violet column">
             <div class="ui basic segment hidden1" id="paradeBarTime">
               <div class="ui inverted orange fluid large label">
                 <h5 class="ui inverted mini center aligned header">
@@ -56,7 +56,7 @@
           <div class="computer only three wide violet column">
             <div class="ui basic segment">
               {% if parade_summary.no_absentees == True %}
-              <div class="ui medium fluid green teal label"><h3 class="ui inverted medium center aligned header">All present</h3></div>
+              <div class="ui medium fluid teal label"><h3 class="ui inverted medium center aligned header">All present</h3></div>
               {% elif parade_summary.no_absentees == False %}
               <div class="ui medium fluid red label"><h3 class="ui inverted medium center aligned header">Not All Present</h3></div>
               {% else %}
