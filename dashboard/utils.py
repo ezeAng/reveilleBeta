@@ -70,4 +70,30 @@ def delete_personnel(id):
         raise Exception('Personnel does not exist in database.')
     personnel.is_deleted = True
     personnel.save()
-    
+
+def get_search(parade_id = None):
+    logger = logging.getLogger(__name__)
+    if parade_id is None:
+        # Get all personnel
+        personnel = Personnel.objects.filter(
+            is_deleted = False
+        )
+
+    else:
+        # Get absentees only
+        absentee_list = Absence.objects.filter(
+            parade_id = parade_id
+        ).values_list('personnel_id', flat=True)
+        personnel = Personnel.objects.filter(
+            id__in = absentee_list
+        )
+
+    data = []
+    for person in personnel:
+        person_obj = {}
+        person_obj["title"] = person.name
+        person_obj["description"] = person.rank
+        person_obj["category"] = "Platoon " + str(person.platoon)
+        data.append(person_obj)
+    return data
+
