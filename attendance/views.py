@@ -39,13 +39,11 @@ def parade_view(request):
 					date = formatted_date, 
 					time_of_day = time_of_day
 				)
+				parade.save()
+				parade_id = parade.id
 				parade_instance = ParadeStateHandler(parade_id)
-				parade.save(
-					total_strength = parade_instance.calc_coy_total(),
-					current_strength = parade_instance.calc_coy_current(),
-					commander_strength = parade_instance.calc_comd_strength(),
-					personnel_strength = parade_instance.calc_trpr_strength(),
-				)
+				parade_instance.update_parade_instance()
+				
 				return HttpResponseRedirect(
 					request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
 			# if user choose select
@@ -108,6 +106,8 @@ def parade_view(request):
 						)
 						parade.save()
 						parade_id = parade.id
+						parade_instance = ParadeStateHandler(parade_id)
+						parade_instance.update_parade_instance()
 					
 					card_instance = CardHandler(
 						parade_id = parade_id,
