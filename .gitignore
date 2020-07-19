@@ -90,3 +90,5 @@ local_settings.py
 db.sqlite3
 reveille.sqlite3
 reveille.sqlite3
+*.sqlite3
+reveille.sqlite3

@@ -217,6 +217,30 @@
       var dateSelect = document.getElementById('MyDate');
       var parChoiceDrop = document.getElementById('ParadeChoice');
 
+      var URL = window.location.search;
+      var indexEq = URL.indexOf('=') ;
+      var indexAm = URL.indexOf('&') ;
+      var dateVal = URL.slice(indexEq+1,indexAm);
+      var indexLastEq = URL.lastIndexOf('=');
+      var paradeDayChoiceNum = URL.substr(indexLastEq+1);
+      var paradeDayChoice = "";
+
+      document.getElementById("DateView").innerHTML = dateVal;
+
+      if (paradeDayChoiceNum =="0" ){
+        paradeDayChoice = "First Parade"
+      }
+      else if (paradeDayChoiceNum =="1" ){
+        paradeDayChoice = "Mid-Day Parade"
+      }
+
+      else {
+        paradeDayChoice = "Last Parade"
+      }
+
+      document.getElementById('ParadeView').innerHTML = paradeDayChoice;
+      
+
       function checkFillDate(){
         var selectVal = $('.datepick').dropdown('get value');
         var paradeChoice = document.getElementById('ParadeChoice').value;
@@ -269,10 +293,12 @@
           location.assign("http://localhost:8000/home/parade/" + "?date=" + datepickerValue + "&time_of_day=" + paradeChoice + "&create=" + dropSelect ) ;
 
         }
-        
-
-        
+          
       }
+
+
+      
+
 
 
     //Elements after picking parade from DatePicker
@@ -282,16 +308,25 @@
       
       
       if (urlNow != "") {
-        console.log("url live");
-        document.getElementById("OverviewSearch").classList.remove('disabled');
+        var log = "{{parade_exist}}";
+        if (log == "True"){
+          console.log('Parade Exists');
+          document.getElementById("OverviewSearch").classList.remove('disabled');
         document.getElementById("LayoutBtn").classList.remove('disabled');
         document.getElementById("AddCardToggle").classList.remove('disabled');
+        document.getElementById('paradeBarDate').classList.remove('hidden1');
+        document.getElementById('paradeBarTime').classList.remove('hidden1');
+        }
 
+        // else if allpresent is true, disable search and layout btn and add the labels
+        else {
+          console.log('parade does not, disable all');
+        }
+        
       }
 
       else {
         console.log("close document none print cards")
-      
       }
   
     </script>
@@ -353,44 +388,30 @@
     <!-- Search function -->
     <script>
 
+      //dynamic from context
       var contentCards = [
-        { Name: 'Name 1' ,id: '1' , Rank:"5SG", Platoon:"1" },
-        { Name: 'United Arab Emirates' },
-        { Name: 'Afghanistan' },
-        { Name: 'Antigua' },
-        { Name: 'Bulgaria' },
-        { Name: 'Bahrain' },
-        { Name: 'Burundi' }
+        { title: 'Name 1' ,id: '1' , description:"5SG", category:"Platoon 1" },
+        { title: 'Aame 2' ,id: '2' , description:"5SG", category:"Platoon 2" },
+        { title: 'Bame 1' ,id: '3' , description:"3SG", category:"Platoon 3" },
+        { title: 'Bame 1' ,id: '4' , description:"2SG", category:"Platoon 1" },
+        { title: 'Dame 1' ,id: '5' , description:"1SG", category:"Platoon 2" },
+        
+
         // etc
         ];
 
 
       $('.overSearch')
         .search({
+          type: 'category',
           source: contentCards ,
 
           searchFields   : [
-            'Name',
-            'Rank',
-            'Platoon'
-          ],
-          fullTextSearch: false , 
-
-          onSelect: function checkSearchVal(result){
-            // var cardSearch = document.getElementById('searchCards').value;
-            // console.log(cardSearch);
-
-            console.log(result);
-
-          }          
-        })      
-      ;
-
-      $('#AddNewCardSearch').search({
-        source: contentCards ,
-
-          searchFields   : [
-            'Name'
+            
+            'description',
+            'id',
+            'category',
+            'title'
             
           ],
           fullTextSearch: false , 
@@ -399,20 +420,47 @@
             // var cardSearch = document.getElementById('searchCards').value;
             // console.log(cardSearch);
 
-            console.log(result);}}
-            )
-      
-      // function checkSearchVal(){
-      //   var cardSearch = document.getElementById('searchCards').value;
-      // ;
-      // console.log(cardSearch);
+            $('.overSearch').search('set value',result);
 
-      // }
-      
-      // document.getElementsByClassName('overSearch')[0].addEventListener('change',checkSearchVal);
-      
-      
-      
+          }          
+        })      
+      ;
+
+      var contentCardsAdd = [
+        { title: 'Name 1' ,id: '1' , description:"5SG", category:"Platoon 1" },
+        { title: 'Aame 2' ,id: '2' , description:"5SG", category:"Platoon 2" },
+        { title: 'Bame 1' ,id: '3' , description:"3SG", category:"Platoon 3" },
+        { title: 'Bame 1' ,id: '4' , description:"2SG", category:"Platoon 1" },
+        { title: 'Dame 1' ,id: '5' , description:"1SG", category:"Platoon 2" },
+        
+
+        // etc
+        ];
+
+      $('.AddNewCardSearch').search({
+        type : 'category' ,
+        source: contentCardsAdd ,
+
+          searchFields   : [
+          'description',
+          'id',
+          'category',
+          'title'
+            
+          ],
+          fullTextSearch: false , 
+
+          onSelect: function checkSearchVal(result){
+            // var cardSearch = document.getElementById('searchCards').value;
+            // console.log(cardSearch);
+            $('#AddNewCardSearch').search('set value',result);
+            document.getElementById('CardSearchInput').value = result.id ;
+
+
+            console.log(result.title);
+            console.log(document.getElementById('CardSearchInput').value);
+          }}
+            );      
 
 
     </script>
@@ -848,6 +896,9 @@
       var allDelConfirm = document.getElementsByClassName('DelPersonConfirm');
       var allDelNo = document.getElementsByClassName('DelPersonNo');
 
+      var allPerName = document.getElementsByClassName('eachPerName');
+      var allPerRank = document.getElementsByClassName('eachPerRank');
+
       var delBtnNum = [];
 
       function deleteConfirm(){
@@ -873,6 +924,20 @@
 
       function editPersonnel(){
         console.log('edit pressed');
+        var perCardNum = this.id.slice(7,8);
+
+        var DBID = document.getElementById('personnelDBIDa'+ perCardNum);
+        var perName = document.getElementById('perName' + perCardNum);
+        var perRank = document.getElementById('perRank' + perCardNum);
+
+        document.getElementById('NameView').innerHTML = perName.innerHTML ; 
+        document.getElementById('RankView').innerHTML = perRank.innerHTML ; 
+
+
+        $('.EditPerMod').modal('show');
+        
+
+        
       }
       
       
@@ -883,6 +948,8 @@
         allPersonID[i].id = 'personnelDBIDa' + i ;
         allHiddenDBID[i].id = 'hiddenformDBID' + i ;
         allEditBtn[i].id = 'editPer' + i ;
+        allPerName[i].id = 'perName' + i ;
+        allPerRank[i].id = 'perRank' + i ;
 
         allDeleteBtn[i].addEventListener('click',deleteConfirm);
         allEditBtn[i].addEventListener('click', editPersonnel);
@@ -893,6 +960,8 @@
         allDelNo[i].addEventListener('click',deleteNo);
 
       }
+
+
 
       
 
@@ -940,6 +1009,7 @@
         
       })
     </script>
+
     
    
 
