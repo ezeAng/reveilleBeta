@@ -387,31 +387,25 @@
     </script>
 
     <!-- For Delete Parade Modal -->
-    
+
 
 
     <!-- Search function -->
     <script>
 
       //dynamic from context
-      var contextTest = {{ personnel }};
-      console.log(contextTest);
-      var contentCards = [
-        { title: 'Name 1' ,id: '1' , description:"5SG", category:"Platoon 1" },
-        { title: 'Aame 2' ,id: '2' , description:"5SG", category:"Platoon 2" },
-        { title: 'Bame 1' ,id: '3' , description:"3SG", category:"Platoon 3" },
-        { title: 'Bame 1' ,id: '4' , description:"2SG", category:"Platoon 1" },
-        { title: 'Dame 1' ,id: '5' , description:"1SG", category:"Platoon 2" },
-        
-
-        // etc
-        ];
+      
+        var contextTest = {{ personnel|safe }};
+        console.log(contextTest);
+      
+      
+      
 
 
       $('.overSearch')
         .search({
           type: 'category',
-          source: contentCards ,
+          source: contextTest ,
 
           searchFields   : [
             
@@ -429,24 +423,17 @@
 
             $('.overSearch').search('set value',result);
 
+            console.log(result.id);
+            document.getElementsByClassName('ResultID')[0].value = result.id;
           }          
         })      
       ;
 
-      var contentCardsAdd = [
-        { title: 'Name 1' ,id: '1' , description:"5SG", category:"Platoon 1" },
-        { title: 'Aame 2' ,id: '2' , description:"5SG", category:"Platoon 2" },
-        { title: 'Bame 1' ,id: '3' , description:"3SG", category:"Platoon 3" },
-        { title: 'Bame 1' ,id: '4' , description:"2SG", category:"Platoon 1" },
-        { title: 'Dame 1' ,id: '5' , description:"1SG", category:"Platoon 2" },
-        
-
-        // etc
-        ];
+      
 
       $('.AddNewCardSearch').search({
         type : 'category' ,
-        source: contentCardsAdd ,
+        source: contextTest ,
 
           searchFields   : [
           'description',
