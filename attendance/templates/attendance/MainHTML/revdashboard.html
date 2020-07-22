@@ -24,5 +24,44 @@
 <!-- Footer -->
 {% include 'attendance/Home-Partials/_Footer.html/' %}
 
+<!--Scripts specific to dash-->
+<script>
+    var ListPersonnelDash = {{ all_personnel_search|safe }};
+        console.log("hi" + ListPersonnelDash);
+        $('.pplSearch').search({
+        type: 'category',
+          source: ListPersonnelDash ,
+
+          searchFields   : [
+            
+            'description',
+            'id',
+            'category',
+            'title'
+            
+          ],
+
+          onSelect: function checkSearchRes(result){
+            
+            $('.pplSearch').search('set value',result.id);
+            var idRes = document.getElementById('searchPpl').value;
+            console.log(idRes);
+            var allPplDetail = document.getElementsByClassName('personnelCard');
+            var allPplPerID = document.getElementsByClassName('personDBID');
+
+            for (var i = 0; i < allPplDetail.length; i++){
+              console.log(allCardPerID[i].innerHTML);
+              allPplDetail[i].style.display = "none" ;
+              if (parseInt(allPplPerID[i].innerHTML) == idRes){
+                allPplDetail[i].style.display = 'flex';
+              }
+              
+            }
+            
+                      
+          }
+      })
+      ;
+</script>
 
 {% endblock content %}
