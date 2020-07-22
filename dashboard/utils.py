@@ -30,7 +30,8 @@ def get_all_personnel():
             person_data = {
                 'id': person['id'],
                 'rank': person['rank'],
-                'name': person['name']
+                'name': person['name'],
+                'plt': person['platoon']
             }
             person_list.append(person_data)
         plt_object['personnel'] = person_list
