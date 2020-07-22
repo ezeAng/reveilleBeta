@@ -117,13 +117,24 @@
       <div class="fourteen wide column" >
         <div class="ui basic segment hidden1" id="PersonnelViewer">
           <div class="ui centered grid">
-            <div class="six wide left aligned column">
+            <div class="three wide left aligned column">
               <div class="ui inverted header"><h1>Personnel</h1></div>
             </div>
-            <div class="four wide column">
+            <div class="five wide column">
+              
+                <div class="ui search pplSearch" id="pplSearch">
+                  <div class="ui icon input">
+                    <input class="prompt" id="searchPpl" type="text" placeholder="Search personnel...">
+                    <i class="search icon"></i>
+                  </div>
+                  <div class="results"></div>
+                </div>
+              
+            </div>
+            <div class="three wide column">
               <div class="ui blue label"><h3>Total Strength: <span>{{ count }}</span></h3></div>
             </div>
-            <div class="four wide column">
+            <div class="three wide column">
               <button class="ui teal button" id="AddPersonnel">Add new personnel</button>
             </div>
 

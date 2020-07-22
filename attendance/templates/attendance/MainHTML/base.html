@@ -17,7 +17,7 @@
 <!-- Style Overides -->
 <style>
 
-  .DimDB , .IndivDBID , .hidden-form , .hidden1 , .IndivDBIDPer {
+  #hideSaveColumn , .DimDB , .IndivDBID , .hidden-form , .hidden1 , .IndivDBIDPer {
     display: none;
   }
   
@@ -214,6 +214,41 @@
     -->
     <script>
 
+      //Elements after picking parade from DatePicker
+
+      var urlNow = window.location.search;
+      console.log(urlNow);
+      
+      
+      if (urlNow != "") {
+        var paradeExistence = "{{parade_exist}}";
+        var absenteesNone = "{{no_absentees}}";
+        if (paradeExistence == "True"){
+
+        document.getElementById("OverviewSearch").classList.remove('disabled');     
+        document.getElementById("LayoutBtn").classList.remove('disabled');
+        document.getElementById("AddCardToggle").classList.remove('disabled');
+        document.getElementById('paradeBarDate').classList.remove('hidden1');
+        document.getElementById('paradeBarTime').classList.remove('hidden1');
+        document.getElementById('DeleteParade').classList.remove('disabled');
+
+        
+        }
+        
+
+        
+
+        // else if allpresent is true, disable search and layout btn and add the labels
+        else {
+          console.log('parade does not, disable all');
+        }
+        
+      }
+
+      else {
+        console.log("close document none print cards")
+      }
+
       var dateSelect = document.getElementById('MyDate');
       var parChoiceDrop = document.getElementById('ParadeChoice');
 
@@ -296,44 +331,15 @@
           
       }
 
+      function createPURL(){
+        var currURL = window.location.href ; 
+        var routeCreate = currURL + "&create=True" ; 
+        location.assign(routeCreate);
+      }
+      document.getElementById('createThisP').addEventListener('click',createPURL);
 
-      
-
-
-
-    //Elements after picking parade from DatePicker
+          
     
-      var urlNow = window.location.search;
-      console.log(urlNow);
-      
-      
-      if (urlNow != "") {
-        var paradeExistence = "{{parade_exist}}";
-        var absenteesNone = "{{no_absentees}}";
-        if (paradeExistence == "True"){
-
-        document.getElementById("OverviewSearch").classList.remove('disabled');     
-        document.getElementById("LayoutBtn").classList.remove('disabled');
-        document.getElementById("AddCardToggle").classList.remove('disabled');
-        document.getElementById('paradeBarDate').classList.remove('hidden1');
-        document.getElementById('paradeBarTime').classList.remove('hidden1');
-        document.getElementById('DeleteParade').classList.remove('disabled');
-
-        
-        }
-
-        
-
-        // else if allpresent is true, disable search and layout btn and add the labels
-        else {
-          console.log('parade does not, disable all');
-        }
-        
-      }
-
-      else {
-        console.log("close document none print cards")
-      }
   
     </script>
 
@@ -390,99 +396,10 @@
 
     </script>
 
-    <!-- For Delete Parade Modal -->
 
 
 
-    <!-- Search function -->
-    <script>
-
-      //dynamic from context
-      
-      var ListPersonel = {{ personnel|safe }};
-      var ListAbsPar = {{ absentees|safe }};
-      
-
-
-      $('.overSearch')
-        .search({
-          type: 'category',
-          source: ListAbsPar ,
-
-          searchFields   : [
-            
-            'description',
-            'id',
-            'category',
-            'title'
-            
-          ],
-
-          onSelect: function checkSearchVal(result){
-            
-            $('.overSearch').search('set value',result.id);
-            var idRes = document.getElementById('searchCards').value;
-            console.log(idRes);
-            var allCards = document.getElementsByClassName('personnel-card');
-            var allCardAbsID = document.getElementsByClassName('IndivDBID');
-            var allCardPerID = document.getElementsByClassName('IndivDBIDPer');
-
-      //Just require the ID issue to be settled such that an if statement for equality can be written
-      // for eg, var xx = absenceid.innerHTML .... xx
-
-            for (var i = 0; i < allCards.length; i++){
-              console.log(allCards[i].id);
-              console.log(allCardPerID[i].innerHTML);
-              allCards[i].style.display = "none" ;
-              if (parseInt(allCardPerID[i].innerHTML) == idRes){
-                allCards[i].style.display = 'flex';
-              }
-              
-            }
-            // allCards[0].style.display = "flex";
-                      
-          }
-
-
-        })      
-      ;
-
-      
-      document.getElementById('OverviewSearch').addEventListener('input',function(){
-        //to remove display=none
-        var allCards = document.getElementsByClassName('personnel-card');
-        for (var i = 0; i < allCards.length; i++){
-              
-              allCards[i].style.display = "flex" ;
-              
-        }
-        
-      });
-
-      $('.AddNewCardSearch').search({
-        type : 'category' ,
-        source: ListPersonel ,
-
-        searchFields   : [
-        'description',
-        'id',
-        'category',
-        'title'
-          
-        ],
-
-        onSelect: function checkSearchVal(result){
-          // var cardSearch = document.getElementById('searchCards').value;
-          // console.log(cardSearch);
-          $('#AddNewCardSearch').search('set value',result);
-          document.getElementById('ResultID').value = result.id ;
-
-          console.log(result.title);
-          console.log(document.getElementById('ResultID').value);
-        }}
-      );      
-
-    </script>
+    
 
     <!-- Edit Card button and Delete dimmer--> <!--Do not fucking touch this -->
     <script>
@@ -701,6 +618,7 @@
       var localStrAfterDel = window.localStorage.getItem('deletePer');
       var localStr = window.localStorage.getItem('AddPerPressed');
       var localStrAfterAdd = window.localStorage.getItem('AddedPerson');
+      var localStrEditDetail = window.localStorage.getItem('fromEditDetail');
 
 
       if (localStrAfterDel == 'True'){
@@ -732,10 +650,21 @@
         window.localStorage.setItem('AddedPerson', 'False');
 
       }
+      if (localStrEditDetail == 'True'){
+        if (document.getElementById("PersonnelViewer")){
+          document.getElementById("PersonnelViewer").classList.remove('hidden1');
+        
+        document.getElementById("DashWidgets").classList.add('hidden1');
+        
+        }
+        window.localStorage.setItem('fromEditDetail', 'False');
+      }
 
       window.localStorage.setItem('AddPerPressed', 'False');
       window.localStorage.setItem('deletePer', 'False');
       window.localStorage.setItem('AddedPerson', 'False');
+      window.localStorage.setItem('fromEditDetail','False');
+
       
       //Checks localstorage to know what to display
 
@@ -904,6 +833,7 @@
 
       }
 
+      //edit or view personnel
       function editPersonnel(){
         console.log('edit pressed');
         var perCardNum = this.id.slice(7);
@@ -917,16 +847,73 @@
         document.getElementById('NameView').innerHTML = perName.innerHTML ; 
         document.getElementById('RankView').innerHTML = perRank.innerHTML ; 
         document.getElementById('idView').innerHTML = DBID.innerHTML ; 
-        document.getElementById('PlatoonView').innerHTML = plt.innerHTML ; 
+        document.getElementById('PlatoonView').innerHTML = 'Platoon' + plt.innerHTML ; 
+
+        document.getElementById('PerFullName').value = perName.innerText ; 
+        // document.getElementById('PerRankEdit').value = perRank.innerText ; 
+        // document.getElementById('PerPltEdit').value = parseInt(plt.innerHTML) ; 
+
+        $('#PerRankEdit').dropdown(
+          'set selected' , perRank.innerText
+        );
+
+        $('#PerPltEdit').dropdown(
+          'set selected' , parseInt(plt.innerHTML)
+        );
+
+        document.getElementById('idDetail').value = parseInt(document.getElementById('idView').innerHTML);
 
 
         $('.EditPerMod').modal('show');
-        
-
-        
+                
       }
       
+      //CloseBtn
+      function closePerView(){
+        
+        document.getElementById('perDetailEdit').classList.add('hidden-form');
+        document.getElementById('editSave').style.display = "none" ;
+        document.getElementById('EditView').style.display = "inline-block" ; 
+        document.getElementById('perDetail').style.display = "flex" ;
+        $('.EditPerMod').modal('hide');
+      }
+      document.getElementById('CloseView').addEventListener('click',closePerView);
+
+      document.getElementById('editSave').style.display = "none";
       
+      
+
+      //EditBtn
+      function editPerView(){
+        //show the form, hide the usual
+        document.getElementById('perDetailEdit').classList.remove('hidden-form');
+        document.getElementById('perDetail').style.display = "none" ;
+
+        //hide edit button show save
+        document.getElementById('EditView').style.display = "none" ; 
+        document.getElementById('editSave').style.display = "inline-block";
+      }
+      document.getElementById('EditView').addEventListener('click',editPerView);
+
+      //SaveBtn
+      function savePerEdit(){
+        // post form to edit
+        console.log('save btn pressed')
+        // hide form and save btn show edit btn
+        document.getElementById('perDetailEdit').classList.add('hidden-form');
+
+        document.getElementById('EditView').style.display = "inline-block" ; 
+        document.getElementById('editSave').style.display = "none" ; 
+
+        document.getElementById('perDetail').style.display = "flex" ;
+
+        // add to localstorage, camefromsavechanges. 
+        window.localStorage.setItem('fromEditDetail','True');
+      }
+      document.getElementById('editSave').addEventListener('click',savePerEdit);
+
+      
+
       for (var i = 0; i < allDeleteBtn.length; i++) {
         allPersonnel[i].id = 'personnelCard' + i ; 
         allDeleteBtn[i].id = 'personnelDelete' + i ;

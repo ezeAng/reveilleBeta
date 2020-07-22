@@ -39,7 +39,97 @@
 {% include 'attendance/Home-Partials/_Footer.html/' %}
  
 
+<!--Script for home-->
+<script>
+    
 
+      //dynamic from context
+      
+        var ListPersonnel = {{ personnel|safe }};
+        console.log(ListPersonnel);
+
+        var ListAbsPar = {{ absentees|safe }};
+      
+
+      $('.overSearch')
+        .search({
+          type: 'category',
+          source: ListAbsPar ,
+
+          searchFields   : [
+            
+            'description',
+            'id',
+            'category',
+            'title'
+            
+          ],
+
+          onSelect: function checkSearchVal(result){
+            
+            $('.overSearch').search('set value',result.id);
+            var idRes = document.getElementById('searchCards').value;
+            console.log(idRes);
+            var allCards = document.getElementsByClassName('personnel-card');
+            var allCardAbsID = document.getElementsByClassName('IndivDBID');
+            var allCardPerID = document.getElementsByClassName('IndivDBIDPer');
+
+      //Just require the ID issue to be settled such that an if statement for equality can be written
+      // for eg, var xx = absenceid.innerHTML .... xx
+
+            for (var i = 0; i < allCards.length; i++){
+              console.log(allCards[i].id);
+              console.log(allCardPerID[i].innerHTML);
+              allCards[i].style.display = "none" ;
+              if (parseInt(allCardPerID[i].innerHTML) == idRes){
+                allCards[i].style.display = 'flex';
+              }
+              
+            }
+            
+                      
+          }
+
+
+        })      
+      ;
+
+      
+      document.getElementById('OverviewSearch').addEventListener('input',function(){
+        //to remove display=none
+        var allCards = document.getElementsByClassName('personnel-card');
+        for (var i = 0; i < allCards.length; i++){
+              
+              allCards[i].style.display = "flex" ;
+              
+        }
+        
+      });
+
+      $('.AddNewCardSearch').search({
+        type : 'category' ,
+        source: ListPersonnel ,
+
+        searchFields   : [
+        'description',
+        'id',
+        'category',
+        'title'
+          
+        ],
+
+        onSelect: function checkSearchVal(result){
+          // var cardSearch = document.getElementById('searchCards').value;
+          // console.log(cardSearch);
+          $('#AddNewCardSearch').search('set value',result);
+          document.getElementById('ResultID').value = result.id ;
+
+          console.log(result.title);
+          console.log(document.getElementById('ResultID').value);
+        }}
+      );      
+
+</script>
 <!--------------------------------Body Close----------------------->
 
 {% endblock content %}

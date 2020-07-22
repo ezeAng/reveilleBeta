@@ -1,20 +1,76 @@
 <!--Expand Personnel Modal-->
 <div class="ui modal EditPerMod">
     <div class="content">
-        <div id="NameView"></div>
-        <div id="RankView"></div>
-        <div id="PlatoonView" class="ui yellow label"></div>
+        <div class="ui center aligned grid" id="perDetail">
+            <div class="four wide left aligned column">
+                <div id="NameView"></div>
+                <div id="RankView"></div>
+            </div>
+            <div class="ten wide right aligned column">
+                <div id="PlatoonView" class="ui large yellow label"></div>
+            </div>
+        </div>
+        
+        
 
         <div id="idView" class="hidden-form"></div>
+
+        <div class="ui fluid form hidden-form" id="perDetailEdit">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="field">
+                    <h1><input type="text" class="ui input" id="PerFullName" value="GuyName"></h1>
+                </div>
+                <div class="field">
+                    <select name="personRank" class="ui fluid dropdown" id="PerRankEdit">
+                        <option value="">Rank</option>
+                        <option value="CPL">CPL</option>
+                        <option value="3SG">3SG</option>
+                        <option value="2LT">Off</option>
+                        <option value="LTA">LTA</option>
+                        <option value="CPT">CPT</option>
+                        <option value="REC">REC</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <select name="personPlatoon" class="ui fluid dropdown" id="PerPltEdit">
+                        <option value="">Platoon</option>
+                        <option value="1">Platoon 1</option>
+                        <option value="2">Platoon 2</option>
+                        <option value="3">Platoon 3</option>                   
+                      </select>
+
+                </div>
+                <div class="field hidden-form">
+                    <input type="text" name="idDetailed" id="idDetail">
+                </div>
+
+            </form>
+        </div>
+
     </div>
+    
     <div class="extra content">
-        <button class="ui large orange button">
-            Close
-        </button>
-        <button class="ui icon large teal button">
-            <i class="edit icon"></i>
-            Edit
-        </button>
+        <div  class="ui center aligned two wide grid">
+            
+            <button class="ui large orange button" id="CloseView">
+                Close
+            </button>
+        
+            <button class="ui icon large teal button" id="EditView">
+                <i class="edit icon"></i>
+                Edit
+            </button>
+        
+            <button class="ui icon large teal button" id="editSave" type="submit">
+                <i class="save outline icon"></i>
+                Save
+            </button>
+            
+            
+        </div>
+        
+
     </div>
 
 </div>
