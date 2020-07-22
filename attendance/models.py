@@ -30,6 +30,17 @@ class Personnel(models.Model):
     def __str__(self):
         return self.name
 
+
+class ParadePersonnel(models.Model):
+    parade = models.ForeignKey('attendance.Parade',
+                            on_delete=models.CASCADE,
+                            related_name='paradepersonnel_parade')
+    personnel = models.ForeignKey('attendance.Personnel',
+                            on_delete=models.CASCADE,
+                            related_name='paradepersonnel_personnel')
+    is_absent = models.BooleanField(default=False)
+
+
 class Parade(models.Model):
     date = models.DateField()
     time_of_day = models.IntegerField()
@@ -52,6 +63,10 @@ class Parade(models.Model):
     #     related_name='parade_updated_by',
     #     db_column='updated_by'
     #     )
+    parade_personnel = models.ManyToManyField(
+        Personnel, through = ParadePersonnel,
+        through_fields=('parade','personnel')
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)

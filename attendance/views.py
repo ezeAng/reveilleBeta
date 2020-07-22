@@ -109,6 +109,7 @@ def parade_view(request):
 						pass
 
 					else:
+						# creates parade if it does not exist
 						parade = Parade(
 							date = formatted_date, 
 							time_of_day = time_of_day
@@ -117,6 +118,8 @@ def parade_view(request):
 						parade_id = parade.id
 						parade_instance = ParadeStateHandler(parade_id)
 						parade_instance.update_parade_instance()
+						# parade strength data updated based on 
+						# dashboard personnel at time of creation
 					
 					card_instance = CardHandler(
 						parade_id = parade_id,
