@@ -2,10 +2,13 @@ from .models import (
     Personnel, 
     Absence, 
     Status, 
-    Parade
+    Parade,
+    ParadePersonnel
 )
 import logging
 import sys
+from django.db import transaction
+
 
 class ParadeStateHandler:
     logger = logging.getLogger(__name__)
@@ -252,7 +255,14 @@ class CardHandler:
                 logger.info('SAVING NOW')
                 absentee.save()
                 logger.info('ABSENTEE INSTANCE %s', absentee)
-
+                
+                parade_record = ParadePersonnelHandler(
+                    parade_id=self.parade_id,
+                    absence_id=absentee.id
+                )
+                parade_record.add_absence()
+                
+                '''
                 if update:
                     # Change parade data based on updated db
                     parade_instance = ParadeStateHandler(self.parade_id)
@@ -267,6 +277,7 @@ class CardHandler:
                     else:
                         parade_instance.personnel_strength -= 1
                     parade_instance.save()  
+                '''
 
         except Exception as identifier:
             raise Exception(identifier.args[0])
@@ -310,8 +321,14 @@ class CardHandler:
     def delete_card(self, update=False):
         logger = logging.getLogger(__name__)
         absence_instance = self.absence_instance
+        parade_record = ParadePersonnelHandler(
+            parade_id=self.parade_id,
+            absence_id=absence_instance.id
+        )
+        parade_record.remove_absence()
         absence_instance.delete()
 
+        '''
         personnel_obj = Personnel.objects.get(id=int(absence_instance.personnel_id))
         if update:
             # Change parade data based on updated db
@@ -326,10 +343,87 @@ class CardHandler:
                 parade_instance.commander_strength += 1
             else:
                 parade_instance.personnel_strength += 1
-            parade_instance.save() 
+            parade_instance.save()
+        '''
 
-def check_discrepancy():
-    pass
+class ParadePersonnelHandler():
+    logger = logging.getLogger(__name__)
+    def __init__(self, parade_id=None, absence_id=None):
+        self.parade_id = parade_id
+        if absence_id is not None:
+            self.absence_id = absence_id
+            self.personnel_id = Absence.objects.get(id=absence_id).personnel_id
+            self.parade_personnel_obj = ParadePersonnel.objects.get(
+                parade_id = self.parade_id,
+                personnel_id = self.personnel_id
+            )
+    
+    def populate(self):
+        # populate ParadePersonnel
+        all_personnel = Personnel.objects.all().values()
+        self.logger.info('POPULATING PARADE-PERSONNEL')
+        for person in all_personnel:
+            parade_personnel = ParadePersonnel(
+                parade_id = self.parade_id,
+                personnel_id = person['id']
+            )
+            parade_personnel.save()
+        self.logger.info('PARADE-PERSONNEL ADDED')
+        return True
 
+    def add_absence(self):
+        self.logger.info('ABSENCE ADDED: personnel %s', self.personnel_id)
+        self.parade_personnel_obj.is_absent = True
+        self.parade_personnel_obj.save()
+        return True
+
+    def remove_absence(self):
+        self.logger.info('ABSENCE REMOVED: %s', self.personnel_id)
+        self.parade_personnel_obj.is_absent = False
+        self.parade_personnel_obj.save()
+        return True
+
+    def check_discrepancy(self):
+        currentdb_personnel = Personnel.objects.filter(
+            is_deleted=False).values_list('id', flat=True)
+        parade_personnel = ParadePersonnel.objects.filter(
+            parade_id = self.parade_id
+        ).values_list('id', flat=True)
+
+        if currentdb_personnel.sort() == parade_personnel.sort():
+            self.logger.info('NO DISCREPANCY')
+            return False
+        else:
+            self.logger.info('YES DISCREPANCY')
+            return True
+
+
+def create_parade(date, time_of_day):
+    logger = logging.getLogger(__name__)
+    transaction.set_autocommit(False)
+    try:
+        # Check if db has personnel
+        all_personnel = Personnel.objects.all().values()
+        if len(all_personnel) == 0:
+            raise Exception('Unable to create parade with no personnel')
+        else:
+            parade = Parade(
+                date = date, 
+                time_of_day = time_of_day
+            )
+            parade.save()
+            parade_id = parade.id
+            logger.info('PARADE SAVED ID: %s', parade_id)
+            # update parade numbers
+            parade_instance = ParadeStateHandler(parade_id)
+            parade_instance.update_parade_instance()
+            logger.info('PARADE Numbers updated')
+            # populate ParadePersonnel
+            parade_record = ParadePersonnelHandler(parade_id=parade_id)
+            parade_record.populate()
+    except Exception as identifier:
+        transaction.rollback()
+        raise Exception(identifier.args[0])
+    transaction.commit()
 
 
