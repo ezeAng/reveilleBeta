@@ -17,7 +17,7 @@
 <!-- Style Overides -->
 <style>
 
-  .DimDB , .IndivDBID , .hidden-form , .hidden1 {
+  .DimDB , .IndivDBID , .hidden-form , .hidden1 , .IndivDBIDPer {
     display: none;
   }
   
@@ -425,15 +425,16 @@
             console.log(idRes);
             var allCards = document.getElementsByClassName('personnel-card');
             var allCardAbsID = document.getElementsByClassName('IndivDBID');
+            var allCardPerID = document.getElementsByClassName('IndivDBIDPer');
 
       //Just require the ID issue to be settled such that an if statement for equality can be written
       // for eg, var xx = absenceid.innerHTML .... xx
 
             for (var i = 0; i < allCards.length; i++){
               console.log(allCards[i].id);
-              console.log(allCardAbsID[i].innerHTML);
+              console.log(allCardPerID[i].innerHTML);
               allCards[i].style.display = "none" ;
-              if (parseInt(allCardAbsID[i].innerHTML) == idRes){
+              if (parseInt(allCardPerID[i].innerHTML) == idRes){
                 allCards[i].style.display = 'flex';
               }
               
@@ -878,6 +879,7 @@
 
       var allPerName = document.getElementsByClassName('eachPerName');
       var allPerRank = document.getElementsByClassName('eachPerRank');
+      var allPerPlt = document.getElementsByClassName('personPlatoon');
 
       var delBtnNum = [];
 
@@ -910,10 +912,12 @@
         var DBID = document.getElementById('personnelDBIDa'+ perCardNum);
         var perName = document.getElementById('perName' + perCardNum);
         var perRank = document.getElementById('perRank' + perCardNum);
+        var plt = document.getElementById('perPlt' + perCardNum);
 
         document.getElementById('NameView').innerHTML = perName.innerHTML ; 
         document.getElementById('RankView').innerHTML = perRank.innerHTML ; 
         document.getElementById('idView').innerHTML = DBID.innerHTML ; 
+        document.getElementById('PlatoonView').innerHTML = plt.innerHTML ; 
 
 
         $('.EditPerMod').modal('show');
@@ -932,6 +936,7 @@
         allEditBtn[i].id = 'editPer' + i ;
         allPerName[i].id = 'perName' + i ;
         allPerRank[i].id = 'perRank' + i ;
+        allPerPlt[i].id = 'perPlt' + i ;
 
         allDeleteBtn[i].addEventListener('click',deleteConfirm);
         allEditBtn[i].addEventListener('click', editPersonnel);
