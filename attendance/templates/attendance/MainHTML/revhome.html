@@ -78,8 +78,7 @@
       // for eg, var xx = absenceid.innerHTML .... xx
 
             for (var i = 0; i < allCards.length; i++){
-              console.log(allCards[i].id);
-              console.log(allCardPerID[i].innerHTML);
+              
               allCards[i].style.display = "none" ;
               if (parseInt(allCardPerID[i].innerHTML) == idRes){
                 allCards[i].style.display = 'flex';
