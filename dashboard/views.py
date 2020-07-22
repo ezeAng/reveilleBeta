@@ -14,7 +14,12 @@ def dashboard_view(request):
 	# try:
 
 	if request.method == 'GET':
-		context = get_all_personnel()
+		context = {
+			'count': len(Personnel.objects.filter(
+				is_deleted = False
+			)),
+			'company': get_all_personnel()
+		}
 		logger.info('RESULTS %s', context)
 		return render(request, 'attendance/MainHTML/revdashboard.html/', context)
 		

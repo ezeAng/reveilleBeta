@@ -35,9 +35,9 @@ def get_all_personnel():
             person_list.append(person_data)
         plt_object['personnel'] = person_list
         company.append(plt_object)
-    data['company'] = company
+    # data['company'] = company
     logger.info(data)
-    return data
+    return company
 
 def add_personnel(name, rank, platoon):
     man = ['REC', 'PTE', 'LCP', 'CPL', 'CFC']
