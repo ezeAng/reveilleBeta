@@ -7,7 +7,7 @@ import logging
 import sys
 from django.db import transaction
 from .utils import (get_all_personnel, add_personnel, 
-edit_personnel, delete_personnel)
+edit_personnel, delete_personnel, get_search)
 
 def dashboard_view(request):
 	logger = logging.getLogger(__name__)
@@ -18,7 +18,8 @@ def dashboard_view(request):
 			'count': len(Personnel.objects.filter(
 				is_deleted = False
 			)),
-			'company': get_all_personnel()
+			'company': get_all_personnel(),
+			'all_personnel_search': get_search(),
 		}
 		logger.info('RESULTS %s', context)
 		return render(request, 'attendance/MainHTML/revdashboard.html/', context)

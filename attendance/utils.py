@@ -208,7 +208,7 @@ class CardHandler:
         self.remarks = remarks
         self.reason = reason
 
-    def add_new_card(self):
+    def add_new_card(self, update=False):
         logger = logging.getLogger(__name__)
         id = self.id
         remarks = self.remarks
@@ -253,8 +253,20 @@ class CardHandler:
                 absentee.save()
                 logger.info('ABSENTEE INSTANCE %s', absentee)
 
-                parade_instance = ParadeStateHandler(self.parade_id)
-                parade_instance.update_parade_instance()
+                if update:
+                    # Change parade data based on updated db
+                    parade_instance = ParadeStateHandler(self.parade_id)
+                    parade_instance.update_parade_instance()
+                else:
+                    # Change parade data based on instance of creation
+                    parade_instance = Parade.objects.get(
+                        id = self.parade_id)
+                    parade_instance.current_strength -= 1
+                    if personnel_obj.is_commander:
+                        parade_instance.commander_strength -= 1
+                    else:
+                        parade_instance.personnel_strength -= 1
+                    parade_instance.save()  
 
         except Exception as identifier:
             raise Exception(identifier.args[0])
@@ -295,11 +307,29 @@ class CardHandler:
         except Exception as identifier:
             raise Exception(identifier.args[0])
     
-    def delete_card(self):
+    def delete_card(self, update=False):
         logger = logging.getLogger(__name__)
         absence_instance = self.absence_instance
         absence_instance.delete()
-        parade_instance = ParadeStateHandler(self.parade_id)
-        parade_instance.update_parade_instance()
+
+        personnel_obj = Personnel.objects.get(id=int(absence_instance.personnel_id))
+        if update:
+            # Change parade data based on updated db
+            parade_instance = ParadeStateHandler(self.parade_id)
+            parade_instance.update_parade_instance()
+        else:
+            # Change parade data based on instance of creation
+            parade_instance = Parade.objects.get(
+                        id = self.parade_id)
+            parade_instance.current_strength += 1
+            if personnel_obj.is_commander:
+                parade_instance.commander_strength += 1
+            else:
+                parade_instance.personnel_strength += 1
+            parade_instance.save() 
+
+def check_discrepancy():
+    pass
+
 
 
