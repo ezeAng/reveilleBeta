@@ -904,7 +904,8 @@
 
       function editPersonnel(){
         console.log('edit pressed');
-        var perCardNum = this.id.slice(7,8);
+        var perCardNum = this.id.slice(7);
+        
 
         var DBID = document.getElementById('personnelDBIDa'+ perCardNum);
         var perName = document.getElementById('perName' + perCardNum);
@@ -912,6 +913,7 @@
 
         document.getElementById('NameView').innerHTML = perName.innerHTML ; 
         document.getElementById('RankView').innerHTML = perRank.innerHTML ; 
+        document.getElementById('idView').innerHTML = DBID.innerHTML ; 
 
 
         $('.EditPerMod').modal('show');
