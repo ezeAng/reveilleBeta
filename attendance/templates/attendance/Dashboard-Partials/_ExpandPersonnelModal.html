@@ -19,7 +19,7 @@
             <form method="POST" action="">
                 {% csrf_token %}
                 <div class="field">
-                    <h1><input type="text" class="ui input" id="PerFullName" value="GuyName"></h1>
+                    <h1><input type="text" class="ui input" id="PerFullName" value="" name="personName"></h1>
                 </div>
                 <div class="field">
                     <select name="personRank" class="ui fluid dropdown" id="PerRankEdit">
@@ -42,7 +42,18 @@
 
                 </div>
                 <div class="field hidden-form">
-                    <input type="text" name="idDetailed" id="idDetail">
+                    <input type="text" name="personID" id="idDetail">
+                </div>
+                <div class="field hidden-form">
+                    <input type="text" name="action" value="1">
+                </div>
+                
+                <div class="ui hidden divider"></div>
+                <div class="ui center aligned basic segment">
+                    <button class="ui icon large teal button" id="editSave" type="submit">
+                        <i class="save outline icon"></i>
+                        Save
+                    </button>
                 </div>
 
             </form>
@@ -61,16 +72,8 @@
                 <i class="edit icon"></i>
                 Edit
             </button>
-        
-            <button class="ui icon large teal button" id="editSave" type="submit">
-                <i class="save outline icon"></i>
-                Save
-            </button>
-            
             
         </div>
-        
-
     </div>
 
 </div>

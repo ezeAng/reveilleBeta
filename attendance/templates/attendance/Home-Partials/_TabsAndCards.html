@@ -470,20 +470,17 @@
               <div class="ui inverted grey segment">
                 <h2 class="ui violet header">Current Strength: <span>{{ parade_summary.current_strength }}</span></h2>
               </div>
-              <div class="ui hidden divider"></div>
-
             </div>
+              
           </div>
 
           <div class="row">
-            <a class="fourteen wide left aligned column dataRow">
+            <div class="fourteen wide left aligned column dataRow">
               <div class="ui inverted grey segment">
                 <h3 class="ui violet header">Total Absent: <span>{{ parade_summary.total_absent }}</span></h3>
               </div>
-              <div class="ui segment hidden1 1Name">
-                
-              </div>
-            </a>
+              
+            </div>
 
           </div>
 
@@ -492,11 +489,11 @@
               <div class="ui inverted grey segment">
                 <h3 class="ui violet header">Attend C: <span>{{ parade_summary.total_attc.count }}</span></h3>
               </div>
-              <div class="ui segment hidden1 hiddenName">
+              <div class="ui basic segment hidden1 hiddenName">
                 {% if parade_summary.total_attc.count != 0 %}
                   {% for eachAttC in parade_summary.total_attc.personnel %}
-                  <div class="ui segment">
-                    <div class="ui fluid label">
+                  <div class="ui basic segment">
+                    <div class="ui massive olive fluid label">
                       <h3>{{ eachAttC }}</h3>
                     </div>
                   </div>
@@ -515,11 +512,11 @@
               <div class="ui inverted grey segment">
                 <h3 class="ui violet header">Medical Appointment: <span>{{ parade_summary.total_ma.count }}</span></h3>
               </div>
-              <div class="ui segment hidden1 hiddenName">
+              <div class="ui basic segment hidden1 hiddenName">
                 {% if parade_summary.total_ma.count != 0 %}
                   {% for eachMA in parade_summary.total_ma.personnel %}
                   <div class="ui basic segment">
-                    <div class="ui yellow fluid label">
+                    <div class="ui massive yellow fluid label">
                       <h3>{{ eachMA }}</h3>
                     </div>
                   </div>
@@ -538,11 +535,11 @@
               <div class="ui inverted grey segment">
                 <h3 class="ui violet header">Leave: <span>{{ parade_summary.total_leave.count }}</span></h3>
               </div>
-              <div class="ui segment hidden1 hiddenName">
+              <div class="ui basic segment hidden1 hiddenName">
                 {% if parade_summary.total_leave.count != 0 %}
                   {% for eachLeave in parade_summary.total_leave.personnel %}
-                  <div class="ui segment">
-                    <div class="ui fluid label">
+                  <div class="ui basic segment">
+                    <div class="ui massive blue fluid label">
                       <h3>{{ eachLeave }}</h3>
                     </div>
                   </div>
@@ -561,11 +558,11 @@
               <div class="ui inverted grey segment">
                 <h3 class="ui violet header">On Off: <span>{{ parade_summary.total_off.count }}</span></h3>
               </div>
-              <div class="ui segment hidden1 hiddenName">
+              <div class="ui basic segment hidden1 hiddenName">
                 {% if parade_summary.total_off.count != 0 %}
                   {% for eachOff in parade_summary.total_off.personnel %}
-                  <div class="ui segment">
-                    <div class="ui fluid label">
+                  <div class="ui basic segment">
+                    <div class="ui massive purple fluid label">
                       <h3>{{ eachOff }}</h3>
                     </div>
                   </div>
@@ -584,11 +581,11 @@
               <div class="ui inverted grey segment">
                 <h3 class="ui violet header">Other: <span>{{ parade_summary.total_other.count }}</span></h3>
               </div>
-              <div class="ui segment hidden1 hiddenName">
+              <div class="ui basic segment hidden1 hiddenName">
                 {% if parade_summary.total_other.count != 0 %}
                   {% for eachOther in parade_summary.total_other.personnel %}
-                  <div class="ui segment">
-                    <div class="ui fluid label">
+                  <div class="ui basic segment">
+                    <div class="ui red fluid label">
                       <h3>{{ eachOther }}</h3>
                     </div>
                   </div>

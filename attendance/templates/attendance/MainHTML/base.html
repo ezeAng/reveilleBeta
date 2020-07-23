@@ -398,7 +398,7 @@
 
 
 
-    <!-- Edit Card button and Delete dimmer--> <!--Do not fucking touch this -->
+    <!-- Edit Card button and Delete dimmer--> 
     <script>
 
       var perEdit = document.getElementsByClassName('IndivEdit');
@@ -647,20 +647,21 @@
         window.localStorage.setItem('AddedPerson', 'False');
 
       }
-      if (localStrEditDetail == 'True'){
-        if (document.getElementById("PersonnelViewer")){
-          document.getElementById("PersonnelViewer").classList.remove('hidden1');
+
+      // if (localStrEditDetail == 'True'){
+      //   if (document.getElementById("PersonnelViewer")){
+      //     document.getElementById("PersonnelViewer").classList.remove('hidden1');
         
-        document.getElementById("DashWidgets").classList.add('hidden1');
+      //   document.getElementById("DashWidgets").classList.add('hidden1');
         
-        }
-        window.localStorage.setItem('fromEditDetail', 'False');
-      }
+      //   }
+      //   window.localStorage.setItem('fromEditDetail', 'False');
+      // }
 
       window.localStorage.setItem('AddPerPressed', 'False');
       window.localStorage.setItem('deletePer', 'False');
       window.localStorage.setItem('AddedPerson', 'False');
-      window.localStorage.setItem('fromEditDetail','False');
+      // window.localStorage.setItem('fromEditDetail','False');
 
       
       //Checks localstorage to know what to display
@@ -895,6 +896,7 @@
       //SaveBtn
       function savePerEdit(){
         // post form to edit
+        // add to localstorage, camefromsavechanges. 
         console.log('save btn pressed')
         // hide form and save btn show edit btn
         document.getElementById('perDetailEdit').classList.add('hidden-form');
@@ -904,10 +906,12 @@
 
         document.getElementById('perDetail').style.display = "flex" ;
 
-        // add to localstorage, camefromsavechanges. 
-        window.localStorage.setItem('fromEditDetail','True');
+        
+
       }
       document.getElementById('editSave').addEventListener('click',savePerEdit);
+      document.getElementById('editSave').addEventListener('click',refreshPer);
+
 
       
 
@@ -980,6 +984,8 @@
         
       })
     </script>
+
+    
 
     
    

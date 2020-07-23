@@ -13,6 +13,7 @@
 
 {% include 'attendance/Home-Partials/_DimmerEDCard.html/' %}
 
+{% include 'attendance/Home-Partials/_DimmerDiscrep.html/' %}
 
 
   
@@ -129,6 +130,21 @@
       );      
 
 </script>
+
+<!--Discrepancy on Home-->
+<!-- <script>
+  if ({{ discrepancy }} == "True"){
+    console.log('discrep Tru');
+    //Popup modal 
+    $('#discrepPop').modal('show');
+    
+  }
+  else if ({{ discrepancy }} == "False"){
+    console.log('discrep F');
+
+  }
+</script> -->
+
 <!--------------------------------Body Close----------------------->
 
 {% endblock content %}
