@@ -6,7 +6,9 @@ import datetime
 import logging
 import sys
 from django.db import transaction
-from .utils import ParadeStateHandler, CardHandler, create_parade
+from .utils import (ParadeStateHandler, CardHandler, 
+					ParadePersonnelHandler,create_parade,
+					update_parade)
 from dashboard.utils import get_all_personnel, get_search
 
 def home_view(request):
@@ -62,19 +64,51 @@ def parade_view(request):
 			pass
 
 		parade_exist = True
-		parade = parade.values()[0]
-		logger.info('PARADE OBJ: %s',parade)
-		parade_id = parade['id']
+		parade_id = parade.values()[0]['id']
+		parade_obj = Parade.objects.get(id=parade_id)
+		parade_record = ParadePersonnelHandler(parade_id=parade_id)
+
+		discrepancy = False
+		if parade_record.check_discrepancy:
+			# discrepancy = true > ask for discrepancy override
+			if parade_obj.ignore_discrepancy == None:
+				# no previous choice recorded > prompt user to choose
+				discrepancy = True
+
+			elif parade_obj.ignore_discrepancy == True:
+				# ignore_discrepancy = True > keep current changes
+				pass
+
+			elif parade_obj.ignore_discrepancy == False:
+				# ignore_discrepancy = False > update current changes
+				transaction.set_autocommit(False)
+				try:
+					update_parade(parade_id)
+					parade_obj.ignore_discrepancy = None
+					parade_obj.save()
+				except:
+					transaction.rollback()
+					raise Exception('Update parade FAILED')
+				transaction.commit()
+			
+			else:
+				pass
+
+		else:
+			# discrepancy = false > do nothing
+			pass
+
 
 		parade_instance = ParadeStateHandler(parade_id)			
 		parade_absence_summary = parade_instance.calc_absence()
-		
+		parade_obj = Parade.objects.get(id=parade_id)
+
 		parade_summary = {
 			'parade_id': parade_id,
-			'total_strength': parade['total_strength'],
-			'current_strength': parade['current_strength'],
-			'commander_strength': parade['commander_strength'],
-			'personnel_strength': parade['personnel_strength']
+			'total_strength': parade_obj.total_strength,
+			'current_strength': parade_obj.current_strength,
+			'commander_strength': parade_obj.commander_strength,
+			'personnel_strength': parade_obj.personnel_strength
 		}
 		parade_summary.update(parade_absence_summary)
 		parade_overview = parade_instance.get_parade_overview()
@@ -86,6 +120,8 @@ def parade_view(request):
 		add: 0
 		edit: 1
 		delete: 2
+		delete_parade: 3
+		ignore_discrepancy: 4
 		'''
 		logger.info('POST DATA %s', request.POST)
 		action = int(request.POST.get('action'))
@@ -187,6 +223,16 @@ def parade_view(request):
 				raise Exception(identifier.args[0])
 			transaction.commit()
 
+		elif action == 4:
+			# frontend return keep_current as a boolean
+			keep_current = request.POST.get('keep_current')
+			logger.info('keep_current: %s', keep_current)
+			discrepancy_parade_obj = Parade.objects.get(id=parade_id)
+			discrepancy_parade_obj.ignore_discrepancy = keep_current
+			discrepancy_parade_obj.save()
+			return HttpResponseRedirect(
+				request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
+		
 		else:
 			raise Exception('Invalid action type')
 
@@ -194,10 +240,11 @@ def parade_view(request):
 		logger.info('PARADE ID: %s',parade_id)
 		context = {
 			'parade_exist': parade_exist,
+			'discrepancy': discrepancy,
 			'parade_summary': parade_summary,
 			'parade_overview': parade_overview,
 			'personnel': get_search(),
-			'absentees': get_search(parade_id)
+			'absentees': get_search(parade_id),
 		}
 
 		logger.info('RESULTS %s', context)

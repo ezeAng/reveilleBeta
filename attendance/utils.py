@@ -163,7 +163,7 @@ class ParadeStateHandler:
             self.logger.info('CARD DATA %s', card_data )
         return card_data
 
-    def update_parade_instance(self):
+    def update_parade_strength(self):
         parade = self.parade
         parade.commander_strength = int(self.calc_comd_strength())
         parade.personnel_strength = int(self.calc_trpr_strength())
@@ -266,7 +266,7 @@ class CardHandler:
                 if update:
                     # Change parade data based on updated db
                     parade_instance = ParadeStateHandler(self.parade_id)
-                    parade_instance.update_parade_instance()
+                    parade_instance.update_parade_strength()
                 else:
                     # Change parade data based on instance of creation
                     parade_instance = Parade.objects.get(
@@ -333,7 +333,7 @@ class CardHandler:
         if update:
             # Change parade data based on updated db
             parade_instance = ParadeStateHandler(self.parade_id)
-            parade_instance.update_parade_instance()
+            parade_instance.update_parade_strength()
         else:
             # Change parade data based on instance of creation
             parade_instance = Parade.objects.get(
@@ -370,6 +370,12 @@ class ParadePersonnelHandler():
             parade_personnel.save()
         self.logger.info('PARADE-PERSONNEL ADDED')
         return True
+    
+    def delete_parade_record(self):
+        self.logger.info('DESTROYING PARADE-PERSONNEL')
+        ParadePersonnel.objects.filter(
+            parade_id = self.parade_id
+        ).delete()
 
     def add_absence(self):
         self.logger.info('ABSENCE ADDED: personnel %s', self.personnel_id)
@@ -382,8 +388,28 @@ class ParadePersonnelHandler():
         self.parade_personnel_obj.is_absent = False
         self.parade_personnel_obj.save()
         return True
+    
+    def update_absence(self):
+        # BASED ON PARADE ID
+        parade_personnel= ParadePersonnel.objects.filter(
+            parade_id = self.parade_id
+        ).values()
+        for obj in parade_personnel:
+            check_absence = Absence.objects.filter(
+                parade_id = self.parade_id,
+                personnel_id = obj['personnel_id']
+            )
+            if len(check_absence) == 0:
+                pass
+            else:
+                parade_personnel_obj = ParadePersonnel.objects.get(
+                    id = obj['id'])
+                parade_personnel_obj.is_absent = True
+                parade_personnel_obj.save()
+
 
     def check_discrepancy(self):
+        #  ONLY FOR CREATED PARADE
         currentdb_personnel = Personnel.objects.filter(
             is_deleted=False).values_list('id', flat=True)
         parade_personnel = ParadePersonnel.objects.filter(
@@ -416,7 +442,7 @@ def create_parade(date, time_of_day):
             logger.info('PARADE SAVED ID: %s', parade_id)
             # update parade numbers
             parade_instance = ParadeStateHandler(parade_id)
-            parade_instance.update_parade_instance()
+            parade_instance.update_parade_strength()
             logger.info('PARADE Numbers updated')
             # populate ParadePersonnel
             parade_record = ParadePersonnelHandler(parade_id=parade_id)
@@ -425,5 +451,34 @@ def create_parade(date, time_of_day):
         transaction.rollback()
         raise Exception(identifier.args[0])
     transaction.commit()
+
+def update_parade(parade_id):
+        logger = logging.getLogger(__name__)
+        transaction.set_autocommit(False)
+        try:
+            # Check if db has personnel
+            all_personnel = Personnel.objects.all().values()
+            if len(all_personnel) == 0:
+                raise Exception('Unable to update parade with no personnel')
+            else:
+                parade = Parade.objects.get(
+                    id = parade_id
+                )
+                logger.info('PARADE OBJ TO UPDATE: %s', parade)
+                # update parade numbers
+                parade_instance = ParadeStateHandler(parade_id)
+                parade_instance.update_parade_strength()
+                logger.info('PARADE Numbers updated')
+                
+                # REpopulate ParadePersonnel
+                parade_record = ParadePersonnelHandler(parade_id=parade_id)
+                parade_record.delete_parade_record()
+                parade_record.populate()
+                parade_record.update_absence()
+                
+        except Exception as identifier:
+            transaction.rollback()
+            raise Exception(identifier.args[0])
+        transaction.commit()
 
 
