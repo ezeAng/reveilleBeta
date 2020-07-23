@@ -69,17 +69,22 @@ def parade_view(request):
 		parade_record = ParadePersonnelHandler(parade_id=parade_id)
 
 		discrepancy = False
-		if parade_record.check_discrepancy:
+		
+		if parade_record.check_discrepancy():
+			logger.info('DISCREPANCY: TRUE')
 			# discrepancy = true > ask for discrepancy override
 			if parade_obj.ignore_discrepancy == None:
+				logger.info('IGNORE DISCREPANCY: NONE')
 				# no previous choice recorded > prompt user to choose
 				discrepancy = True
 
 			elif parade_obj.ignore_discrepancy == True:
+				logger.info('IGNORE DISCREPANCY: TRUE')
 				# ignore_discrepancy = True > keep current changes
 				pass
 
 			elif parade_obj.ignore_discrepancy == False:
+				logger.info('IGNORE DISCREPANCY: FALSE')
 				# ignore_discrepancy = False > update current changes
 				transaction.set_autocommit(False)
 				try:
@@ -96,6 +101,7 @@ def parade_view(request):
 
 		else:
 			# discrepancy = false > do nothing
+			logger.info('DISCREPANCY: FALSE')
 			pass
 
 

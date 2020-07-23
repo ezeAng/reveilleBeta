@@ -158,9 +158,7 @@ class ParadeStateHandler:
                 'is_other': abs['is_other'],
                 'remarks': abs['remarks'],
             }
-            self.logger.info('DATA %s', data )
             card_data.append(data)
-            self.logger.info('CARD DATA %s', card_data )
         return card_data
 
     def update_parade_strength(self):
@@ -360,7 +358,9 @@ class ParadePersonnelHandler():
     
     def populate(self):
         # populate ParadePersonnel
-        all_personnel = Personnel.objects.all().values()
+        all_personnel = Personnel.objects.filter(
+            is_deleted = False
+        ).values()
         self.logger.info('POPULATING PARADE-PERSONNEL')
         for person in all_personnel:
             parade_personnel = ParadePersonnel(
@@ -412,11 +412,14 @@ class ParadePersonnelHandler():
         #  ONLY FOR CREATED PARADE
         currentdb_personnel = Personnel.objects.filter(
             is_deleted=False).values_list('id', flat=True)
+        self.logger.info('CURRENTDB PERSONNEL : %s', list(currentdb_personnel))
         parade_personnel = ParadePersonnel.objects.filter(
             parade_id = self.parade_id
-        ).values_list('id', flat=True)
+        ).values_list('personnel_id', flat=True)
+        self.logger.info('PARADE PERSONNEL : %s', list(parade_personnel))
 
-        if currentdb_personnel.sort() == parade_personnel.sort():
+
+        if sorted(list(currentdb_personnel)) == sorted(list(parade_personnel)):
             self.logger.info('NO DISCREPANCY')
             return False
         else:
