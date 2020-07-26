@@ -129,21 +129,29 @@
         }}
       );      
 
+      
 </script>
 
 <!--Discrepancy on Home-->
-<!-- <script>
-  if ({{ discrepancy }} == "True"){
+<script>
+  
+  console.log('run');
+  if ("{{ discrepancy }}" == "True"){
     console.log('discrep Tru');
     //Popup modal 
     $('#discrepPop').modal('show');
     
   }
-  else if ({{ discrepancy }} == "False"){
+  else if ("{{ discrepancy }}" == "False"){
     console.log('No Discrepancies, code will run as usual no popups');
 
   }
-</script> -->
+
+  function hideDiscrepPopup(){
+    $('#discrepPop').modal('hide');
+  }
+  document.getElementById('NoChange').addEventListener('click',hideDiscrepPopup);
+</script>
 
 <!--------------------------------Body Close----------------------->
 

@@ -1,29 +1,54 @@
-<!-- <div class="ui modal" id="discrepPop">
+<div class="ui modal" id="discrepPop">
     <div class="content">
-        <div class="ui centered grid">
+        <div class="ui center aligned grid">
             <div class="sixteen wide column">
-                <div class="ui header">
-                    <h1 class="ui header">
-                        Discrep Popup
+                <div class="ui massive orange label">
+                    <h1 class="ui inverted header">
+                        Discrepancies in Strength
                     </h1>
                 </div>
             </div>
 
             <div class="sixteen wide column">
-                <p>Text paragraph on instructions</p>
+                <div class="ui basic segment">
+                    <h3 class="ui header">We have detected discrepancies between the currently selected parade's total strength and your current total personnel strength.</h3>
+                </div>
+                <div class="ui basic segment">
+                    <h4>Would you like to use the new personnel strength as the base strength for the current selected parade?</h4>
+
+                </div>
 
             </div>
 
-            <div class="seven wide column">
-                <button class="ui button" id="">
-                    Yes Change
-                </button>
+            <div class="sixteen wide column">
+                <div class="ui form">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="field hidden-form">
+                            <input type="text" name="changeDiscrep" id="" value="0">
+                        </div>
+                        <div class="ui center aligned two column grid">
+                            <div class="column">                               
+                                <button class="ui purple button" id="YesChange" type="submit">
+                                    Yes Change, use new strength
+                                </button>                              
+                            </div>
+                            <div class="column">     
+                                <button class="ui purple button" id="NoChange" type="button">
+                                    No Change, keep old strength
+                                </button>                               
+                            </div>
+
+                        </div>
+                        
+                        
+
+                    </form>
+                </div>
             </div>
-            <div class="seven wide column">
-                <button class="ui button">
-                    No Change
-                </button>
-            </div>
+            
+                
+            
         </div>
     </div>
-</div> -->
+</div>
