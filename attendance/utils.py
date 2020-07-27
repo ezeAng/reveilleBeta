@@ -161,15 +161,14 @@ class ParadeStateHandler:
         return card_data
 
     def update_parade_strength(self):
-        parade = self.parade
-        parade.commander_strength = int(self.calc_comd_strength())
-        parade.personnel_strength = int(self.calc_trpr_strength())
-        parade.current_strength = int(self.calc_coy_current())
-        parade.total_strength = int(self.calc_coy_total())
-        parade.save()
-
-    def export_data(self):
-        pass
+        # parade = self.parade
+        self.parade.commander_strength = int(self.calc_comd_strength())
+        self.parade.personnel_strength = int(self.calc_trpr_strength())
+        self.parade.current_strength = int(self.calc_coy_current())
+        self.logger.info('COY CURRENT: %s', self.parade.current_strength)
+        self.parade.total_strength = int(self.calc_coy_total())
+        self.logger.info('COY TOTAL: %s', self.parade.total_strength)
+        self.parade.save()
 
 
 class CardHandler:
@@ -423,12 +422,30 @@ def update_parade(parade_id):
                     id = parade_id
                 )
                 logger.info('PARADE OBJ TO UPDATE: %s', parade)
-                
                 # REpopulate ParadePersonnel
                 parade_record = ParadePersonnelHandler(parade_id=parade_id)
                 parade_record.delete_parade_record()
                 parade_record.populate()
                 parade_record.update_absence()
+
+                #  Delete removed personnel from Absence
+                logger.info('CHECKING DELETED ABSENTEES')
+                absentee_ids = Absence.objects.filter(
+                    parade_id = parade_id
+                ).values()
+                parade_personnel = ParadePersonnel.objects.filter(
+                    parade_id = parade_id
+                ).values_list('personnel_id', flat=True)
+                for i in absentee_ids:
+                    if i['personnel_id'] not in parade_personnel:
+                        remove_absence = Absence.objects.get(
+                            id = i['id']
+                        )
+                        remove_absence.delete()
+                        logger.info('ABSENTEE %s DELETED', 
+                        Personnel.objects.get(id=i['personnel_id']).name)
+                    else:
+                        logger.info('NO DELETED ABSENTEES FOUND')
 
                 # update parade numbers
                 parade_instance = ParadeStateHandler(parade_id)
