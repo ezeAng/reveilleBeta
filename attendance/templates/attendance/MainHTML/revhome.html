@@ -147,10 +147,18 @@
 
   }
 
+  function submitKeepCurr(){
+    document.getElementById('keepcurr').value = 1 ;
+    
+  }
+
+  document.getElementById('NoChange').addEventListener('click',submitKeepCurr);
+
   function hideDiscrepPopup(){
+    document.getElementById('keepcurr').value = 0 ;
     $('#discrepPop').modal('hide');
   }
-  document.getElementById('NoChange').addEventListener('click',hideDiscrepPopup);
+  document.getElementById('YesChange').addEventListener('click',hideDiscrepPopup);
 </script>
 
 <!--------------------------------Body Close----------------------->
