@@ -84,10 +84,7 @@
                     <i class="list ul icon"></i>
                     Rows
                   </div>
-                  <div class="item">
-                    <i class="th icon"></i>
-                    Icons
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -158,10 +155,7 @@
                         <i class="list ul icon"></i>
                         Stacked Rows
                       </div>
-                      <div class="item">
-                        <i class="th icon"></i>
-                        Small icons
-                      </div>
+                      
                     </div>
                   </div>
                 </div>
@@ -251,7 +245,7 @@
                           {% csrf_token %}
                           
                           <div class="hidden-form">
-                            <input class="DimDelId" name="absence_id" ></input>
+                            <input class="DimDelId" name="absence_id"></input>
                             <input class="DimDel" name="action" value="2"></input>
                           </div>
 
@@ -364,7 +358,9 @@
 
             </div>
 
+            
             {% endif %}
+            <!-- Add another div for rows format, for mobile use, hide it by default and use layout button to toggle -->
         </div>
 
       </div>
