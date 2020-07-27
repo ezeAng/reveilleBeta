@@ -14,7 +14,7 @@
                     <h3 class="ui header">We have detected discrepancies between the currently selected parade's total strength and your current total personnel strength.</h3>
                 </div>
                 <div class="ui basic segment">
-                    <h4>Would you like to use the new personnel strength as the base strength for the current selected parade?</h4>
+                    <h4>Would you like to keep your current parade state?</h4>
 
                 </div>
 
@@ -25,17 +25,20 @@
                     <form action="" method="POST">
                         {% csrf_token %}
                         <div class="field hidden-form">
-                            <input type="text" name="changeDiscrep" id="" value="0">
+                            <input type="text" name="keep_current" id="keepcurr" value="">
+                        </div>
+                        <div class="field hidden-form">
+                            <input type="text" name="action" id="" value="4">
                         </div>
                         <div class="ui center aligned two column grid">
                             <div class="column">                               
-                                <button class="ui purple button" id="YesChange" type="submit">
-                                    Yes Change, use new strength
-                                </button>                              
+                                <button class="ui purple button" id="NoChange" type="submit">
+                                    Yes, keep current parade strength.
+                                </button>                  
                             </div>
                             <div class="column">     
-                                <button class="ui purple button" id="NoChange" type="button">
-                                    No Change, keep old strength
+                                <button class="ui purple button" id="YesChange" type="submit">
+                                    No, update new strength.
                                 </button>                               
                             </div>
 
