@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import View
-from .models import Personnel, Absence, Parade
+from .models import Personnel, Absence, Parade, ParadePersonnel
 import datetime
 import logging
 import sys
@@ -130,10 +130,10 @@ def parade_view(request):
 		ignore_discrepancy: 4
 		'''
 		logger.info('POST DATA %s', request.POST)
-		action = int(request.POST.get('action'))
+		action = request.POST.get('action')
 		logger.info('ACTION %s', action)
 	
-		if action == 0:
+		if int(action) == 0:
 			# add card
 			id = request.POST.get('idSearchResult')
 			remarks = request.POST.get('Remarks')
@@ -164,7 +164,7 @@ def parade_view(request):
 			return HttpResponseRedirect(
 				request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
 	
-		elif action == 1:
+		elif int(action) == 1:
 			# edit card
 			remarks = request.POST.get('Remarks')
 			reason = request.POST.get('Absence')
@@ -190,7 +190,7 @@ def parade_view(request):
 			return HttpResponseRedirect(
 				request.path_info + '?date=' + date + '&time_of_day=' + str(time_of_day))
 	
-		elif action == 2:
+		elif int(action) == 2:
 			# delete card
 			absence_id = int(request.POST.get('absence_id'))
 			logger.info('absence_id %s', absence_id)
@@ -213,7 +213,7 @@ def parade_view(request):
 	
 			pass
 		
-		elif action == 3:
+		elif int(action) == 3:
 			# delete parade
 			transaction.set_autocommit(False)
 			try:
@@ -229,9 +229,13 @@ def parade_view(request):
 				raise Exception(identifier.args[0])
 			transaction.commit()
 
-		elif action == 4:
+		elif int(action) == 4:
 			# frontend return keep_current as a boolean
 			keep_current = request.POST.get('keep_current')
+			if keep_current == 0:
+				keep_current = False
+			if keep_current == 1:
+				keep_current = True
 			logger.info('keep_current: %s', keep_current)
 			discrepancy_parade_obj = Parade.objects.get(id=parade_id)
 			discrepancy_parade_obj.ignore_discrepancy = keep_current

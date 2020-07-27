@@ -20,39 +20,38 @@ class ParadeStateHandler:
         self.parade_id = parade_id
 
     def calc_coy_total(self):
-        strength = 0
-        for i in Personnel.objects.filter(is_deleted=False):
-            strength += 1
-        return strength
+        return len(ParadePersonnel.objects.filter(
+            parade_id = self.parade_id))
 
     def calc_coy_current(self):
-        total_strength = self.calc_coy_total()
-        current_strength = total_strength
-        for i in Absence.objects.filter(parade_id=self.parade_id):
-            current_strength -= 1
-        # return ('{}/{}'.format(current_strength,total_strength))
-        return current_strength
+        return len(ParadePersonnel.objects.filter(
+            parade_id = self.parade_id,
+            is_absent=False))
     
     def calc_comd_strength(self):
-        total_comd_strength = 0
-        for i in Personnel.objects.filter(is_commander = True, is_deleted=False):
-            total_comd_strength += 1
-        current_comd_strength = total_comd_strength
-        absent_comds = Absence.objects.filter(
-            parade_id=self.parade_id).filter(personnel__is_commander=True)
-        for i in absent_comds:
-            current_comd_strength -= 1
+        present_personnel = ParadePersonnel.objects.filter(
+            parade_id = self.parade_id,
+            is_absent=False).values()
+        current_comd_strength = 0
+        for person in present_personnel:
+            is_comd = Personnel.objects.get(id=person['personnel_id']).is_commander
+            if is_comd:
+                current_comd_strength += 1
+            else:
+                pass
         return current_comd_strength
 
     def calc_trpr_strength(self):
-        total_trpr_strength = 0
-        for i in Personnel.objects.filter(is_commander = False, is_deleted=False):
-            total_trpr_strength += 1
-        current_trpr_strength = total_trpr_strength
-        absent_trprs = Absence.objects.filter(
-            parade_id=self.parade_id).filter(personnel__is_commander=False)
-        for i in absent_trprs:
-            current_trpr_strength -= 1
+        present_personnel = ParadePersonnel.objects.filter(
+            parade_id = self.parade_id,
+            is_absent=False).values()
+        current_trpr_strength = 0
+        for person in present_personnel:
+            is_comd = Personnel.objects.get(id=person['personnel_id']).is_commander
+            if is_comd:
+                pass
+            else:
+                current_trpr_strength += 1
         return current_trpr_strength
 
     def calc_absence(self):
@@ -172,19 +171,6 @@ class ParadeStateHandler:
     def export_data(self):
         pass
 
-'''
-    def calc_plt_total(platoon):
-        strength = 0 
-        for i in Personnel.objects.all().filter(platoon=platoon):
-            strength += 1
-
-    def calc_plt_current(platoon, parade_id):
-        total_strength = calc_plt_total(platoon)
-        current_strength = total_strength
-        for i in Absence.objects.all().filter(id=parade_id).filter(trooper__platoon=platoon):
-            current_strength -= 1
-        return ('{}/{}'.format(current_strength,total_strength))
-'''
 
 class CardHandler:
     logger = logging.getLogger(__name__)
@@ -259,23 +245,8 @@ class CardHandler:
                     absence_id=absentee.id
                 )
                 parade_record.add_absence()
-                
-                '''
-                if update:
-                    # Change parade data based on updated db
-                    parade_instance = ParadeStateHandler(self.parade_id)
-                    parade_instance.update_parade_strength()
-                else:
-                    # Change parade data based on instance of creation
-                    parade_instance = Parade.objects.get(
-                        id = self.parade_id)
-                    parade_instance.current_strength -= 1
-                    if personnel_obj.is_commander:
-                        parade_instance.commander_strength -= 1
-                    else:
-                        parade_instance.personnel_strength -= 1
-                    parade_instance.save()  
-                '''
+                parade_instance = ParadeStateHandler(self.parade_id)
+                parade_instance.update_parade_strength()
 
         except Exception as identifier:
             raise Exception(identifier.args[0])
@@ -312,7 +283,6 @@ class CardHandler:
             absence_instance.save()
             self.logger.info('2ND SAVE DONE')
 
-
         except Exception as identifier:
             raise Exception(identifier.args[0])
     
@@ -325,24 +295,8 @@ class CardHandler:
         )
         parade_record.remove_absence()
         absence_instance.delete()
-
-        '''
-        personnel_obj = Personnel.objects.get(id=int(absence_instance.personnel_id))
-        if update:
-            # Change parade data based on updated db
-            parade_instance = ParadeStateHandler(self.parade_id)
-            parade_instance.update_parade_strength()
-        else:
-            # Change parade data based on instance of creation
-            parade_instance = Parade.objects.get(
-                        id = self.parade_id)
-            parade_instance.current_strength += 1
-            if personnel_obj.is_commander:
-                parade_instance.commander_strength += 1
-            else:
-                parade_instance.personnel_strength += 1
-            parade_instance.save()
-        '''
+        parade_instance = ParadeStateHandler(self.parade_id)
+        parade_instance.update_parade_strength()
 
 class ParadePersonnelHandler():
     logger = logging.getLogger(__name__)
@@ -443,13 +397,14 @@ def create_parade(date, time_of_day):
             parade.save()
             parade_id = parade.id
             logger.info('PARADE SAVED ID: %s', parade_id)
+            # populate ParadePersonnel
+            parade_record = ParadePersonnelHandler(parade_id=parade_id)
+            parade_record.populate()
             # update parade numbers
             parade_instance = ParadeStateHandler(parade_id)
             parade_instance.update_parade_strength()
             logger.info('PARADE Numbers updated')
-            # populate ParadePersonnel
-            parade_record = ParadePersonnelHandler(parade_id=parade_id)
-            parade_record.populate()
+            
     except Exception as identifier:
         transaction.rollback()
         raise Exception(identifier.args[0])
@@ -468,16 +423,17 @@ def update_parade(parade_id):
                     id = parade_id
                 )
                 logger.info('PARADE OBJ TO UPDATE: %s', parade)
-                # update parade numbers
-                parade_instance = ParadeStateHandler(parade_id)
-                parade_instance.update_parade_strength()
-                logger.info('PARADE Numbers updated')
                 
                 # REpopulate ParadePersonnel
                 parade_record = ParadePersonnelHandler(parade_id=parade_id)
                 parade_record.delete_parade_record()
                 parade_record.populate()
                 parade_record.update_absence()
+
+                # update parade numbers
+                parade_instance = ParadeStateHandler(parade_id)
+                parade_instance.update_parade_strength()
+                logger.info('PARADE Numbers updated')
                 
         except Exception as identifier:
             transaction.rollback()
@@ -485,3 +441,55 @@ def update_parade(parade_id):
         transaction.commit()
 
 
+
+'''
+MAIN FUNCTIONS
+
+def calc_coy_total(self):
+        strength = 0
+        for i in Personnel.objects.filter(is_deleted=False):
+            strength += 1
+        return strength
+
+    def calc_coy_current(self):
+        total_strength = self.calc_coy_total()
+        current_strength = total_strength
+        for i in Absence.objects.filter(parade_id=self.parade_id):
+            current_strength -= 1
+        # return ('{}/{}'.format(current_strength,total_strength))
+        return current_strength
+    
+    def calc_comd_strength(self):
+        total_comd_strength = 0
+        for i in Personnel.objects.filter(is_commander = True, is_deleted=False):
+            total_comd_strength += 1
+        current_comd_strength = total_comd_strength
+        absent_comds = Absence.objects.filter(
+            parade_id=self.parade_id).filter(personnel__is_commander=True)
+        for i in absent_comds:
+            current_comd_strength -= 1
+        return current_comd_strength
+
+    def calc_trpr_strength(self):
+        total_trpr_strength = 0
+        for i in Personnel.objects.filter(is_commander = False, is_deleted=False):
+            total_trpr_strength += 1
+        current_trpr_strength = total_trpr_strength
+        absent_trprs = Absence.objects.filter(
+            parade_id=self.parade_id).filter(personnel__is_commander=False)
+        for i in absent_trprs:
+            current_trpr_strength -= 1
+        return current_trpr_strength
+
+    def calc_plt_total(platoon):
+        strength = 0 
+        for i in Personnel.objects.all().filter(platoon=platoon):
+            strength += 1
+
+    def calc_plt_current(platoon, parade_id):
+        total_strength = calc_plt_total(platoon)
+        current_strength = total_strength
+        for i in Absence.objects.all().filter(id=parade_id).filter(trooper__platoon=platoon):
+            current_strength -= 1
+        return ('{}/{}'.format(current_strength,total_strength))
+'''
