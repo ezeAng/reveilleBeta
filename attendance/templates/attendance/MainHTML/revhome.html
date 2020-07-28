@@ -15,6 +15,11 @@
 
 {% include 'attendance/Home-Partials/_DimmerDiscrep.html/' %}
 
+{% include 'attendance/Home-Partials/_DimmerRepeatEntry.html/' %}
+
+
+
+
 
   
 <!-----------------------Main Body---------------------->
@@ -163,6 +168,22 @@
   document.getElementById('YesChange').addEventListener('click',hideDiscrepPopup);
 </script>
 
+<!-- Repeat Entry Checker -->
+<script>
+  if ( "{{ repeat_entry }}" == "True" ) {
+    console.log('repeat');
+  }
+
+  else if ( "{{ repeat_entry }}" == "False" ) {
+    console.log('no repeat');
+  }
+
+  else {
+    console.log('no repeat');
+
+  }
+
+</script>
 <!--------------------------------Body Close----------------------->
 
 {% endblock content %}

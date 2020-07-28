@@ -222,8 +222,10 @@
       
       
       if (urlNow != "") {
+
         var paradeExistence = "{{parade_exist}}";
         var absenteesNone = "{{no_absentees}}";
+
         if (paradeExistence == "True"){
 
         document.getElementById("OverviewSearch").classList.remove('disabled');     
@@ -240,15 +242,29 @@
         
 
         // else if allpresent is true, disable search and layout btn and add the labels
-        else {
-          console.log('parade does not, disable all');
+        else if (absenteesNone == "True") {
+          document.getElementById("AddCardToggle").classList.remove('disabled');
+          document.getElementById('paradeBarDate').classList.remove('hidden1');
+          document.getElementById('paradeBarTime').classList.remove('hidden1');
         }
         
+        else if ("{{ repeat_entry }}" == "True") {
+          console.log('repeat entry do popup');
+          // Popup on close, reload page
+        }
+
+        else {
+          console.log('Error');
+        }
+
+
       }
 
       else {
         console.log("close document none print cards")
       }
+
+
 
       var dateSelect = document.getElementById('MyDate');
       var parChoiceDrop = document.getElementById('ParadeChoice');
@@ -594,7 +610,6 @@
       
       
     </script>
-
 
 
     <!-- Scripts for dashboard item and functions -->  

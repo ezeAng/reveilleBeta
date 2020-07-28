@@ -218,7 +218,24 @@
               </div>
             </div>
 
+            {% elif repeat_entry == True %}
 
+            <script>
+              console.log('Entry Repeated');
+              $('#RepEntMod').modal('show');
+              $('#RepEntMod').modal('setting', 'closable', false);
+
+
+              var urlNOW = window.location.href ; 
+
+              document.getElementById('closeRepEnt').addEventListener('click',function(){
+                location.assign(urlNOW);
+                $('#RepEntMod').modal('hide');
+
+
+              })
+
+            </script>
 
 
             <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
