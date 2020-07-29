@@ -33,20 +33,20 @@
           </div>
 
           <!-- Labels -->
-          <div class="computer only two wide violet column">
+          <div class="computer only four wide violet column">
             <div class="ui basic segment hidden1" id="paradeBarDate">
               <div class="ui inverted teal fluid large label">
-                <h5 class="ui inverted mini fluid center aligned header">
+                <h5 class="ui inverted medium fluid center aligned header">
                   <span id="DateView"></span>
                 </h5>
               </div>
             </div>
           </div>
 
-          <div class="computer only three wide violet column">
+          <div class="computer only four wide violet column">
             <div class="ui basic segment hidden1" id="paradeBarTime">
               <div class="ui inverted orange fluid large label">
-                <h5 class="ui inverted mini center aligned header">
+                <h5 class="ui inverted medium center aligned header">
                   <span id="ParadeView"></span>
                 </h5>
               </div>
@@ -56,39 +56,15 @@
           <div class="computer only three wide violet column">
             <div class="ui basic segment">
               {% if parade_summary.no_absentees == True %}
-              <div class="ui medium fluid teal label"><h3 class="ui inverted medium center aligned header">All present</h3></div>
+              <div class="ui large fluid teal label"><h3 class="ui inverted medium center aligned header">All present</h3></div>
               {% elif parade_summary.no_absentees == False %}
-              <div class="ui medium fluid red label"><h3 class="ui inverted medium center aligned header">Not All Present</h3></div>
+              <div class="ui large fluid red label"><h3 class="ui inverted medium center aligned header">Not All Present</h3></div>
               {% else %}
               {% endif %}
             </div>
           </div>
 
-          <!--Layout Changer -->
-          <div class="computer only violet three wide column">
-            <div class="ui basic right aligned segment">
-              <div class="ui disabled floating labeled icon dropdown fluid button" id="LayoutBtn">
-                <i class="object group icon"></i>
-                <span class="text">Layout</span>
-                <div class="menu">
-                  <div class="header">
-                    <i class="columns icon"></i>
-                    Layout Choices
-                  </div>
-                  <div class="divider"></div>
-                  <div class="item">
-                    <i class="sticky note icon"></i>
-                    Cards
-                  </div>
-                  <div class="item">
-                    <i class="list ul icon"></i>
-                    Rows
-                  </div>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
+          
 
           <!--Add Card Toggle-->
 
@@ -213,24 +189,7 @@
               </div>
             </div>
 
-            {% elif repeat_entry == True %}
-
-            <script>
-              console.log('Entry Repeated');
-              $('#RepEntMod').modal('show');
-              $('#RepEntMod').modal('setting', 'closable', false);
-
-
-              var urlNOW = window.location.href ; 
-
-              document.getElementById('closeRepEnt').addEventListener('click',function(){
-                location.assign(urlNOW);
-                $('#RepEntMod').modal('hide');
-
-
-              })
-
-            </script>
+          
 
 
             <!--CardHolding, will have to do a loop to generate cards and each taking data from backend-->
@@ -239,8 +198,8 @@
             <!-- if no_absentees == true , else show no absentee msg.-->
             <div class="" id="CardHolders">
                                                     
-              <!--Sample Cards-->                
-              <div class="ui raised four stackable cards">
+              <!-- Cards -->                
+              <div class="ui raised four stackable cards" id="CardDiv">
 
                 {% for eachCard in parade_overview %}
                 <!--Individual Cards-->     
@@ -356,23 +315,23 @@
                       <div class="column"><button class="ui orange circular icon button IndivDelete"><i class="minus square icon"></i></button></div>
                     </div>
                   </div>
-                  
-                  
-                  
-
 
                 </div>
-
                 
                 {% endfor %}
                 
               </div>
 
+              <div class="ui hidden divider"></div>
+
+              
+
+
             </div>
 
             
             {% endif %}
-            <!-- Add another div for rows format, for mobile use, hide it by default and use layout button to toggle -->
+            
         </div>
 
       </div>

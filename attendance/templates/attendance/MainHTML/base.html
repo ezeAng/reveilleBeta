@@ -224,26 +224,27 @@
       if (urlNow != "") {
 
         var paradeExistence = "{{parade_exist}}";
-        var absenteesNone = "{{no_absentees}}";
+        var absenteesNone = "{{ parade_summary.no_absentees}}";
 
         if (paradeExistence == "True"){
 
           document.getElementById("OverviewSearch").classList.remove('disabled');     
-          document.getElementById("LayoutBtn").classList.remove('disabled');
+          // document.getElementById("LayoutBtn").classList.remove('disabled');
           document.getElementById("AddCardToggle").classList.remove('disabled');
           document.getElementById('paradeBarDate').classList.remove('hidden1');
           document.getElementById('paradeBarTime').classList.remove('hidden1');
-          console.log(absenteesNone + "nani");
+          
 
           //Smth wrong with context, chek again
-          // if (absenteesNone == "True"){
-          //   document.getElementById('DeleteParade').classList.add('disabled');
-          //   console.log(absenteesNone);
+          if (absenteesNone == "True"){
+            document.getElementById('DeleteParade').classList.add('disabled');
+            document.getElementById("OverviewSearch").classList.add('disabled');     
+
             
-          // }
-          // if (absenteesNone != "True"){
-          //   document.getElementById('DeleteParade').classList.remove('disabled');
-          // }
+          }
+          else if (absenteesNone != "True"){
+            document.getElementById('DeleteParade').classList.remove('disabled');
+          }
 
         
         }
@@ -251,18 +252,21 @@
 
         
 
-        // else if allpresent is true, disable search and layout btn and add the labels
-        else if (absenteesNone == "True") {
-          document.getElementById("AddCardToggle").classList.remove('disabled');
-          document.getElementById('paradeBarDate').classList.remove('hidden1');
-          document.getElementById('paradeBarTime').classList.remove('hidden1');
-          document.getElementById('DeleteParade').classList.add('disabled');
-
-        }
+        
         
         else if ("{{ repeat_entry }}" == "True") {
-          console.log('repeat entry do popup');
           // Popup on close, reload page
+          $('#RepEntMod').modal('show');
+          $('#RepEntMod').modal('setting', 'closable', false);
+
+          var urlNOW = window.location.href ; 
+
+              document.getElementById('closeRepEnt').addEventListener('click',function(){
+                location.assign(urlNOW);
+                $('#RepEntMod').modal('hide');
+
+
+              })
         }
 
         else if (paradeExistence != "True"){
@@ -429,10 +433,7 @@
 
     </script>
 
-    <!-- For Delete Parade -->
-    <script>
-
-    </script>
+    
 
     <!-- Edit Card button and Delete dimmer--> 
     <script>

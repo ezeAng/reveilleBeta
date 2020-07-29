@@ -5,7 +5,7 @@
             <div class="four wide left aligned column">
                 <h1 class="ui large header" id="NameView"></h1>
 
-                <h1 class="ui large label" id="RankView"></h1>
+                <h1 class="ui large green label" id="RankView"></h1>
             </div>
             <div class="ten wide right aligned column">
                 <div id="PlatoonView" class="ui massive yellow label"></div>
@@ -16,11 +16,10 @@
         <div class="ui center aligned grid" id="tablePer">
             <div class="fourteen wide column">
                 <div class="ui segment">
-                    <div class="ui large inverted orange label"><h3>Absence</h3></div>
+                    <div class="ui large inverted orange label"><h3>Absence Records</h3></div>
                     <table class="ui celled inverted orange table">
                         <thead>
-                            <tr>
-                                <th>ID</th>
+                            <tr>                         
                                 <th>Date</th>
                                 <th>Parade</th>
                                 <th>Reason</th>
@@ -28,23 +27,21 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- For each absent he is find the parade n date, his reason n remarks -->
                           <tr>
-                            <td data-label="ID">James</td>
                             <td data-label="Date">24</td>
                             <td data-label="Parade">Engineer</td>
                             <td data-label="Reason">24</td>
-                            <td data-label="Remark">24</td>
-            
+                            <td data-label="Remark">24</td>          
                           </tr>
-                          <tr>
-                            <td data-label="ID">Jill</td>
+
+                          <tr>                  
                             <td data-label="Date">26</td>
                             <td data-label="Parade">Engineer</td>
                             <td data-label="Reason">24</td>
                             <td data-label="Remark">24</td>
                           </tr>
-                          <tr>
-                            <td data-label="ID">Elyse</td>
+                          <tr>            
                             <td data-label="Date">24</td>
                             <td data-label="Parade">Designer</td>
                             <td data-label="Reason">24</td>
@@ -54,7 +51,9 @@
                       </table>
                 </div>
             </div>
-            <div class="fourteen wide column">
+
+            <!-- Temporarily not used no backend functionality -->
+            <!-- <div class="fourteen wide column">
                 <div class="ui segment">
                     <div class="ui large inverted teal label"><h3>Status</h3></div>
                     <table class="ui celled inverted teal table">
@@ -89,7 +88,7 @@
                         </tbody>
                       </table>
                 </div>
-            </div>
+            </div> -->
         </div>
         
         

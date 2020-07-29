@@ -1,6 +1,164 @@
 
 Bunch of Cached code for reference / history purposes
+-----------------------------------------------------------------------
+------ROW BTN---------
 
+<div class="ui basic right aligned segment">
+              <div class="ui disabled floating labeled icon dropdown fluid button" id="LayoutBtn">
+                <i class="object group icon"></i>
+                <span class="text">Layout</span>
+                <div class="menu">
+                  <div class="header">
+                    <i class="columns icon"></i>
+                    Layout Choices
+                  </div>
+                  <div class="divider"></div>
+                  <div class="item">Cards
+                  </div>
+                  <div class="item">Rows
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+
+
+--- Rows LAyout -----
+
+<!-- Rows -->
+              <div class="ui column stackable grid" id="RowDiv">
+                {% for eachCard in parade_overview %}
+                <!--Individual Cards Rows-->  
+                <div class="ui segment">
+
+                  <div class="content">
+                    <div class="ui center aligned grid">
+
+                      <div class="row">
+                        
+                        <div class="two wide column">
+                          <div class="meta PersonRankRow">
+                            <div class="ui huge header">
+                              {{ eachCard.rank }}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="four wide left floated left aligned column">
+                          <div class="fluid left aligned large header">                          
+                            <h3 class="ui huge header PersonNameRow">{{ eachCard.name }}</h3>
+                          </div>
+                        </div>
+
+                        
+
+                        
+
+                        <div class="five wide column"></div>
+
+                        <div class="two wide right floated column">
+                          <div class="meta">
+                            <a class="ui yellow huge label PersonPlatoonRow">
+                              Platoon
+                            {{ eachCard.platoon }}
+                            </a>
+                          </div>
+                        </div>
+
+                        <div class="right floated column">
+                          <div class="meta PersonReasonRow"> 
+                              {% if eachCard.is_mc == True %}
+                              
+                              <a class="ui huge red label">MC</a>
+                              {% else %}
+                              {% endif %}
+                              
+                              {% if eachCard.is_ma == True  %}
+                              
+                              <a class="ui huge orange label">MA</a>
+    
+                              {% else %}
+                              {% endif %}
+      
+                              {% if eachCard.is_off == True %}
+                              <a class="ui huge blue label">Off</a>
+                              {% else %}
+                              {% endif %}
+      
+                              {% if eachCard.is_leave == True %}
+                              <a class="ui huge green label">Leave</a>
+                              {% else %}
+                              {% endif %}
+      
+                              {% if eachCard.is_other == True %}
+                              <a class="ui huge red label">Others</a>
+                              {% else %}
+                              {% endif %}
+      
+                          </div>                         
+                        </div>
+                        
+                      <div class="right floated column"><button class="ui teal square icon button IndivEditRow" ><i class="edit icon"></i></button></div>
+                      <div class="right floated column"><button class="ui orange square icon button IndivDeleteRow"><i class="minus square icon"></i></button></div>
+                      
+                      </div>
+                      
+
+                      <div class="row">
+                        <div class="sixteen wide column">
+                          <div class="ui fluid segment">
+                            <div class="description PersonDescRow">
+                              {{ eachCard.remarks }}
+                            </div>
+                        </div>
+                        </div>                     
+                      </div>
+
+                      <div class="IndivDBIDRow hidden1" >
+                        {{ eachCard.absence_id }}
+                      </div>
+                      <div class="IndivDBIDPerRow hidden1" >
+                        {{ eachCard.personnel_id }}
+                      </div>
+
+                      
+
+                      
+                    </div>
+                  </div>
+
+                </div>
+                {% endfor %}
+              </div>
+
+------- JS LAYOUT -----
+
+<!-- For Layout -->
+    <script>
+      document.getElementById('CardDiv').style.display = "flex";
+      document.getElementById('RowDiv').style.display = "none";
+      var val = $('#LayoutBtn').dropdown('get value');
+      function checkLayoutSel(val){
+        console.log(val);
+        if (val == 'cards'){
+          console.log('show cards hide rows');
+          document.getElementById('CardDiv').style.display = "flex";
+          document.getElementById('RowDiv').style.display = "none";
+
+
+        }
+
+        else if (val == 'rows'){
+
+          console.log('show rows,hide cards');
+          document.getElementById('CardDiv').style.display = "none";
+          document.getElementById('RowDiv').style.display = "flex";
+
+        }
+      }
+
+      $('#LayoutBtn').dropdown('setting', 'onChange', checkLayoutSel);
+    </script>
 
 
 ------------------------------
