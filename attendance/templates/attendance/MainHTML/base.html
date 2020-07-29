@@ -228,12 +228,22 @@
 
         if (paradeExistence == "True"){
 
-        document.getElementById("OverviewSearch").classList.remove('disabled');     
-        document.getElementById("LayoutBtn").classList.remove('disabled');
-        document.getElementById("AddCardToggle").classList.remove('disabled');
-        document.getElementById('paradeBarDate').classList.remove('hidden1');
-        document.getElementById('paradeBarTime').classList.remove('hidden1');
-        document.getElementById('DeleteParade').classList.remove('disabled');
+          document.getElementById("OverviewSearch").classList.remove('disabled');     
+          document.getElementById("LayoutBtn").classList.remove('disabled');
+          document.getElementById("AddCardToggle").classList.remove('disabled');
+          document.getElementById('paradeBarDate').classList.remove('hidden1');
+          document.getElementById('paradeBarTime').classList.remove('hidden1');
+          console.log(absenteesNone + "nani");
+
+          //Smth wrong with context, chek again
+          // if (absenteesNone == "True"){
+          //   document.getElementById('DeleteParade').classList.add('disabled');
+          //   console.log(absenteesNone);
+            
+          // }
+          // if (absenteesNone != "True"){
+          //   document.getElementById('DeleteParade').classList.remove('disabled');
+          // }
 
         
         }
@@ -246,6 +256,8 @@
           document.getElementById("AddCardToggle").classList.remove('disabled');
           document.getElementById('paradeBarDate').classList.remove('hidden1');
           document.getElementById('paradeBarTime').classList.remove('hidden1');
+          document.getElementById('DeleteParade').classList.add('disabled');
+
         }
         
         else if ("{{ repeat_entry }}" == "True") {
