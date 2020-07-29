@@ -1,0 +1,31 @@
+<div class="ui modal" id="ClearParadeMod">
+    <div class="content">
+        <div class="ui basic center aligned segment">
+            <div class="ui massive fluid red label">
+                <div class="ui massive inverted header">
+                    Clear Parade?
+                </div>
+            </div>
+            <div class="ui basic center aligned segment">
+                <div class="ui huge header">
+                    Clearing Parade will remove all absentees and indicate full attendance.
+                </div>
+            </div>
+        </div>
+        <div class="ui basic center aligned segment">
+            <div class="ui form">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="hidden-form field">
+                        <input type="text" name="clearParade" id="clearParadeInput" value="1">
+                    </div>
+                    <div class="ui basic center aligned segment">
+                        <button name="clearParade" type="submit" class="ui huge blue button" id="confirmClearParade">Confirm</button>
+                        <button class="ui huge orange button" id="closeClearParade" type="button">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

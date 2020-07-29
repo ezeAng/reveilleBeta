@@ -17,7 +17,7 @@
 
 {% include 'attendance/Home-Partials/_DimmerRepeatEntry.html/' %}
 
-
+{% include 'attendance/Home-Partials/_DimmerClearParade.html/' %}
 
 
 
@@ -183,6 +183,25 @@
 
   }
 
+</script>
+
+<!-- Clear Parade -->
+<script>
+  function ClearParade(){
+    $('#ClearParadeMod').modal('show');
+  }
+    
+  $('#ClearParadeMod').modal('setting', 'closable', false);
+
+  document.getElementById('closeClearParade').addEventListener('click',function(){
+    $('#ClearParadeMod').modal('hide');
+  })
+
+  document.getElementById('confirmClearParade').addEventListener('click',function(){
+    $('#ClearParadeMod').modal('hide');
+  })
+
+  document.getElementById('DeleteParade').addEventListener('click',ClearParade);
 </script>
 <!--------------------------------Body Close----------------------->
 
