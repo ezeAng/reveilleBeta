@@ -1,7 +1,7 @@
 # Reveille
 ## An attendance taking program, have all your attendance records in one place.
 
-> We created this app during the circuit breaker crisis that fked our ORD plans up, looking to utilize the knowledge gained from terrible terrence and mushy marcel.
+> We created this app during the COVID-19 circuit breaker of 2020, looking to utilize the knowledge gained from our Python and Tensorflow course instructors.
 
 ---
 
@@ -9,16 +9,14 @@
 
 * beta 1.0.1 
     * Attendance tracking for 1 company in 1 unit.
+    * Allows you to track attendance in the form of personal-profile cards
 
 ---
 
 ## Setup:
 ```
-www.reveille.com
 
-Google Play:
-
-IOS App Store:
+Requires localhost server setup with django, as of now we have not decided to take it a step further and host it on a server. Hence, to view how our website works, a video summary will show our webapp's basic functions
 
 ```
 
@@ -28,11 +26,12 @@ IOS App Store:
 ## The creators : 
 > Wong Wei Bin
 
-[Wong Wei Bin's instagram profile](www.google.com)
 
 > Ezekiel Ang 
 
-[Ezekiel Ang's Instagram profile](www.youtube.com)
+[Ezekiel Ang's Instagram profile](www.instagram.com/angjhe)
+
+[Ezekiel Ang's LinkedIn profile](www.linkedin.com/in/ezekiel-ang-704a9015a)
 
 ---
 
