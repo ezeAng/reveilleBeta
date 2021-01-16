@@ -39,9 +39,9 @@
 
 > Ezekiel Ang 
 
-[Ezekiel Ang's Instagram profile](www.instagram.com/angjhe)
+[Ezekiel Ang's Instagram profile](http://www.instagram.com/angjhe)
 
-[Ezekiel Ang's LinkedIn profile](www.linkedin.com/in/ezekiel-ang-704a9015a)
+[Ezekiel Ang's LinkedIn profile](http://www.linkedin.com/in/ezekiel-ang-704a9015a)
 
 ---
 
