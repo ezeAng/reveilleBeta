@@ -22,15 +22,17 @@ Requires localhost server setup with django, as of now we have not decided to ta
 
 ## Languages and Frameworks utilized:
 
-* Back-End :
-   * Python
-   * Django
+
 * Front-End: 
    * HTML
    * CSS
    * Javascript
    * Jquery
    * Semantic UI
+   
+* Back-End :
+   * Python
+   * Django
 
 
 ## The creators : 
