@@ -15,7 +15,7 @@
 
 ## Setup:
 
-> Requires localhost server setup with django, as of now we have not decided to take it a step further and host it on a server. Hence, to view how our website works, a video summary will show our webapp's basic functions
+> Requires localhost server setup with django, as of now we have not decided to take it a step further and host it on a server. Hence, to view how our website works, a video summary will show our webapp's basic functions. The video can be found named as reveille trial run, under our project folder.
 
 
 ## Languages and Frameworks utilized:
