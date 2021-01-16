@@ -14,11 +14,9 @@
 ---
 
 ## Setup:
-```
 
-Requires localhost server setup with django, as of now we have not decided to take it a step further and host it on a server. Hence, to view how our website works, a video summary will show our webapp's basic functions
+> Requires localhost server setup with django, as of now we have not decided to take it a step further and host it on a server. Hence, to view how our website works, a video summary will show our webapp's basic functions
 
-```
 
 ## Languages and Frameworks utilized:
 
