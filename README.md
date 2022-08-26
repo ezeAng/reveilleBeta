@@ -3,7 +3,10 @@
 
 > We created this app during the COVID-19 circuit breaker of 2020, looking to utilize the knowledge gained from our Python and Tensorflow course instructors.
 
+Link to demo: https://youtu.be/tPe1jRlTQtk
+
 ---
+
 
 ## Versions and functions:
 
@@ -39,9 +42,6 @@
 
 > Ezekiel Ang 
 
-[Ezekiel Ang's Instagram profile](http://www.instagram.com/angjhe)
-
-[Ezekiel Ang's LinkedIn profile](http://www.linkedin.com/in/ezekiel-ang-704a9015a)
 
 ---
 
